@@ -2,8 +2,6 @@ package main
 
 import (
 	"bytes"
-	"github.com/gorilla/handlers"
-	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 	"os"
@@ -23,25 +21,38 @@ func main() {
 	address := ":" + port
 
 	// set up router
-	r := mux.NewRouter()
-	r.HandleFunc("/", rootHandler).Methods("GET")
-	r.HandleFunc("/japicc/version", japiccVersionHandler).Methods("GET")
+	router := http.NewServeMux()
+	router.HandleFunc("/", rootHandler)
+	router.HandleFunc("/japicc/version", japiccVersionHandler)
 
 	// wrap with logging handler
-	loggingHandler := handlers.LoggingHandler(os.Stdout, r)
+	loggingHandler := newLoggingHandler(router)
 
 	// start server
 	log.Println("Listen on", address)
 	log.Fatal(http.ListenAndServe(address, loggingHandler))
 }
 
+func newLoggingHandler(next http.Handler) http.Handler {
+	return http.HandlerFunc(
+		func(w http.ResponseWriter, r *http.Request) {
+			// TODO: capture and log status code
+			log.Println(r.Method, r.URL)
+			next.ServeHTTP(w, r)
+		},
+	)
+}
+
 func rootHandler(w http.ResponseWriter, r *http.Request) {
+	// TODO: only support GET requests
+
 	w.Header().Set("Content-Type", "text/plain")
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Hello from jarhc-online!\n"))
 }
 
 func japiccVersionHandler(w http.ResponseWriter, r *http.Request) {
+	// TODO: only support GET requests
 
 	// prepare JAPICC command
 	cmd := exec.Command("/usr/bin/japi-compliance-checker", "--version")

@@ -40,6 +40,4 @@ To do.
 ## Dependencies
 
 * [Go](https://go.dev/) version 1.17
-* [gorilla/mux](https://github.com/gorilla/mux)
-* [gorilla/handlers](https://github.com/gorilla/handlers)
 * [Java API Compliance Checker (JAPICC)](https://github.com/lvc/japi-compliance-checker) version 2.4
