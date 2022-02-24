@@ -1,11 +1,10 @@
 package main
 
 import (
-	"bytes"
+	"github.com/smarkwal/jarhc-online/rest-api/japicc"
 	"log"
 	"net/http"
 	"os"
-	"os/exec"
 )
 
 func main() {
@@ -54,16 +53,8 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 func japiccVersionHandler(w http.ResponseWriter, r *http.Request) {
 	// TODO: only support GET requests
 
-	// prepare JAPICC command
-	cmd := exec.Command("/usr/bin/japi-compliance-checker", "--version")
-
-	// buffer output sent to STDOUT and STDERR
-	var out bytes.Buffer
-	cmd.Stdout = &out
-	cmd.Stderr = &out
-
-	// execute JAPICC command
-	err := cmd.Run()
+	// get JAPICC version
+	out, err := japicc.GetVersion()
 
 	// handle potential error
 	if err != nil {
@@ -74,12 +65,16 @@ func japiccVersionHandler(w http.ResponseWriter, r *http.Request) {
 	// return output of JAPICC
 	w.Header().Set("Content-Type", "text/plain")
 	w.WriteHeader(http.StatusOK)
-	w.Write(out.Bytes())
+	w.Write(out)
 }
 
 func returnError(w http.ResponseWriter, err error) {
-	log.Println(err)
+	returnErrorMessage(w, err.Error())
+}
+
+func returnErrorMessage(w http.ResponseWriter, message string) {
+	log.Println(message)
 	w.Header().Set("Content-Type", "text/plain")
 	w.WriteHeader(http.StatusInternalServerError)
-	w.Write([]byte(err.Error()))
+	w.Write([]byte(message))
 }
