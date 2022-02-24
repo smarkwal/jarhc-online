@@ -1,3 +1,7 @@
 # @name Get root
 GET http://localhost:8080
 
+###
+
+# @name Get JAPICC version
+GET http://localhost:8080/japicc/version

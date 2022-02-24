@@ -31,11 +31,15 @@ http://localhost:8080
 
 To do.
 
+# Project information
 
-# Dependencies
+## Developers
 
-## Go
+* Stephan Markwalder - [@smarkwal](https://github.com/smarkwal)
 
-* Go version 1.17
+## Dependencies
+
+* [Go](https://go.dev/) version 1.17
 * [gorilla/mux](https://github.com/gorilla/mux)
 * [gorilla/handlers](https://github.com/gorilla/handlers)
+* [Java API Compliance Checker (JAPICC)](https://github.com/lvc/japi-compliance-checker) version 2.4
