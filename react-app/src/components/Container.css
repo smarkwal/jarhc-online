@@ -1,0 +1,7 @@
+.Container {
+	margin: auto;
+	padding: 20px;
+	max-width: 800px;
+	height: calc(100% - 60px);
+	background-color: white;
+}
