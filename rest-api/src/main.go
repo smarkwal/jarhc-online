@@ -1,7 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"github.com/smarkwal/jarhc-online/rest-api/japicc"
+	"github.com/smarkwal/jarhc-online/rest-api/maven"
 	"log"
 	"net/http"
 	"os"
@@ -23,6 +25,7 @@ func main() {
 	router := http.NewServeMux()
 	router.HandleFunc("/", rootHandler)
 	router.HandleFunc("/japicc/version", japiccVersionHandler)
+	router.HandleFunc("/maven/search", mavenSearchHandler)
 
 	// wrap with logging handler
 	loggingHandler := newLoggingHandler(router)
@@ -55,10 +58,8 @@ func japiccVersionHandler(w http.ResponseWriter, r *http.Request) {
 
 	// get JAPICC version
 	out, err := japicc.GetVersion()
-
-	// handle potential error
 	if err != nil {
-		returnError(w, err)
+		returnError(w, http.StatusInternalServerError, err)
 		return
 	}
 
@@ -69,13 +70,50 @@ func japiccVersionHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(out)
 }
 
-func returnError(w http.ResponseWriter, err error) {
-	returnErrorMessage(w, err.Error())
+func mavenSearchHandler(w http.ResponseWriter, r *http.Request) {
+
+	// get coordinates from query string
+	query := r.URL.Query()
+	coordinates := query.Get("coordinates")
+	if len(coordinates) == 0 {
+		returnErrorMessage(w, http.StatusBadRequest, "missing parameter: 'coordinates'")
+		return
+	}
+
+	// parse coordinates
+	artifact, err := maven.NewArtifact(coordinates)
+	if err != nil {
+		returnError(w, http.StatusBadRequest, err)
+		return
+	}
+
+	// check if artifact exists
+	exists, err := artifact.Exists()
+	if err != nil {
+		returnError(w, http.StatusInternalServerError, err)
+		return
+	}
+	if !exists {
+		returnErrorMessage(w, http.StatusNotFound, "artifact not found")
+		return
+	}
+
+	// return artifact
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(artifact)
 }
 
-func returnErrorMessage(w http.ResponseWriter, message string) {
+func returnError(w http.ResponseWriter, statusCode int, err error) {
+	returnErrorMessage(w, statusCode, err.Error())
+}
+
+func returnErrorMessage(w http.ResponseWriter, statusCode int, message string) {
 	log.Println(message)
+
 	w.Header().Set("Content-Type", "text/plain")
-	w.WriteHeader(http.StatusInternalServerError)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.WriteHeader(statusCode)
 	w.Write([]byte(message))
 }

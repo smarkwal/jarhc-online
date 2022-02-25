@@ -5,3 +5,24 @@ GET http://localhost:8080
 
 # @name Get JAPICC version
 GET http://localhost:8080/japicc/version
+
+###
+
+# @name Search Maven artifact
+GET http://localhost:8080/maven/search?coordinates=commons-io:commons-io:2.7
+
+###
+
+# @name Search Maven artifact (not found)
+GET http://localhost:8080/maven/search?coordinates=unknown:unknown:0.0.1
+
+###
+
+# @name Search Maven artifact (invalid coordinates)
+GET http://localhost:8080/maven/search?coordinates=unknown
+
+###
+
+# @name Search Maven artifact (missing parameter)
+GET http://localhost:8080/maven/search
+
