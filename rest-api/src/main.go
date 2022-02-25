@@ -64,6 +64,7 @@ func japiccVersionHandler(w http.ResponseWriter, r *http.Request) {
 
 	// return output of JAPICC
 	w.Header().Set("Content-Type", "text/plain")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(http.StatusOK)
 	w.Write(out)
 }

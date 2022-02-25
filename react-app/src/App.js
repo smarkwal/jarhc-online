@@ -1,8 +1,9 @@
-import Container from "./components/Container";
-import Header from "./components/Header";
+import JapiccForm from "./components/japicc/JapiccForm";
 
 function App() {
-	return (<Container><Header/></Container>);
+	return (<>
+		<JapiccForm/>
+	</>);
 }
 
 export default App;
