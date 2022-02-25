@@ -5,23 +5,41 @@ const JapiccForm = () => {
 
 	const [state, setState] = useState({
 		oldVersion: "",
+		oldVersionValid: null,
 		newVersion: "",
+		newVersionValid: null,
 		reportURL: "",
 		errorMessage: ""
 	});
 
-	function onChangeVersion(event) {
+	async function onChangeVersion(event) {
 		const name = event.target.name;
-		const value = event.target.value
+		const coordinates = event.target.value.trim()
 		const newState = {...state}
-		newState[name] = value
+		newState[name] = coordinates
+		newState[name + "Valid"] = await validateCoordinates(coordinates);
 		setState(newState)
+	}
+
+	async function validateCoordinates(coordinates) {
+		if (coordinates === undefined || coordinates.length === 0) {
+			return null
+		} else if (!coordinates.match("[^:]+:[^:]+:[^:]+")) {
+			return false
+		}
+		const response = await fetch("http://localhost:8080/maven/search?coordinates=" + coordinates);
+		if (!response.ok) {
+			return null;
+		}
+		const json = await response.json()
+		return json.length > 0
 	}
 
 	function onSubmit(event) {
 		event.preventDefault()
-		console.log(`Check: ${state.oldVersion} vs ${state.newVersion}`)
+
 		// TODO: submit to server
+		console.log(`Check: ${state.oldVersion} vs ${state.newVersion}`)
 
 		setState({
 			...state,
@@ -30,16 +48,31 @@ const JapiccForm = () => {
 		})
 	}
 
-	function validate(name) {
+	function getInputFieldClass(name) {
 		const value = state[name];
 		if (value !== undefined && value.length > 0) {
 			if (value.match("[^:]+:[^:]+:[^:]+")) {
-				return "is-valid"
+				const valid = state[name + "Valid"]
+				if (valid === true) {
+					return "is-valid"
+				} else if (valid === false) {
+					return "is-invalid"
+				} else {
+					return ""
+				}
 			} else {
 				return "is-invalid"
 			}
 		}
 		return ""
+	}
+
+	function isSubmitButtonEnabled() {
+		return state.oldVersionValid && state.newVersionValid;
+	}
+
+	function getSubmitButtonClass() {
+		return isSubmitButtonEnabled() ? "btn-primary" : "btn-secondary";
 	}
 
 	return (<div>
@@ -61,15 +94,15 @@ const JapiccForm = () => {
 		<form onSubmit={onSubmit}>
 			<div className="row align-items-end mb-3">
 				<div className="col-12 col-md-5 mt-3">
-					<label className="form-label">Old Version</label>
-					<input type="text" className={`form-control ${validate('oldVersion')}`} name="oldVersion" value={state.oldVersion} onChange={onChangeVersion} placeholder="Group:Artifact:Version"/>
+					<label className="form-label">Old version</label>
+					<input type="text" className={`form-control ${getInputFieldClass('oldVersion')}`} name="oldVersion" value={state.oldVersion} onChange={onChangeVersion} placeholder="Group:Artifact:Version"/>
 				</div>
 				<div className="col-12 col-md-5 mt-3">
-					<label className="form-label">New Version</label>
-					<input type="text" className={`form-control ${validate('newVersion')}`} name="newVersion" value={state.newVersion} onChange={onChangeVersion} placeholder="Group:Artifact:Version"/>
+					<label className="form-label">New version</label>
+					<input type="text" className={`form-control ${getInputFieldClass('newVersion')}`} name="newVersion" value={state.newVersion} onChange={onChangeVersion} placeholder="Group:Artifact:Version"/>
 				</div>
 				<div className="col-12 col-md-2 mt-3">
-					<button type="submit" className="btn btn-primary w-100">Check</button>
+					<button type="submit" disabled={!isSubmitButtonEnabled()} className={`btn ${getSubmitButtonClass()} w-100`}>Check</button>
 				</div>
 			</div>
 		</form>
@@ -87,7 +120,7 @@ const JapiccForm = () => {
 				</a>
 				</span>
 			</div>
-			<iframe src={state.reportURL} className=" w-100 mt-0" style={{height: "500px"}}/>
+			<iframe src={state.reportURL} className="w-100 mt-0" style={{height: "500px"}}/>
 		</div>}
 		<div className="alert alert-secondary mt-5">
 			<h5 className="alert-heading">About Java API Compliance Checker</h5>

@@ -45,15 +45,18 @@ func newLoggingHandler(next http.Handler) http.Handler {
 	)
 }
 
-func rootHandler(w http.ResponseWriter, r *http.Request) {
+func rootHandler(w http.ResponseWriter, _ *http.Request) {
 	// TODO: only support GET requests
 
 	w.Header().Set("Content-Type", "text/plain")
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Hello from jarhc-online!\n"))
+	_, err := w.Write([]byte("Hello from jarhc-online!\n"))
+	if err != nil {
+		log.Println(err)
+	}
 }
 
-func japiccVersionHandler(w http.ResponseWriter, r *http.Request) {
+func japiccVersionHandler(w http.ResponseWriter, _ *http.Request) {
 	// TODO: only support GET requests
 
 	// get JAPICC version
@@ -67,7 +70,10 @@ func japiccVersionHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/plain")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(http.StatusOK)
-	w.Write(out)
+	_, err = w.Write(out)
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 func mavenSearchHandler(w http.ResponseWriter, r *http.Request) {
@@ -93,16 +99,22 @@ func mavenSearchHandler(w http.ResponseWriter, r *http.Request) {
 		returnError(w, http.StatusInternalServerError, err)
 		return
 	}
-	if !exists {
-		returnErrorMessage(w, http.StatusNotFound, "artifact not found")
-		return
+
+	// prepare list of artifacts
+	//goland:noinspection ALL
+	artifacts := []maven.Artifact{}
+	if exists {
+		artifacts = append(artifacts, *artifact)
 	}
 
-	// return artifact
+	// return artifacts as JSON array
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(artifact)
+	err = json.NewEncoder(w).Encode(artifacts)
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 func returnError(w http.ResponseWriter, statusCode int, err error) {
@@ -112,8 +124,12 @@ func returnError(w http.ResponseWriter, statusCode int, err error) {
 func returnErrorMessage(w http.ResponseWriter, statusCode int, message string) {
 	log.Println(message)
 
+	// send error message to client
 	w.Header().Set("Content-Type", "text/plain")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(statusCode)
-	w.Write([]byte(message))
+	_, err := w.Write([]byte(message))
+	if err != nil {
+		log.Println(err)
+	}
 }

@@ -2,12 +2,15 @@ package maven
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"net/url"
 	"strings"
 )
 
 const repoBaseURL = "https://repo1.maven.org/maven2"
+
+var cache = make(map[string]bool)
 
 type Artifact struct {
 	GroupId    string `json:"groupId"`
@@ -35,8 +38,22 @@ func NewArtifact(coordinates string) (*Artifact, error) {
 // Exists Check if the artifact exists in Maven Central.
 func (artifact *Artifact) Exists() (bool, error) {
 
+	// check in-memory cache
+	cacheKey := artifact.ToCoordinates()
+	exists, cached := cache[cacheKey]
+	if cached {
+		if exists {
+			log.Println("artifact found:", cacheKey, "(cached)")
+			return true, nil
+		} else {
+			log.Println("artifact not found:", cacheKey, "(cached)")
+			return false, nil
+		}
+	}
+
 	// get artifact URL for given coordinates
 	artifactURL := artifact.GetURL()
+	log.Println("artifact URL:", artifactURL)
 
 	// check if artifact URL is valid
 	resp, err := http.Head(artifactURL)
@@ -47,8 +64,12 @@ func (artifact *Artifact) Exists() (bool, error) {
 	// return result based on status code
 	statusCode := resp.StatusCode
 	if statusCode == http.StatusOK {
+		log.Println("artifact found:", cacheKey)
+		cache[cacheKey] = true
 		return true, nil
 	} else if statusCode == http.StatusNotFound {
+		log.Println("artifact not found:", cacheKey)
+		cache[cacheKey] = false
 		return false, nil
 	} else {
 		err := fmt.Errorf("unexpected status code: %d", statusCode)
@@ -59,13 +80,25 @@ func (artifact *Artifact) Exists() (bool, error) {
 // GetURL Generate artifact URL based on coordinates.
 func (artifact *Artifact) GetURL() string {
 
-	artifactURL := fmt.Sprintf(
-		"%s/%s/%s/%s/%[3]s-%[4]s.jar",
-		repoBaseURL,
-		url.PathEscape(artifact.GroupId),
-		url.PathEscape(artifact.ArtifactId),
-		url.PathEscape(artifact.Version),
-	)
+	var artifactURL strings.Builder
+	artifactURL.WriteString(repoBaseURL)
+	for _, path := range strings.Split(artifact.GroupId, ".") {
+		artifactURL.WriteString("/")
+		artifactURL.WriteString(url.PathEscape(path))
+	}
+	artifactURL.WriteString("/")
+	artifactURL.WriteString(url.PathEscape(artifact.ArtifactId))
+	artifactURL.WriteString("/")
+	artifactURL.WriteString(url.PathEscape(artifact.Version))
+	artifactURL.WriteString("/")
+	artifactURL.WriteString(url.PathEscape(artifact.ArtifactId))
+	artifactURL.WriteString("-")
+	artifactURL.WriteString(url.PathEscape(artifact.Version))
+	artifactURL.WriteString(".jar")
 
-	return artifactURL
+	return artifactURL.String()
+}
+
+func (artifact *Artifact) ToCoordinates() string {
+	return fmt.Sprintf("%s:%s:%s", artifact.GroupId, artifact.ArtifactId, artifact.Version)
 }

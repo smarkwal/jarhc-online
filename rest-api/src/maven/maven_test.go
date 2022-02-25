@@ -20,8 +20,15 @@ func Test_NewArtifact_returnsError_forInvalidCoordinates(t *testing.T) {
 	assert.Nil(t, artifact)
 }
 
-func Test_Exists(t *testing.T) {
+func Test_Exists_CommonsIO(t *testing.T) {
 	artifact, _ := NewArtifact("commons-io:commons-io:2.11.0")
+	exists, err := artifact.Exists()
+	assert.NoError(t, err)
+	assert.True(t, exists)
+}
+
+func Test_Exists_ESAPI(t *testing.T) {
+	artifact, _ := NewArtifact("org.owasp.esapi:esapi:2.2.3.1")
 	exists, err := artifact.Exists()
 	assert.NoError(t, err)
 	assert.True(t, exists)
