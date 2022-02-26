@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import JapiccVersion from "./JapiccVersion";
+import JapiccReport from "./JapiccReport";
+import JapiccAbout from "./JapiccAbout";
 
 const JapiccForm = () => {
 
@@ -8,6 +9,7 @@ const JapiccForm = () => {
 		oldVersionValid: null,
 		newVersion: "",
 		newVersionValid: null,
+		loading: false,
 		reportURL: "",
 		errorMessage: ""
 	});
@@ -38,14 +40,37 @@ const JapiccForm = () => {
 	function onSubmit(event) {
 		event.preventDefault()
 
-		// TODO: submit to server
-		console.log(`Check: ${state.oldVersion} vs ${state.newVersion}`)
-
+		// show loading wheel
 		setState({
 			...state,
-			errorMessage: "Artifact not found: " + state.oldVersion,
-			reportURL: "http://localhost:8080/japicc/version"
+			loading: true,
+			reportURL: "",
+			errorMessage: ""
 		})
+
+		// prepare API request
+		const requestOptions = {
+			method: 'POST',
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify({
+				oldVersion: state.oldVersion,
+				newVersion: state.newVersion
+			})
+		};
+
+		// run JAPICC check
+		fetch('http://localhost:8080/japicc/check', requestOptions)
+			.then(response => response.json())
+			.then(data => {
+
+				// show report or error message
+				setState({
+					...state,
+					loading: false,
+					reportURL: data.reportURL,
+					errorMessage: data.errorMessage
+				})
+			});
 	}
 
 	function getInputFieldClass(name) {
@@ -68,11 +93,28 @@ const JapiccForm = () => {
 	}
 
 	function isSubmitButtonEnabled() {
-		return state.oldVersionValid && state.newVersionValid;
+		return state.oldVersionValid && state.newVersionValid && !state.loading;
 	}
 
 	function getSubmitButtonClass() {
 		return isSubmitButtonEnabled() ? "btn-primary" : "btn-secondary";
+	}
+
+	function doSubmitExample(oldVersion, newVersion) {
+		setState({
+			...state,
+			oldVersion: oldVersion,
+			oldVersionValid: true,
+			newVersion: newVersion,
+			newVersionValid: true
+		})
+	}
+
+	function closeReport() {
+		setState({
+			...state,
+			reportURL: ""
+		})
 	}
 
 	return (<div>
@@ -86,9 +128,30 @@ const JapiccForm = () => {
 		<div>
 			Examples:
 			<ul>
-				<li><code>org.springframework:spring-core:4.3.30.RELEASE</code> and <code>org.springframework:spring-core:5.3.16</code></li>
-				<li><code>commons-io:commons-io:2.7</code> and <code>commons-io:commons-io:2.11.0</code></li>
-				<li><code>org.owasp.esapi:esapi:2.1.0.1</code> and <code>org.owasp.esapi:esapi:2.2.3.1</code></li>
+				<li>
+					<span role="button" onClick={() => doSubmitExample("org.springframework:spring-core:5.3.0", "org.springframework:spring-core:5.3.16")}>
+						<code>org.springframework:spring-core:5.3.0</code> and <code>org.springframework:spring-core:5.3.16</code>
+						<i className="bi bi-box-arrow-in-down-right text-primary ms-1"/>
+					</span>
+				</li>
+				<li>
+					<span role="button" onClick={() => doSubmitExample("commons-io:commons-io:2.10.0", "commons-io:commons-io:2.11.0")}>
+						<code>commons-io:commons-io:2.10.0</code> and <code>commons-io:commons-io:2.11.0</code>
+						<i className="bi bi-box-arrow-in-down-right text-primary ms-1"/>
+					</span>
+				</li>
+				<li>
+					<span role="button" onClick={() => doSubmitExample("org.owasp.esapi:esapi:2.2.2.0", "org.owasp.esapi:esapi:2.2.3.1")}>
+						<code>org.owasp.esapi:esapi:2.2.2.0</code> and <code>org.owasp.esapi:esapi:2.2.3.1</code>
+						<i className="bi bi-box-arrow-in-down-right text-primary ms-1"/>
+					</span>
+				</li>
+				<li>
+					<span role="button" onClick={() => doSubmitExample("javax.xml.bind:jaxb-api:2.3.0", "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2")}>
+						<code>javax.xml.bind:jaxb-api:2.3.0</code> and <code>jakarta.xml.bind:jakarta.xml.bind-api:2.3.2</code>
+						<i className="bi bi-box-arrow-in-down-right text-primary ms-1"/>
+					</span>
+				</li>
 			</ul>
 		</div>
 		<form onSubmit={onSubmit}>
@@ -102,7 +165,10 @@ const JapiccForm = () => {
 					<input type="text" className={`form-control ${getInputFieldClass('newVersion')}`} name="newVersion" value={state.newVersion} onChange={onChangeVersion} placeholder="Group:Artifact:Version"/>
 				</div>
 				<div className="col-12 col-md-2 mt-3">
-					<button type="submit" disabled={!isSubmitButtonEnabled()} className={`btn ${getSubmitButtonClass()} w-100`}>Check</button>
+					<button type="submit" disabled={!isSubmitButtonEnabled()} className={`btn ${getSubmitButtonClass()} w-100`}>
+						{state.loading && <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"/>}
+						Check
+					</button>
 				</div>
 			</div>
 		</form>
@@ -111,24 +177,7 @@ const JapiccForm = () => {
 				{state.errorMessage}
 			</div>
 		</div>}
-		{state.reportURL.length > 0 && <div className="border border-success border-1 mt-5">
-			<div className="alert alert-success mb-0">
-				Java API Compliance Checker report is ready:
-				<span className="align-vertical-middle float-end">
-				Download: <a href={state.reportURL} target="_blank" title="Download">
-					<i className="bi bi-cloud-download-fill text-success"/>
-				</a>
-				</span>
-			</div>
-			<iframe src={state.reportURL} className="w-100 mt-0" style={{height: "500px"}}/>
-		</div>}
-		<div className="alert alert-secondary mt-5">
-			<h5 className="alert-heading">About Java API Compliance Checker</h5>
-			<hr/>
-			<JapiccVersion/>
-			<hr/>
-			<a className="alert-link" href="https://github.com/lvc/japi-compliance-checker">https://github.com/lvc/japi-compliance-checker</a>
-		</div>
+		{state.reportURL.length > 0 ? <JapiccReport reportURL={state.reportURL} onClose={closeReport}/> : <JapiccAbout/>}
 	</div>)
 }
 

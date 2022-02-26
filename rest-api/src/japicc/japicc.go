@@ -3,6 +3,7 @@ package japicc
 import (
 	"bytes"
 	"errors"
+	"log"
 	"os"
 	"os/exec"
 )
@@ -24,6 +25,25 @@ func GetVersion() ([]byte, error) {
 	return runCommand("--version")
 }
 
+func Check(oldFilePath string, newFilePath string, reportFilePath string) error {
+
+	_, err := runCommand("-old", oldFilePath, "-new", newFilePath, "-report-path", reportFilePath)
+	if err != nil {
+		var exitError *exec.ExitError
+		if errors.As(err, &exitError) {
+			if exitError.ExitCode() == 1 {
+				// incompatibilities found
+			} else {
+				return err
+			}
+		} else {
+			return err
+		}
+	}
+
+	return nil
+}
+
 // runCommand Run JAPICC with given arguments.
 func runCommand(args ...string) ([]byte, error) {
 
@@ -41,7 +61,12 @@ func runCommand(args ...string) ([]byte, error) {
 	cmd.Stderr = &out
 
 	// execute JAPICC command
+	log.Println("Run JAPICC command:", args)
 	err := cmd.Run()
 
-	return out.Bytes(), err
+	// log command output
+	data := out.Bytes()
+	log.Println("Output:\n", string(data))
+
+	return data, err
 }

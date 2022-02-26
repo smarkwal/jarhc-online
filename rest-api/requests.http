@@ -26,3 +26,18 @@ GET http://localhost:8080/maven/search?coordinates=unknown
 # @name Search Maven artifact (missing parameter)
 GET http://localhost:8080/maven/search
 
+####
+
+# @name Run JAPICC check
+POST http://localhost:8080/japicc/check
+Content-Type: application/json
+
+{
+  "oldVersion": "commons-io:commons-io:2.7",
+  "newVersion": "commons-io:commons-io:2.11.0"
+}
+
+###
+
+# @name Download report
+GET http://localhost:8080/japicc/report/report-89136839f409d413748241df527e6e5afaa826d520d434493f37c9d17673c5d8.html
