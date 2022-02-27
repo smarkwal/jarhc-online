@@ -7,4 +7,4 @@ s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-lcbyi0cw90q3"
 s3_prefix = "jarhc-online-app"
 region = "eu-central-1"
 capabilities = "CAPABILITY_IAM"
-image_repositories = ["HelloWorldFunction=837783538267.dkr.ecr.eu-central-1.amazonaws.com/jarhconlineappc576971f/helloworldfunction19d43fc4repo", "JapiccCheckFunction=837783538267.dkr.ecr.eu-central-1.amazonaws.com/jarhconlineappc576971f/japicccheckfunctionf49d3734repo"]
+image_repositories = ["JapiccCheckFunction=837783538267.dkr.ecr.eu-central-1.amazonaws.com/jarhconlineappc576971f/japicccheckfunctionf49d3734repo"]

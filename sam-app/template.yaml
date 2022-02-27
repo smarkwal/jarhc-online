@@ -19,28 +19,13 @@ Resources:
     Type: AWS::S3::Bucket # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html
     Properties:
       AccessControl: PublicRead
-    # CorsConfiguration: https://docs.aws.amazon.com/AmazonS3/latest/userguide/cors.html
-    # LifecycleConfiguration: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html
-
-  HelloWorldFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-    Properties:
-      PackageType: Image
-      Architectures:
-        - x86_64
-      Events:
-        CatchAll:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-          Properties:
-            Path: /hello
-            Method: GET
-      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
-        Variables:
-          PARAM1: VALUE
-    Metadata:
-      DockerTag: go1.x-v1
-      DockerContext: ./hello-world
-      Dockerfile: Dockerfile
+      LifecycleConfiguration: # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-lifecycleconfig.html
+        Rules:
+          - Id: AutoCleanup
+            Status: Enabled
+            Prefix: "report-"
+            ExpirationInDays: 7
+      # CorsConfiguration: https://docs.aws.amazon.com/AmazonS3/latest/userguide/cors.html
 
   JapiccCheckFunction:
     Type: AWS::Serverless::Function # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html
@@ -54,11 +39,11 @@ Resources:
       Timeout: 60 # increase timeout to 60 seconds for JAPICC
       Events:
         CatchAll:
-          Type: Api
+          Type: Api # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /japicc/check
             Method: POST
-      Environment:
+      Environment: # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           PARAM1: VALUE # TODO: pass bucket region and name to function
     Metadata:
