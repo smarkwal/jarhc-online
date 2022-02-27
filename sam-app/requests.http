@@ -1,0 +1,14 @@
+
+# @name Hello World test function
+GET https://xo6nwek0fh.execute-api.eu-central-1.amazonaws.com/Prod/hello
+
+###
+
+# @name JAPICC check function
+POST https://xo6nwek0fh.execute-api.eu-central-1.amazonaws.com/Prod/japicc/check
+Content-Type: application/json
+
+{
+  "oldVersion": "commons-io:commons-io:2.7",
+  "newVersion": "commons-io:commons-io:2.11.0"
+}
