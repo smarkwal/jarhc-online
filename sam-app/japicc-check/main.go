@@ -8,14 +8,17 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/smarkwal/jarhc-online/sam-app/japicc-check/japicc"
 	"github.com/smarkwal/jarhc-online/sam-app/japicc-check/maven"
+	"github.com/smarkwal/jarhc-online/sam-app/japicc-check/reports"
 	"log"
-	"net/url"
 	"os"
 	"path"
 	"strings"
 )
 
 var tempDirPath = path.Join(os.TempDir(), "jarhc-online")
+
+const region = "eu-central-1"                                           // TODO: read from ENV
+const bucketName = "jarhc-online-app-japiccreportsbucket-1d9yisjijbxeh" // TODO: read from ENV
 
 type JapiccCheckRequest struct {
 	OldVersion string `json:"oldVersion"`
@@ -53,16 +56,24 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 
 	// prepare report file
 	reportFileName := "report-" + hash + ".html"
-	reportFilePath := path.Join(tempDirPath, "reports", reportFileName)
-	log.Println("report file path:", reportFilePath)
 
 	// check if report file already exists
-	info, err := os.Stat(reportFilePath)
-	if err == nil && info != nil && !info.IsDir() {
-		log.Println("report file size: ", getFileSize(reportFilePath))
-
-		return returnReportFile(reportFileName, err)
+	s3 := reports.NewS3Client(region, bucketName)
+	exists, err := s3.Exists(reportFileName)
+	if err != nil {
+		// TODO: return internal server error
+		return events.APIGatewayProxyResponse{}, err
 	}
+
+	reportFileURL := s3.GetURL(reportFileName)
+	if exists {
+		log.Println("report file size: [S3]")
+		return returnReportFile(reportFileURL, err)
+	}
+
+	// prepare temp dir for report file
+	reportFilePath := path.Join(tempDirPath, "reports", reportFileName)
+	log.Println("report file path:", reportFilePath)
 
 	err = os.MkdirAll(path.Dir(reportFilePath), os.ModePerm)
 	if err != nil {
@@ -119,15 +130,31 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	}
 	log.Println("report file size: ", getFileSize(reportFilePath))
 
-	return returnReportFile(reportFileName, err)
+	// read report file
+	file, err := os.Open(reportFilePath)
+	if err != nil {
+		// TODO: return internal server error
+		return events.APIGatewayProxyResponse{}, err
+	}
+	//goland:noinspection GoUnhandledErrorResult
+	defer file.Close()
+
+	// upload report file to S3
+	_, err = s3.Upload(reportFileName, file)
+	if err != nil {
+		// TODO: return internal server error
+		return events.APIGatewayProxyResponse{}, err
+	}
+
+	return returnReportFile(reportFileURL, err)
 }
 
-func returnReportFile(reportFileName string, err error) (events.APIGatewayProxyResponse, error) {
+func returnReportFile(reportFileURL string, err error) (events.APIGatewayProxyResponse, error) {
 
 	// prepare JSON response
 	var r JapiccCheckResponse
 	if err == nil {
-		r.ReportURL = "http://localhost:8080/japicc/report/" + url.PathEscape(reportFileName)
+		r.ReportURL = reportFileURL
 	} else {
 		r.ErrorMessage = err.Error()
 	}

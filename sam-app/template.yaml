@@ -9,6 +9,19 @@ Globals:
 
 Resources:
 
+  #  ResourceGroup:
+  #    Type: "AWS::ResourceGroups::Group"
+  #    Properties:
+  #      Name: "jarhc-online-resource-group"
+  #      Description: "Resource group for jarhc-online-app"
+
+  JapiccReportsBucket:
+    Type: AWS::S3::Bucket # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html
+    Properties:
+      AccessControl: PublicRead
+    # CorsConfiguration: https://docs.aws.amazon.com/AmazonS3/latest/userguide/cors.html
+    # LifecycleConfiguration: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html
+
   HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
@@ -30,7 +43,7 @@ Resources:
       Dockerfile: Dockerfile
 
   JapiccCheckFunction:
-    Type: AWS::Serverless::Function
+    Type: AWS::Serverless::Function # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html
     Properties:
       PackageType: Image
       Architectures:
@@ -47,13 +60,38 @@ Resources:
             Method: POST
       Environment:
         Variables:
-          PARAM1: VALUE
+          PARAM1: VALUE # TODO: pass bucket region and name to function
     Metadata:
       DockerTag: go1.x-v1
       DockerContext: ./japicc-check
       Dockerfile: Dockerfile
 
+  JapiccReportsBucketPolicy:
+    Type: AWS::S3::BucketPolicy # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html
+    Properties:
+      Bucket: !Ref JapiccReportsBucket
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: ReadAccessForEveryone # grant read access to everyone
+            Resource: !Sub "arn:aws:s3:::${JapiccReportsBucket}/*"
+            Effect: Allow
+            Action:
+              - 's3:GetObject'
+            Principal: '*'
+          - Sid: ReadWriteAccessForJapiccCheckFunctionRole # grant read and write access to JapiccCheck function
+            Resource: !Sub "arn:aws:s3:::${JapiccReportsBucket}/*"
+            Effect: Allow
+            Action:
+              - 's3:GetObject'
+              - 's3:PutObject'
+            Principal:
+              AWS: !GetAtt JapiccCheckFunctionRole.Arn
+
 Outputs:
-  JapiccCheckApi:
-    Description: "API Gateway endpoint base URL for Prod environment"
+  ApiGatewayUrl:
+    Description: "Base URL of API Gateway."
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  JapiccReportsBucketUrl:
+    Description: "Public URL of S3 Bucket for JAPICC reports."
+    Value: !GetAtt JapiccReportsBucket.RegionalDomainName # !Sub "https://${JapiccReportsBucket::RegionalDomainName}/"

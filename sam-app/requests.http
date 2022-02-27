@@ -1,11 +1,11 @@
 
 # @name Hello World test function
-GET https://xo6nwek0fh.execute-api.eu-central-1.amazonaws.com/Prod/hello
+GET https://enw25uywda.execute-api.eu-central-1.amazonaws.com/Prod/hello
 
 ###
 
 # @name JAPICC check function
-POST https://xo6nwek0fh.execute-api.eu-central-1.amazonaws.com/Prod/japicc/check
+POST https://enw25uywda.execute-api.eu-central-1.amazonaws.com/Prod/japicc/check
 Content-Type: application/json
 
 {
