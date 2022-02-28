@@ -7,8 +7,8 @@ JAR Health Check online service.
 ### Build
 
 ```shell
-sam build
 sam validate
+sam build
 ```
 
 ### Run

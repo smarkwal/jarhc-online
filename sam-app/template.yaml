@@ -7,6 +7,20 @@ Globals:
   Function:
     Timeout: 5
 
+  Api:
+    Cors: "'online.jarhc.org'"
+    EndpointConfiguration:
+      Type: REGIONAL
+    Domain:
+      DomainName: api.jarhc.org
+      CertificateArn: !Ref ApiCertificate
+      EndpointConfiguration: REGIONAL # default
+      Route53:
+        # see https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-api-route53configuration.html
+        HostedZoneId: Z39VOOPW73P7H0
+        EvaluateTargetHealth: false
+        IpV6: false
+
 Resources:
 
   ResourceGroup:
@@ -47,6 +61,16 @@ Resources:
       ValidationMethod: DNS
       DomainValidationOptions:
         - DomainName: online.jarhc.org
+          HostedZoneId: Z39VOOPW73P7H0
+
+  # SSL certificate for API gateway api.jarhc.org
+  ApiCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: api.jarhc.org
+      ValidationMethod: DNS
+      DomainValidationOptions:
+        - DomainName: api.jarhc.org
           HostedZoneId: Z39VOOPW73P7H0
 
   # S3 Bucket for public site online.jarhc.org

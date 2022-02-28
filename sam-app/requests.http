@@ -5,7 +5,7 @@ GET https://enw25uywda.execute-api.eu-central-1.amazonaws.com/Prod/hello
 ###
 
 # @name JAPICC check function
-POST https://enw25uywda.execute-api.eu-central-1.amazonaws.com/Prod/japicc/check
+POST https://api.jarhc.org/japicc/check
 Content-Type: application/json
 
 {
