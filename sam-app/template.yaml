@@ -9,11 +9,11 @@ Globals:
 
 Resources:
 
-  #  ResourceGroup:
-  #    Type: "AWS::ResourceGroups::Group"
-  #    Properties:
-  #      Name: "jarhc-online-resource-group"
-  #      Description: "Resource group for jarhc-online-app"
+  ResourceGroup:
+    Type: "AWS::ResourceGroups::Group"
+    Properties:
+      Name: "jarhc-online-resource-group"
+      Description: "Resource group for jarhc-online-app"
 
   JapiccReportsBucket:
     Type: AWS::S3::Bucket # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html
@@ -73,10 +73,61 @@ Resources:
             Principal:
               AWS: !GetAtt JapiccCheckFunctionRole.Arn
 
+  # SSL certificate for public site online.jarhc.org
+  Certificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: online.jarhc.org
+      ValidationMethod: DNS
+      DomainValidationOptions:
+        - DomainName: online.jarhc.org
+          HostedZoneId: Z39VOOPW73P7H0
+
+  # S3 Bucket for public site online.jarhc.org
+  JarhcOnlineBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: online.jarhc.org
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+
+  # S3 Bucket Policy for public site online.jarhc.org
+  JarhcOnlineBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref JarhcOnlineBucket
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: ReadAccessForEveryone # grant read access to everyone
+            Resource: !Sub "arn:aws:s3:::${JarhcOnlineBucket}/*"
+            Effect: Allow
+            Action:
+              - 's3:GetObject'
+            Principal: '*'
+
+  JarhcOnlineDnsRecord:
+    # see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset.html
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Name: online.jarhc.org
+      HostedZoneId: Z39VOOPW73P7H0
+      Type: A
+      AliasTarget:
+        # see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-aliastarget-1.html
+        # see https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints
+        DNSName: s3-website.eu-central-1.amazonaws.com # S3 website endpoint where bucket "online.jarhc.org" has been created
+        HostedZoneId: Z21DNDUVLTQW6Q # Route 53 Hosted Zone ID for S3 website endpoint where bucket "online.jarhc.org" has been created
+        EvaluateTargetHealth: false
+
 Outputs:
   ApiGatewayUrl:
     Description: "Base URL of API Gateway."
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
   JapiccReportsBucketUrl:
     Description: "Public URL of S3 Bucket for JAPICC reports."
-    Value: !GetAtt JapiccReportsBucket.RegionalDomainName # !Sub "https://${JapiccReportsBucket::RegionalDomainName}/"
+    Value: !Sub "https://${JapiccReportsBucket.RegionalDomainName}/"
+  JarhcOnlineBucketUrl:
+    Description: "Public URL of S3 Bucket for online.jarhc.org."
+    Value: !Sub "https://${JarhcOnlineBucket.RegionalDomainName}/"

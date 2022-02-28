@@ -27,9 +27,32 @@ http://localhost:8080
 
 # React App
 
-## Build and test
+## Build
 
-To do.
+```shell
+npm run build
+```
+
+## Run
+
+To run during development:
+
+```shell
+npm start
+```
+
+To run the production build:
+
+```shell
+npm install -g serve
+serve -s build
+```
+
+## Deploy
+
+```shell
+aws s3 sync build/. s3://online.jarhc.org
+```
 
 # Project information
 
