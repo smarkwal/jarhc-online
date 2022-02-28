@@ -29,7 +29,7 @@ const JapiccForm = () => {
 		} else if (!coordinates.match("[^:]+:[^:]+:[^:]+")) {
 			return false
 		}
-		const response = await fetch("http://localhost:8080/maven/search?coordinates=" + coordinates);
+		const response = await fetch(process.env.REACT_APP_API_URL + "/maven/search?coordinates=" + coordinates);
 		if (!response.ok) {
 			return null;
 		}
@@ -59,7 +59,7 @@ const JapiccForm = () => {
 		};
 
 		// run JAPICC check
-		fetch('http://localhost:8080/japicc/check', requestOptions)
+		fetch(process.env.REACT_APP_API_URL + '/japicc/check', requestOptions)
 			.then(response => response.json())
 			.then(data => {
 
