@@ -58,6 +58,22 @@ Resources:
       DockerContext: ./japicc-check
       Dockerfile: Dockerfile
 
+  MavenSearchFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./maven-search
+      Handler: maven-search
+      Runtime: go1.x
+      Architectures:
+        - x86_64
+      Tracing: Active
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /maven/search
+            Method: GET
+
   # SSL certificate for public site online.jarhc.org
   Certificate:
     Type: AWS::CertificateManager::Certificate

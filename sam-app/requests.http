@@ -1,10 +1,25 @@
 
-# @name Hello World test function
-GET https://enw25uywda.execute-api.eu-central-1.amazonaws.com/Prod/hello
+# @name Maven Search function
+GET https://api.jarhc.org/maven/search?coordinates=commons-io:commons-io:2.7
 
 ###
 
-# @name JAPICC check function
+# @name Maven Search function (not found)
+GET https://api.jarhc.org/maven/search?coordinates=unknown:unknown:0.0.1
+
+###
+
+# @name Maven Search function (invalid coordinates)
+GET https://api.jarhc.org/maven/search?coordinates=unknown
+
+###
+
+# @name Maven Search function (missing parameter)
+GET https://api.jarhc.org/maven/search
+
+###
+
+# @name JAPICC Check function
 POST https://api.jarhc.org/japicc/check
 Content-Type: application/json
 
@@ -15,7 +30,25 @@ Content-Type: application/json
 
 ###
 
-# @name CORS preflight request for API gateway
+# @name JAPICC Check function (not found)
+POST https://api.jarhc.org/japicc/check
+Content-Type: application/json
+
+{
+  "oldVersion": "unknown:unknown:0.0.1",
+  "newVersion": "unknown:unknown:0.0.2"
+}
+
+### CORS ---------------------------------------
+
+# @name CORS preflight request for Maven Search function
+OPTIONS https://api.jarhc.org/maven/search
+Origin: http://online.jarhc.org
+Access-Control-Request-Method: GET
+
+###
+
+# @name CORS preflight request for JAPICC Check function
 OPTIONS https://api.jarhc.org/japicc/check
 Origin: http://online.jarhc.org
 Access-Control-Request-Method: POST
