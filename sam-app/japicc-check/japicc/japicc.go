@@ -9,10 +9,38 @@ import (
 )
 
 // path to JAPICC command on local system
-const binary = "/usr/bin/japi-compliance-checker"
+var binary = ""
+
+// init Try to find JAPICC binary
+func init() {
+
+	// test /usr/bin
+	binary = "/usr/bin/japi-compliance-checker"
+	_, err := os.Stat(binary)
+	if err == nil {
+		log.Println("JAPICC found:", binary)
+		return
+	}
+
+	// test /usr/local/bin
+	binary = "/usr/local/bin/japi-compliance-checker"
+	_, err = os.Stat(binary)
+	if err == nil {
+		log.Println("JAPICC found:", binary)
+		return
+	}
+
+	// JAPICC binary not found
+	binary = ""
+	log.Println("JAPICC not found.")
+	return
+}
 
 // IsInstalled Check if JAPICC is installed.
 func IsInstalled() bool {
+	if len(binary) == 0 {
+		return false
+	}
 	_, err := os.Stat(binary)
 	if err == nil {
 		return true
@@ -66,7 +94,7 @@ func runCommand(args ...string) ([]byte, error) {
 
 	// log command output
 	data := out.Bytes()
-	log.Println("Output:\n", string(data))
+	log.Printf("Output:\n%s\n", string(data))
 
 	return data, err
 }
