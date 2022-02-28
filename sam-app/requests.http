@@ -12,3 +12,11 @@ Content-Type: application/json
   "oldVersion": "commons-io:commons-io:2.7",
   "newVersion": "commons-io:commons-io:2.11.0"
 }
+
+###
+
+# @name CORS preflight request for API gateway
+OPTIONS https://api.jarhc.org/japicc/check
+Origin: http://online.jarhc.org
+Access-Control-Request-Method: POST
+Access-Control-Allow-Headers: content-type

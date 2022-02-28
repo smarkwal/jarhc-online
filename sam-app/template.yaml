@@ -8,7 +8,12 @@ Globals:
     Timeout: 5
 
   Api:
-    Cors: "'online.jarhc.org'"
+    Cors:
+      AllowOrigin: "'http://online.jarhc.org'" # TODO: change after switching to HTTPS
+      AllowMethods: "'GET,POST,OPTIONS'"
+      AllowHeaders: "'Content-Type'"
+      AllowCredentials: true
+      MaxAge: "'600'" # cache results of a preflight request for 10 minutes
     EndpointConfiguration:
       Type: REGIONAL
     Domain:

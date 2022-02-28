@@ -61,6 +61,7 @@ const JapiccForm = () => {
 		// run JAPICC check
 		fetch(process.env.REACT_APP_API_URL + '/japicc/check', requestOptions)
 			.then(response => response.json())
+			// TODO: error handling
 			.then(data => {
 
 				// show report or error message
