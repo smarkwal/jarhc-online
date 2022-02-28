@@ -7,8 +7,8 @@ import (
 	"time"
 )
 
-const region = "eu-central-1"                                           // TODO: read from ENV
-const bucketName = "jarhc-online-app-japiccreportsbucket-1d9yisjijbxeh" // TODO: read from ENV
+const region = "eu-central-1"
+const bucketName = "online.jarhc.org"
 
 func TestHandler(t *testing.T) {
 

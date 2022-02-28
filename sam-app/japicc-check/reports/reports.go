@@ -26,7 +26,7 @@ func NewS3Client(region string, bucketName string) S3Client {
 }
 
 func (c *S3Client) GetURL(fileName string) string {
-	return "https://" + c.BucketName + ".s3." + c.Region + ".amazonaws.com/" + url.PathEscape(fileName)
+	return "http://online.jarhc.org/reports/" + url.PathEscape(fileName)
 }
 
 func (c *S3Client) Exists(fileName string) (bool, error) {
@@ -43,7 +43,7 @@ func (c *S3Client) Exists(fileName string) (bool, error) {
 	// check if object exists
 	input := &s3.HeadObjectInput{
 		Bucket: aws.String(c.BucketName),
-		Key:    aws.String(fileName),
+		Key:    aws.String("reports/" + fileName),
 	}
 	fmt.Println("Input:", input)
 
@@ -82,7 +82,7 @@ func (c *S3Client) Upload(fileName string, file io.Reader) (bool, error) {
 
 	input := &s3manager.UploadInput{
 		Bucket:      aws.String(c.BucketName),
-		Key:         aws.String(fileName),
+		Key:         aws.String("reports/" + fileName),
 		Body:        file,
 		ContentType: aws.String("text/html"),
 	}
@@ -111,7 +111,7 @@ func (c *S3Client) Delete(fileName string) (bool, error) {
 
 	input := s3.DeleteObjectInput{
 		Bucket: aws.String(c.BucketName),
-		Key:    aws.String(fileName),
+		Key:    aws.String("reports/" + fileName),
 	}
 	fmt.Println("Input:", input)
 

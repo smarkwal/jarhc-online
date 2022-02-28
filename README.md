@@ -2,38 +2,34 @@
 
 JAR Health Check online service.
 
-# REST API
+## Serverless API
 
-## Build and test
-
-To build and run locally (requires Go 1.17):
+### Build
 
 ```shell
-cd rest-api/src
-go build
-./rest-api
+sam build
+sam validate
 ```
 
-To build Docker image `jarhc-online` and run container:
+### Run
+
+ToDo
+
+### Deploy
 
 ```shell
-cd rest-api
-./build-docker.sh
-./run-docker.sh
+sam deploy
 ```
 
-REST API will be available here:
-http://localhost:8080
+## React App
 
-# React App
-
-## Build
+### Build
 
 ```shell
 npm run build
 ```
 
-## Run
+### Run
 
 To run during development:
 
@@ -48,19 +44,27 @@ npm install -g serve
 serve -s build
 ```
 
-## Deploy
+### Deploy
+
+Use `aws s3 sycn` to copy the content of the `build/` folder into the S3 bucket `online.jarhc.org`.
+
+Use `--delete` to delete files in S3 which do not exist locally.
+
+Use `--exclude reports/*` to avoid deleting generated JAPICC reports.
+
+Use `--dryrun` to display the operations that would be performed without actually running them.
 
 ```shell
-aws s3 sync build/. s3://online.jarhc.org
+aws s3 sync build/. s3://online.jarhc.org --delete --exclude reports/* # --dryrun
 ```
 
-# Project information
+## Project information
 
-## Developers
+### Developers
 
 * Stephan Markwalder - [@smarkwal](https://github.com/smarkwal)
 
-## Dependencies
+### Dependencies
 
 * [Go](https://go.dev/) version 1.17
 * [Java API Compliance Checker (JAPICC)](https://github.com/lvc/japi-compliance-checker) version 2.4

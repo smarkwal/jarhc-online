@@ -15,18 +15,6 @@ Resources:
       Name: "jarhc-online-resource-group"
       Description: "Resource group for jarhc-online-app"
 
-  JapiccReportsBucket:
-    Type: AWS::S3::Bucket # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html
-    Properties:
-      AccessControl: PublicRead
-      LifecycleConfiguration: # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-lifecycleconfig.html
-        Rules:
-          - Id: AutoCleanup
-            Status: Enabled
-            Prefix: "report-"
-            ExpirationInDays: 7
-      # CorsConfiguration: https://docs.aws.amazon.com/AmazonS3/latest/userguide/cors.html
-
   JapiccCheckFunction:
     Type: AWS::Serverless::Function # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html
     Properties:
@@ -51,28 +39,6 @@ Resources:
       DockerContext: ./japicc-check
       Dockerfile: Dockerfile
 
-  JapiccReportsBucketPolicy:
-    Type: AWS::S3::BucketPolicy # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html
-    Properties:
-      Bucket: !Ref JapiccReportsBucket
-      PolicyDocument:
-        Version: 2012-10-17
-        Statement:
-          - Sid: ReadAccessForEveryone # grant read access to everyone
-            Resource: !Sub "arn:aws:s3:::${JapiccReportsBucket}/*"
-            Effect: Allow
-            Action:
-              - 's3:GetObject'
-            Principal: '*'
-          - Sid: ReadWriteAccessForJapiccCheckFunctionRole # grant read and write access to JapiccCheck function
-            Resource: !Sub "arn:aws:s3:::${JapiccReportsBucket}/*"
-            Effect: Allow
-            Action:
-              - 's3:GetObject'
-              - 's3:PutObject'
-            Principal:
-              AWS: !GetAtt JapiccCheckFunctionRole.Arn
-
   # SSL certificate for public site online.jarhc.org
   Certificate:
     Type: AWS::CertificateManager::Certificate
@@ -91,6 +57,14 @@ Resources:
       AccessControl: PublicRead
       WebsiteConfiguration:
         IndexDocument: index.html
+      LifecycleConfiguration:
+        # see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-lifecycleconfig.html
+        Rules:
+          - Id: AutoCleanup
+            Status: Enabled
+            Prefix: "reports/"
+            ExpirationInDays: 7
+      # CorsConfiguration: https://docs.aws.amazon.com/AmazonS3/latest/userguide/cors.html
 
   # S3 Bucket Policy for public site online.jarhc.org
   JarhcOnlineBucketPolicy:
@@ -106,6 +80,14 @@ Resources:
             Action:
               - 's3:GetObject'
             Principal: '*'
+          - Sid: ReadWriteAccessForJapiccCheckFunctionRole # grant read and write access to JapiccCheck function
+            Resource: !Sub "arn:aws:s3:::${JarhcOnlineBucket}/*"
+            Effect: Allow
+            Action:
+              - 's3:GetObject'
+              - 's3:PutObject'
+            Principal:
+              AWS: !GetAtt JapiccCheckFunctionRole.Arn
 
   JarhcOnlineDnsRecord:
     # see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset.html
@@ -125,9 +107,6 @@ Outputs:
   ApiGatewayUrl:
     Description: "Base URL of API Gateway."
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
-  JapiccReportsBucketUrl:
-    Description: "Public URL of S3 Bucket for JAPICC reports."
-    Value: !Sub "https://${JapiccReportsBucket.RegionalDomainName}/"
   JarhcOnlineBucketUrl:
     Description: "Public URL of S3 Bucket for online.jarhc.org."
     Value: !Sub "https://${JarhcOnlineBucket.RegionalDomainName}/"

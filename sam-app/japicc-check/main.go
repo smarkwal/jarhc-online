@@ -17,8 +17,8 @@ import (
 
 var tempDirPath = path.Join(os.TempDir(), "jarhc-online")
 
-const region = "eu-central-1"                                           // TODO: read from ENV
-const bucketName = "jarhc-online-app-japiccreportsbucket-1d9yisjijbxeh" // TODO: read from ENV
+const region = "eu-central-1"         // TODO: read from ENV
+const bucketName = "online.jarhc.org" // TODO: read from ENV
 
 type JapiccCheckRequest struct {
 	OldVersion string `json:"oldVersion"`
