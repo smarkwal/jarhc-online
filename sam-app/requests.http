@@ -4,6 +4,11 @@ GET https://api.jarhc.org/maven/search?coordinates=commons-io:commons-io:2.7
 
 ###
 
+# @name Maven Search function
+GET http://localhost:8080/maven/search?coordinates=commons-io:commons-io:2.7.1
+
+###
+
 # @name Maven Search function (not found)
 GET https://api.jarhc.org/maven/search?coordinates=unknown:unknown:0.0.1
 

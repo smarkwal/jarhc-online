@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"io"
 	"net/url"
+	"os"
 )
 
 const NotFound = "NotFound"
@@ -26,7 +27,11 @@ func NewS3Client(region string, bucketName string) S3Client {
 }
 
 func (c *S3Client) GetURL(fileName string) string {
-	return "http://online.jarhc.org/reports/" + url.PathEscape(fileName)
+	var bucketUrl = os.Getenv("BUCKET_URL")
+	if len(bucketUrl) == 0 {
+		bucketUrl = "http://localhost:3000"
+	}
+	return bucketUrl + "/reports/" + url.PathEscape(fileName)
 }
 
 func (c *S3Client) Exists(fileName string) (bool, error) {

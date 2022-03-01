@@ -18,9 +18,6 @@ import (
 
 var tempDirPath = path.Join(os.TempDir(), "jarhc-online")
 
-const region = "eu-central-1"         // TODO: read from ENV
-const bucketName = "online.jarhc.org" // TODO: read from ENV
-
 type JapiccCheckRequest struct {
 	OldVersion string `json:"oldVersion"`
 	NewVersion string `json:"newVersion"`
@@ -49,13 +46,20 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	log.Println("old version:", oldVersion)
 
 	newVersion := in.NewVersion
-	log.Println("old version:", newVersion)
+	log.Println("new version:", newVersion)
 
 	// calculate hash for combination of versions
 	hash := sha256hex(oldVersion + "/" + newVersion)
 
 	// prepare report file
 	reportFileName := "report-" + hash + ".html"
+
+	// get S3 bucket
+	region := "eu-central-1" // TODO: read from ENV
+	var bucketName = os.Getenv("BUCKET_NAME")
+	if len(bucketName) == 0 {
+		bucketName = "localhost"
+	}
 
 	// check if report file already exists
 	s3 := reports.NewS3Client(region, bucketName)
@@ -143,7 +147,7 @@ func sendReportFile(reportFileURL string) (events.APIGatewayProxyResponse, error
 	// prepare headers
 	headers := make(map[string]string)
 	headers["Content-Type"] = "application/json"
-	headers["Access-Control-Allow-Origin"] = "http://online.jarhc.org"
+	addCorsHeaders(headers)
 
 	// prepare body
 	var body = JapiccCheckResponse{
@@ -171,7 +175,7 @@ func sendErrorMessage(statusCode int, errorMessage string) (events.APIGatewayPro
 	// prepare headers
 	headers := make(map[string]string)
 	headers["Content-Type"] = "application/json"
-	headers["Access-Control-Allow-Origin"] = "http://online.jarhc.org"
+	addCorsHeaders(headers)
 
 	// prepare body
 	var body = JapiccCheckResponse{
@@ -205,4 +209,12 @@ func sha256hex(text string) string {
 	data := []byte(text)
 	hash := sha256.Sum256(data)
 	return fmt.Sprintf("%x", hash[:])
+}
+
+func addCorsHeaders(headers map[string]string) {
+	var websiteUrl = os.Getenv("WEBSITE_URL")
+	if len(websiteUrl) == 0 {
+		websiteUrl = "http://localhost:3000"
+	}
+	headers["Access-Control-Allow-Origin"] = websiteUrl
 }

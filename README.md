@@ -13,7 +13,9 @@ sam build
 
 ### Run
 
-ToDo
+```shell
+sam local start-api --port 8080 --parameter-overrides "ApiDomain=localhost:8080 WebsiteDomain=localhost:3000 WebsiteURL=http://localhost:3000"
+```
 
 ### Deploy
 

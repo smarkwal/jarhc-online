@@ -7,6 +7,7 @@ import (
 	"github.com/smarkwal/jarhc-online/sam-app/maven-search/maven"
 	"log"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -44,7 +45,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	// prepare headers
 	headers := make(map[string]string)
 	headers["Content-Type"] = "application/json"
-	headers["Access-Control-Allow-Origin"] = "http://online.jarhc.org"
+	addCorsHeaders(headers)
 
 	// serialize body to JSON
 	jsonBody, err := json.Marshal(artifacts)
@@ -69,7 +70,7 @@ func sendErrorMessage(statusCode int, errorMessage string) (events.APIGatewayPro
 	// prepare headers
 	headers := make(map[string]string)
 	headers["Content-Type"] = "application/json"
-	headers["Access-Control-Allow-Origin"] = "http://online.jarhc.org"
+	addCorsHeaders(headers)
 
 	// return API response
 	response := events.APIGatewayProxyResponse{
@@ -78,4 +79,12 @@ func sendErrorMessage(statusCode int, errorMessage string) (events.APIGatewayPro
 		Body:       "[]",
 	}
 	return response, nil
+}
+
+func addCorsHeaders(headers map[string]string) {
+	var websiteUrl = os.Getenv("WEBSITE_URL")
+	if len(websiteUrl) == 0 {
+		websiteUrl = "http://localhost:3000"
+	}
+	headers["Access-Control-Allow-Origin"] = websiteUrl
 }
