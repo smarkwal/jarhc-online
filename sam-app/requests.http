@@ -1,7 +1,7 @@
 
 # @name CORS preflight request for Maven Search function
 OPTIONS https://api.jarhc.org/maven/search
-Origin: http://online.jarhc.org
+Origin: https://online.jarhc.org
 Access-Control-Request-Method: GET
 
 > {%
@@ -9,7 +9,7 @@ Access-Control-Request-Method: GET
         client.assert(response.status === 200, "Response status is not 200");
     });
     client.test("CORS headers", function() {
-        client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "http://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
+        client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "https://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
         client.assert(response.headers.valueOf("Access-Control-Allow-Methods") == "GET,POST,OPTIONS", "Access-Control-Allow-Methods incorrect");
         client.assert(response.headers.valueOf("Access-Control-Allow-Headers") == "Content-Type", "Access-Control-Allow-Headers incorrect");
         client.assert(response.headers.valueOf("Access-Control-Allow-Credentials") == "true", "Access-Control-Allow-Credentials incorrect");
@@ -27,7 +27,7 @@ GET https://api.jarhc.org/maven/search?coordinates=commons-io:commons-io:2.7
         client.assert(response.status === 200, "Response status is not 200");
     });
     client.test("CORS headers", function() {
-        client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "http://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
+        client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "https://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
     });
     client.test("Body", function() {
         client.assert(response.body.length === 1, "Response contains 1 artifact");
@@ -47,7 +47,7 @@ GET https://api.jarhc.org/maven/search?coordinates=unknown:unknown:0.0.1
         client.assert(response.status === 200, "Response status is not 200");
     });
     client.test("CORS headers", function() {
-        client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "http://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
+        client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "https://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
     });
     client.test("Body", function() {
         client.assert(response.body.length === 0, "Response contains 0 artifact");
@@ -64,7 +64,7 @@ GET https://api.jarhc.org/maven/search?coordinates=unknown
         client.assert(response.status === 400, "Response status is not 400");
     });
     client.test("CORS headers", function() {
-        client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "http://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
+        client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "https://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
     });
     client.test("Body", function() {
         client.assert(response.body.length === 0, "Response contains 0 artifact");
@@ -81,7 +81,7 @@ GET https://api.jarhc.org/maven/search
         client.assert(response.status === 400, "Response status is not 400");
     });
     client.test("CORS headers", function() {
-        client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "http://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
+        client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "https://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
     });
     client.test("Body", function() {
         client.assert(response.body.length === 0, "Response contains 0 artifact");
@@ -92,7 +92,7 @@ GET https://api.jarhc.org/maven/search
 
 # @name CORS preflight request for JAPICC Check function
 OPTIONS https://api.jarhc.org/japicc/check
-Origin: http://online.jarhc.org
+Origin: https://online.jarhc.org
 Access-Control-Request-Method: POST
 Access-Control-Allow-Headers: content-type
 
@@ -101,7 +101,7 @@ Access-Control-Allow-Headers: content-type
         client.assert(response.status === 200, "Response status is not 200");
     });
     client.test("CORS headers", function() {
-        client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "http://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
+        client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "https://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
         client.assert(response.headers.valueOf("Access-Control-Allow-Methods") == "GET,POST,OPTIONS", "Access-Control-Allow-Methods incorrect");
         client.assert(response.headers.valueOf("Access-Control-Allow-Headers") == "Content-Type", "Access-Control-Allow-Headers incorrect");
         client.assert(response.headers.valueOf("Access-Control-Allow-Credentials") == "true", "Access-Control-Allow-Credentials incorrect");
@@ -125,10 +125,10 @@ Content-Type: application/json
         client.assert(response.status === 200, "Response status is not 200");
     });
     client.test("CORS headers", function() {
-        client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "http://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
+        client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "https://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
     });
     client.test("Body", function() {
-        client.assert(response.body.reportURL === "http://online.jarhc.org/reports/report-89136839f409d413748241df527e6e5afaa826d520d434493f37c9d17673c5d8.html", "reportURL contains report URL");
+        client.assert(response.body.reportURL === "https://online.jarhc.org/reports/report-89136839f409d413748241df527e6e5afaa826d520d434493f37c9d17673c5d8.html", "reportURL contains report URL");
         client.assert(response.body.errorMessage === "", "errorMessage is empty");
     });
 %}
@@ -149,10 +149,52 @@ Content-Type: application/json
         client.assert(response.status === 500, "Response status is not 500");
     });
     client.test("CORS headers", function() {
-        client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "http://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
+        client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "https://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
     });
     client.test("Body", function() {
         client.assert(response.body.reportURL == "", "reportURL is empty");
         client.assert(response.body.errorMessage == "unexpected status code: 404", "errorMessage contains error messsage");
+    });
+%}
+
+###
+
+# @name Public website root
+GET https://online.jarhc.org/
+
+> {%
+    client.test("Status code", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+    client.test("Headers", function() {
+        client.assert(response.contentType.mimeType === "text/html", "Content-Type not text/html");
+    });
+%}
+
+###
+
+# @name Public website index.html
+GET https://online.jarhc.org/index.html
+
+> {%
+    client.test("Status code", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+    client.test("Headers", function() {
+        client.assert(response.contentType.mimeType === "text/html", "Content-Type not text/html");
+    });
+%}
+
+###
+
+# @name Public website logo
+GET https://online.jarhc.org/logo.png
+
+> {%
+    client.test("Status code", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+    client.test("Headers", function() {
+        client.assert(response.contentType.mimeType === "image/png", "Content-Type not image/png");
     });
 %}

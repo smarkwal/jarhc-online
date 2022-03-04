@@ -11,15 +11,17 @@ Parameters:
     Default: online.jarhc.org
   WebsiteURL:
     Type: String
-    # TODO: change after switching to HTTPS
-    Default: http://online.jarhc.org
+    Default: https://online.jarhc.org
+  WebsiteCertificateARN:
+    # ARN of SSL certificate in us-east-1 required for CloutFront
+    Type: String
+    Default: arn:aws:acm:us-east-1:837783538267:certificate/b18b61c2-4f55-4f98-8563-a7b6fc5af699
   BucketName:
     Type: String
     Default: online.jarhc.org
   BucketURL:
     Type: String
-    # TODO: change after switching to HTTPS
-    Default: http://online.jarhc.org
+    Default: https://online.jarhc.org
   DnsZoneID:
     Type: String
     Default: Z39VOOPW73P7H0
@@ -101,15 +103,15 @@ Resources:
         Variables:
           WEBSITE_URL: !Ref WebsiteURL
 
-  # SSL certificate for public website
-  Certificate:
-    Type: AWS::CertificateManager::Certificate
-    Properties:
-      DomainName: !Ref WebsiteDomain
-      ValidationMethod: DNS
-      DomainValidationOptions:
-        - DomainName: !Ref WebsiteDomain
-          HostedZoneId: !Ref DnsZoneID
+  # SSL certificate for public website (must be in us-east-1 !!!)
+  # WebsiteCertificate:
+  #  Type: AWS::CertificateManager::Certificate
+  #  Properties:
+  #    DomainName: !Ref WebsiteDomain
+  #    ValidationMethod: DNS
+  #    DomainValidationOptions:
+  #      - DomainName: !Ref WebsiteDomain
+  #        HostedZoneId: !Ref DnsZoneID
 
   # SSL certificate for API gateway
   ApiCertificate:
@@ -122,7 +124,7 @@ Resources:
           HostedZoneId: !Ref DnsZoneID
 
   # S3 Bucket for public website
-  JarhcOnlineBucket:
+  WebsiteBucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Ref BucketName
@@ -139,21 +141,21 @@ Resources:
       # CorsConfiguration: https://docs.aws.amazon.com/AmazonS3/latest/userguide/cors.html
 
   # S3 Bucket Policy for public website
-  JarhcOnlineBucketPolicy:
+  WebsiteBucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
-      Bucket: !Ref JarhcOnlineBucket
+      Bucket: !Ref WebsiteBucket
       PolicyDocument:
         Version: 2012-10-17
         Statement:
           - Sid: ReadAccessForEveryone # grant read access to everyone
-            Resource: !Sub "arn:aws:s3:::${JarhcOnlineBucket}/*"
+            Resource: !Sub "arn:aws:s3:::${WebsiteBucket}/*"
             Effect: Allow
             Action:
               - 's3:GetObject'
             Principal: '*'
           - Sid: ReadWriteAccessForJapiccCheckFunctionRole # grant read and write access to JapiccCheck function
-            Resource: !Sub "arn:aws:s3:::${JarhcOnlineBucket}/*"
+            Resource: !Sub "arn:aws:s3:::${WebsiteBucket}/*"
             Effect: Allow
             Action:
               - 's3:GetObject'
@@ -161,24 +163,59 @@ Resources:
             Principal:
               AWS: !GetAtt JapiccCheckFunctionRole.Arn
 
-  JarhcOnlineDnsRecord:
-    # see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset.html
-    Type: AWS::Route53::RecordSet
+  # CloudFront Distribution for public website
+  WebsiteCloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
     Properties:
-      Name: !Ref WebsiteDomain
+      DistributionConfig:
+        Enabled: true
+        Aliases:
+          - !Ref WebsiteDomain
+        HttpVersion: http2
+        Origins:
+          - Id: DefaultOrigin
+            DomainName: !Sub "${WebsiteBucket.RegionalDomainName}"
+            S3OriginConfig:
+              OriginAccessIdentity: ""
+        DefaultRootObject: index.html
+        PriceClass: PriceClass_100
+        ViewerCertificate:
+          AcmCertificateArn: !Ref WebsiteCertificateARN
+          MinimumProtocolVersion: TLSv1.2_2021
+          SslSupportMethod: sni-only
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - GET
+            - HEAD
+          CachedMethods:
+            - GET
+            - HEAD
+          # CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6 # CachingOptimized
+          CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad # CachingDisabled
+          Compress: true
+          TargetOriginId: DefaultOrigin
+          ViewerProtocolPolicy: redirect-to-https
+
+  WebsiteDnsRecord:
+    # see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-route53.html#w2ab1c23c21c80c11
+    Type: AWS::Route53::RecordSetGroup
+    Properties:
       HostedZoneId: !Ref DnsZoneID
-      Type: A
-      AliasTarget:
-        # see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-aliastarget-1.html
-        # see https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints
-        DNSName: !Sub "s3-website.${AWS::Region}.amazonaws.com" # S3 website endpoint where S3 bucket has been created
-        HostedZoneId: Z21DNDUVLTQW6Q # Route 53 Hosted Zone ID for S3 website endpoint where S3 bucket has been created
-        EvaluateTargetHealth: false
+      RecordSets:
+        - Name: !Ref WebsiteDomain
+          Type: A
+          AliasTarget:
+            DNSName: !Sub "${WebsiteCloudFrontDistribution.DomainName}"
+            HostedZoneId: Z2FDTNDATAQYW2
+            EvaluateTargetHealth: false
 
 Outputs:
   ApiGatewayUrl:
     Description: "Base URL of API Gateway."
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
-  JarhcOnlineBucketUrl:
+  WebsiteBucketUrl:
     Description: "Public URL of S3 Bucket."
-    Value: !Sub "https://${JarhcOnlineBucket.RegionalDomainName}/"
+    Value: !Sub "https://${WebsiteBucket.RegionalDomainName}/"
+  WebsiteCloudFrontDistributionUrl:
+    Description: "Public URL of CloudFront Distribution."
+    Value: !Sub "https://${WebsiteCloudFrontDistribution.DomainName}/"

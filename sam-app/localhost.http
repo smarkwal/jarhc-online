@@ -77,7 +77,7 @@ Content-Type: application/json
         client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "http://localhost:3000", "Access-Control-Allow-Origin incorrect");
     });
     client.test("Body", function() {
-        client.assert(response.body.reportURL === "http://online.jarhc.org/reports/report-89136839f409d413748241df527e6e5afaa826d520d434493f37c9d17673c5d8.html", "reportURL contains report URL");
+        client.assert(response.body.reportURL === "https://online.jarhc.org/reports/report-89136839f409d413748241df527e6e5afaa826d520d434493f37c9d17673c5d8.html", "reportURL contains report URL");
         client.assert(response.body.errorMessage === "", "errorMessage is empty");
     });
 %}
