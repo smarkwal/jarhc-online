@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"crypto/sha256"
 	"encoding/json"
 	"fmt"
@@ -10,7 +11,6 @@ import (
 	"github.com/smarkwal/jarhc-online/sam-app/japicc-check/maven"
 	"github.com/smarkwal/jarhc-online/sam-app/japicc-check/reports"
 	"log"
-	"net/http"
 	"os"
 	"path"
 	"strings"
@@ -23,23 +23,35 @@ type JapiccCheckRequest struct {
 	NewVersion string `json:"newVersion"`
 }
 
-type JapiccCheckResponse struct {
-	ReportURL    string `json:"reportURL"`
-	ErrorMessage string `json:"errorMessage"`
-}
-
 func main() {
 	lambda.Start(handler)
 }
 
-func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func handler(ctx context.Context, sqsEvent events.SQSEvent) error {
+	for _, message := range sqsEvent.Records {
+		fmt.Printf("The message %s for event source %s = %s \n", message.MessageId, message.EventSource, message.Body)
+
+		// TODO: delete message?
+
+		// handle message
+		err := handle(message)
+		if err != nil {
+			// TODO: exception handling
+			log.Println("Error:", err)
+		}
+	}
+
+	return nil
+}
+
+func handle(message events.SQSMessage) error {
 
 	// parse JSON request body
 	var in JapiccCheckRequest
-	reader := strings.NewReader(request.Body)
+	reader := strings.NewReader(message.Body)
 	err := json.NewDecoder(reader).Decode(&in)
 	if err != nil {
-		return sendError(http.StatusBadRequest, err)
+		return err
 	}
 
 	oldVersion := in.OldVersion
@@ -65,13 +77,11 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	s3 := reports.NewS3Client(region, bucketName)
 	exists, err := s3.Exists(reportFileName)
 	if err != nil {
-		return sendError(http.StatusInternalServerError, err)
+		return err
 	}
-
-	reportFileURL := s3.GetURL(reportFileName)
 	if exists {
 		log.Println("report file size: [S3]")
-		return sendReportFile(reportFileURL)
+		return nil
 	}
 
 	// prepare temp dir for report file
@@ -80,18 +90,18 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 
 	err = os.MkdirAll(path.Dir(reportFilePath), os.ModePerm)
 	if err != nil {
-		return sendError(http.StatusInternalServerError, err)
+		return err
 	}
 
 	oldArtifact, err := maven.NewArtifact(oldVersion)
 	if err != nil {
-		return sendError(http.StatusBadRequest, err)
+		return err
 	}
 	log.Println("old artifact:", oldArtifact.ToCoordinates())
 
 	newArtifact, err := maven.NewArtifact(newVersion)
 	if err != nil {
-		return sendError(http.StatusBadRequest, err)
+		return err
 	}
 	log.Println("new artifact:", newArtifact.ToCoordinates())
 
@@ -99,11 +109,11 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	log.Println("old file path:", oldFilePath)
 	err = os.MkdirAll(path.Dir(oldFilePath), os.ModePerm)
 	if err != nil {
-		return sendError(http.StatusInternalServerError, err)
+		return err
 	}
 	err = oldArtifact.Download(oldFilePath)
 	if err != nil {
-		return sendError(http.StatusInternalServerError, err)
+		return err
 	}
 	log.Println("old file size: ", getFileSize(oldFilePath))
 
@@ -111,24 +121,24 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	log.Println("new file path:", newFilePath)
 	err = os.MkdirAll(path.Dir(newFilePath), os.ModePerm)
 	if err != nil {
-		return sendError(http.StatusInternalServerError, err)
+		return err
 	}
 	err = newArtifact.Download(newFilePath)
 	if err != nil {
-		return sendError(http.StatusInternalServerError, err)
+		return err
 	}
 	log.Println("new file size: ", getFileSize(newFilePath))
 
 	err = japicc.Check(oldFilePath, newFilePath, reportFilePath)
 	if err != nil {
-		return sendError(http.StatusInternalServerError, err)
+		return err
 	}
 	log.Println("report file size: ", getFileSize(reportFilePath))
 
 	// read report file
 	file, err := os.Open(reportFilePath)
 	if err != nil {
-		return sendError(http.StatusInternalServerError, err)
+		return err
 	}
 	//goland:noinspection GoUnhandledErrorResult
 	defer file.Close()
@@ -136,65 +146,10 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	// upload report file to S3
 	_, err = s3.Upload(reportFileName, file)
 	if err != nil {
-		return sendError(http.StatusInternalServerError, err)
+		return err
 	}
 
-	return sendReportFile(reportFileURL)
-}
-
-func sendReportFile(reportFileURL string) (events.APIGatewayProxyResponse, error) {
-
-	// prepare headers
-	headers := make(map[string]string)
-	headers["Content-Type"] = "application/json"
-	addCorsHeaders(headers)
-
-	// prepare body
-	var body = JapiccCheckResponse{
-		ReportURL: reportFileURL,
-	}
-
-	// serialize body to JSON
-	jsonBody, err := json.Marshal(body)
-
-	// return API response
-	response := events.APIGatewayProxyResponse{
-		StatusCode: 200,
-		Headers:    headers,
-		Body:       string(jsonBody),
-	}
-	return response, err
-}
-
-func sendError(statusCode int, err error) (events.APIGatewayProxyResponse, error) {
-	return sendErrorMessage(statusCode, err.Error())
-}
-
-func sendErrorMessage(statusCode int, errorMessage string) (events.APIGatewayProxyResponse, error) {
-
-	// prepare headers
-	headers := make(map[string]string)
-	headers["Content-Type"] = "application/json"
-	addCorsHeaders(headers)
-
-	// prepare body
-	var body = JapiccCheckResponse{
-		ErrorMessage: errorMessage,
-	}
-
-	// serialize body to JSON
-	jsonBody, err := json.Marshal(body)
-	if err != nil {
-		log.Println("JSON error: ", err)
-	}
-
-	// return API response
-	response := events.APIGatewayProxyResponse{
-		StatusCode: statusCode,
-		Headers:    headers,
-		Body:       string(jsonBody),
-	}
-	return response, nil
+	return nil
 }
 
 func getFileSize(path string) int64 {
@@ -209,12 +164,4 @@ func sha256hex(text string) string {
 	data := []byte(text)
 	hash := sha256.Sum256(data)
 	return fmt.Sprintf("%x", hash[:])
-}
-
-func addCorsHeaders(headers map[string]string) {
-	var websiteUrl = os.Getenv("WEBSITE_URL")
-	if len(websiteUrl) == 0 {
-		websiteUrl = "http://localhost:3000"
-	}
-	headers["Access-Control-Allow-Origin"] = websiteUrl
 }

@@ -90,8 +90,8 @@ GET https://api.jarhc.org/maven/search
 
 ###
 
-# @name CORS preflight request for JAPICC Check function
-OPTIONS https://api.jarhc.org/japicc/check
+# @name CORS preflight request for JAPICC Submit function
+OPTIONS https://api.jarhc.org/japicc/submit
 Origin: https://online.jarhc.org
 Access-Control-Request-Method: POST
 Access-Control-Allow-Headers: content-type
@@ -111,8 +111,8 @@ Access-Control-Allow-Headers: content-type
 
 ###
 
-# @name JAPICC Check function
-POST https://api.jarhc.org/japicc/check
+# @name JAPICC Submit function
+POST https://api.jarhc.org/japicc/submit
 Content-Type: application/json
 
 {
@@ -135,8 +135,8 @@ Content-Type: application/json
 
 ###
 
-# @name JAPICC Check function (not found)
-POST https://api.jarhc.org/japicc/check
+# @name JAPICC Submit function (not found)
+POST https://api.jarhc.org/japicc/submit
 Content-Type: application/json
 
 {

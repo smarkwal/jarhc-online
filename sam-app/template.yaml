@@ -82,6 +82,51 @@ Resources:
       Name: "jarhc-online-resource-group"
       Description: "Resource group for jarhc-online-app"
 
+  JapiccJobQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: japicc-job-queue
+      VisibilityTimeout: 60 # must be >= Lambda function timeout
+
+  JapiccJobQueuePolicy:
+    Type: AWS::SQS::QueuePolicy
+    Properties:
+      Queues:
+        - !Ref JapiccJobQueue
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: JapiccSubmitFunctionRole # grant access to JapiccSubmit function
+            Resource: !GetAtt JapiccJobQueue.Arn
+            Effect: Allow
+            Action:
+              - 'sqs:GetQueueUrl'
+              - 'sqs:SendMessage'
+            Principal:
+              AWS: !GetAtt JapiccSubmitFunctionRole.Arn
+
+  # Lambda function
+  JapiccSubmitFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./japicc-submit
+      Handler: japicc-submit
+      Runtime: go1.x
+      Architectures:
+        - x86_64
+      Tracing: Active
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /japicc/submit
+            Method: POST
+      Environment:
+        Variables:
+          WEBSITE_URL: !Ref WebsiteURL
+          BUCKET_NAME: !Ref BucketName
+          BUCKET_URL: !Ref BucketURL
+
   # Lambda function
   JapiccCheckFunction:
     Type: AWS::Serverless::Function
@@ -95,13 +140,12 @@ Resources:
       Timeout: 60 # increase timeout to 60 seconds for JAPICC
       Events:
         CatchAll:
-          Type: Api
+          Type: SQS
           Properties:
-            Path: /japicc/check
-            Method: POST
+            Queue: !GetAtt JapiccJobQueue.Arn
+            BatchSize: 1
       Environment:
         Variables:
-          WEBSITE_URL: !Ref WebsiteURL
           BUCKET_NAME: !Ref BucketName
           BUCKET_URL: !Ref BucketURL
     Metadata:

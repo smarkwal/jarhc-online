@@ -59,7 +59,7 @@ const JapiccForm = () => {
 		};
 
 		// run JAPICC check
-		fetch(process.env.REACT_APP_API_URL + '/japicc/check', requestOptions)
+		fetch(process.env.REACT_APP_API_URL + '/japicc/submit', requestOptions)
 			.then(response => response.json())
 			// TODO: error handling
 			.then(data => {

@@ -39,8 +39,8 @@ GET http://localhost:3001/maven/search?coordinates=commons-io:commons-io:2.7
 
 ###
 
-# @name CORS preflight request for JAPICC Check function
-OPTIONS http://localhost:3001/japicc/check
+# @name CORS preflight request for JAPICC Submit function
+OPTIONS http://localhost:3001/japicc/submit
 Origin: http://localhost:3000
 Access-Control-Request-Method: POST
 Access-Control-Allow-Headers: content-type
@@ -60,8 +60,8 @@ Access-Control-Allow-Headers: content-type
 
 ###
 
-# @name JAPICC Check function
-POST http://localhost:3001/japicc/check
+# @name JAPICC Submit function
+POST http://localhost:3001/japicc/submit
 Content-Type: application/json
 
 {
