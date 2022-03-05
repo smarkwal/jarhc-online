@@ -3,31 +3,44 @@ Transform: AWS::Serverless-2016-10-31
 Description: "jarhc-online-app - JAR Health Check Online serverless application."
 
 Parameters:
+
   ApiDomain:
+    Description: Domain name for API gateway
     Type: String
     Default: api.jarhc.org
+
   WebsiteDomain:
+    Description: Domain name for public website (CloudFront distribution)
     Type: String
     Default: online.jarhc.org
+
   WebsiteURL:
+    Description: URL for public website (CloudFront distribution)
     Type: String
     Default: https://online.jarhc.org
+
   WebsiteCertificateARN:
-    # ARN of SSL certificate in us-east-1 required for CloutFront
+    Description: ARN of SSL certificate in us-east-1 required for CloutFront
     Type: String
     Default: arn:aws:acm:us-east-1:837783538267:certificate/b18b61c2-4f55-4f98-8563-a7b6fc5af699
+
   BucketName:
+    Description: Name of S3 bucket hosting public website
     Type: String
     Default: online.jarhc.org
+
   BucketURL:
+    Description: URL of S3 bucket hosting JARHC reports
     Type: String
     Default: https://online.jarhc.org
+
   DnsZoneID:
+    Description: ID of hosted DNS zone
     Type: String
     Default: Z39VOOPW73P7H0
 
-# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
+
   Function:
     Timeout: 5
 
@@ -41,6 +54,7 @@ Globals:
     EndpointConfiguration:
       Type: REGIONAL
     Domain:
+      # Domain name and SSL certificate for API gateway
       DomainName: !Ref ApiDomain
       CertificateArn: !Ref ApiCertificate
       EndpointConfiguration: REGIONAL # default
@@ -58,8 +72,9 @@ Resources:
       Name: "jarhc-online-resource-group"
       Description: "Resource group for jarhc-online-app"
 
+  # Lambda function
   JapiccCheckFunction:
-    Type: AWS::Serverless::Function # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html
+    Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
       Architectures:
@@ -70,7 +85,7 @@ Resources:
       Timeout: 60 # increase timeout to 60 seconds for JAPICC
       Events:
         CatchAll:
-          Type: Api # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Type: Api
           Properties:
             Path: /japicc/check
             Method: POST
@@ -84,6 +99,7 @@ Resources:
       DockerContext: ./japicc-check
       Dockerfile: Dockerfile
 
+  # Lambda function
   MavenSearchFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -130,13 +146,11 @@ Resources:
       BucketName: !Ref BucketName
       AccessControl: PublicRead
       LifecycleConfiguration:
-        # see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-lifecycleconfig.html
         Rules:
           - Id: AutoCleanup
             Status: Enabled
             Prefix: "reports/"
             ExpirationInDays: 30
-      # CorsConfiguration: https://docs.aws.amazon.com/AmazonS3/latest/userguide/cors.html
 
   # S3 Bucket Policy for public website
   WebsiteBucketPolicy:
@@ -188,14 +202,13 @@ Resources:
           CachedMethods:
             - GET
             - HEAD
-          # CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6 # CachingOptimized
           CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad # CachingDisabled
           Compress: true
           TargetOriginId: DefaultOrigin
           ViewerProtocolPolicy: redirect-to-https
 
+  # Route 53 DNS record for public website (CloudFront distribution)
   WebsiteDnsRecord:
-    # see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-route53.html#w2ab1c23c21c80c11
     Type: AWS::Route53::RecordSetGroup
     Properties:
       HostedZoneId: !Ref DnsZoneID
@@ -208,12 +221,15 @@ Resources:
             EvaluateTargetHealth: false
 
 Outputs:
+
   ApiGatewayUrl:
     Description: "Base URL of API Gateway."
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+
   WebsiteBucketUrl:
     Description: "Public URL of S3 Bucket."
     Value: !Sub "https://${WebsiteBucket.RegionalDomainName}/"
+
   WebsiteCloudFrontDistributionUrl:
     Description: "Public URL of CloudFront Distribution."
     Value: !Sub "https://${WebsiteCloudFrontDistribution.DomainName}/"
