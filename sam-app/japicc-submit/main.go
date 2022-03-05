@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/smarkwal/jarhc-online/sam-app/japicc-submit/cloud"
+	"github.com/smarkwal/jarhc-online/sam-app/common/cloud"
 	"log"
 	"net/http"
 	"os"

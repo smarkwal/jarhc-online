@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/smarkwal/jarhc-online/sam-app/maven-search/maven"
+	"github.com/smarkwal/jarhc-online/sam-app/common/maven"
 	"log"
 	"net/http"
 	"os"

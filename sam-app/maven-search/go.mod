@@ -4,7 +4,8 @@ go 1.17
 
 require (
 	github.com/aws/aws-lambda-go v1.28.0
-	github.com/stretchr/testify v1.6.1
+	github.com/smarkwal/jarhc-online/sam-app/common v0.0.0-20220305230941-bef2b8252114
+	github.com/stretchr/testify v1.7.0
 )
 
 require (

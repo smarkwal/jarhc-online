@@ -7,9 +7,9 @@ import (
 	"fmt"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/smarkwal/jarhc-online/sam-app/common/cloud"
+	"github.com/smarkwal/jarhc-online/sam-app/common/maven"
 	"github.com/smarkwal/jarhc-online/sam-app/japicc-check/japicc"
-	"github.com/smarkwal/jarhc-online/sam-app/japicc-check/maven"
-	"github.com/smarkwal/jarhc-online/sam-app/japicc-check/reports"
 	"log"
 	"os"
 	"path"
@@ -74,7 +74,7 @@ func handle(message events.SQSMessage) error {
 	}
 
 	// check if report file already exists
-	s3 := reports.NewS3Client(region, bucketName)
+	s3 := cloud.NewS3Client(region, bucketName)
 	exists, err := s3.Exists(reportFileName)
 	if err != nil {
 		return err
