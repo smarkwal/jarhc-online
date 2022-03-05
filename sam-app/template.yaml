@@ -34,6 +34,11 @@ Parameters:
     Type: String
     Default: https://online.jarhc.org
 
+  LogsBucket:
+    Description: Full name of S3 bucket for logs
+    Type: String
+    Default: aws-cloud-reports.s3.amazonaws.com
+
   DnsZoneID:
     Description: ID of hosted DNS zone
     Type: String
@@ -206,6 +211,10 @@ Resources:
           Compress: true
           TargetOriginId: DefaultOrigin
           ViewerProtocolPolicy: redirect-to-https
+        Logging:
+          Bucket: !Ref LogsBucket
+          Prefix: "cloudfront-access-logs/"
+          IncludeCookies: false
 
   # Route 53 DNS record for public website (CloudFront distribution)
   WebsiteDnsRecord:
