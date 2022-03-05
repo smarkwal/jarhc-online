@@ -68,6 +68,11 @@ Globals:
         HostedZoneId: !Ref DnsZoneID
         EvaluateTargetHealth: false
         IpV6: false
+    MethodSettings:
+      - HttpMethod: "*"
+        ResourcePath: "/*"
+        ThrottlingRateLimit: 10
+        ThrottlingBurstLimit: 20
 
 Resources:
 
