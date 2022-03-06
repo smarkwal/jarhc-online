@@ -91,21 +91,42 @@ function validateToken(type) {
 
 		// prepare API request
 		const requestOptions = {
-			method: 'GET',
-			headers: {'Content-Type': 'text/plain'}
+			method: "GET",
+			withCredentials: true,
+			credentials: "include",
+			headers: {
+				"Authorization": "Bearer " + token
+			}
 		};
 
 		fetch("https://api.jarhc.org/auth/validate", requestOptions)
 			.then(res => {
+				const status = res.status
 				if (res.ok) {
-					res.data().then(data => {
-						alert(res.statusCode + ": " + data)
+					res.text().then(data => {
+						alert(status + ": " + data)
 					})
 				} else {
-					alert(res.statusCode + ": " + res.statusMessage)
+					alert(status + ": " + res.statusText)
 				}
 			})
 	} else {
 		alert(type + " not found")
 	}
+}
+
+function searchInMaven(coordinates) {
+
+	fetch("https://api.jarhc.org/maven/search?coordinates=" + coordinates)
+		.then(res => {
+			const status = res.status
+			if (res.ok) {
+				res.json().then(data => {
+					alert(status + ": " + JSON.stringify(data))
+				})
+			} else {
+				alert(status + ": " + res.statusText)
+			}
+		})
+
 }

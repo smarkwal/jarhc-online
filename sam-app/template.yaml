@@ -9,6 +9,11 @@ Parameters:
     Type: String
     Default: api.jarhc.org
 
+  CognitoUserPoolARN:
+    Description: Cognito User Pool ARN
+    Type: String
+    Default: arn:aws:cognito-idp:eu-central-1:837783538267:userpool/eu-central-1_duUV8DgO7
+
   WebsiteDomain:
     Description: Domain name for public website (CloudFront distribution)
     Type: String
@@ -51,10 +56,20 @@ Globals:
     Timeout: 5
 
   Api:
+    Auth:
+      ApiKeyRequired: false
+      DefaultAuthorizer: CognitoAuthorizer
+      AddDefaultAuthorizerToCorsPreflight: false
+      Authorizers:
+        CognitoAuthorizer:
+          UserPoolArn: !Ref CognitoUserPoolARN
+          Identity:
+            Header: Authorization # default
+            ReauthorizeEvery: 300 # 300 seconds = 5 minutes (default)
     Cors:
       AllowOrigin: !Sub "'${WebsiteURL}'"
       AllowMethods: "'GET,POST,OPTIONS'"
-      AllowHeaders: "'Content-Type'"
+      AllowHeaders: "'Content-Type,Authorization'"
       AllowCredentials: true
       MaxAge: "'600'" # cache results of a preflight request for 10 minutes
     EndpointConfiguration:
@@ -190,6 +205,8 @@ Resources:
           Properties:
             Path: /maven/search
             Method: GET
+            Auth:
+              Authorizer: NONE
       Environment:
         Variables:
           WEBSITE_URL: !Ref WebsiteURL
