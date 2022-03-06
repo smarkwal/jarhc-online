@@ -9,6 +9,11 @@ Parameters:
     Type: String
     Default: online.jarhc.org
 
+  CognitoDomain:
+    Description: Domain name of Cognito sign-up and sign-in webpages.
+    Type: String
+    Default: login.jarhc.org
+
   DnsZoneID:
     Description: ID of hosted DNS zone
     Type: String
@@ -25,8 +30,21 @@ Resources:
         - DomainName: !Ref WebsiteDomain
           HostedZoneId: !Ref DnsZoneID
 
+  CognitoCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: !Ref CognitoDomain
+      ValidationMethod: DNS
+      DomainValidationOptions:
+        - DomainName: !Ref CognitoDomain
+          HostedZoneId: !Ref DnsZoneID
+
 Outputs:
 
-  WebsiteCertificateArn:
+  WebsiteCertificateARN:
     Description: "Website Certificate ARN"
     Value: !Ref WebsiteCertificate
+
+  CognitoCertificateARN:
+    Description: "Cognito Certificate ARN"
+    Value: !Ref CognitoCertificate
