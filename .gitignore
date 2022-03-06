@@ -1,2 +1,8 @@
 # IntelliJ project directory
 /.idea
+
+# AWS SAM build directory
+.aws-sam
+
+# Misc
+.DS_Store
