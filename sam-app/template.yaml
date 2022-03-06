@@ -22,7 +22,8 @@ Parameters:
   WebsiteCertificateARN:
     Description: ARN of SSL certificate in us-east-1 required for CloutFront
     Type: String
-    Default: arn:aws:acm:us-east-1:837783538267:certificate/b18b61c2-4f55-4f98-8563-a7b6fc5af699
+    # see region "us-east-1", CloudFormation stack "jarhc-online-cert", output "WebsiteCertificateArn"
+    Default: arn:aws:acm:us-east-1:837783538267:certificate/3fa0002b-0667-4e67-b8c5-d228a4341811
 
   BucketName:
     Description: Name of S3 bucket hosting public website
@@ -172,16 +173,6 @@ Resources:
       Environment:
         Variables:
           WEBSITE_URL: !Ref WebsiteURL
-
-  # SSL certificate for public website (must be in us-east-1 !!!)
-  # WebsiteCertificate:
-  #  Type: AWS::CertificateManager::Certificate
-  #  Properties:
-  #    DomainName: !Ref WebsiteDomain
-  #    ValidationMethod: DNS
-  #    DomainValidationOptions:
-  #      - DomainName: !Ref WebsiteDomain
-  #        HostedZoneId: !Ref DnsZoneID
 
   # SSL certificate for API gateway
   ApiCertificate:
