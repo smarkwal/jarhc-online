@@ -188,7 +188,7 @@ GET https://online.jarhc.org/index.html
 ###
 
 # @name Public website logo
-GET https://online.jarhc.org/logo.png
+GET https://online.jarhc.org/img/logo.png
 
 > {%
     client.test("Status code", function() {
