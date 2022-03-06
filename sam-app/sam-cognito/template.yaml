@@ -76,8 +76,49 @@ Resources:
         HostedZoneId: Z2FDTNDATAQYW2
         EvaluateTargetHealth: false
 
+  # Cognito app client used by public website and API gateway
+  CognitoAppClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      UserPoolId: !Ref CognitoUserPool
+      ClientName: online.jarhc.org
+      GenerateSecret: true
+      AllowedOAuthFlowsUserPoolClient: true
+      AllowedOAuthFlows:
+        - code
+        - implicit
+      AllowedOAuthScopes:
+        - openid
+        - profile
+        - email
+        - phone
+      DefaultRedirectURI: https://online.jarhc.org
+      CallbackURLs:
+        - https://online.jarhc.org
+        - http://localhost:3000
+      LogoutURLs:
+        - https://online.jarhc.org
+        - http://localhost:3000
+      IdTokenValidity: 3 # hours
+      AccessTokenValidity: 3 # hours
+      RefreshTokenValidity: 7 # days
+      EnableTokenRevocation: true
+      PreventUserExistenceErrors: ENABLED
+      SupportedIdentityProviders:
+        - COGNITO
+      WriteAttributes:
+        - name
+
 Outputs:
+
+  CognitoUserPoolID:
+    Description: "Cognito User Pool ID"
+    Value: !Ref CognitoUserPool
 
   CognitoUserPoolProviderURL:
     Description: "Cognito User Pool Provider URL"
     Value: !GetAtt CognitoUserPool.ProviderURL
+
+  CognitoAppClientID:
+    Description: "Cognito App Client ID"
+    Value: !Ref CognitoAppClient
