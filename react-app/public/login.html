@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<link rel="icon" href="favicon.ico"/>
+	<title>JAR Health Check Online</title>
+	<script src="auth.js"></script>
+</head>
+<body onload="storeTokens();">
+	<h1>Login</h1>
+	<div>You have been signed in.</div>
+	<button onclick="clearTokens(); openSignOutURL()">Sign out</button>
+	<hr/>
+	<button onclick="alert(getAccessToken())">Show Access Token</button>
+	<button onclick="alert(getIdToken())">Show ID Token</button>
+	<br/>
+	<button onclick="validateToken('access_token')">Validate Access Token</button>
+	<button onclick="validateToken('id_token')">Validate ID Token</button>
+</body>
+</html>

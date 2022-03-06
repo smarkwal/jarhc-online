@@ -92,13 +92,13 @@ Resources:
         - profile
         - email
         - phone
-      DefaultRedirectURI: https://online.jarhc.org
+      DefaultRedirectURI: https://online.jarhc.org/login.html
       CallbackURLs:
-        - https://online.jarhc.org
-        - http://localhost:3000
+        - https://online.jarhc.org/login.html
+        - http://localhost:3000/login.html
       LogoutURLs:
-        - https://online.jarhc.org
-        - http://localhost:3000
+        - https://online.jarhc.org/logout.html
+        - http://localhost:3000/logout.html
       IdTokenValidity: 3 # hours
       AccessTokenValidity: 3 # hours
       RefreshTokenValidity: 7 # days

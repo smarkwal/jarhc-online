@@ -20,7 +20,7 @@ Parameters:
     Default: https://online.jarhc.org
 
   WebsiteCertificateARN:
-    Description: ARN of SSL certificate in us-east-1 required for CloutFront
+    Description: ARN of SSL certificate in us-east-1 required for CloudFront
     Type: String
     # see region "us-east-1", CloudFormation stack "jarhc-online-cert", output "WebsiteCertificateARN"
     Default: arn:aws:acm:us-east-1:837783538267:certificate/3fa0002b-0667-4e67-b8c5-d228a4341811
@@ -105,6 +105,26 @@ Resources:
               - 'sqs:SendMessage'
             Principal:
               AWS: !GetAtt JapiccSubmitFunctionRole.Arn
+
+  # Lambda function
+  AuthValidateFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./auth-validate
+      Handler: auth-validate
+      Runtime: go1.x
+      Architectures:
+        - x86_64
+      Tracing: Active
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /auth/validate
+            Method: GET
+      Environment:
+        Variables:
+          WEBSITE_URL: !Ref WebsiteURL
 
   # Lambda function
   JapiccSubmitFunction:

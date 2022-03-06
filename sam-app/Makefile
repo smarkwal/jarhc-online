@@ -39,6 +39,10 @@ update:
 	cd common || exit 1
 	go mod tidy
 
+	echo "Updating auth-validate ..."
+	cd ../auth-validate || exit 1
+	go mod tidy
+
 	echo "Updating japicc-check ..."
 	cd ../japicc-check || exit 1
 	go get -u github.com/smarkwal/jarhc-online/sam-app/common@bef2b82521144958a1a95163d01ee1fbdb018bd8
