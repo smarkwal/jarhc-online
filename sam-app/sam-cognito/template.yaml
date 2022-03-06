@@ -4,6 +4,17 @@ Description: Cognito User Pool for public website and API gateway.
 
 Parameters:
 
+  CognitoDomain:
+    Description: DNS name of Cognito sign-up and sign-in webpages.
+    Type: String
+    Default: login.jarhc.org
+
+  CognitoCertificateARN:
+    Description: ARN of SSL certificate in us-east-1 required for Cognito
+    Type: String
+    # see region "us-east-1", CloudFormation stack "jarhc-online-cert", output "CognitoCertificateARN"
+    Default: arn:aws:acm:us-east-1:837783538267:certificate/26192609-2067-455f-b1c3-f67b75b15926
+
   DnsZoneID:
     Description: ID of hosted DNS zone
     Type: String
@@ -11,6 +22,7 @@ Parameters:
 
 Resources:
 
+  # Cognito user pool
   CognitoUserPool:
     Type: AWS::Cognito::UserPool
     Properties:
@@ -33,6 +45,36 @@ Resources:
         RecoveryMechanisms:
           - Name: verified_email
             Priority: 1
+
+  # Cognito user group "Administrators"
+  CognitoAdminGroup:
+    Type: AWS::Cognito::UserPoolGroup
+    Properties:
+      UserPoolId: !Ref CognitoUserPool
+      GroupName: "Administrators"
+      Precedence: 0
+
+  # Cognito custom domain
+  CognitoCustomDomain:
+    Type: AWS::Cognito::UserPoolDomain
+    Properties:
+      UserPoolId: !Ref CognitoUserPool
+      Domain: !Ref CognitoDomain
+      CustomDomainConfig:
+        CertificateArn: !Ref CognitoCertificateARN
+
+  # DNS record for Cognito custom domain
+  CognitoDnsRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref DnsZoneID
+      Name: !Ref CognitoDomain
+      Type: A
+      AliasTarget:
+        # TODO: how to get the DNS name for CloudFront distribution created for Cognito?
+        DNSName: d1h9aibn2whqxe.cloudfront.net
+        HostedZoneId: Z2FDTNDATAQYW2
+        EvaluateTargetHealth: false
 
 Outputs:
 
