@@ -15,6 +15,11 @@ Parameters:
     # see region "us-east-1", CloudFormation stack "jarhc-online-cert", output "CognitoCertificateARN"
     Default: arn:aws:acm:us-east-1:837783538267:certificate/26192609-2067-455f-b1c3-f67b75b15926
 
+  EmailARN:
+    Description: ARN of a verified email address in Amazon SES (eu-west-1, us-east-1, or us-west-2)
+    Type: String
+    Default: arn:aws:ses:eu-west-1:837783538267:identity/do-not-reply@jarhc.org
+
   DnsZoneID:
     Description: ID of hosted DNS zone
     Type: String
@@ -37,7 +42,9 @@ Resources:
       EnabledMfas:
         - SOFTWARE_TOKEN_MFA
       EmailConfiguration:
-        EmailSendingAccount: COGNITO_DEFAULT
+        EmailSendingAccount: DEVELOPER
+        SourceArn: !Ref EmailARN
+        From: "JarHC <do-not-reply@jarhc.org>"
       AdminCreateUserConfig:
         AllowAdminCreateUserOnly: false
         UnusedAccountValidityDays: 7
