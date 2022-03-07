@@ -72,6 +72,17 @@ Globals:
       AllowHeaders: "'Content-Type,Authorization'"
       AllowCredentials: true
       MaxAge: "'600'" # cache results of a preflight request for 10 minutes
+    GatewayResponses:
+      DEFAULT_4XX:
+        ResponseParameters:
+          Headers:
+            Access-Control-Allow-Origin: !Sub "'${WebsiteURL}'"
+            Access-Control-Allow-Credentials: "'true'"
+      DEFAULT_5XX:
+        ResponseParameters:
+          Headers:
+            Access-Control-Allow-Origin: !Sub "'${WebsiteURL}'"
+            Access-Control-Allow-Credentials: "'true'"
     EndpointConfiguration:
       Type: REGIONAL
     Domain:
