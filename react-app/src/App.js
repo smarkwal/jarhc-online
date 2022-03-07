@@ -12,10 +12,10 @@ function App() {
 				<Card imageUrl="/img/card-image-japicc.png" title="JAPICC - Java API Compliance Checker" text="Compare two versions of a Java library and get a report with details on source and binary compatibility." linkUrl="/japicc" linkText="Run JAPICC"/>
 			</div>
 			<div className="col-12 col-md-6 col-lg-4 mb-4">
-				<Card imageUrl="/img/card-image-jarhc.png" title="JarHC - JAR Health Check" text="Analyze a set of Java libraries for their binary compatibility." linkUrl="/jarhc" linkText="Coming soon" enabled={false}/>
+				<Card imageUrl="/img/card-image-jarhc.png" title="JarHC - JAR Health Check" text="Analyze a set of Java libraries for compatibility at binary level. Find missing dependencies, duplicate classes, dangerous code, and much more." linkUrl="/jarhc" linkText="Coming soon" enabled={false}/>
 			</div>
 			<div className="col-12 col-md-6 col-lg-4 mb-4">
-				<Card imageUrl="/img/card-image-jdiff.png" title="jDiff - Java API Diff" text="" linkUrl="/jdiff" linkText="Coming soon" enabled={false}/>
+				<Card imageUrl="/img/card-image-srcdiff.png" title="SrcDiff - Java Source Code Diff" text="Compare the source code of two versions of a Java library and see what has been changed by the developers." linkUrl="/srcdiff" linkText="Coming soon" enabled={false}/>
 			</div>
 		</div>
 	</>);

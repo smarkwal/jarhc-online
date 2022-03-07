@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import {HashRouter, Route, Routes} from "react-router-dom";
 import './index.css';
 import App from './App';
-import JDiff from "./JDiff";
 import JAPICC from "./JAPICC";
 import JarHC from "./JarHC";
+import SrcDiff from "./SrcDiff";
 import reportWebVitals from './reportWebVitals';
 
 let rootElement = document.getElementById('root');
@@ -15,7 +15,7 @@ ReactDOM.render(<React.StrictMode>
 			<Route path="/" element={<App/>}/>
 			<Route path="japicc" element={<JAPICC/>}/>
 			<Route path="jarhc" element={<JarHC/>}/>
-			<Route path="jdiff" element={<JDiff/>}/>
+			<Route path="srcdiff" element={<SrcDiff/>}/>
 		</Routes>
 	</HashRouter>
 </React.StrictMode>, rootElement);

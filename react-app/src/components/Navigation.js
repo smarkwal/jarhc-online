@@ -8,7 +8,7 @@ const Navigation = () => {
 			<NavLink className="nav-item nav-link px-3" activeclassname="active" to="/">Home</NavLink>
 			<NavLink className="nav-item nav-link px-3" activeclassname="active" to="/japicc">JAPICC</NavLink>
 			<NavLink className="nav-item nav-link px-3" activeclassname="active" to="/jarhc">JarHC</NavLink>
-			<NavLink className="nav-item nav-link px-3" activeclassname="active" to="/jdiff">jDiff</NavLink>
+			<NavLink className="nav-item nav-link px-3" activeclassname="active" to="/srcdiff">SrcDiff</NavLink>
 		</div>
 		<div className="pe-4">
 			{Auth.isSignedIn() ? <button className="btn btn-primary" onClick={Auth.signOut}>Sign out</button> : <div>

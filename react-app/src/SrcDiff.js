@@ -1,14 +1,14 @@
 import Navigation from "./components/Navigation";
 import UnderConstruction from "./components/UnderConstruction";
 
-function JDiff() {
+function SrcDiff() {
 	return (<>
 		<Navigation/>
 		<div className="container">
-			<h2>jDiff - Java API Diff</h2>
+			<h2>SrcDiff - Java Source Code Diff</h2>
 			<UnderConstruction/>
 		</div>
 	</>);
 }
 
-export default JDiff;
+export default SrcDiff;
