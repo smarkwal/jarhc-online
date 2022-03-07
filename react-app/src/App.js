@@ -1,5 +1,6 @@
 import Card from "./components/Card";
 import Navigation from "./components/Navigation";
+import Auth from "./components/Auth"
 
 function App() {
 	return (<>
@@ -18,6 +19,12 @@ function App() {
 				<Card imageUrl="/img/card-image-jdiff.png" title="jDiff - Java API Diff" text="" linkUrl="/jdiff" linkText="Start"/>
 			</div>
 		</div>
+
+		{Auth.isSignedIn() ? <button className="btn btn-primary" onClick={Auth.signOut}>Sign out</button> : <div>
+			<button className="btn btn-primary" onClick={Auth.signIn}>Sign in</button>
+			<button className="btn btn-primary" onClick={Auth.signUp}>Sign up</button>
+		</div>}
+
 	</>);
 }
 

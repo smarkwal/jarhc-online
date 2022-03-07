@@ -6,17 +6,9 @@
 	<title>JAR Health Check Online</title>
 	<script src="auth.js"></script>
 </head>
-<body onload="storeTokens();">
+<body onload="storeTokens(); redirectToMainApp()">
 	<h1>Login</h1>
 	<div>You have been signed in.</div>
-	<button onclick="clearTokens(); openSignOutURL()">Sign out</button>
-	<hr/>
-	<button onclick="alert(getAccessToken())">Show Access Token</button>
-	<button onclick="alert(getIdToken())">Show ID Token</button>
-	<hr/>
-	<button onclick="validateToken('access_token')">Validate Access Token</button>
-	<button onclick="validateToken('id_token')">Validate ID Token</button>
-	<hr/>
-	<button onclick="searchInMaven('commons-io:commons-io:2.11.0')">Search in Maven</button>
+	<button onclick="redirectToMainApp()">Back</button>
 </body>
 </html>

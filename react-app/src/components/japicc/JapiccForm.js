@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState} from "react";
 import JapiccReport from "./JapiccReport";
 import JapiccAbout from "./JapiccAbout";
+import Auth from "../Auth"
 
 const JapiccForm = () => {
 
@@ -40,6 +41,14 @@ const JapiccForm = () => {
 	function onSubmit(event) {
 		event.preventDefault()
 
+		// get ID token
+		const token = Auth.getIdToken()
+		if (!token) {
+			// TODO: error handling
+			console.error("ID token not found. Please sign in first.")
+			return
+		}
+
 		// show loading wheel
 		setState({
 			...state,
@@ -50,8 +59,12 @@ const JapiccForm = () => {
 
 		// prepare API request
 		const requestOptions = {
-			method: 'POST',
-			headers: {'Content-Type': 'application/json'},
+			method: "POST",
+			credentials: "include",
+			headers: {
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + token
+			},
 			body: JSON.stringify({
 				oldVersion: state.oldVersion,
 				newVersion: state.newVersion
@@ -59,7 +72,7 @@ const JapiccForm = () => {
 		};
 
 		// run JAPICC check
-		fetch(process.env.REACT_APP_API_URL + '/japicc/submit', requestOptions)
+		fetch(process.env.REACT_APP_API_URL + "/japicc/submit", requestOptions)
 			.then(response => response.json())
 			// TODO: error handling
 			.then(data => {
@@ -173,12 +186,12 @@ const JapiccForm = () => {
 				</div>
 			</div>
 		</form>
-		{state.errorMessage.length > 0 && <div className="border border-danger border-1 mt-5">
+		{state.errorMessage && state.errorMessage.length > 0 && <div className="border border-danger border-1 mt-5">
 			<div className="alert alert-danger mb-0">
 				{state.errorMessage}
 			</div>
 		</div>}
-		{state.reportURL.length > 0 ? <JapiccReport reportURL={state.reportURL} onClose={closeReport}/> : <JapiccAbout/>}
+		{state.reportURL && state.reportURL.length > 0 ? <JapiccReport reportURL={state.reportURL} onClose={closeReport}/> : <JapiccAbout/>}
 	</div>)
 }
 

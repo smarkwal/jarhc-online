@@ -170,4 +170,5 @@ func addCorsHeaders(headers map[string]string) {
 		websiteUrl = "http://localhost:3000"
 	}
 	headers["Access-Control-Allow-Origin"] = websiteUrl
+	headers["Access-Control-Allow-Credentials"] = "true"
 }

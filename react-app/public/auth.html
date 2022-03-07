@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<link rel="icon" href="favicon.ico"/>
+	<title>JAR Health Check Online</title>
+	<script type="text/javascript">
+
+		function getTokens() {
+			const storage = window.sessionStorage;
+			const value = storage.getItem("tokens");
+			if (value) {
+				return JSON.parse(value);
+			} else {
+				return {}
+			}
+		}
+
+		function getToken(type) {
+			const tokens = getTokens()
+			return tokens[type]
+		}
+
+		function getAccessToken() {
+			return getToken("access_token")
+		}
+
+		function getIdToken() {
+			return getToken("id_token")
+		}
+
+		function validateToken(type) {
+			const token = getToken(type)
+			if (token) {
+
+				// prepare API request
+				const requestOptions = {
+					method: "GET",
+					withCredentials: true,
+					credentials: "include",
+					headers: {
+						"Authorization": "Bearer " + token
+					}
+				};
+
+				fetch("https://api.jarhc.org/auth/validate", requestOptions)
+					.then(res => {
+						const status = res.status
+						if (res.ok) {
+							res.text().then(data => {
+								alert(status + ": " + data)
+							})
+						} else {
+							alert(status + ": " + res.statusText)
+						}
+					})
+					.catch(error => {
+						alert(error)
+					})
+
+			} else {
+				alert(type + " not found")
+			}
+		}
+
+		function searchInMaven(coordinates) {
+
+			fetch("https://api.jarhc.org/maven/search?coordinates=" + coordinates)
+				.then(res => {
+					const status = res.status
+					if (res.ok) {
+						res.json().then(data => {
+							alert(status + ": " + JSON.stringify(data))
+						})
+					} else {
+						alert(status + ": " + res.statusText)
+					}
+				})
+
+		}
+
+	</script>
+</head>
+<body>
+	<h1>Auth Tests</h1>
+	<button onclick="alert(getAccessToken())">Show Access Token</button>
+	<button onclick="alert(getIdToken())">Show ID Token</button>
+	<hr/>
+	<button onclick="validateToken('access_token')">Validate Access Token</button>
+	<button onclick="validateToken('id_token')">Validate ID Token</button>
+	<hr/>
+	<button onclick="searchInMaven('commons-io:commons-io:2.11.0')">Search in Maven</button>
+</body>
+</html>

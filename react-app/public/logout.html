@@ -6,10 +6,9 @@
 	<title>JAR Health Check Online</title>
 	<script src="auth.js"></script>
 </head>
-<body>
+<body onload="clearTokens(); redirectToMainApp()">
 	<h1>Logout</h1>
 	<div>You have been signed out.</div>
-	<button onclick="openSignInURL()">Sign in</button>
-	<button onclick="openSignUpURL()">Sign up</button>
+	<button onclick="redirectToMainApp()">Back</button>
 </body>
 </html>
