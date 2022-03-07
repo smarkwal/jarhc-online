@@ -1,6 +1,5 @@
 import Card from "./components/Card";
 import Navigation from "./components/Navigation";
-import Auth from "./components/Auth"
 
 function App() {
 	return (<>
@@ -10,21 +9,15 @@ function App() {
 		</div>
 		<div className="row">
 			<div className="col-12 col-md-6 col-lg-4 mb-4">
-				<Card imageUrl="/img/card-image-japicc.png" title="JAPICC - Java API Compliance Checker" text="Compare two versions of a Java library and get a report with details on source and binary compatibility." linkUrl="/japicc" linkText="Start"/>
+				<Card imageUrl="/img/card-image-japicc.png" title="JAPICC - Java API Compliance Checker" text="Compare two versions of a Java library and get a report with details on source and binary compatibility." linkUrl="/japicc" linkText="Run JAPICC"/>
 			</div>
 			<div className="col-12 col-md-6 col-lg-4 mb-4">
-				<Card imageUrl="/img/card-image-jarhc.png" title="JarHC - JAR Health Check" text="Analyze a set of Java libraries for their binary compatibility." linkUrl="/jarhc" linkText="Start"/>
+				<Card imageUrl="/img/card-image-jarhc.png" title="JarHC - JAR Health Check" text="Analyze a set of Java libraries for their binary compatibility." linkUrl="/jarhc" linkText="Run JarHC"/>
 			</div>
 			<div className="col-12 col-md-6 col-lg-4 mb-4">
-				<Card imageUrl="/img/card-image-jdiff.png" title="jDiff - Java API Diff" text="" linkUrl="/jdiff" linkText="Start"/>
+				<Card imageUrl="/img/card-image-jdiff.png" title="jDiff - Java API Diff" text="" linkUrl="/jdiff" linkText="Run jDiff"/>
 			</div>
 		</div>
-
-		{Auth.isSignedIn() ? <button className="btn btn-primary" onClick={Auth.signOut}>Sign out</button> : <div>
-			<button className="btn btn-primary" onClick={Auth.signIn}>Sign in</button>
-			<button className="btn btn-primary" onClick={Auth.signUp}>Sign up</button>
-		</div>}
-
 	</>);
 }
 

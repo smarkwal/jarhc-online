@@ -9,15 +9,17 @@ const Card = ({
 				  linkText
 			  }) => {
 	return (<div className="card">
-			<img className="card-img-top" src={imageUrl} alt=""/>
-			<div className="card-body">
-				<h5 className="card-title">{title}</h5>
-				<p className="card-text">{text}</p>
+		<img className="card-img-top" src={imageUrl} alt=""/>
+		<div className="card-body">
+			<h5 className="card-title">{title}</h5>
+			<p className="card-text">{text}</p>
+			<div className="text-end">
 				<Link to={linkUrl}>
 					<button className="btn btn-primary">{linkText}</button>
 				</Link>
 			</div>
-		</div>);
+		</div>
+	</div>);
 };
 
 export default Card;

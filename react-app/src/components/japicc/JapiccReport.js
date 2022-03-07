@@ -11,10 +11,10 @@ const JapiccReport = ({
 				<a href={reportURL} target="_blank" rel="noreferrer" title="Open">
 					<i className="bi bi-box-arrow-up-right text-success"/>
 				</a>
-				<a href="#" className="ms-3" title="Close" onClick={onClose}>
+				<span className="ms-3" title="Close" onClick={onClose} role="button">
 					<i className="bi bi-x-lg text-success"/>
-				</a>
 				</span>
+			</span>
 		</div>
 		<iframe src={reportURL} className="w-100 mt-0" style={{height: "500px"}} title="JAPICC Report"/>
 	</div>);
