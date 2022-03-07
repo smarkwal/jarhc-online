@@ -107,7 +107,7 @@ const JapiccForm = () => {
 	}
 
 	function isSubmitButtonEnabled() {
-		return state.oldVersionValid && state.newVersionValid && !state.loading;
+		return Auth.isSignedIn() && state.oldVersionValid && state.newVersionValid && !state.loading;
 	}
 
 	function getSubmitButtonClass() {
@@ -168,7 +168,7 @@ const JapiccForm = () => {
 			</ul>
 		</div>
 		<form onSubmit={onSubmit}>
-			<div className="row align-items-end mb-3">
+			<div className="row align-items-md-top mb-3">
 				<div className="col-12 col-md-5 mt-3">
 					<label className="form-label">Old version</label>
 					<input type="text" className={`form-control ${getInputFieldClass('oldVersion')}`} name="oldVersion" value={state.oldVersion} onChange={onChangeVersion} placeholder="Group:Artifact:Version"/>
@@ -178,10 +178,12 @@ const JapiccForm = () => {
 					<input type="text" className={`form-control ${getInputFieldClass('newVersion')}`} name="newVersion" value={state.newVersion} onChange={onChangeVersion} placeholder="Group:Artifact:Version"/>
 				</div>
 				<div className="col-12 col-md-2 mt-3">
+					<label className="form-label d-none d-md-block">&nbsp;</label>
 					<button type="submit" disabled={!isSubmitButtonEnabled()} className={`btn ${getSubmitButtonClass()} w-100`}>
 						{state.loading && <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"/>}
 						Check
 					</button>
+					{!Auth.isSignedIn() && <div className="text-secondary text-center">Please sign in first</div>}
 				</div>
 			</div>
 		</form>
