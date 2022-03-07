@@ -9,6 +9,11 @@ const Card = ({
 				  linkText,
 				  enabled = true
 			  }) => {
+
+	function scrollToTop() {
+		window.scrollTo(0, 0);
+	}
+
 	return (<div className="card">
 		<img className="card-img-top" src={imageUrl} alt=""/>
 		<div className="card-body">
@@ -16,7 +21,7 @@ const Card = ({
 			<p className="card-text">{text}</p>
 			<div className="text-end">
 				{enabled ? <Link to={linkUrl}>
-					<button className="btn btn-primary">{linkText}</button>
+					<button className="btn btn-primary" onClick={scrollToTop}>{linkText}</button>
 				</Link> : <button className="btn btn-outline-primary disabled">{linkText}</button>}
 			</div>
 		</div>
