@@ -136,6 +136,7 @@ Resources:
   AuthValidateFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: auth-validate
       CodeUri: ./auth-validate
       Handler: auth-validate
       Runtime: go1.x
@@ -156,6 +157,7 @@ Resources:
   JapiccSubmitFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: japicc-submit
       CodeUri: ./japicc-submit
       Handler: japicc-submit
       Runtime: go1.x
@@ -178,6 +180,7 @@ Resources:
   JapiccCheckFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: japicc-check
       PackageType: Image
       Architectures:
         - x86_64
@@ -204,6 +207,7 @@ Resources:
   MavenSearchFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: maven-search
       CodeUri: ./maven-search
       Handler: maven-search
       Runtime: go1.x
