@@ -132,7 +132,6 @@ const JapiccForm = () => {
 	}
 
 	return (<div>
-		<h2>Java API Compliance Checker</h2>
 		<div>
 			Check API source and binary compatibility of two versions of a Java library.
 		</div>

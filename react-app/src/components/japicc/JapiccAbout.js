@@ -1,7 +1,7 @@
 import React from 'react';
 
 const JapiccAbout = () => {
-	return (<div className="alert alert-secondary mt-5">
+	return (<div className="bg-light border rounded-3 p-3 mt-5">
 		<h5 className="alert-heading">About Java API Compliance Checker</h5>
 		<hr/>
 		<pre>{`Java API Compliance Checker (JAPICC) 2.4

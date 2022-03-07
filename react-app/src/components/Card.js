@@ -6,7 +6,8 @@ const Card = ({
 				  title,
 				  text,
 				  linkUrl,
-				  linkText
+				  linkText,
+				  enabled = true
 			  }) => {
 	return (<div className="card">
 		<img className="card-img-top" src={imageUrl} alt=""/>
@@ -14,9 +15,9 @@ const Card = ({
 			<h5 className="card-title">{title}</h5>
 			<p className="card-text">{text}</p>
 			<div className="text-end">
-				<Link to={linkUrl}>
+				{enabled ? <Link to={linkUrl}>
 					<button className="btn btn-primary">{linkText}</button>
-				</Link>
+				</Link> : <button className="btn btn-outline-primary disabled">{linkText}</button>}
 			</div>
 		</div>
 	</div>);
