@@ -48,9 +48,20 @@ function getTokensFromURL() {
 	return tokens
 }
 
+function removeTokensFromURL() {
+	// remove fragment as much as it can go without adding an entry in browser history
+	window.location.replace("#");
+
+	// slice off the remaining "#" in HTML5
+	if (typeof window.history.replaceState == "function") {
+		history.replaceState({}, "", window.location.href.slice(0, -1));
+	}
+}
+
 function storeTokens() {
 	const tokens = getTokensFromURL()
 	if (tokens) {
+		removeTokensFromURL()
 		const storage = window.sessionStorage;
 		let value = JSON.stringify(tokens);
 		storage.setItem("tokens", value)
@@ -110,6 +121,10 @@ function validateToken(type) {
 					alert(status + ": " + res.statusText)
 				}
 			})
+			.catch(error => {
+				alert(error)
+			})
+
 	} else {
 		alert(type + " not found")
 	}
