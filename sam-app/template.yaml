@@ -242,6 +242,17 @@ Resources:
     Properties:
       BucketName: !Ref BucketName
       AccessControl: PublicRead
+      CorsConfiguration:
+        CorsRules:
+          - Id: CorsRule1
+            AllowedOrigins:
+              - "*"
+            AllowedMethods:
+              - GET
+              - HEAD
+            AllowedHeaders:
+              - "*"
+            MaxAge: 600
       LifecycleConfiguration:
         Rules:
           - Id: AutoCleanup
@@ -296,6 +307,7 @@ Resources:
           AllowedMethods:
             - GET
             - HEAD
+            - OPTIONS
           CachedMethods:
             - GET
             - HEAD
