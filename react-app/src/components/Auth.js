@@ -6,10 +6,10 @@ const Auth = {
 	callbackBaseURL: window.location.origin,
 
 	isSignedIn: function() {
-		console.log("is signed in ...")
+		// console.log("is signed in ...")
 		const tokens = Auth.getTokens()
 		const count = Object.keys(tokens).length;
-		console.log("count =", count)
+		// console.log("count =", count)
 		return count
 	},
 
@@ -61,7 +61,7 @@ const Auth = {
 	getToken: function(type) {
 		const tokens = Auth.getTokens()
 		const token = tokens[type];
-		console.log(type, "=", token)
+		// console.log(type, "=", token)
 		return token
 	},
 
@@ -76,7 +76,7 @@ const Auth = {
 	},
 
 	clearTokens: function() {
-		console.log("clear tokens ...")
+		// console.log("clear tokens ...")
 		const storage = window.sessionStorage;
 		storage.removeItem("tokens")
 	}
