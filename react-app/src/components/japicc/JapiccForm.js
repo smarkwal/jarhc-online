@@ -141,30 +141,10 @@ const JapiccForm = () => {
 		<div>
 			Examples:
 			<ul>
-				<li>
-					<span role="button" onClick={() => doSubmitExample("org.springframework:spring-core:5.3.0", "org.springframework:spring-core:5.3.16")}>
-						<code>org.springframework:spring-core:5.3.0</code> and <code>org.springframework:spring-core:5.3.16</code>
-						<i className="bi bi-box-arrow-in-down-right text-primary ms-1"/>
-					</span>
-				</li>
-				<li>
-					<span role="button" onClick={() => doSubmitExample("commons-io:commons-io:2.10.0", "commons-io:commons-io:2.11.0")}>
-						<code>commons-io:commons-io:2.10.0</code> and <code>commons-io:commons-io:2.11.0</code>
-						<i className="bi bi-box-arrow-in-down-right text-primary ms-1"/>
-					</span>
-				</li>
-				<li>
-					<span role="button" onClick={() => doSubmitExample("org.owasp.esapi:esapi:2.2.2.0", "org.owasp.esapi:esapi:2.2.3.1")}>
-						<code>org.owasp.esapi:esapi:2.2.2.0</code> and <code>org.owasp.esapi:esapi:2.2.3.1</code>
-						<i className="bi bi-box-arrow-in-down-right text-primary ms-1"/>
-					</span>
-				</li>
-				<li>
-					<span role="button" onClick={() => doSubmitExample("javax.xml.bind:jaxb-api:2.3.0", "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2")}>
-						<code>javax.xml.bind:jaxb-api:2.3.0</code> and <code>jakarta.xml.bind:jakarta.xml.bind-api:2.3.2</code>
-						<i className="bi bi-box-arrow-in-down-right text-primary ms-1"/>
-					</span>
-				</li>
+				<Example oldVersion="org.springframework:spring-core:5.3.0" newVersion="org.springframework:spring-core:5.3.16" onClick={doSubmitExample}/>
+				<Example oldVersion="commons-io:commons-io:2.10.0" newVersion="commons-io:commons-io:2.11.0" onClick={doSubmitExample}/>
+				<Example oldVersion="org.owasp.esapi:esapi:2.2.2.0" newVersion="org.owasp.esapi:esapi:2.2.3.1" onClick={doSubmitExample}/>
+				<Example oldVersion="javax.xml.bind:jaxb-api:2.3.0" newVersion="jakarta.xml.bind:jakarta.xml.bind-api:2.3.2" onClick={doSubmitExample}/>
 			</ul>
 		</div>
 		<form onSubmit={onSubmit}>
@@ -194,6 +174,15 @@ const JapiccForm = () => {
 		</div>}
 		{state.reportURL && state.reportURL.length > 0 ? <JapiccReport reportURL={state.reportURL} onClose={closeReport}/> : <JapiccAbout/>}
 	</div>)
+}
+
+function Example({oldVersion, newVersion, onClick}) {
+	return <li>
+		<span role="button" onClick={() => onClick(oldVersion, newVersion)}>
+			<code>{oldVersion}</code> and <code>{newVersion}</code>
+			<i className="bi bi-box-arrow-in-down-right text-primary ms-1"/>
+		</span>
+	</li>;
 }
 
 export default JapiccForm;
