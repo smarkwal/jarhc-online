@@ -123,53 +123,44 @@ Resources:
       PolicyDocument:
         Version: 2012-10-17
         Statement:
-          - Sid: JapiccSubmitFunctionRole # grant access to JapiccSubmit function
+          - Sid: RestApiFunctionRole # grant access to rest-api function
             Resource: !GetAtt JapiccJobQueue.Arn
             Effect: Allow
             Action:
               - 'sqs:GetQueueUrl'
               - 'sqs:SendMessage'
             Principal:
-              AWS: !GetAtt JapiccSubmitFunctionRole.Arn
+              AWS: !GetAtt RestApiFunctionRole.Arn
 
   # Lambda function
-  AuthValidateFunction:
+  RestApiFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: auth-validate
-      CodeUri: ./auth-validate
-      Handler: auth-validate
+      FunctionName: rest-api
+      CodeUri: ./rest-api
+      Handler: rest-api
       Runtime: go1.x
       Architectures:
         - x86_64
       Tracing: Active
       Events:
-        CatchAll:
+        AuthValidate:
           Type: Api
           Properties:
             Path: /auth/validate
             Method: GET
-      Environment:
-        Variables:
-          WEBSITE_URL: !Ref WebsiteURL
-
-  # Lambda function
-  JapiccSubmitFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: japicc-submit
-      CodeUri: ./japicc-submit
-      Handler: japicc-submit
-      Runtime: go1.x
-      Architectures:
-        - x86_64
-      Tracing: Active
-      Events:
-        CatchAll:
+        JapiccSubmit:
           Type: Api
           Properties:
             Path: /japicc/submit
             Method: POST
+        MavenSearch:
+          Type: Api
+          Properties:
+            Path: /maven/search
+            Method: GET
+            Auth:
+              Authorizer: NONE
       Environment:
         Variables:
           WEBSITE_URL: !Ref WebsiteURL
@@ -202,29 +193,6 @@ Resources:
       DockerTag: go1.x-v1
       DockerContext: ./japicc-check
       Dockerfile: Dockerfile
-
-  # Lambda function
-  MavenSearchFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: maven-search
-      CodeUri: ./maven-search
-      Handler: maven-search
-      Runtime: go1.x
-      Architectures:
-        - x86_64
-      Tracing: Active
-      Events:
-        CatchAll:
-          Type: Api
-          Properties:
-            Path: /maven/search
-            Method: GET
-            Auth:
-              Authorizer: NONE
-      Environment:
-        Variables:
-          WEBSITE_URL: !Ref WebsiteURL
 
   # SSL certificate for API gateway
   ApiCertificate:

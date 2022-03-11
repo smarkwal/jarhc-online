@@ -3,36 +3,30 @@ package main
 import (
 	"encoding/json"
 	"github.com/aws/aws-lambda-go/events"
-	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/smarkwal/jarhc-online/sam-app/common/maven"
 	"log"
 	"net/http"
-	"os"
 )
 
-func main() {
-	lambda.Start(handler)
-}
-
-func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func handlerMavenSearch(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
 	// get coordinates from query string
 	query := request.QueryStringParameters
 	coordinates := query["coordinates"]
 	if len(coordinates) == 0 {
-		return sendErrorMessage(http.StatusBadRequest, "missing parameter: 'coordinates'")
+		return sendMavenSearchErrorMessage(http.StatusBadRequest, "missing parameter: 'coordinates'")
 	}
 
 	// parse coordinates
 	artifact, err := maven.NewArtifact(coordinates)
 	if err != nil {
-		return sendError(http.StatusBadRequest, err)
+		return sendMavenSearchError(http.StatusBadRequest, err)
 	}
 
 	// check if artifact exists
 	exists, err := artifact.Exists()
 	if err != nil {
-		return sendError(http.StatusInternalServerError, err)
+		return sendMavenSearchError(http.StatusInternalServerError, err)
 	}
 
 	// prepare list of artifacts
@@ -59,11 +53,11 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	return response, err
 }
 
-func sendError(statusCode int, err error) (events.APIGatewayProxyResponse, error) {
-	return sendErrorMessage(statusCode, err.Error())
+func sendMavenSearchError(statusCode int, err error) (events.APIGatewayProxyResponse, error) {
+	return sendMavenSearchErrorMessage(statusCode, err.Error())
 }
 
-func sendErrorMessage(statusCode int, errorMessage string) (events.APIGatewayProxyResponse, error) {
+func sendMavenSearchErrorMessage(statusCode int, errorMessage string) (events.APIGatewayProxyResponse, error) {
 
 	log.Println("Error:", errorMessage)
 
@@ -79,12 +73,4 @@ func sendErrorMessage(statusCode int, errorMessage string) (events.APIGatewayPro
 		Body:       "[]",
 	}
 	return response, nil
-}
-
-func addCorsHeaders(headers map[string]string) {
-	var websiteUrl = os.Getenv("WEBSITE_URL")
-	if len(websiteUrl) == 0 {
-		websiteUrl = "http://localhost:3000"
-	}
-	headers["Access-Control-Allow-Origin"] = websiteUrl
 }

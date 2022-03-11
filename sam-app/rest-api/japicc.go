@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/aws/aws-lambda-go/events"
-	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/smarkwal/jarhc-online/sam-app/common/cloud"
 	"log"
 	"net/http"
@@ -23,11 +22,7 @@ type JapiccCheckResponse struct {
 	ErrorMessage string `json:"errorMessage"`
 }
 
-func main() {
-	lambda.Start(handler)
-}
-
-func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func handlerJapiccSubmit(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
 	// get message from request body
 	message := request.Body
@@ -39,7 +34,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	err := json.NewDecoder(reader).Decode(&in)
 	if err != nil {
 		log.Println("error parsing JSON message: ", err)
-		return sendError(http.StatusBadRequest, err)
+		return sendJapiccSubmitError(http.StatusBadRequest, err)
 	}
 
 	// TODO: validate old and new version (syntax)
@@ -71,7 +66,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	exists, err := s3.Exists(reportFileName)
 	if err != nil {
 		log.Println("error testing if report file exists in S3 bucket:", err)
-		return sendError(http.StatusInternalServerError, err)
+		return sendJapiccSubmitError(http.StatusInternalServerError, err)
 	}
 
 	reportFileURL := s3.GetURL(reportFileName)
@@ -87,7 +82,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	client, err := cloud.NewSQSClient(region)
 	if err != nil {
 		log.Println("error connecting to SQS:", err)
-		return sendError(http.StatusInternalServerError, err)
+		return sendJapiccSubmitError(http.StatusInternalServerError, err)
 	}
 
 	// add message to SQS queue
@@ -96,7 +91,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	messageId, err := client.SendMessage(queueName, message)
 	if err != nil {
 		log.Println("error sending message to SQS:", err)
-		return sendError(http.StatusInternalServerError, err)
+		return sendJapiccSubmitError(http.StatusInternalServerError, err)
 	}
 	log.Println("message ID:", messageId)
 
@@ -127,11 +122,11 @@ func sendReportFile(reportFileURL string) (events.APIGatewayProxyResponse, error
 	return response, err
 }
 
-func sendError(statusCode int, err error) (events.APIGatewayProxyResponse, error) {
-	return sendErrorMessage(statusCode, err.Error())
+func sendJapiccSubmitError(statusCode int, err error) (events.APIGatewayProxyResponse, error) {
+	return sendJapiccSubmitErrorMessage(statusCode, err.Error())
 }
 
-func sendErrorMessage(statusCode int, errorMessage string) (events.APIGatewayProxyResponse, error) {
+func sendJapiccSubmitErrorMessage(statusCode int, errorMessage string) (events.APIGatewayProxyResponse, error) {
 
 	// prepare headers
 	headers := make(map[string]string)
@@ -162,13 +157,4 @@ func sha256hex(text string) string {
 	data := []byte(text)
 	hash := sha256.Sum256(data)
 	return fmt.Sprintf("%x", hash[:])
-}
-
-func addCorsHeaders(headers map[string]string) {
-	var websiteUrl = os.Getenv("WEBSITE_URL")
-	if len(websiteUrl) == 0 {
-		websiteUrl = "http://localhost:3000"
-	}
-	headers["Access-Control-Allow-Origin"] = websiteUrl
-	headers["Access-Control-Allow-Credentials"] = "true"
 }
