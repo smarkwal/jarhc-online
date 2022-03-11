@@ -1,7 +1,6 @@
 package cloud
 
 import (
-	"fmt"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -44,7 +43,7 @@ func (c *S3Client) Exists(fileName string) (bool, error) {
 	}
 	sess, err := session.NewSession(&config)
 	if err != nil {
-		fmt.Println("AWS error:", err)
+		log.Println("AWS error:", err)
 		return false, err
 	}
 	service := s3.New(sess)
@@ -54,7 +53,7 @@ func (c *S3Client) Exists(fileName string) (bool, error) {
 		Bucket: aws.String(c.BucketName),
 		Key:    aws.String("reports/" + fileName),
 	}
-	fmt.Println("S3 input:", input)
+	log.Println("S3 input:", input)
 
 	output, err := service.HeadObject(&input)
 
@@ -64,18 +63,18 @@ func (c *S3Client) Exists(fileName string) (bool, error) {
 		if ok {
 			switch err2.Code() {
 			case NotFound: // s3.ErrCodeNoSuchKey does not work
-				fmt.Println("S3 response:", err)
+				log.Println("S3 response:", err)
 				return false, nil
 			default:
-				fmt.Println("S3 error:", err)
+				log.Println("S3 error:", err)
 				return false, err
 			}
 		}
-		fmt.Println("S3 error:", err)
+		log.Println("S3 error:", err)
 		return false, err
 	}
 
-	fmt.Println("S3 output:", *output)
+	log.Println("S3 output:", *output)
 	return true, nil
 }
 
@@ -85,7 +84,7 @@ func (c *S3Client) Upload(fileName string, file io.Reader) (bool, error) {
 	config := aws.Config{Region: aws.String(c.Region)}
 	sess, err := session.NewSession(&config)
 	if err != nil {
-		fmt.Println("AWS error:", err)
+		log.Println("AWS error:", err)
 		return false, err
 	}
 
@@ -97,15 +96,15 @@ func (c *S3Client) Upload(fileName string, file io.Reader) (bool, error) {
 		Body:        file,
 		ContentType: aws.String("text/html"),
 	}
-	fmt.Println("S3 input:", input)
+	log.Println("S3 input:", input)
 
 	output, err := uploader.Upload(&input)
 	if err != nil {
-		fmt.Println("S3 error:", err)
+		log.Println("S3 error:", err)
 		return false, err
 	}
 
-	fmt.Println("S3 output:", *output)
+	log.Println("S3 output:", *output)
 	return true, nil
 }
 
@@ -115,7 +114,7 @@ func (c *S3Client) Delete(fileName string) (bool, error) {
 	config := aws.Config{Region: aws.String(c.Region)}
 	sess, err := session.NewSession(&config)
 	if err != nil {
-		fmt.Println("AWS error:", err)
+		log.Println("AWS error:", err)
 		return false, err
 	}
 	service := s3.New(sess)
@@ -124,15 +123,15 @@ func (c *S3Client) Delete(fileName string) (bool, error) {
 		Bucket: aws.String(c.BucketName),
 		Key:    aws.String("reports/" + fileName),
 	}
-	fmt.Println("S3 input:", input)
+	log.Println("S3 input:", input)
 
 	output, err := service.DeleteObject(&input)
 	if err != nil {
-		fmt.Println("S3 error:", err)
+		log.Println("S3 error:", err)
 		return false, err
 	}
 
-	fmt.Println("S3 output:", *output)
+	log.Println("S3 output:", *output)
 	return true, nil
 }
 
@@ -149,7 +148,7 @@ func NewSQSClient(region string) (*SQSClient, error) {
 	config := aws.Config{Region: aws.String(region)}
 	sess, err := session.NewSession(&config)
 	if err != nil {
-		fmt.Println("AWS error:", err)
+		log.Println("AWS error:", err)
 		return nil, err
 	}
 	connection := sqs.New(sess)
