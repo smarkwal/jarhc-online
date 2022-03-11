@@ -103,7 +103,6 @@ func sendReportFile(reportFileURL string) (events.APIGatewayProxyResponse, error
 	// prepare headers
 	headers := make(map[string]string)
 	headers["Content-Type"] = "application/json"
-	addCorsHeaders(headers)
 
 	// prepare body
 	var body = JapiccCheckResponse{
@@ -131,7 +130,6 @@ func sendJapiccSubmitErrorMessage(statusCode int, errorMessage string) (events.A
 	// prepare headers
 	headers := make(map[string]string)
 	headers["Content-Type"] = "application/json"
-	addCorsHeaders(headers)
 
 	// prepare body
 	var body = JapiccCheckResponse{

@@ -9,7 +9,6 @@ func handlerAuthValidate(request events.APIGatewayProxyRequest) (events.APIGatew
 	// prepare headers
 	headers := make(map[string]string)
 	headers["Content-Type"] = "text/plain"
-	addCorsHeaders(headers)
 
 	// return API response
 	response := events.APIGatewayProxyResponse{

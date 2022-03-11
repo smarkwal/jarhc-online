@@ -39,7 +39,6 @@ func handlerMavenSearch(request events.APIGatewayProxyRequest) (events.APIGatewa
 	// prepare headers
 	headers := make(map[string]string)
 	headers["Content-Type"] = "application/json"
-	addCorsHeaders(headers)
 
 	// serialize body to JSON
 	jsonBody, err := json.Marshal(artifacts)
@@ -64,7 +63,6 @@ func sendMavenSearchErrorMessage(statusCode int, errorMessage string) (events.AP
 	// prepare headers
 	headers := make(map[string]string)
 	headers["Content-Type"] = "application/json"
-	addCorsHeaders(headers)
 
 	// return API response
 	response := events.APIGatewayProxyResponse{

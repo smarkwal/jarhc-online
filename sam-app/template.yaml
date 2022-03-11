@@ -163,7 +163,6 @@ Resources:
               Authorizer: NONE
       Environment:
         Variables:
-          WEBSITE_URL: !Ref WebsiteURL
           BUCKET_NAME: !Ref BucketName
           BUCKET_URL: !Ref BucketURL
 
