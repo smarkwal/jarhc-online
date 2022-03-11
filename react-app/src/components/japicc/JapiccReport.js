@@ -31,7 +31,7 @@ const JapiccReport = ({
 	function pollReport() {
 
 		const fetchOptions = {
-			method: "GET"
+			method: "HEAD"
 		}
 
 		fetch(reportURL, fetchOptions)
