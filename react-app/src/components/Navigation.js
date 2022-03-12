@@ -11,9 +11,9 @@ const Navigation = () => {
 			<div className="navbar-nav me-auto ps-4">
 				<NavLink className="nav-item nav-link px-3" activeclassname="active" to="/">Home</NavLink>
 				<NavLink className="nav-item nav-link px-3" activeclassname="active" to="/japicc">JAPICC</NavLink>
-				<NavLink className="nav-item nav-link px-3" activeclassname="active" to="/jarhc">JarHC</NavLink>
-				<NavLink className="nav-item nav-link px-3" activeclassname="active" to="/jardiff">JarDiff</NavLink>
-				<NavLink className="nav-item nav-link px-3" activeclassname="active" to="/srcdiff">SrcDiff</NavLink>
+				<NavLink className="nav-item nav-link px-3 d-none" activeclassname="active" to="/jarhc">JarHC</NavLink>
+				<NavLink className="nav-item nav-link px-3 d-none" activeclassname="active" to="/jardiff">JarDiff</NavLink>
+				<NavLink className="nav-item nav-link px-3 d-none" activeclassname="active" to="/srcdiff">SrcDiff</NavLink>
 			</div>
 		</div>
 		<div className="d-flex pe-4">

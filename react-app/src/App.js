@@ -24,26 +24,44 @@ function App() {
 				<div className="row">
 
 					<div className="col-12 col-md-12 col-lg-6 mb-4">
-						<Card imageUrl="/img/card-image-japicc.png" title="JAPICC - Java API Compliance Checker" linkUrl="/japicc" linkText="Run JAPICC">
+						<Card imageUrl="/img/card-image-japicc.png" title="Java API Compliance Checker" linkUrl="/japicc" linkText="Run JAPICC">
 							<span>Compare two versions of a Java library and get a report with details on source and binary compatibility.</span>
 						</Card>
 					</div>
 
 					<div className="col-12 col-md-12 col-lg-6 mb-4">
-						<Card imageUrl="/img/card-image-jarhc.png" title="JarHC - JAR Health Check" linkUrl="/jarhc" linkText="Coming soon" enabled={false}>
+						<Card imageUrl="/img/card-image-jarhc.png" title="JAR Health Check" linkUrl="/jarhc" linkText="Coming soon" enabled={false}>
 							<span>Analyze a set of Java libraries for compatibility at binary level. Find missing dependencies, duplicate classes, dangerous code, and much more.</span>
 						</Card>
 					</div>
 
 					<div className="col-12 col-md-12 col-lg-6 mb-4">
-						<Card imageUrl="/img/card-image-jardiff.png" title="JarDiff - JAR File Diff" linkUrl="/jardiff" linkText="Coming soon" enabled={false}>
+						<Card imageUrl="/img/card-image-jardiff.png" title="JAR File Diff" linkUrl="/jardiff" linkText="Coming soon" enabled={false}>
 							<span>Compare the JAR files of two versions of a Java library.</span>
 						</Card>
 					</div>
 
 					<div className="col-12 col-md-12 col-lg-6 mb-4">
-						<Card imageUrl="/img/card-image-srcdiff.png" title="SrcDiff - Java Source Code Diff" linkUrl="/srcdiff" linkText="Coming soon" enabled={false}>
+						<Card imageUrl="/img/card-image-srcdiff.png" title="Java Source Code Diff" linkUrl="/srcdiff" linkText="Coming soon" enabled={false}>
 							<span>Compare the source code of two versions of a Java library and see what has been changed by the developers.</span>
+						</Card>
+					</div>
+
+					<div className="col-12 col-md-12 col-lg-6 mb-4">
+						<Card imageUrl="/img/card-image-soon.png" title="Decompile JAR File" linkUrl="/decompile" linkText="Coming soon" enabled={false}>
+							<span>Decompile the Java classes in a JAR file and download or inspect the Java source code.</span>
+						</Card>
+					</div>
+
+					<div className="col-12 col-md-12 col-lg-6 mb-4">
+						<Card imageUrl="/img/card-image-soon.png" title="Dependency Tree" linkUrl="/dependencies" linkText="Coming soon" enabled={false}>
+							<span>See the full tree of direct and transitive dependencies of a Java library.</span>
+						</Card>
+					</div>
+
+					<div className="col-12 col-md-12 col-lg-6 mb-4">
+						<Card imageUrl="/img/card-image-soon.png" title="OWASP Dependency-Check" linkUrl="/dependency-check" linkText="Coming soon" enabled={false}>
+							<span>Check if a Java library contains known security vulnerabilities.</span>
 						</Card>
 					</div>
 
