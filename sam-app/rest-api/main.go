@@ -12,11 +12,18 @@ func main() {
 
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
+	// log.Println("-----------------------------------------------------------")
+	// log.Println("Headers:")
+	// for name, value := range request.Headers {
+	// 	log.Printf("\t%s: %s\n", name, value)
+	// }
+	// log.Println("-----------------------------------------------------------")
+
 	response, err := dispatch(request)
 
 	// add CORS headers to every response
 	// (reflect origin header)
-	origin := request.Headers["origin"]
+	origin := getOrigin(request)
 	addCorsHeaders(response.Headers, origin)
 
 	return response, err
@@ -40,13 +47,26 @@ func dispatch(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResp
 	}
 }
 
-func addCorsHeaders(headers map[string]string, origin string) {
+func getOrigin(request events.APIGatewayProxyRequest) string {
 
-	if len(origin) == 0 {
-		origin = "*"
+	// live behind AWS API Gateway
+	origin := request.Headers["origin"]
+	if len(origin) > 0 {
+		return origin
 	}
-	log.Println("CORS Origin:", origin)
 
+	// test on localhost with `sam local start-api`
+	origin = request.Headers["Origin"]
+	if len(origin) > 0 {
+		return origin
+	}
+
+	// fallback
+	return "*"
+}
+
+func addCorsHeaders(headers map[string]string, origin string) {
+	log.Println("CORS Origin:", origin)
 	headers["Access-Control-Allow-Origin"] = origin
 	headers["Access-Control-Allow-Credentials"] = "true"
 }
