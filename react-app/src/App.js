@@ -84,7 +84,7 @@ function About() {
 		<div className="p-3 mb-4 bg-light">
 			<h2>About this Website</h2>
 			<p>This website is for Java developers.</p>
-			<p>It is a collection of tools to help find your way through &quot;JAR hell&quot; or &quot;classpath hell&quot;.</p>
+			<p>It is a collection of online tools to help find your way through &quot;JAR hell&quot; or &quot;classpath hell&quot;.</p>
 			<p>All tools fall into the category of static analysis where binary code, source code, or some other kind of software artifact is inspected.</p>
 		</div>
 	</>;
