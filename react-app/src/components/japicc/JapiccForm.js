@@ -1,42 +1,22 @@
-import React, {useState} from "react";
+import React, {useReducer, useState} from "react";
+import Auth from "../Auth"
+import Artifacts from "../Artifacts";
+import ArtifactInput from "../ArtifactInput";
 import JapiccReport from "./JapiccReport";
 import JapiccAbout from "./JapiccAbout";
-import Auth from "../Auth"
 
 const JapiccForm = () => {
 
 	const [state, setState] = useState({
 		oldVersion: "",
-		oldVersionValid: null,
 		newVersion: "",
-		newVersionValid: null,
 		loading: false,
 		reportURL: "",
 		errorMessage: ""
 	});
 
-	async function onChangeVersion(event) {
-		const name = event.target.name;
-		const coordinates = event.target.value.trim()
-		const newState = {...state}
-		newState[name] = coordinates
-		newState[name + "Valid"] = await validateCoordinates(coordinates);
-		setState(newState)
-	}
-
-	async function validateCoordinates(coordinates) {
-		if (coordinates === undefined || coordinates.length === 0) {
-			return null
-		} else if (!coordinates.match("[^:]+:[^:]+:[^:]+")) {
-			return false
-		}
-		const response = await fetch(process.env.REACT_APP_API_URL + "/maven/search?coordinates=" + coordinates);
-		if (!response.ok) {
-			return null;
-		}
-		const json = await response.json()
-		return json.length > 0
-	}
+	// create a helper hook to force a rerender
+	const [, forceUpdate] = useReducer(x => x + 1, 0, (x) => x);
 
 	function onSubmit(event) {
 		event.preventDefault()
@@ -87,27 +67,8 @@ const JapiccForm = () => {
 			});
 	}
 
-	function getInputFieldClass(name) {
-		const value = state[name];
-		if (value !== undefined && value.length > 0) {
-			if (value.match("[^:]+:[^:]+:[^:]+")) {
-				const valid = state[name + "Valid"]
-				if (valid === true) {
-					return "is-valid"
-				} else if (valid === false) {
-					return "is-invalid"
-				} else {
-					return ""
-				}
-			} else {
-				return "is-invalid"
-			}
-		}
-		return ""
-	}
-
 	function isSubmitButtonEnabled() {
-		return Auth.isSignedIn() && state.oldVersionValid && state.newVersionValid && !state.loading;
+		return Auth.isSignedIn() && Artifacts.isValid(state.oldVersion) && Artifacts.isValid(state.newVersion) && !state.loading;
 	}
 
 	function getSubmitButtonClass() {
@@ -118,9 +79,7 @@ const JapiccForm = () => {
 		setState({
 			...state,
 			oldVersion: oldVersion,
-			oldVersionValid: true,
 			newVersion: newVersion,
-			newVersionValid: true
 		})
 	}
 
@@ -129,6 +88,22 @@ const JapiccForm = () => {
 			...state,
 			reportURL: ""
 		})
+	}
+
+	function setOldVersion(version) {
+		setState({
+			...state,
+			oldVersion: version
+		})
+		forceUpdate()
+	}
+
+	function setNewVersion(version) {
+		setState({
+			...state,
+			newVersion: version
+		})
+		forceUpdate()
 	}
 
 	return (<div>
@@ -151,11 +126,11 @@ const JapiccForm = () => {
 			<div className="row align-items-md-top mb-3">
 				<div className="col-12 col-md-5 mt-3">
 					<label className="form-label">Old version</label>
-					<input type="text" className={`form-control ${getInputFieldClass('oldVersion')}`} name="oldVersion" value={state.oldVersion} onChange={onChangeVersion} placeholder="Group:Artifact:Version"/>
+					<ArtifactInput version={state.oldVersion} onUpdate={setOldVersion}/>
 				</div>
 				<div className="col-12 col-md-5 mt-3">
 					<label className="form-label">New version</label>
-					<input type="text" className={`form-control ${getInputFieldClass('newVersion')}`} name="newVersion" value={state.newVersion} onChange={onChangeVersion} placeholder="Group:Artifact:Version"/>
+					<ArtifactInput version={state.newVersion} onUpdate={setNewVersion}/>
 				</div>
 				<div className="col-12 col-md-2 mt-3">
 					<label className="form-label d-none d-md-block">&nbsp;</label>
@@ -176,7 +151,11 @@ const JapiccForm = () => {
 	</div>)
 }
 
-function Example({oldVersion, newVersion, onClick}) {
+function Example({
+					 oldVersion,
+					 newVersion,
+					 onClick
+				 }) {
 	return <li>
 		<span role="button" onClick={() => onClick(oldVersion, newVersion)}>
 			<code>{oldVersion}</code> and <code>{newVersion}</code>

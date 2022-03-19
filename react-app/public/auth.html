@@ -65,7 +65,17 @@
 
 		function searchInMaven(coordinates) {
 
-			fetch("https://api.jarhc.org/maven/search?coordinates=" + coordinates)
+			const requestOptions = {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({
+					coordinates: coordinates
+				})
+			}
+
+			fetch("https://api.jarhc.org/maven/search", requestOptions)
 				.then(res => {
 					const status = res.status
 					if (res.ok) {
