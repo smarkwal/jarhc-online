@@ -76,6 +76,12 @@ const JapiccForm = () => {
 	}
 
 	function doSubmitExample(oldVersion, newVersion) {
+		if (!Artifacts.isCached(oldVersion)) {
+			Artifacts.startSearch(oldVersion, forceUpdate)
+		}
+		if (!Artifacts.isCached(newVersion)) {
+			Artifacts.startSearch(newVersion, forceUpdate)
+		}
 		setState({
 			...state,
 			oldVersion: oldVersion,
@@ -95,7 +101,6 @@ const JapiccForm = () => {
 			...state,
 			oldVersion: version
 		})
-		forceUpdate()
 	}
 
 	function setNewVersion(version) {
@@ -103,7 +108,6 @@ const JapiccForm = () => {
 			...state,
 			newVersion: version
 		})
-		forceUpdate()
 	}
 
 	return (<div>
@@ -126,11 +130,11 @@ const JapiccForm = () => {
 			<div className="row align-items-md-top mb-3">
 				<div className="col-12 col-md-5 mt-3">
 					<label className="form-label">Old version</label>
-					<ArtifactInput version={state.oldVersion} onUpdate={setOldVersion}/>
+					<ArtifactInput version={state.oldVersion} onUpdate={setOldVersion} onRefresh={forceUpdate}/>
 				</div>
 				<div className="col-12 col-md-5 mt-3">
 					<label className="form-label">New version</label>
-					<ArtifactInput version={state.newVersion} onUpdate={setNewVersion}/>
+					<ArtifactInput version={state.newVersion} onUpdate={setNewVersion} onRefresh={forceUpdate}/>
 				</div>
 				<div className="col-12 col-md-2 mt-3">
 					<label className="form-label d-none d-md-block">&nbsp;</label>

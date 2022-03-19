@@ -1,57 +1,45 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {DebounceInput} from 'react-debounce-input';
 import Artifacts from './Artifacts'
 
 function ArtifactInput({
 						   version,
-						   onUpdate
+						   onUpdate,
+						   onRefresh
 					   }) {
-
-	const [state, setState] = useState(version)
 
 	const VERSION_REGEX = "^[^:]+:[^:]+:[^:]*[^.]$"
 
 	// on every change in the input field ...
 	function onChange(event) {
 
-		const value = event.target.value.trim()
-		//console.log("onChange: input:", inputVersion)
+		const version = event.target.value.trim()
 
-		// remember new version
-		//console.log("onChange: setVersion:", inputVersion)
-		setState(value)
-	}
-
-	useEffect(() => {
+		onUpdate(version)
 
 		// check if artifact is cached
-		if (!Artifacts.isCached(state)) {
-			if (state.match(VERSION_REGEX)) {
-				Artifacts.startSearch(state, () => {
-					onUpdate(state)
-				})
-				return;
+		if (version.match(VERSION_REGEX)) {
+			if (!Artifacts.isCached(version)) {
+				Artifacts.startSearch(version, onRefresh)
 			}
 		}
 
-		onUpdate(state)
-
-	}, [state])
+	}
 
 	function getClassNames() {
 
-		if (state === undefined || state.length === 0) {
+		if (version === undefined || version.length === 0) {
 			// input field is empty
 			return ""
 		}
 
-		if (!state.match(VERSION_REGEX)) {
+		if (!version.match(VERSION_REGEX)) {
 			// input field contains an invalid value
 			return "is-invalid"
 		}
 
-		if (Artifacts.isCached(state)) {
-			if (Artifacts.isValid(state)) {
+		if (Artifacts.isCached(version)) {
+			if (Artifacts.isValid(version)) {
 				return "is-valid"
 			} else {
 				return "is-invalid"
@@ -62,7 +50,7 @@ function ArtifactInput({
 
 	}
 
-	return (<DebounceInput value={state} className={`form-control ${getClassNames()}`} minLength={5} debounceTimeout={500} onChange={onChange} placeholder="Group:Artifact:Version" spellCheck="false"/>);
+	return (<DebounceInput value={version} className={`form-control ${getClassNames()}`} minLength={5} debounceTimeout={500} onChange={onChange} placeholder="Group:Artifact:Version" spellCheck="false"/>);
 }
 
 export default ArtifactInput;
