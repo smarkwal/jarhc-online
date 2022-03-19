@@ -2,7 +2,9 @@
 # @name CORS preflight request for Maven Search function
 OPTIONS https://api.jarhc.org/maven/search
 Origin: https://online.jarhc.org
-Access-Control-Request-Method: GET
+Content-Type: application/json
+Access-Control-Request-Method: POST
+Access-Control-Request-Headers: Content-Type
 
 > {%
     client.test("Status code", function() {
@@ -11,7 +13,7 @@ Access-Control-Request-Method: GET
     client.test("CORS headers", function() {
         client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "https://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
         client.assert(response.headers.valueOf("Access-Control-Allow-Methods") == "GET,POST,OPTIONS", "Access-Control-Allow-Methods incorrect");
-        client.assert(response.headers.valueOf("Access-Control-Allow-Headers") == "Content-Type", "Access-Control-Allow-Headers incorrect");
+        client.assert(response.headers.valueOf("Access-Control-Allow-Headers") == "Content-Type,Authorization", "Access-Control-Allow-Headers incorrect");
         client.assert(response.headers.valueOf("Access-Control-Allow-Credentials") == "true", "Access-Control-Allow-Credentials incorrect");
         client.assert(response.headers.valueOf("Access-Control-Max-Age") == "600", "Access-Control-Max-Age incorrect");
     });
@@ -20,7 +22,13 @@ Access-Control-Request-Method: GET
 ###
 
 # @name Maven Search function
-GET https://api.jarhc.org/maven/search?coordinates=commons-io:commons-io:2.7
+POST https://api.jarhc.org/maven/search
+Origin: https://online.jarhc.org
+Content-Type: application/json
+
+{
+  "coordinates": "commons-io:commons-io:2.7"
+}
 
 > {%
     client.test("Status code", function() {
@@ -30,17 +38,24 @@ GET https://api.jarhc.org/maven/search?coordinates=commons-io:commons-io:2.7
         client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "https://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
     });
     client.test("Body", function() {
-        client.assert(response.body.length === 1, "Response contains 1 artifact");
-        client.assert(response.body[0].groupId === "commons-io", "groupId is commons-io");
-        client.assert(response.body[0].artifactId === "commons-io", "artifactId is commons-io");
-        client.assert(response.body[0].version === "2.7", "version is 2.7");
+        client.assert(response.body.coordinates === "commons-io:commons-io:2.7", "Response contains coordinates");
+        client.assert(response.body.artifacts.length === 1, "Response contains 1 artifact");
+        client.assert(response.body.artifacts[0].groupId === "commons-io", "groupId is commons-io");
+        client.assert(response.body.artifacts[0].artifactId === "commons-io", "artifactId is commons-io");
+        client.assert(response.body.artifacts[0].version === "2.7", "version is 2.7");
     });
 %}
 
 ###
 
 # @name Maven Search function (not found)
-GET https://api.jarhc.org/maven/search?coordinates=unknown:unknown:0.0.1
+POST https://api.jarhc.org/maven/search
+Origin: https://online.jarhc.org
+Content-Type: application/json
+
+{
+  "coordinates": "unknown:unknown:0.0.1"
+}
 
 > {%
     client.test("Status code", function() {
@@ -50,14 +65,21 @@ GET https://api.jarhc.org/maven/search?coordinates=unknown:unknown:0.0.1
         client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "https://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
     });
     client.test("Body", function() {
-        client.assert(response.body.length === 0, "Response contains 0 artifact");
+        client.assert(response.body.coordinates === "unknown:unknown:0.0.1", "Response contains coordinates");
+        client.assert(response.body.artifacts.length === 0, "Response contains 0 artifact");
     });
 %}
 
 ###
 
 # @name Maven Search function (invalid coordinates)
-GET https://api.jarhc.org/maven/search?coordinates=unknown
+POST https://api.jarhc.org/maven/search
+Origin: https://online.jarhc.org
+Content-Type: application/json
+
+{
+  "coordinates": "unknown"
+}
 
 > {%
     client.test("Status code", function() {
@@ -67,14 +89,18 @@ GET https://api.jarhc.org/maven/search?coordinates=unknown
         client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "https://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
     });
     client.test("Body", function() {
-        client.assert(response.body.length === 0, "Response contains 0 artifact");
+        client.assert(response.body.errorMessage === "invalid artifact coordinates: 'unknown'", "Response contains error message");
     });
 %}
 
 ###
 
 # @name Maven Search function (missing parameter)
-GET https://api.jarhc.org/maven/search
+POST https://api.jarhc.org/maven/search
+Origin: https://online.jarhc.org
+Content-Type: application/json
+
+{}
 
 > {%
     client.test("Status code", function() {
@@ -84,7 +110,7 @@ GET https://api.jarhc.org/maven/search
         client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "https://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
     });
     client.test("Body", function() {
-        client.assert(response.body.length === 0, "Response contains 0 artifact");
+        client.assert(response.body.errorMessage === "missing parameter: 'coordinates'", "Response contains error message");
     });
 %}
 
@@ -103,7 +129,7 @@ Access-Control-Allow-Headers: content-type
     client.test("CORS headers", function() {
         client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "https://online.jarhc.org", "Access-Control-Allow-Origin incorrect");
         client.assert(response.headers.valueOf("Access-Control-Allow-Methods") == "GET,POST,OPTIONS", "Access-Control-Allow-Methods incorrect");
-        client.assert(response.headers.valueOf("Access-Control-Allow-Headers") == "Content-Type", "Access-Control-Allow-Headers incorrect");
+        client.assert(response.headers.valueOf("Access-Control-Allow-Headers") == "Content-Type,Authorization", "Access-Control-Allow-Headers incorrect");
         client.assert(response.headers.valueOf("Access-Control-Allow-Credentials") == "true", "Access-Control-Allow-Credentials incorrect");
         client.assert(response.headers.valueOf("Access-Control-Max-Age") == "600", "Access-Control-Max-Age incorrect");
     });

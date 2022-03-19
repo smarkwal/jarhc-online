@@ -158,7 +158,7 @@ Resources:
           Type: Api
           Properties:
             Path: /maven/search
-            Method: GET
+            Method: POST
             Auth:
               Authorizer: NONE
       Environment:

@@ -6,13 +6,39 @@ import (
 	"github.com/smarkwal/jarhc-online/sam-app/common/maven"
 	"log"
 	"net/http"
+	"strings"
 )
+
+type MavenSearchRequest struct {
+	Coordinates string `json:"coordinates"`
+}
+
+type MavenSearchResponse struct {
+	Coordinates string           `json:"coordinates"`
+	Artifacts   []maven.Artifact `json:"artifacts"`
+}
+
+type MavenSearchError struct {
+	ErrorMessage string `json:"errorMessage"`
+}
 
 func handlerMavenSearch(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
+	// get message from request body
+	message := request.Body
+	log.Println("message: ", message)
+
+	// parse JSON message
+	var in MavenSearchRequest
+	reader := strings.NewReader(message)
+	err := json.NewDecoder(reader).Decode(&in)
+	if err != nil {
+		log.Println("error parsing JSON message: ", err)
+		return sendMavenSearchError(http.StatusBadRequest, err)
+	}
+
 	// get coordinates from query string
-	query := request.QueryStringParameters
-	coordinates := query["coordinates"]
+	coordinates := in.Coordinates
 	if len(coordinates) == 0 {
 		return sendMavenSearchErrorMessage(http.StatusBadRequest, "missing parameter: 'coordinates'")
 	}
@@ -40,8 +66,14 @@ func handlerMavenSearch(request events.APIGatewayProxyRequest) (events.APIGatewa
 	headers := make(map[string]string)
 	headers["Content-Type"] = "application/json"
 
+	// prepare response body
+	out := MavenSearchResponse{
+		Coordinates: coordinates,
+		Artifacts:   artifacts,
+	}
+
 	// serialize body to JSON
-	jsonBody, err := json.Marshal(artifacts)
+	jsonBody, err := json.Marshal(out)
 
 	// return API response
 	response := events.APIGatewayProxyResponse{
@@ -64,11 +96,19 @@ func sendMavenSearchErrorMessage(statusCode int, errorMessage string) (events.AP
 	headers := make(map[string]string)
 	headers["Content-Type"] = "application/json"
 
+	// prepare response body
+	out := MavenSearchError{
+		ErrorMessage: errorMessage,
+	}
+
+	// serialize body to JSON
+	jsonBody, err := json.Marshal(out)
+
 	// return API response
 	response := events.APIGatewayProxyResponse{
 		StatusCode: statusCode,
 		Headers:    headers,
-		Body:       "[]",
+		Body:       string(jsonBody),
 	}
-	return response, nil
+	return response, err
 }
