@@ -15,19 +15,19 @@ const Artifacts = {
 		}
 	},
 
-	get: function(version) {
+	getFromCache: function(version) {
 		const artifacts = Artifacts.cache[version];
-		console.log("Artifacts.get:", version, artifacts)
+		console.log("Artifacts.getFromCache:", version, artifacts)
 		return artifacts
 	},
 
-	put: function(version, artifacts) {
-		console.log("Artifacts.put:", version, artifacts)
+	putInCache: function(version, artifacts) {
+		console.log("Artifacts.putInCache:", version, artifacts)
 		Artifacts.cache[version] = artifacts
 	},
 
-	startSearch: function(version, callback) {
-		console.log("Artifacts.startSearch:", version)
+	searchAsync: function(version) { // TODO: return promise instead of taking callback parameter
+		console.log("Artifacts.searchAsync:", version)
 
 		// use REST API to validate version
 		const requestOptions = {
@@ -40,34 +40,30 @@ const Artifacts = {
 			})
 		}
 		const url = process.env.REACT_APP_API_URL + "/maven/search"
-		fetch(url, requestOptions)
-			.then(response => Artifacts.handleValidationResponse(response, callback))
-			.catch(Artifacts.handleValidationError)
+		return fetch(url, requestOptions)
+			.then(Artifacts.handleResponse)
+			.catch(Artifacts.handleError)
 	},
 
-	handleValidationResponse: function(response, callback) {
-		console.log("Artifacts.handleValidationResponse:", response)
+	handleResponse: function(response) {
+		console.log("Artifacts.handleResponse:", response)
 
 		if (response.ok) {
-			response.json()
-				.then(Artifacts.handleValidationResult)
-				.then(callback)
-				.catch(Artifacts.handleValidationError)
+			return response.json().then(Artifacts.handleResult)
 		} else {
-			Artifacts.handleValidationError(response)
+			Artifacts.handleError(response)
 		}
 	},
 
-	handleValidationResult: function(result) {
-		console.log("Artifacts.handleValidationResult:", result)
+	handleResult: function(result) {
+		console.log("Artifacts.handleResult:", result)
 
 		// cache result
-		Artifacts.put(result.coordinates, result.artifacts)
+		Artifacts.putInCache(result.coordinates, result.artifacts)
 	},
 
-	handleValidationError: function(error) {
-		// TODO: error handling
-		console.error(error)
+	handleError: function(error) {
+		console.error("Artifacts.handleError:", error)
 	},
 
 }

@@ -20,7 +20,7 @@ function ArtifactInput({
 		// check if artifact is cached
 		if (version.match(VERSION_REGEX)) {
 			if (!Artifacts.isCached(version)) {
-				Artifacts.startSearch(version, onRefresh)
+				Artifacts.searchAsync(version).then(onRefresh)
 			}
 		}
 

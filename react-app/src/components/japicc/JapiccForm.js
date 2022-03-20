@@ -18,7 +18,7 @@ const JapiccForm = () => {
 	// create a helper hook to force a rerender
 	const [, forceUpdate] = useReducer(x => x + 1, 0, (x) => x);
 
-	function onSubmit(event) {
+	const onSubmit = function(event) {
 		event.preventDefault()
 
 		// get ID token
@@ -52,9 +52,9 @@ const JapiccForm = () => {
 		};
 
 		// run JAPICC check
-		fetch(process.env.REACT_APP_API_URL + "/japicc/submit", requestOptions)
+		const requestURL = process.env.REACT_APP_API_URL + "/japicc/submit";
+		fetch(requestURL, requestOptions)
 			.then(response => response.json())
-			// TODO: error handling
 			.then(data => {
 
 				// show report or error message
@@ -64,23 +64,33 @@ const JapiccForm = () => {
 					reportURL: data.reportURL,
 					errorMessage: data.errorMessage
 				})
+			})
+			.catch(error => {
+				console.error("API error:", error)
+
+				// show error message
+				setState({
+					...state,
+					loading: false,
+					errorMessage: "" + error
+				})
 			});
 	}
 
-	function isSubmitButtonEnabled() {
+	const isSubmitButtonEnabled = function() {
 		return Auth.isSignedIn() && Artifacts.isValid(state.oldVersion) && Artifacts.isValid(state.newVersion) && !state.loading;
 	}
 
-	function getSubmitButtonClass() {
+	const getSubmitButtonClass = function() {
 		return isSubmitButtonEnabled() ? "btn-primary" : "btn-secondary";
 	}
 
-	function doSubmitExample(oldVersion, newVersion) {
+	const doSubmitExample = function(oldVersion, newVersion) {
 		if (!Artifacts.isCached(oldVersion)) {
-			Artifacts.startSearch(oldVersion, forceUpdate)
+			Artifacts.searchAsync(oldVersion).then(forceUpdate)
 		}
 		if (!Artifacts.isCached(newVersion)) {
-			Artifacts.startSearch(newVersion, forceUpdate)
+			Artifacts.searchAsync(newVersion).then(forceUpdate)
 		}
 		setState({
 			...state,
@@ -89,24 +99,24 @@ const JapiccForm = () => {
 		})
 	}
 
-	function closeReport() {
-		setState({
-			...state,
-			reportURL: ""
-		})
-	}
-
-	function setOldVersion(version) {
+	const setOldVersion = function(version) {
 		setState({
 			...state,
 			oldVersion: version
 		})
 	}
 
-	function setNewVersion(version) {
+	const setNewVersion = function(version) {
 		setState({
 			...state,
 			newVersion: version
+		})
+	}
+
+	const closeReport = function() {
+		setState({
+			...state,
+			reportURL: ""
 		})
 	}
 
@@ -126,7 +136,7 @@ const JapiccForm = () => {
 				<Example oldVersion="javax.xml.bind:jaxb-api:2.3.0" newVersion="jakarta.xml.bind:jakarta.xml.bind-api:2.3.2" onClick={doSubmitExample}/>
 			</ul>
 		</div>
-		<form onSubmit={onSubmit}>
+		<form onSubmit={onSubmit} className="mb-0">
 			<div className="row align-items-md-top mb-3">
 				<div className="col-12 col-md-5 mt-3">
 					<label className="form-label">Old version</label>
@@ -146,10 +156,8 @@ const JapiccForm = () => {
 				</div>
 			</div>
 		</form>
-		{state.errorMessage && state.errorMessage.length > 0 && <div className="border border-danger border-1 mt-5">
-			<div className="alert alert-danger mb-0">
-				{state.errorMessage}
-			</div>
+		{state.errorMessage && state.errorMessage.length > 0 && <div className="alert alert-danger">
+			{state.errorMessage}
 		</div>}
 		{state.reportURL && state.reportURL.length > 0 ? <JapiccReport reportURL={state.reportURL} onClose={closeReport}/> : <JapiccAbout/>}
 	</div>)

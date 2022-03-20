@@ -6,9 +6,11 @@ import (
 	"fmt"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/smarkwal/jarhc-online/sam-app/common/cloud"
+	"github.com/smarkwal/jarhc-online/sam-app/common/maven"
 	"log"
 	"net/http"
 	"os"
+	"regexp"
 	"strings"
 )
 
@@ -33,17 +35,32 @@ func handlerJapiccSubmit(request events.APIGatewayProxyRequest) (events.APIGatew
 	reader := strings.NewReader(message)
 	err := json.NewDecoder(reader).Decode(&in)
 	if err != nil {
-		log.Println("error parsing JSON message: ", err)
+		log.Println("error parsing JSON message:", err)
 		return sendJapiccSubmitError(http.StatusBadRequest, err)
 	}
-
-	// TODO: validate old and new version (syntax)
 
 	oldVersion := in.OldVersion
 	log.Println("old version:", oldVersion)
 
+	// check if old version is valid
+	if !isValidVersion(oldVersion) {
+		log.Println("version is not valid:", oldVersion)
+		return sendJapiccSubmitErrorMessage(http.StatusBadRequest, "Version is not valid: "+oldVersion)
+	}
+
 	newVersion := in.NewVersion
 	log.Println("new version:", newVersion)
+
+	// check if new version is valid
+	if !isValidVersion(newVersion) {
+		log.Println("version is not valid:", newVersion)
+		return sendJapiccSubmitErrorMessage(http.StatusBadRequest, "Version is not valid: "+newVersion)
+	}
+
+	if oldVersion == newVersion {
+		log.Println("submitted same version twice:", oldVersion)
+		return sendJapiccSubmitErrorMessage(http.StatusBadRequest, "Cannot compare version with itself: "+oldVersion)
+	}
 
 	// calculate hash for combination of versions
 	hash := sha256hex(oldVersion + "/" + newVersion)
@@ -75,7 +92,21 @@ func handlerJapiccSubmit(request events.APIGatewayProxyRequest) (events.APIGatew
 		return sendReportFile(reportFileURL)
 	}
 
-	// TODO: check if library versions exist in Maven Central
+	// check if old version exists in Maven Central
+	oldArtifact, _ := maven.NewArtifact(oldVersion)
+	exists, _ = oldArtifact.Exists()
+	if !exists {
+		log.Println("version not found in Maven Central:", oldVersion)
+		return sendJapiccSubmitErrorMessage(http.StatusBadRequest, "Version not found in Maven Central: "+oldVersion)
+	}
+
+	// check if new version exists in Maven Central
+	newArtifact, _ := maven.NewArtifact(newVersion)
+	exists, _ = newArtifact.Exists()
+	if !exists {
+		log.Println("version not found in Maven Central:", newVersion)
+		return sendJapiccSubmitErrorMessage(http.StatusBadRequest, "Version not found in Maven Central: "+newVersion)
+	}
 
 	// create SQS client
 	log.Println("connect to SQS:", region)
@@ -96,6 +127,14 @@ func handlerJapiccSubmit(request events.APIGatewayProxyRequest) (events.APIGatew
 	log.Println("message ID:", messageId)
 
 	return sendReportFile(reportFileURL)
+}
+
+func isValidVersion(version string) bool {
+	if len(version) < 5 {
+		return false
+	}
+	matched, _ := regexp.MatchString(`^[^:]+:[^:]+:[^:]*[^.]$`, version)
+	return matched
 }
 
 func sendReportFile(reportFileURL string) (events.APIGatewayProxyResponse, error) {
