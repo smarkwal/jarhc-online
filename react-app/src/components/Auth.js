@@ -6,11 +6,39 @@ const Auth = {
 	callbackBaseURL: window.location.origin,
 
 	isSignedIn: function() {
-		// console.log("is signed in ...")
-		const tokens = Auth.getTokens()
-		const count = Object.keys(tokens).length;
-		// console.log("count =", count)
-		return count
+
+		// get ID token
+		const token = Auth.getIdToken()
+		if (token) {
+
+			// try to decode token
+			let payload = {}
+			try {
+				const base64Url = token.split('.')[1]
+				const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+				const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+					return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+				}).join(''))
+				payload = JSON.parse(jsonPayload)
+				// console.log(payload)
+			} catch (e) {
+				console.log("Error decoding JWT token:", e)
+				return false
+			}
+
+			// if token contains 'exp' claim
+			if ("exp" in payload) {
+
+				// compare expiration date with current date
+				const exp = payload["exp"] * 1000
+				// TODO: cache expiration date
+				// console.log("ID token expires:", new Date(exp))
+				const now = new Date().getTime()
+				return exp > now
+			}
+		}
+
+		return false
 	},
 
 	signUp: function() {
