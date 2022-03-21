@@ -8,7 +8,7 @@ const Navigation = () => {
 			<span className="navbar-toggler-icon"/>
 		</button>
 		<div className="collapse navbar-collapse" id="navbarSupportedContent">
-			<div className="navbar-nav me-auto ps-4">
+			<div className="navbar-nav me-auto ps-1">
 				<NavLink className="nav-item nav-link px-3" activeclassname="active" to="/">Home</NavLink>
 				<NavLink className="nav-item nav-link px-3" activeclassname="active" to="/japicc">JAPICC</NavLink>
 				<NavLink className="nav-item nav-link px-3 d-none" activeclassname="active" to="/jarhc">JarHC</NavLink>

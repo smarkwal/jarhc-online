@@ -1,4 +1,5 @@
 import React from 'react';
+import ExternalLink from "../ExternalLink";
 
 const JapiccAbout = () => {
 	return (<div className="bg-light border rounded-3 p-3 mt-5">
@@ -11,7 +12,7 @@ This program is free software: you can redistribute it and/or modify it.
 
 Written by Andrey Ponomarenko.`}</pre>
 		<hr/>
-		<a className="alert-link" href="https://github.com/lvc/japi-compliance-checker">https://github.com/lvc/japi-compliance-checker</a>
+		<ExternalLink className="alert-link" href="https://github.com/lvc/japi-compliance-checker">https://github.com/lvc/japi-compliance-checker</ExternalLink>
 	</div>);
 };
 

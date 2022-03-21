@@ -2,6 +2,7 @@ import React from "react";
 import Card from "./components/Card";
 import Navigation from "./components/Navigation";
 import PayPalButton from "./components/PayPalButton";
+import ExternalLink from "./components/ExternalLink";
 
 function App() {
 	return (<>
@@ -95,8 +96,8 @@ function OpenSource() {
 		<div className="p-3 mb-4 bg-sidepanel">
 			<h3>Open Source</h3>
 			<p>Everything in this project is open source.</p>
-			<p>The website itself is a <a href="https://reactjs.org/" target="_blank" rel="noreferrer">React</a> app with a <a href="https://go.dev/" target="_blank" rel="noreferrer">Go</a> backend running on serverless <a href="https://aws.amazon.com/serverless/sam/" target="_blank" rel="noreferrer">AWS SAM</a> infrastructure.</p>
-			<p>You can find more information on GitHub at <a href="https://github.com/smarkwal/jarhc-online" target="_blank" rel="noreferrer">smarkwal/jarhc-online</a>.</p>
+			<p>The website itself is a <ExternalLink href="https://reactjs.org/">React</ExternalLink> app with a <ExternalLink href="https://go.dev/">Go</ExternalLink> backend running on serverless <ExternalLink href="https://aws.amazon.com/serverless/sam/">AWS SAM</ExternalLink> infrastructure.</p>
+			<p>You can find more information on GitHub at <ExternalLink href="https://github.com/smarkwal/jarhc-online">smarkwal/jarhc-online</ExternalLink>.</p>
 		</div>
 	</>;
 }
@@ -106,8 +107,13 @@ function Donations() {
 		<div className="p-3 mb-4 bg-sidepanel">
 			<h3>Donations</h3>
 			<p>If you want to support this project, you can make a small donation. THANK YOU VERY MUCH!</p>
-			<p>If you like it anonymous, use Bitcoin:<br/><code>3L1V8yGPwSjixTScCpE78fUr16tEWdpD1n</code></p>
-			<p>If you like it comfortable, use Paypal: <PayPalButton/></p>
+			<p>If you like it anonymous, use Bitcoin:<br/>
+				<ExternalLink href="https://www.blockchain.com/btc/address/3L1V8yGPwSjixTScCpE78fUr16tEWdpD1n">
+					<code>3L1V8yGPwSjixTScCpE78fUr16tEWdpD1n</code>
+				</ExternalLink>
+			</p>
+			<p className="mb-1">If you like it comfortable, use Paypal:</p>
+			<PayPalButton/>
 		</div>
 	</>;
 }
@@ -116,7 +122,7 @@ function Support() {
 	return <>
 		<div className="p-3 mb-4 bg-sidepanel">
 			<h3>Support</h3>
-			<p>If you have found a problem with this website, please report it on <a href="https://github.com/smarkwal/jarhc-online/issues" target="_blank" rel="noreferrer">GitHub</a>.</p>
+			<p>If you have found a problem with this website, please report it on <ExternalLink href="https://github.com/smarkwal/jarhc-online/issues">GitHub</ExternalLink>.</p>
 		</div>
 	</>;
 }
