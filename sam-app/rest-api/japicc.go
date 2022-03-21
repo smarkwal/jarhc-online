@@ -116,6 +116,9 @@ func handlerJapiccSubmit(request events.APIGatewayProxyRequest) (events.APIGatew
 		return sendJapiccSubmitError(http.StatusInternalServerError, err)
 	}
 
+	// create SQS message with function name
+	message = createSqsMessage("japicc-check", oldVersion, newVersion)
+
 	// add message to SQS queue
 	queueName := "jarhc-online-job-queue" // TODO: get from env
 	log.Println("send message to SQS:", queueName, message)
@@ -127,6 +130,28 @@ func handlerJapiccSubmit(request events.APIGatewayProxyRequest) (events.APIGatew
 	log.Println("message ID:", messageId)
 
 	return sendReportFile(reportFileURL)
+}
+
+func createSqsMessage(functionName string, oldVersion string, newVersion string) string {
+
+	// prepare message type
+	type JapiccCheckMessage struct {
+		Function   string `json:"function"`
+		OldVersion string `json:"oldVersion"`
+		NewVersion string `json:"newVersion"`
+	}
+
+	// create message object
+	message := JapiccCheckMessage{
+		Function:   functionName,
+		OldVersion: oldVersion,
+		NewVersion: newVersion,
+	}
+
+	// serialize to JSON
+	bytes, _ := json.Marshal(message)
+
+	return string(bytes)
 }
 
 func isValidVersion(version string) bool {

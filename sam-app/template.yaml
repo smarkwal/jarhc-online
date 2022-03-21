@@ -193,6 +193,9 @@ Resources:
           Type: SQS
           Properties:
             Queue: !GetAtt JobQueue.Arn
+            FilterCriteria:
+              Filters:
+                - Pattern: "{ \"body\": { \"function\" : [ \"japicc-check\" ] } }"
             BatchSize: 1
       Environment:
         Variables:
