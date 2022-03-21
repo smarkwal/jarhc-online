@@ -109,22 +109,32 @@ Resources:
       Name: "jarhc-online-resource-group"
       Description: "Resource group for jarhc-online-app"
 
-  JapiccJobQueue:
+  ErrorQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: japicc-job-queue
-      VisibilityTimeout: 60 # must be >= Lambda function timeout
+      QueueName: jarhc-online-error-queue
+      MessageRetentionPeriod: 1209600 # 14 days
 
-  JapiccJobQueuePolicy:
+  JobQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: jarhc-online-job-queue
+      MessageRetentionPeriod: 300 # 5 minutes
+      VisibilityTimeout: 60 # must be >= Lambda function timeout
+      RedrivePolicy:
+        deadLetterTargetArn: !GetAtt ErrorQueue.Arn
+        maxReceiveCount: 3
+
+  JobQueuePolicy:
     Type: AWS::SQS::QueuePolicy
     Properties:
       Queues:
-        - !Ref JapiccJobQueue
+        - !Ref JobQueue
       PolicyDocument:
         Version: 2012-10-17
         Statement:
           - Sid: RestApiFunctionRole # grant access to rest-api function
-            Resource: !GetAtt JapiccJobQueue.Arn
+            Resource: !GetAtt JobQueue.Arn
             Effect: Allow
             Action:
               - 'sqs:GetQueueUrl'
@@ -182,7 +192,7 @@ Resources:
         CatchAll:
           Type: SQS
           Properties:
-            Queue: !GetAtt JapiccJobQueue.Arn
+            Queue: !GetAtt JobQueue.Arn
             BatchSize: 1
       Environment:
         Variables:

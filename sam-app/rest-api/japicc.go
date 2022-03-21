@@ -117,7 +117,7 @@ func handlerJapiccSubmit(request events.APIGatewayProxyRequest) (events.APIGatew
 	}
 
 	// add message to SQS queue
-	queueName := "japicc-job-queue" // TODO: get from env
+	queueName := "jarhc-online-job-queue" // TODO: get from env
 	log.Println("send message to SQS:", queueName, message)
 	messageId, err := client.SendMessage(queueName, message)
 	if err != nil {
