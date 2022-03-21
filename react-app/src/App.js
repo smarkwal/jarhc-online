@@ -81,7 +81,7 @@ function App() {
 
 function About() {
 	return <>
-		<div className="p-3 mb-4 bg-light">
+		<div className="p-3 mb-4 bg-sidepanel">
 			<h2>About this Website</h2>
 			<p>This website is for Java developers.</p>
 			<p>It is a collection of online tools to help find your way through &quot;JAR hell&quot; or &quot;classpath hell&quot;.</p>
@@ -92,7 +92,7 @@ function About() {
 
 function OpenSource() {
 	return <>
-		<div className="p-3 mb-4 bg-light">
+		<div className="p-3 mb-4 bg-sidepanel">
 			<h3>Open Source</h3>
 			<p>Everything in this project is open source.</p>
 			<p>The website itself is a <a href="https://reactjs.org/" target="_blank" rel="noreferrer">React</a> app with a <a href="https://go.dev/" target="_blank" rel="noreferrer">Go</a> backend running on serverless <a href="https://aws.amazon.com/serverless/sam/" target="_blank" rel="noreferrer">AWS SAM</a> infrastructure.</p>
@@ -103,18 +103,18 @@ function OpenSource() {
 
 function Donations() {
 	return <>
-		<div className="p-3 mb-4 bg-light">
+		<div className="p-3 mb-4 bg-sidepanel">
 			<h3>Donations</h3>
 			<p>If you want to support this project, you can make a small donation. THANK YOU VERY MUCH!</p>
-			<p> If you like it anonymous, use Bitcoin:<br/><code>3L1V8yGPwSjixTScCpE78fUr16tEWdpD1n</code></p>
-			<p> If you like it comfortable, use Paypal: <PayPalButton/></p>
+			<p>If you like it anonymous, use Bitcoin:<br/><code>3L1V8yGPwSjixTScCpE78fUr16tEWdpD1n</code></p>
+			<p>If you like it comfortable, use Paypal: <PayPalButton/></p>
 		</div>
 	</>;
 }
 
 function Support() {
 	return <>
-		<div className="p-3 mb-4 bg-light">
+		<div className="p-3 mb-4 bg-sidepanel">
 			<h3>Support</h3>
 			<p>If you have found a problem with this website, please report it on <a href="https://github.com/smarkwal/jarhc-online/issues" target="_blank" rel="noreferrer">GitHub</a>.</p>
 		</div>

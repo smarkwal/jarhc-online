@@ -1,0 +1,40 @@
+:root {
+	--text-primary: #2F5597;
+	--btn-primary: #4472C4;
+	--btn-primary-hover: #94AEDD;
+	--bg-sidepanel: #DAE3F3;
+}
+
+body {
+	background-color: var(--bg-sidepanel);
+}
+
+.bg-navbar {
+	background-color: black;
+}
+
+.text-primary {
+	color: var(--text-primary);
+}
+
+a {
+	color: var(--text-primary);
+}
+
+code {
+	color: var(--text-primary);
+}
+
+.btn-primary {
+	background-color: var(--btn-primary);
+	border-color: var(--btn-primary);
+}
+
+.btn-primary:hover {
+	background-color: var(--btn-primary-hover);
+	border-color: var(--btn-primary-hover);
+}
+
+.bg-sidepanel {
+	background-color: var(--bg-sidepanel);
+}

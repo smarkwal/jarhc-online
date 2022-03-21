@@ -120,7 +120,7 @@ const JapiccForm = () => {
 		})
 	}
 
-	return (<div>
+	return (<div className="mb-4">
 		<div>
 			Check API source and binary compatibility of two versions of a Java library.
 		</div>

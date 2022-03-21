@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 import Auth from "./Auth";
 
 const Navigation = () => {
-	return (<nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4" style={{fontSize: "1.5rem"}}>
+	return (<nav className="navbar navbar-expand-md navbar-dark bg-navbar mb-4" style={{fontSize: "1.5rem"}}>
 		<button className="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span className="navbar-toggler-icon"/>
 		</button>
