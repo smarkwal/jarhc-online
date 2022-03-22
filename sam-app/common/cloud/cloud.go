@@ -1,9 +1,11 @@
 package cloud
 
 import (
+	"encoding/json"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/lambda"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/aws/aws-sdk-go/service/sqs"
@@ -206,5 +208,73 @@ func (c *SQSClient) getQueueURL(queueName string) (*string, error) {
 
 func (c *SQSClient) DeleteMessage(queueName string, messageId string) error {
 	// TODO: implement
+	return nil
+}
+
+// Lambda ======================================================================
+
+type LambdaClient struct {
+	Region     string
+	connection *lambda.Lambda
+}
+
+type LambdaPayload struct {
+	Body string `json:"body"`
+}
+
+func NewLambdaClient(region string) (*LambdaClient, error) {
+
+	// connect to Lambda
+	config := aws.Config{Region: aws.String(region)}
+	sess, err := session.NewSession(&config)
+	if err != nil {
+		log.Println("AWS error:", err)
+		return nil, err
+	}
+	connection := lambda.New(sess)
+
+	// return client
+	client := LambdaClient{
+		Region:     region,
+		connection: connection,
+	}
+	return &client, nil
+}
+
+func (c *LambdaClient) InvokeAsync(functionName string, message interface{}) error {
+
+	// create payload
+	body, err := json.Marshal(message)
+	if err != nil {
+		log.Println("JSON error:", err)
+		return err
+	}
+
+	payload := LambdaPayload{
+		Body: string(body),
+	}
+
+	bytes, err := json.Marshal(payload)
+	if err != nil {
+		log.Println("JSON error:", err)
+		return err
+	}
+
+	// prepare Lambda call
+	input := lambda.InvokeInput{
+		FunctionName:   aws.String(functionName),
+		InvocationType: aws.String(lambda.InvocationTypeEvent), // async
+		Payload:        bytes,
+	}
+	log.Println("Lambda input:", input)
+
+	// invoke Lambda function
+	output, err := c.connection.Invoke(&input)
+	if err != nil {
+		log.Println("Lambda error:", err)
+		return err
+	}
+	log.Println("Lambda output:", *output)
+
 	return nil
 }
