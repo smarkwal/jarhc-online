@@ -3,9 +3,7 @@ package main
 import (
 	"context"
 	"crypto/sha256"
-	"encoding/json"
 	"fmt"
-	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/smarkwal/jarhc-online/sam-app/common/cloud"
 	"github.com/smarkwal/jarhc-online/sam-app/common/maven"
@@ -13,9 +11,10 @@ import (
 	"log"
 	"os"
 	"path"
-	"strings"
 )
 
+var region = "eu-central-1" // TODO: read from ENV
+var bucketName = os.Getenv("BUCKET_NAME")
 var tempDirPath = path.Join(os.TempDir(), "jarhc-online")
 
 type JapiccCheckRequest struct {
@@ -23,41 +22,24 @@ type JapiccCheckRequest struct {
 	NewVersion string `json:"newVersion"`
 }
 
+func init() {
+	// set up global state
+	if len(bucketName) == 0 {
+		bucketName = "localhost"
+	}
+	// TODO: create and reuse S3 client?
+}
+
 func main() {
 	lambda.Start(handler)
 }
 
-func handler(ctx context.Context, sqsEvent events.SQSEvent) error {
-	for _, message := range sqsEvent.Records {
-		fmt.Printf("The message %s for event source %s = %s \n", message.MessageId, message.EventSource, message.Body)
+func handler(ctx context.Context, request JapiccCheckRequest) error {
 
-		// TODO: delete message?
-
-		// handle message
-		err := handle(message)
-		if err != nil {
-			// TODO: exception handling
-			log.Println("Error:", err)
-		}
-	}
-
-	return nil
-}
-
-func handle(message events.SQSMessage) error {
-
-	// parse JSON request body
-	var in JapiccCheckRequest
-	reader := strings.NewReader(message.Body)
-	err := json.NewDecoder(reader).Decode(&in)
-	if err != nil {
-		return err
-	}
-
-	oldVersion := in.OldVersion
+	oldVersion := request.OldVersion
 	log.Println("old version:", oldVersion)
 
-	newVersion := in.NewVersion
+	newVersion := request.NewVersion
 	log.Println("new version:", newVersion)
 
 	// calculate hash for combination of versions
@@ -65,13 +47,6 @@ func handle(message events.SQSMessage) error {
 
 	// prepare report file
 	reportFileName := "report-" + hash + ".html"
-
-	// get S3 bucket
-	region := "eu-central-1" // TODO: read from ENV
-	var bucketName = os.Getenv("BUCKET_NAME")
-	if len(bucketName) == 0 {
-		bucketName = "localhost"
-	}
 
 	// check if report file already exists
 	s3 := cloud.NewS3Client(region, bucketName)

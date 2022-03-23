@@ -37,10 +37,10 @@ update:
 
 	@echo "Updating japicc-check ..."
 	@cd japicc-check && \
-	 go get -u github.com/smarkwal/jarhc-online/sam-app/common@18c359f78f21 && \
+	 go get -u github.com/smarkwal/jarhc-online/sam-app/common@7631a7fe07e3 && \
 	 go mod tidy
 
 	@echo "Updating rest-api ..."
 	@cd rest-api && \
-	 go get -u github.com/smarkwal/jarhc-online/sam-app/common@18c359f78f21 && \
+	 go get -u github.com/smarkwal/jarhc-online/sam-app/common@7631a7fe07e3 && \
 	 go mod tidy

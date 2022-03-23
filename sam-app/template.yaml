@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: "jarhc-online-app - JAR Health Check Online serverless application."
 
@@ -115,33 +115,6 @@ Resources:
       QueueName: jarhc-online-error-queue
       MessageRetentionPeriod: 1209600 # 14 days
 
-  JobQueue:
-    Type: AWS::SQS::Queue
-    Properties:
-      QueueName: jarhc-online-job-queue
-      MessageRetentionPeriod: 300 # 5 minutes
-      VisibilityTimeout: 60 # must be >= Lambda function timeout
-      RedrivePolicy:
-        deadLetterTargetArn: !GetAtt ErrorQueue.Arn
-        maxReceiveCount: 3
-
-  JobQueuePolicy:
-    Type: AWS::SQS::QueuePolicy
-    Properties:
-      Queues:
-        - !Ref JobQueue
-      PolicyDocument:
-        Version: 2012-10-17
-        Statement:
-          - Sid: RestApiFunctionRole # grant access to rest-api function
-            Resource: !GetAtt JobQueue.Arn
-            Effect: Allow
-            Action:
-              - 'sqs:GetQueueUrl'
-              - 'sqs:SendMessage'
-            Principal:
-              AWS: !GetAtt RestApiFunctionRole.Arn
-
   # Lambda function
   RestApiFunction:
     Type: AWS::Serverless::Function
@@ -153,6 +126,7 @@ Resources:
       Architectures:
         - x86_64
       Tracing: Active
+      Role: !GetAtt RestApiFunctionRole.Arn
       Events:
         AuthValidate:
           Type: Api
@@ -176,6 +150,25 @@ Resources:
           BUCKET_NAME: !Ref BucketName
           BUCKET_URL: !Ref BucketURL
 
+  # Lambda function role
+  RestApiFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: rest-api-role
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - "sts:AssumeRole"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess"
+        - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+        - "arn:aws:iam::aws:policy/service-role/AWSLambdaRole"
+
   # Lambda function
   JapiccCheckFunction:
     Type: AWS::Serverless::Function
@@ -188,15 +181,9 @@ Resources:
       # MemorySize * Timeout / 1024 * $0.0000166667 = $0.001000002
       MemorySize: 1024 # increase memory size to 1 GB for JAPICC
       Timeout: 60 # increase timeout to 60 seconds for JAPICC
-      Events:
-        CatchAll:
-          Type: SQS
-          Properties:
-            Queue: !GetAtt JobQueue.Arn
-            FilterCriteria:
-              Filters:
-                - Pattern: "{ \"body\": { \"function\" : [ \"japicc-check\" ] } }"
-            BatchSize: 1
+      DeadLetterQueue:
+        Type: SQS
+        TargetArn: !GetAtt ErrorQueue.Arn
       Environment:
         Variables:
           BUCKET_NAME: !Ref BucketName
@@ -252,14 +239,14 @@ Resources:
             Resource: !Sub "arn:aws:s3:::${WebsiteBucket}/*"
             Effect: Allow
             Action:
-              - 's3:GetObject'
-            Principal: '*'
+              - "s3:GetObject"
+            Principal: "*"
           - Sid: ReadWriteAccessForJapiccCheckFunctionRole # grant read and write access to JapiccCheck function
             Resource: !Sub "arn:aws:s3:::${WebsiteBucket}/*"
             Effect: Allow
             Action:
-              - 's3:GetObject'
-              - 's3:PutObject'
+              - "s3:GetObject"
+              - "s3:PutObject"
             Principal:
               AWS: !GetAtt JapiccCheckFunctionRole.Arn
 

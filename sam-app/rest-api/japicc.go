@@ -108,50 +108,29 @@ func handlerJapiccSubmit(request events.APIGatewayProxyRequest) (events.APIGatew
 		return sendJapiccSubmitErrorMessage(http.StatusBadRequest, "Version not found in Maven Central: "+newVersion)
 	}
 
-	// create SQS client
-	log.Println("connect to SQS:", region)
-	client, err := cloud.NewSQSClient(region)
-	if err != nil {
-		log.Println("error connecting to SQS:", err)
-		return sendJapiccSubmitError(http.StatusInternalServerError, err)
-	}
-
-	// create SQS message with function name
-	message = createSqsMessage("japicc-check", oldVersion, newVersion)
-
-	// add message to SQS queue
-	queueName := "jarhc-online-job-queue" // TODO: get from env
-	log.Println("send message to SQS:", queueName, message)
-	messageId, err := client.SendMessage(queueName, message)
-	if err != nil {
-		log.Println("error sending message to SQS:", err)
-		return sendJapiccSubmitError(http.StatusInternalServerError, err)
-	}
-	log.Println("message ID:", messageId)
-
-	return sendReportFile(reportFileURL)
-}
-
-func createSqsMessage(functionName string, oldVersion string, newVersion string) string {
-
-	// prepare message type
 	type JapiccCheckMessage struct {
-		Function   string `json:"function"`
 		OldVersion string `json:"oldVersion"`
 		NewVersion string `json:"newVersion"`
 	}
 
-	// create message object
-	message := JapiccCheckMessage{
-		Function:   functionName,
+	payload := JapiccCheckMessage{
 		OldVersion: oldVersion,
 		NewVersion: newVersion,
 	}
 
-	// serialize to JSON
-	bytes, _ := json.Marshal(message)
+	client, err := cloud.NewLambdaClient(region)
+	if err != nil {
+		log.Println("error connecting to Lambda:", err)
+		return sendJapiccSubmitError(http.StatusInternalServerError, err)
+	}
 
-	return string(bytes)
+	err = client.InvokeAsync("japicc-check", payload)
+	if err != nil {
+		log.Println("error invoking Lambda function:", err)
+		return sendJapiccSubmitError(http.StatusInternalServerError, err)
+	}
+
+	return sendReportFile(reportFileURL)
 }
 
 func isValidVersion(version string) bool {
