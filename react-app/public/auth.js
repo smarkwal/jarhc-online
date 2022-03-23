@@ -1,3 +1,14 @@
+
+function loginCallback() {
+	storeTokens()
+	window.setTimeout(redirectToMainApp, 2000)
+}
+
+function logoutCallback() {
+	clearTokens()
+	window.setTimeout(redirectToMainApp, 2000)
+}
+
 function storeTokens() {
 	console.log("store tokens ...")
 	const tokens = getTokensFromURL()
