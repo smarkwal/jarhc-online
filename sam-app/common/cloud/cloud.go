@@ -218,10 +218,6 @@ type LambdaClient struct {
 	connection *lambda.Lambda
 }
 
-type LambdaPayload struct {
-	Body string `json:"body"`
-}
-
 func NewLambdaClient(region string) (*LambdaClient, error) {
 
 	// connect to Lambda
@@ -241,18 +237,7 @@ func NewLambdaClient(region string) (*LambdaClient, error) {
 	return &client, nil
 }
 
-func (c *LambdaClient) InvokeAsync(functionName string, message interface{}) error {
-
-	// create payload
-	body, err := json.Marshal(message)
-	if err != nil {
-		log.Println("JSON error:", err)
-		return err
-	}
-
-	payload := LambdaPayload{
-		Body: string(body),
-	}
+func (c *LambdaClient) InvokeAsync(functionName string, payload interface{}) error {
 
 	bytes, err := json.Marshal(payload)
 	if err != nil {
