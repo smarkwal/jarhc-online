@@ -8,4 +8,4 @@ s3_prefix = "jarhc-online-app"
 region = "eu-central-1"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM CAPABILITY_NAMED_IAM"
-image_repositories = ["JapiccCheckFunction=837783538267.dkr.ecr.eu-central-1.amazonaws.com/jarhconlineappc576971f/japicccheckfunctionf49d3734repo"]
+image_repositories = ["JapiccCheckFunction=837783538267.dkr.ecr.eu-central-1.amazonaws.com/jarhconlineappc576971f/japicccheckfunctionf49d3734repo", "JarhcCheckFunction=837783538267.dkr.ecr.eu-central-1.amazonaws.com/jarhconlineappc576971f/jarhccheckfunction599769aerepo"]

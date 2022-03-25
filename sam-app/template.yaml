@@ -109,6 +109,7 @@ Resources:
       Name: "jarhc-online-resource-group"
       Description: "Resource group for jarhc-online-app"
 
+  # Dead letter queue for async Lambda functions
   ErrorQueue:
     Type: AWS::SQS::Queue
     Properties:
@@ -177,6 +178,8 @@ Resources:
       PackageType: Image
       Architectures:
         - x86_64
+      Tracing: Active
+      Role: !GetAtt AsyncFunctionRole.Arn
       # max price per execution:
       # MemorySize * Timeout / 1024 * $0.0000166667 = $0.001000002
       MemorySize: 1024 # increase memory size to 1 GB for JAPICC
@@ -192,6 +195,51 @@ Resources:
       DockerTag: go1.x-v1
       DockerContext: ./japicc-check
       Dockerfile: Dockerfile
+
+  # Lambda function
+  JarhcCheckFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: jarhc-check
+      PackageType: Image
+      Architectures:
+        - x86_64
+      Tracing: Active
+      Role: !GetAtt AsyncFunctionRole.Arn
+      # max price per execution:
+      # MemorySize * Timeout / 1024 * $0.0000166667 = $0.001000002
+      MemorySize: 1024 # increase memory size to 1 GB for JarHC
+      Timeout: 60 # increase timeout to 60 seconds for JarHC
+      DeadLetterQueue:
+        Type: SQS
+        TargetArn: !GetAtt ErrorQueue.Arn
+      Environment:
+        Variables:
+          BUCKET_NAME: !Ref BucketName
+          BUCKET_URL: !Ref BucketURL
+    Metadata:
+      DockerTag: go1.x-v1
+      DockerContext: ./jarhc-check
+      Dockerfile: Dockerfile
+
+  # Lambda function role
+  AsyncFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: async-function-role
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - "sts:AssumeRole"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess"
+        - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+        - "arn:aws:iam::aws:policy/AmazonSQSFullAccess"
 
   # SSL certificate for API gateway
   ApiCertificate:
@@ -241,14 +289,14 @@ Resources:
             Action:
               - "s3:GetObject"
             Principal: "*"
-          - Sid: ReadWriteAccessForJapiccCheckFunctionRole # grant read and write access to JapiccCheck function
+          - Sid: AsyncFunctionRole # grant read and write access to async Lambda functions
             Resource: !Sub "arn:aws:s3:::${WebsiteBucket}/*"
             Effect: Allow
             Action:
               - "s3:GetObject"
               - "s3:PutObject"
             Principal:
-              AWS: !GetAtt JapiccCheckFunctionRole.Arn
+              AWS: !GetAtt AsyncFunctionRole.Arn
 
   # CloudFront Distribution for public website
   WebsiteCloudFrontDistribution:
