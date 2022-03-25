@@ -169,6 +169,7 @@ Resources:
         - "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess"
         - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
         - "arn:aws:iam::aws:policy/service-role/AWSLambdaRole"
+        - "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
 
   # Lambda function
   JapiccCheckFunction:
@@ -240,6 +241,7 @@ Resources:
         - "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess"
         - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
         - "arn:aws:iam::aws:policy/AmazonSQSFullAccess"
+        - "arn:aws:iam::aws:policy/AmazonS3FullAccess"
 
   # SSL certificate for API gateway
   ApiCertificate:
@@ -289,14 +291,6 @@ Resources:
             Action:
               - "s3:GetObject"
             Principal: "*"
-          - Sid: AsyncFunctionRole # grant read and write access to async Lambda functions
-            Resource: !Sub "arn:aws:s3:::${WebsiteBucket}/*"
-            Effect: Allow
-            Action:
-              - "s3:GetObject"
-              - "s3:PutObject"
-            Principal:
-              AWS: !GetAtt AsyncFunctionRole.Arn
 
   # CloudFront Distribution for public website
   WebsiteCloudFrontDistribution:
