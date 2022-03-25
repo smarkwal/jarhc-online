@@ -22,7 +22,7 @@ type MavenSearchError struct {
 	ErrorMessage string `json:"errorMessage"`
 }
 
-func handlerMavenSearch(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func handleMavenSearch(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
 	// get message from request body
 	message := request.Body

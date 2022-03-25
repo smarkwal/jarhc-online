@@ -2,31 +2,31 @@ package main
 
 import (
 	"context"
-	"crypto/sha256"
-	"fmt"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/smarkwal/jarhc-online/sam-app/common/cloud"
 	"github.com/smarkwal/jarhc-online/sam-app/jarhc-check/jarhc"
 	"log"
 	"os"
 	"path"
-	"strings"
 )
 
-var region = "eu-central-1" // TODO: read from ENV
-var bucketName = os.Getenv("BUCKET_NAME")
-
 type JarhcCheckRequest struct {
-	Classpath []string `json:"classpath"`
-	Provided  []string `json:"provided"`
+	Classpath      []string `json:"classpath"`
+	Provided       []string `json:"provided"`
+	ReportFileName string   `json:"reportFileName"`
 }
 
+var (
+	region     = "eu-central-1" // TODO: read from ENV
+	bucketName = os.Getenv("BUCKET_NAME")
+	s3Client   cloud.S3Client
+)
+
 func init() {
-	// set up global state
 	if len(bucketName) == 0 {
 		bucketName = "localhost"
 	}
-	// TODO: create and reuse S3 client?
+	s3Client = cloud.NewS3Client(region, bucketName)
 }
 
 func main() {
@@ -35,17 +35,11 @@ func main() {
 
 func handler(ctx context.Context, request JarhcCheckRequest) error {
 
-	config := strings.Join(request.Classpath, ";") + "/" + strings.Join(request.Provided, ";")
-
-	// calculate hash for combination of versions
-	hash := sha256hex(config)
-
 	// prepare report file
-	reportFileName := "report-" + hash + ".html"
+	reportFileName := request.ReportFileName
 
 	// check if report file already exists
-	s3 := cloud.NewS3Client(region, bucketName)
-	exists, err := s3.Exists(reportFileName)
+	exists, err := s3Client.Exists(reportFileName)
 	if err != nil {
 		return err
 	}
@@ -85,7 +79,7 @@ func handler(ctx context.Context, request JarhcCheckRequest) error {
 	defer file.Close()
 
 	// upload report file to S3
-	_, err = s3.Upload(reportFileName, file)
+	_, err = s3Client.Upload(reportFileName, file)
 	if err != nil {
 		return err
 	}
@@ -99,10 +93,4 @@ func getFileSize(path string) int64 {
 		return -1
 	}
 	return info.Size()
-}
-
-func sha256hex(text string) string {
-	data := []byte(text)
-	hash := sha256.Sum256(data)
-	return fmt.Sprintf("%x", hash[:])
 }

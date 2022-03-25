@@ -4,7 +4,7 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 )
 
-func handlerAuthValidate(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func handleAuthValidate(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
 	// prepare headers
 	headers := make(map[string]string)
