@@ -48,6 +48,10 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	// }
 	// log.Println("-----------------------------------------------------------")
 
+	// get current user
+	user := getUser(request.RequestContext)
+	log.Println(user)
+
 	response, err := dispatch(request)
 
 	// add CORS headers to every response
@@ -82,6 +86,35 @@ func handleNotFound() (events.APIGatewayProxyResponse, error) {
 	}
 
 	return response, nil
+}
+
+type User struct {
+	Subject   string `json:"subject"`
+	Email     string `json:"email"`
+	SourceIP  string `json:"sourceIP"`
+	UserAgent string `json:"userAgent"`
+}
+
+func (user User) String() string {
+	return fmt.Sprintf("User { Subject: \"%s\", Email: \"%s\", SourceIP: \"%s\", UserAgent: \"%s\" }", user.Subject, user.Email, user.SourceIP, user.UserAgent)
+}
+
+func getUser(context events.APIGatewayProxyRequestContext) User {
+	authorizer := context.Authorizer
+	identity := context.Identity
+
+	subject := ""
+	email := ""
+	claims, found := authorizer["claims"]
+	if found {
+		values := claims.(map[string]interface{})
+		subject = values["sub"].(string)
+		email = values["email"].(string)
+	}
+	sourceIP := identity.SourceIP
+	userAgent := identity.UserAgent
+
+	return User{Subject: subject, Email: email, SourceIP: sourceIP, UserAgent: userAgent}
 }
 
 func getOrigin(request events.APIGatewayProxyRequest) string {
