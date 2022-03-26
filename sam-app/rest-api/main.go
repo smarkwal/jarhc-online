@@ -13,7 +13,7 @@ import (
 )
 
 var (
-	region       = "eu-central-1" // TODO: read from ENV
+	region       = os.Getenv("AWS_REGION")
 	bucketName   = os.Getenv("BUCKET_NAME")
 	s3Client     cloud.S3Client
 	lambdaClient *cloud.LambdaClient
