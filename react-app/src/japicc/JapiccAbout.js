@@ -1,5 +1,5 @@
 import React from 'react';
-import ExternalLink from "../ExternalLink";
+import ExternalLink from "../components/ExternalLink";
 
 const JapiccAbout = () => {
 	return (<div className="bg-light border rounded-3 p-3 mt-5">

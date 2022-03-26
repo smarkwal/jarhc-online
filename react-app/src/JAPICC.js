@@ -1,4 +1,4 @@
-import JapiccForm from "./components/japicc/JapiccForm";
+import JapiccForm from "./japicc/JapiccForm";
 import Navigation from "./components/Navigation";
 import React from "react";
 

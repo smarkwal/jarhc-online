@@ -139,6 +139,11 @@ Resources:
           Properties:
             Path: /japicc/submit
             Method: POST
+        JarhcSubmit:
+          Type: Api
+          Properties:
+            Path: /jarhc/submit
+            Method: POST
         MavenSearch:
           Type: Api
           Properties:

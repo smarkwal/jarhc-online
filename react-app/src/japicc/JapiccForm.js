@@ -1,8 +1,8 @@
 import React, {useReducer, useState} from "react";
-import Auth from "../Auth"
-import Artifacts from "../Artifacts";
-import ArtifactInput from "../ArtifactInput";
-import JapiccReport from "./JapiccReport";
+import Auth from "../components/Auth"
+import Artifacts from "../components/Artifacts";
+import ArtifactInput from "../components/ArtifactInput";
+import Report from "../components/Report";
 import JapiccAbout from "./JapiccAbout";
 
 const JapiccForm = () => {
@@ -159,7 +159,7 @@ const JapiccForm = () => {
 		{state.errorMessage && state.errorMessage.length > 0 && <div className="alert alert-danger">
 			{state.errorMessage}
 		</div>}
-		{state.reportURL && state.reportURL.length > 0 ? <JapiccReport reportURL={state.reportURL} onClose={closeReport}/> : <JapiccAbout/>}
+		{state.reportURL && state.reportURL.length > 0 ? <Report title="Java API Compliance Checker Report" reportURL={state.reportURL} onClose={closeReport}/> : <JapiccAbout/>}
 	</div>)
 }
 

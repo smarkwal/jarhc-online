@@ -31,7 +31,7 @@ function App() {
 					</div>
 
 					<div className="col-12 col-md-12 col-lg-6 mb-4">
-						<Card imageUrl="/img/card-image-jarhc.png" title="JAR Health Check" linkUrl="/jarhc" linkText="Coming soon" enabled={false}>
+						<Card imageUrl="/img/card-image-jarhc.png" title="JAR Health Check" linkUrl="/jarhc" linkText="Run JarHC">
 							<span>Analyze a set of Java libraries for compatibility at binary level. Find missing dependencies, duplicate classes, dangerous code, and much more.</span>
 						</Card>
 					</div>

@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 
-const JapiccReport = ({
-						  reportURL,
-						  onClose
-					  }) => {
+const Report = ({
+					title,
+					reportURL,
+					onClose
+				}) => {
 
 	const [state, setState] = useState({
 		polling: true,
@@ -76,7 +77,7 @@ const JapiccReport = ({
 
 	return (<div className="border border-success border-1 mt-5">
 		<div className="alert alert-success mb-0">
-			Java API Compliance Checker Report
+			{title}
 			{!state.polling && <span className="align-vertical-middle float-end">
 				<a href={reportURL} target="_blank" rel="noreferrer" title="Open">
 					<i className="bi bi-box-arrow-up-right text-success"/>
@@ -107,4 +108,4 @@ function ReportFrame(props) {
 	return <iframe src={props.src} className="w-100 mt-0" style={{height: "500px"}} title="JAPICC Report"/>;
 }
 
-export default JapiccReport;
+export default Report;
