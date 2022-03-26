@@ -185,6 +185,9 @@ Resources:
       # MemorySize * Timeout / 1024 * $0.0000166667 = $0.001000002
       MemorySize: 1024 # increase memory size to 1 GB for JAPICC
       Timeout: 60 # increase timeout to 60 seconds for JAPICC
+      EventInvokeConfig:
+        MaximumEventAgeInSeconds: 120 # 2 minutes
+        MaximumRetryAttempts: 0 # do not retry
       DeadLetterQueue:
         Type: SQS
         TargetArn: !GetAtt ErrorQueue.Arn
@@ -211,6 +214,9 @@ Resources:
       # MemorySize * Timeout / 1024 * $0.0000166667 = $0.001000002
       MemorySize: 1024 # increase memory size to 1 GB for JarHC
       Timeout: 60 # increase timeout to 60 seconds for JarHC
+      EventInvokeConfig:
+        MaximumEventAgeInSeconds: 120 # 2 minutes
+        MaximumRetryAttempts: 0 # do not retry
       DeadLetterQueue:
         Type: SQS
         TargetArn: !GetAtt ErrorQueue.Arn
