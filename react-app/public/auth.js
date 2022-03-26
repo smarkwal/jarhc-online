@@ -1,12 +1,12 @@
-
 function loginCallback() {
+	const state = getStateParam()
 	storeTokens()
-	window.setTimeout(redirectToMainApp, 2000)
+	window.setTimeout(redirectToMainApp, 2000, state)
 }
 
 function logoutCallback() {
 	clearTokens()
-	window.setTimeout(redirectToMainApp, 2000)
+	window.setTimeout(redirectToMainApp, 2000, "")
 }
 
 function storeTokens() {
@@ -18,6 +18,20 @@ function storeTokens() {
 		let value = JSON.stringify(tokens);
 		storage.setItem("tokens", value)
 	}
+}
+
+function getStateParam() {
+	const fragment = window.location.hash
+	if (fragment) {
+		const params = fragment.substring(1) // remove leading hashtag
+		const pairs = params.split("&")
+		for (const pair of pairs) {
+			if (pair.startsWith("state=")) {
+				return pair.substring(6)
+			}
+		}
+	}
+	return ""
 }
 
 function getTokensFromURL() {
@@ -59,7 +73,7 @@ function clearTokens() {
 	storage.removeItem("tokens")
 }
 
-function redirectToMainApp() {
+function redirectToMainApp(state) {
 	console.log("redirect to main app ...")
-	window.location.href = "/"
+	window.location.href = "/" + state
 }

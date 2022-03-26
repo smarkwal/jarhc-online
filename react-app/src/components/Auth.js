@@ -62,7 +62,7 @@ const Auth = {
 	},
 
 	getSignInURL: function() {
-		return Auth.issuerURL + "/login?response_type=token&client_id=" + Auth.clientId + "&redirect_uri=" + Auth.callbackBaseURL + "/login.html";
+		return Auth.issuerURL + "/login?response_type=token&client_id=" + Auth.clientId + "&redirect_uri=" + Auth.callbackBaseURL + "/login.html" + Auth.getStateParam();
 	},
 
 	signOut: function() {
@@ -76,6 +76,14 @@ const Auth = {
 
 	getSignOutURL: function() {
 		return Auth.issuerURL + "/logout?client_id=" + Auth.clientId + "&logout_uri=" + Auth.callbackBaseURL + "/logout.html";
+	},
+
+	getStateParam: function() {
+		const fragment = window.location.hash
+		if (fragment) {
+			return "&state=" + encodeURIComponent(fragment)
+		}
+		return "";
 	},
 
 	getAccessToken: function() {
