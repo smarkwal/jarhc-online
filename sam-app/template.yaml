@@ -55,52 +55,6 @@ Globals:
   Function:
     Timeout: 5
 
-  Api:
-    Auth:
-      ApiKeyRequired: false
-      DefaultAuthorizer: CognitoAuthorizer
-      AddDefaultAuthorizerToCorsPreflight: false
-      Authorizers:
-        CognitoAuthorizer:
-          UserPoolArn: !Ref CognitoUserPoolARN
-          Identity:
-            Header: Authorization # default
-            ReauthorizeEvery: 300 # 300 seconds = 5 minutes (default)
-    Cors:
-      AllowOrigin: !Sub "'${WebsiteURL}'"
-      AllowMethods: "'GET,POST,OPTIONS'"
-      AllowHeaders: "'Content-Type,Authorization'"
-      AllowCredentials: true
-      MaxAge: "'600'" # cache results of a preflight request for 10 minutes
-    GatewayResponses:
-      DEFAULT_4XX:
-        ResponseParameters:
-          Headers:
-            Access-Control-Allow-Origin: !Sub "'${WebsiteURL}'"
-            Access-Control-Allow-Credentials: "'true'"
-      DEFAULT_5XX:
-        ResponseParameters:
-          Headers:
-            Access-Control-Allow-Origin: !Sub "'${WebsiteURL}'"
-            Access-Control-Allow-Credentials: "'true'"
-    EndpointConfiguration:
-      Type: REGIONAL
-    Domain:
-      # Domain name and SSL certificate for API gateway
-      DomainName: !Ref ApiDomain
-      CertificateArn: !Ref ApiCertificate
-      EndpointConfiguration: REGIONAL # default
-      Route53:
-        # see https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-api-route53configuration.html
-        HostedZoneId: !Ref DnsZoneID
-        EvaluateTargetHealth: false
-        IpV6: false
-    MethodSettings:
-      - HttpMethod: "*"
-        ResourcePath: "/*"
-        ThrottlingRateLimit: 10
-        ThrottlingBurstLimit: 20
-
 Resources:
 
   ResourceGroup:
@@ -108,6 +62,94 @@ Resources:
     Properties:
       Name: "jarhc-online-resource-group"
       Description: "Resource group for jarhc-online-app"
+
+  RestApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      Auth:
+        ApiKeyRequired: false
+        DefaultAuthorizer: CognitoAuthorizer
+        AddDefaultAuthorizerToCorsPreflight: false
+        Authorizers:
+          CognitoAuthorizer:
+            UserPoolArn: !Ref CognitoUserPoolARN
+            Identity:
+              Header: Authorization # default
+              ReauthorizeEvery: 300 # 300 seconds = 5 minutes (default)
+      Cors:
+        AllowOrigin: !Sub "'${WebsiteURL}'"
+        AllowMethods: "'GET,POST,OPTIONS'"
+        AllowHeaders: "'Content-Type,Authorization'"
+        AllowCredentials: true
+        MaxAge: "'600'" # cache results of a preflight request for 10 minutes
+      GatewayResponses:
+        DEFAULT_4XX:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: !Sub "'${WebsiteURL}'"
+              Access-Control-Allow-Credentials: "'true'"
+        DEFAULT_5XX:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: !Sub "'${WebsiteURL}'"
+              Access-Control-Allow-Credentials: "'true'"
+      EndpointConfiguration:
+        Type: REGIONAL
+      Domain:
+        # Domain name and SSL certificate for API gateway
+        DomainName: !Ref ApiDomain
+        CertificateArn: !Ref ApiCertificate
+        EndpointConfiguration: REGIONAL # default
+        Route53:
+          # see https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-api-route53configuration.html
+          HostedZoneId: !Ref DnsZoneID
+          EvaluateTargetHealth: false
+          IpV6: false
+      MethodSettings:
+        - HttpMethod: "*"
+          ResourcePath: "/*"
+          ThrottlingRateLimit: 10
+          ThrottlingBurstLimit: 20
+      Models:
+        JapiccSubmitModel:
+          type: object
+          required:
+            - oldVersion
+            - newVersion
+          properties:
+            oldVersion:
+              type: string
+              #pattern: "^[^:]+:[^:]+:[^:]+$"
+            newVersion:
+              type: string
+              #pattern: "^[^:]+:[^:]+:[^:]+$"
+          additionalProperties: false
+        JarhcSubmitModel:
+          type: object
+          required:
+            - classpath
+          properties:
+            classpath:
+              type: array
+              items:
+                type: string
+                #pattern: "^[^:]+:[^:]+:[^:]+$"
+            provided:
+              type: array
+              items:
+                type: string
+                #pattern: "^[^:]+:[^:]+:[^:]+$"
+          additionalProperties: false
+        MavenSearchModel:
+          type: object
+          required:
+            - coordinates
+          properties:
+            coordinates:
+              type: string
+              #pattern: "^[^:]+:[^:]+:[^:]+$"
+          additionalProperties: false
 
   # Dead letter queue for async Lambda functions
   ErrorQueue:
@@ -132,25 +174,44 @@ Resources:
         AuthValidate:
           Type: Api
           Properties:
+            RestApiId: !Ref RestApi
             Path: /auth/validate
             Method: GET
         JapiccSubmit:
           Type: Api
           Properties:
+            RestApiId: !Ref RestApi
             Path: /japicc/submit
             Method: POST
+            RequestModel:
+              Model: JapiccSubmitModel
+              Required: true
+              ValidateBody: true
+              ValidateParameters: false
         JarhcSubmit:
           Type: Api
           Properties:
+            RestApiId: !Ref RestApi
             Path: /jarhc/submit
             Method: POST
+            RequestModel:
+              Model: JarhcSubmitModel
+              Required: true
+              ValidateBody: true
+              ValidateParameters: false
         MavenSearch:
           Type: Api
           Properties:
+            RestApiId: !Ref RestApi
             Path: /maven/search
             Method: POST
             Auth:
               Authorizer: NONE
+            RequestModel:
+              Model: MavenSearchModel
+              Required: true
+              ValidateBody: true
+              ValidateParameters: false
       Environment:
         Variables:
           BUCKET_NAME: !Ref BucketName
@@ -357,7 +418,7 @@ Outputs:
 
   ApiGatewayUrl:
     Description: "Base URL of API Gateway."
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+    Value: !Sub "https://${RestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
 
   WebsiteBucketUrl:
     Description: "Public URL of S3 Bucket."
