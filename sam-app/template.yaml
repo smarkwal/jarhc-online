@@ -164,8 +164,8 @@ Resources:
     Properties:
       FunctionName: rest-api
       CodeUri: ./rest-api
-      Handler: rest-api
-      Runtime: go1.x
+      Handler: org.jarhc.online.rest.Handler
+      Runtime: java11
       Architectures:
         - x86_64
       Tracing: Active

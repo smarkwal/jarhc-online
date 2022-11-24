@@ -39,8 +39,3 @@ update:
 	@cd japicc-check && \
 	 go get -u github.com/smarkwal/jarhc-online/sam-app/common@7631a7fe07e3 && \
 	 go mod tidy
-
-	@echo "Updating rest-api ..."
-	@cd rest-api && \
-	 go get -u github.com/smarkwal/jarhc-online/sam-app/common@7631a7fe07e3 && \
-	 go mod tidy
