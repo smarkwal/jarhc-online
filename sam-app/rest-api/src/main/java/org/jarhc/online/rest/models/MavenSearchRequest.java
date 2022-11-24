@@ -1,4 +1,4 @@
-package org.jarhc.online.rest;
+package org.jarhc.online.rest.models;
 
 public class MavenSearchRequest {
 

@@ -1,13 +1,13 @@
-package org.jarhc.online.rest;
+package org.jarhc.online.rest.clients;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class LambdaClient {
+public class Lambda {
 
-	private static final Logger logger = LogManager.getLogger(LambdaClient.class);
+	private static final Logger logger = LogManager.getLogger(Lambda.class);
 
-	public LambdaClient(String region) {
+	public Lambda(String region) {
 		logger.debug("Region: {}", region);
 	}
 

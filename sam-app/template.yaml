@@ -170,6 +170,10 @@ Resources:
         - x86_64
       Tracing: Active
       Role: !GetAtt RestApiFunctionRole.Arn
+      # max price per execution:
+      # MemorySize * Timeout / 1024 * $0.0000166667 = $0.00004166675
+      MemorySize: 256 # increase memory size to 256 MB for REST API
+      Timeout: 10 # increase timeout to 10 seconds for REST API
       Events:
         AuthValidate:
           Type: Api

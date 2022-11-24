@@ -1,6 +1,6 @@
 package org.jarhc.online.rest;
 
-import static org.jarhc.online.rest.Artifact.isValidVersion;
+import static org.jarhc.online.rest.models.Artifact.isValidVersion;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -13,6 +13,18 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jarhc.online.rest.clients.Lambda;
+import org.jarhc.online.rest.clients.S3;
+import org.jarhc.online.rest.models.Artifact;
+import org.jarhc.online.rest.models.CheckResponse;
+import org.jarhc.online.rest.models.JapiccCheckMessage;
+import org.jarhc.online.rest.models.JapiccCheckRequest;
+import org.jarhc.online.rest.models.JarhcCheckMessage;
+import org.jarhc.online.rest.models.JarhcCheckRequest;
+import org.jarhc.online.rest.models.MavenSearchError;
+import org.jarhc.online.rest.models.MavenSearchRequest;
+import org.jarhc.online.rest.models.MavenSearchResponse;
+import org.jarhc.online.rest.models.User;
 
 @SuppressWarnings({ "unused", "DuplicatedCode" })
 public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
@@ -24,8 +36,8 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 	private static final int STATUS_NOT_FOUND = 404;
 	private static final int STATUS_INTERNAL_SERVER_ERROR = 500;
 
-	private final S3Client s3;
-	private final LambdaClient lambda;
+	private final S3 s3;
+	private final Lambda lambda;
 	private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 	public Handler() {
@@ -40,9 +52,14 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 			bucketName = "localhost";
 		}
 
+		var bucketUrl = System.getenv("BUCKET_URL");
+		if (bucketUrl == null) {
+			bucketUrl = "http://localhost:3000";
+		}
+
 		// create AWS clients
-		s3 = new S3Client(region, bucketName);
-		lambda = new LambdaClient(region);
+		s3 = new S3(region, bucketName, bucketUrl);
+		lambda = new Lambda(region);
 
 	}
 
@@ -109,7 +126,7 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 			case "/auth/validate":
 				return handleAuthValidate(request);
 			default:
-				return handleNotFound();
+				return sendNotFound();
 		}
 	}
 
@@ -160,21 +177,10 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 			artifacts.add(artifact);
 		}
 
-		// prepare headers
-		var headers = new LinkedHashMap<String, String>();
-		headers.put("Content-Type", "application/json");
-
 		// prepare response body
 		var body = new MavenSearchResponse(coordinates, artifacts);
 
-		// serialize body to JSON
-		var json = gson.toJson(body);
-
-		// return API response
-		return new APIGatewayProxyResponseEvent()
-				.withStatusCode(STATUS_OK)
-				.withHeaders(headers)
-				.withBody(json);
+		return sendBody(STATUS_OK, body);
 	}
 
 	private APIGatewayProxyResponseEvent handleJapiccSubmit(APIGatewayProxyRequestEvent request) {
@@ -366,13 +372,6 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 				.withBody("OK");
 	}
 
-	private APIGatewayProxyResponseEvent handleNotFound() {
-
-		// return "404 - not found" error response
-		return new APIGatewayProxyResponseEvent()
-				.withStatusCode(STATUS_NOT_FOUND);
-	}
-
 	private String getOrigin(APIGatewayProxyRequestEvent request) {
 
 		// get request headers
@@ -415,6 +414,12 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 	private APIGatewayProxyResponseEvent sendError(int statusCode, String errorMessage) {
 		var body = new CheckResponse(null, errorMessage);
 		return sendBody(statusCode, body);
+	}
+
+	private APIGatewayProxyResponseEvent sendNotFound() {
+		// return "404 - not found" error response
+		return new APIGatewayProxyResponseEvent()
+				.withStatusCode(STATUS_NOT_FOUND);
 	}
 
 	private APIGatewayProxyResponseEvent sendBody(int statusCode, Object body) {
