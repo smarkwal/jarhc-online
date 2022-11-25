@@ -1,5 +1,7 @@
 package org.jarhc.online.rest.models;
 
+import static org.jarhc.online.rest.Utils.encodeURL;
+
 public class Artifact {
 
 	private final String groupId;
@@ -33,9 +35,32 @@ public class Artifact {
 		return version;
 	}
 
-	public boolean exists() {
-		// TODO: implement
-		return false;
+	public String toURLPath() {
+		StringBuilder path = new StringBuilder();
+		for (String part : groupId.split("\\.")) {
+			path.append('/').append(encodeURL(part));
+		}
+		path.append('/');
+		path.append(encodeURL(artifactId));
+		path.append('/');
+		path.append(encodeURL(version));
+		path.append('/');
+		path.append(encodeURL(artifactId));
+		path.append('-');
+		path.append(encodeURL(version));
+		path.append(".jar");
+		return path.toString();
+	}
+
+	/**
+	 * Generates artifact path based on coordinates.
+	 */
+	public String toFilePath() {
+		return String.format("%s/%s/%s/%s-%s.jar", groupId.replace('.', '/'), artifactId, version, artifactId, version);
+	}
+
+	public String toCoordinates() {
+		return String.format("%s:%s:%s", groupId, artifactId, version);
 	}
 
 	public static boolean isValidVersion(String version) {

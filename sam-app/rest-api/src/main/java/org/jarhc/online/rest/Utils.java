@@ -1,12 +1,13 @@
 package org.jarhc.online.rest;
 
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Utils {
 
-	private static final byte[] HEX_ARRAY = "0123456789ABCDEF".getBytes(StandardCharsets.US_ASCII);
+	private static final byte[] HEX_ARRAY = "0123456789abcdef".getBytes(StandardCharsets.US_ASCII);
 
 	public static String sha256hex(String text) {
 		try {
@@ -26,6 +27,10 @@ public class Utils {
 			hexChars[j * 2 + 1] = HEX_ARRAY[v & 0x0F];
 		}
 		return new String(hexChars, StandardCharsets.UTF_8);
+	}
+
+	public static String encodeURL(String value) {
+		return URLEncoder.encode(value, StandardCharsets.UTF_8);
 	}
 
 }

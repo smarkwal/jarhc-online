@@ -12,6 +12,7 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jarhc.online.rest.clients.Lambda;
+import org.jarhc.online.rest.clients.Maven;
 import org.jarhc.online.rest.clients.S3;
 import org.jarhc.online.rest.models.Artifact;
 import org.jarhc.online.rest.models.JapiccCheckMessage;
@@ -34,6 +35,7 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 
 	private final S3 s3;
 	private final Lambda lambda;
+	private final Maven maven;
 
 	public Handler() {
 
@@ -55,6 +57,7 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 		// create AWS clients
 		s3 = new S3(region, bucketName, bucketUrl);
 		lambda = new Lambda(region);
+		maven = new Maven(10 * 1000); // 10 seconds
 
 	}
 
@@ -140,7 +143,7 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 			in = JsonUtils.fromJSON(message, MavenSearchRequest.class);
 		} catch (Exception e) {
 			logger.debug("Error parsing JSON message:", e);
-			return sendError(STATUS_BAD_REQUEST, e);
+			return sendError(STATUS_BAD_REQUEST, e); // TODO: throw exception instead of returning response?
 		}
 
 		// get coordinates from message
@@ -160,7 +163,7 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 		// check if artifact exists
 		boolean exists;
 		try {
-			exists = artifact.exists();
+			exists = maven.exists(artifact);
 		} catch (Exception e) {
 			return sendError(STATUS_INTERNAL_SERVER_ERROR, e);
 		}
@@ -238,16 +241,24 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 		}
 
 		// check if old version exists in Maven Central
-		var oldArtifact = new Artifact(oldVersion);
-		exists = oldArtifact.exists();
+		try {
+			var artifact = new Artifact(oldVersion);
+			exists = maven.exists(artifact);
+		} catch (Exception e) {
+			return sendError(STATUS_INTERNAL_SERVER_ERROR, e);
+		}
 		if (!exists) {
 			logger.error("Version not found in Maven Central: {}", oldVersion);
 			return sendError(STATUS_BAD_REQUEST, "Version not found in Maven Central: " + oldVersion);
 		}
 
 		// check if new version exists in Maven Central
-		var newArtifact = new Artifact(newVersion);
-		exists = newArtifact.exists();
+		try {
+			var artifact = new Artifact(newVersion);
+			exists = maven.exists(artifact);
+		} catch (Exception e) {
+			return sendError(STATUS_INTERNAL_SERVER_ERROR, e);
+		}
 		if (!exists) {
 			logger.error("Version not found in Maven Central: {}", newVersion);
 			return sendError(STATUS_BAD_REQUEST, "Version not found in Maven Central: " + newVersion);
@@ -290,8 +301,13 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 			}
 
 			// check if version exists in Maven Central
-			var artifact = new Artifact(version);
-			var exists = artifact.exists();
+			boolean exists;
+			try {
+				var artifact = new Artifact(version);
+				exists = maven.exists(artifact);
+			} catch (Exception e) {
+				return sendError(STATUS_INTERNAL_SERVER_ERROR, e);
+			}
 			if (!exists) {
 				logger.error("Version not found in Maven Central: {}", version);
 				return sendError(STATUS_BAD_REQUEST, "Version not found in Maven Central: " + version);
@@ -308,8 +324,13 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 			}
 
 			// check if version exists in Maven Central
-			var artifact = new Artifact(version);
-			var exists = artifact.exists();
+			boolean exists;
+			try {
+				var artifact = new Artifact(version);
+				exists = maven.exists(artifact);
+			} catch (Exception e) {
+				return sendError(STATUS_INTERNAL_SERVER_ERROR, e);
+			}
 			if (!exists) {
 				logger.error("Version not found in Maven Central: {}", version);
 				return sendError(STATUS_BAD_REQUEST, "Version not found in Maven Central: " + version);
