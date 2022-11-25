@@ -48,6 +48,30 @@ Content-Type: application/json
 
 ###
 
+# @name Maven Search function (unknown artifact)
+POST http://localhost:3001/maven/search
+Origin: http://localhost:3000
+Content-Type: application/json
+
+{
+  "coordinates": "unknown:unknown:1.0"
+}
+
+> {%
+    client.test("Status code", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+    client.test("CORS headers", function() {
+        client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "http://localhost:3000", "Access-Control-Allow-Origin incorrect");
+    });
+    client.test("Body", function() {
+        client.assert(response.body.coordinates === "unknown:unknown:1.0", "Response contains coordinates");
+        client.assert(response.body.artifacts.length === 0, "Response contains 0 artifacts");
+    });
+%}
+
+###
+
 # @name CORS preflight request for JAPICC Submit function
 OPTIONS http://localhost:3001/japicc/submit
 Origin: http://localhost:3000
@@ -88,6 +112,110 @@ Content-Type: application/json
     });
     client.test("Body", function() {
         client.assert(response.body.reportURL === "https://online.jarhc.org/reports/report-89136839f409d413748241df527e6e5afaa826d520d434493f37c9d17673c5d8.html", "reportURL contains report URL");
-        client.assert(response.body.errorMessage === "", "errorMessage is empty");
+        client.assert(response.body.errorMessage === undefined, "errorMessage is undefined");
+    });
+%}
+
+###
+
+# @name JAPICC Submit function (unknown artifacts)
+POST http://localhost:3001/japicc/submit
+Origin: http://localhost:3000
+Content-Type: application/json
+
+{
+  "oldVersion": "unknown:unknown:1.0",
+  "newVersion": "unknown:unknown:2.0"
+}
+
+> {%
+    client.test("Status code", function() {
+        client.assert(response.status === 400, "Response status is not 400");
+    });
+    client.test("CORS headers", function() {
+        client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "http://localhost:3000", "Access-Control-Allow-Origin incorrect");
+    });
+    client.test("Body", function() {
+        client.assert(response.body.reportURL === undefined, "reportURL is undefined");
+        client.assert(response.body.errorMessage === "Version not found in Maven Central: unknown:unknown:1.0", "errorMessage is defined");
+    });
+%}
+
+###
+
+# @name CORS preflight request for JarHC Submit function
+OPTIONS http://localhost:3001/jarhc/submit
+Origin: http://localhost:3000
+Access-Control-Request-Method: POST
+Access-Control-Allow-Headers: content-type
+
+> {%
+    client.test("Status code", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+    client.test("CORS headers", function() {
+        client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "http://localhost:3000", "Access-Control-Allow-Origin incorrect");
+        client.assert(response.headers.valueOf("Access-Control-Allow-Methods") == "GET,OPTIONS,POST", "Access-Control-Allow-Methods incorrect");
+        client.assert(response.headers.valueOf("Access-Control-Allow-Headers") == "Content-Type,Authorization", "Access-Control-Allow-Headers incorrect");
+        client.assert(response.headers.valueOf("Access-Control-Allow-Credentials") == "true", "Access-Control-Allow-Credentials incorrect");
+        client.assert(response.headers.valueOf("Access-Control-Max-Age") == "600", "Access-Control-Max-Age incorrect");
+    });
+%}
+
+###
+
+# @name JarHC Submit function
+POST http://localhost:3001/jarhc/submit
+Origin: http://localhost:3000
+Content-Type: application/json
+
+{
+  "classpath": [
+    "commons-io:commons-io:2.7"
+  ],
+  "provided": [
+    "commons-lang:commons-lang:2.6"
+  ]
+}
+
+> {%
+    client.test("Status code", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+    client.test("CORS headers", function() {
+        client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "http://localhost:3000", "Access-Control-Allow-Origin incorrect");
+    });
+    client.test("Body", function() {
+        client.assert(response.body.reportURL === "https://online.jarhc.org/reports/report-816860ce6a1494f102b80a4b722a8fab99421e0a27fb8bec9a68b969e2ec3718.html", "reportURL contains report URL");
+        client.assert(response.body.errorMessage === undefined, "errorMessage is undefined");
+    });
+%}
+
+###
+
+# @name JarHC Submit function (unknown artifacts)
+POST http://localhost:3001/jarhc/submit
+Origin: http://localhost:3000
+Content-Type: application/json
+
+{
+  "classpath": [
+    "unknown:unknown:1.0"
+  ],
+  "provided": [
+    "commons-lang:commons-lang:2.6"
+  ]
+}
+
+> {%
+    client.test("Status code", function() {
+        client.assert(response.status === 400, "Response status is not 400");
+    });
+    client.test("CORS headers", function() {
+        client.assert(response.headers.valueOf("Access-Control-Allow-Origin") == "http://localhost:3000", "Access-Control-Allow-Origin incorrect");
+    });
+    client.test("Body", function() {
+        client.assert(response.body.reportURL === undefined, "reportURL is undefined");
+        client.assert(response.body.errorMessage === "Version not found in Maven Central: unknown:unknown:1.0", "errorMessage is defined");
     });
 %}

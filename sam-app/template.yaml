@@ -164,12 +164,16 @@ Resources:
     Properties:
       FunctionName: rest-api
       CodeUri: ./rest-api
-      Handler: rest-api
-      Runtime: go1.x
+      Handler: org.jarhc.online.rest.Handler
+      Runtime: java11
       Architectures:
         - x86_64
       Tracing: Active
       Role: !GetAtt RestApiFunctionRole.Arn
+      # max price per execution:
+      # MemorySize * Timeout / 1024 * $0.0000166667 = $0.0000833335
+      MemorySize: 512 # increase memory size to 512 MB for REST API
+      Timeout: 10 # increase timeout to 10 seconds for REST API
       Events:
         AuthValidate:
           Type: Api
