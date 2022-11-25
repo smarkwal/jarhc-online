@@ -7,6 +7,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.apache.logging.log4j.LogManager;
@@ -291,7 +292,13 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 			return sendError(STATUS_BAD_REQUEST, e);
 		}
 
-		for (var version : in.getClasspath()) {
+		// classpath is mandatory
+		var classpath = in.getClasspath();
+		if (classpath == null || classpath.isEmpty()) {
+			return sendError(STATUS_BAD_REQUEST, "Missing parameter: 'classpath'");
+		}
+
+		for (var version : classpath) {
 			logger.info("Classpath: {}", version);
 
 			// check if version is valid
@@ -314,7 +321,13 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 			}
 		}
 
-		for (var version : in.getProvided()) {
+		// provided is optional
+		var provided = in.getProvided();
+		if (provided == null) {
+			provided = Collections.emptyList();
+		}
+
+		for (var version : provided) {
 			logger.info("Provided: {}", version);
 
 			// check if version is valid
@@ -338,7 +351,7 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 		}
 
 		// calculate hash for combination of versions
-		var hash = Utils.sha256hex(String.join(";", in.getClasspath()) + "/" + String.join(":", in.getProvided()));
+		var hash = Utils.sha256hex(String.join(";", classpath) + "/" + String.join(":", provided));
 
 		// prepare report file
 		var reportFileName = "report-" + hash + ".html";
@@ -359,7 +372,7 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 			return sendReportFile(reportFileURL);
 		}
 
-		var payload = new JarhcCheckMessage(in.getClasspath(), in.getProvided(), reportFileName);
+		var payload = new JarhcCheckMessage(classpath, provided, reportFileName);
 
 		try {
 			lambda.invokeAsync("jarhc-check", payload);
