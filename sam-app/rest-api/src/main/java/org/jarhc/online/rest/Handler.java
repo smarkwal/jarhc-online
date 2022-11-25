@@ -6,8 +6,6 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -16,12 +14,10 @@ import org.apache.logging.log4j.Logger;
 import org.jarhc.online.rest.clients.Lambda;
 import org.jarhc.online.rest.clients.S3;
 import org.jarhc.online.rest.models.Artifact;
-import org.jarhc.online.rest.models.CheckResponse;
 import org.jarhc.online.rest.models.JapiccCheckMessage;
 import org.jarhc.online.rest.models.JapiccCheckRequest;
 import org.jarhc.online.rest.models.JarhcCheckMessage;
 import org.jarhc.online.rest.models.JarhcCheckRequest;
-import org.jarhc.online.rest.models.MavenSearchError;
 import org.jarhc.online.rest.models.MavenSearchRequest;
 import org.jarhc.online.rest.models.MavenSearchResponse;
 import org.jarhc.online.rest.models.User;
@@ -38,7 +34,6 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 
 	private final S3 s3;
 	private final Lambda lambda;
-	private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 	public Handler() {
 
@@ -66,9 +61,11 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 	@Override
 	public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent request, Context context) {
 
-		logger.debug("Environment:\n{}", gson.toJson(System.getenv()));
-		logger.debug("Request:\n{}", gson.toJson(request));
-		logger.debug("Context:\n{}", gson.toJson(context));
+		if (logger.isTraceEnabled()) {
+			logger.trace("Environment:\n{}", JsonUtils.toJSON(System.getenv()));
+			logger.trace("Request:\n{}", JsonUtils.toJSON(request));
+			logger.trace("Context:\n{}", JsonUtils.toJSON(context));
+		}
 
 		// get current user
 		var user = getUser(request);
@@ -126,7 +123,8 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 			case "/auth/validate":
 				return handleAuthValidate(request);
 			default:
-				return sendNotFound();
+				// return "404 - not found" error response
+				return sendError(STATUS_NOT_FOUND, "Not found: " + path);
 		}
 	}
 
@@ -139,18 +137,16 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 		// parse JSON message
 		MavenSearchRequest in;
 		try {
-			in = gson.fromJson(message, MavenSearchRequest.class);
+			in = JsonUtils.fromJSON(message, MavenSearchRequest.class);
 		} catch (Exception e) {
 			logger.debug("Error parsing JSON message:", e);
-			var error = new MavenSearchError(e.toString());
-			return sendBody(STATUS_BAD_REQUEST, error);
+			return sendError(STATUS_BAD_REQUEST, e);
 		}
 
 		// get coordinates from message
 		var coordinates = in.getCoordinates();
 		if (coordinates == null) {
-			var error = new MavenSearchError("Missing parameter: 'coordinates'");
-			return sendBody(STATUS_BAD_REQUEST, error);
+			return sendError(STATUS_BAD_REQUEST, "Missing parameter: 'coordinates'");
 		}
 
 		// parse coordinates
@@ -158,8 +154,7 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 		try {
 			artifact = new Artifact(coordinates);
 		} catch (Exception e) {
-			var error = new MavenSearchError(e.toString());
-			return sendBody(STATUS_BAD_REQUEST, error);
+			return sendError(STATUS_BAD_REQUEST, e);
 		}
 
 		// check if artifact exists
@@ -167,8 +162,7 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 		try {
 			exists = artifact.exists();
 		} catch (Exception e) {
-			var error = new MavenSearchError(e.toString());
-			return sendBody(STATUS_INTERNAL_SERVER_ERROR, error);
+			return sendError(STATUS_INTERNAL_SERVER_ERROR, e);
 		}
 
 		// prepare list of artifacts
@@ -180,7 +174,7 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 		// prepare response body
 		var body = new MavenSearchResponse(coordinates, artifacts);
 
-		return sendBody(STATUS_OK, body);
+		return sendResponse(STATUS_OK, body);
 	}
 
 	private APIGatewayProxyResponseEvent handleJapiccSubmit(APIGatewayProxyRequestEvent request) {
@@ -192,7 +186,7 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 		// parse JSON message
 		JapiccCheckRequest in;
 		try {
-			in = gson.fromJson(message, JapiccCheckRequest.class);
+			in = JsonUtils.fromJSON(message, JapiccCheckRequest.class);
 		} catch (Exception e) {
 			logger.error("Error parsing JSON message:", e);
 			return sendError(STATUS_BAD_REQUEST, e);
@@ -204,8 +198,7 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 		// check if old version is valid
 		if (!isValidVersion(oldVersion)) {
 			logger.error("Version is not valid: {}", oldVersion);
-			CheckResponse error = new CheckResponse(null, "Version is not valid: " + oldVersion);
-			return sendBody(STATUS_BAD_REQUEST, error);
+			return sendError(STATUS_BAD_REQUEST, "Version is not valid: " + oldVersion);
 		}
 
 		var newVersion = in.getNewVersion();
@@ -214,14 +207,12 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 		// check if new version is valid
 		if (!isValidVersion(newVersion)) {
 			logger.error("Version is not valid: {}", newVersion);
-			CheckResponse error = new CheckResponse(null, "Version is not valid: " + newVersion);
-			return sendBody(STATUS_BAD_REQUEST, error);
+			return sendError(STATUS_BAD_REQUEST, "Version is not valid: " + newVersion);
 		}
 
 		if (oldVersion.equals(newVersion)) {
 			logger.error("Submitted same version twice: {}", oldVersion);
-			CheckResponse error = new CheckResponse(null, "Cannot compare version with itself: " + oldVersion);
-			return sendBody(STATUS_BAD_REQUEST, error);
+			return sendError(STATUS_BAD_REQUEST, "Cannot compare version with itself: " + oldVersion);
 		}
 
 		// calculate hash for combination of versions
@@ -283,7 +274,7 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 		// parse JSON message
 		JarhcCheckRequest in;
 		try {
-			in = gson.fromJson(message, JarhcCheckRequest.class);
+			in = JsonUtils.fromJSON(message, JarhcCheckRequest.class);
 		} catch (Exception e) {
 			logger.error("Error parsing JSON message:", e);
 			return sendError(STATUS_BAD_REQUEST, e);
@@ -403,8 +394,8 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 	// -------------------------------------------------------------------------
 
 	private APIGatewayProxyResponseEvent sendReportFile(String reportFileURL) {
-		var body = new CheckResponse(reportFileURL, null);
-		return sendBody(STATUS_OK, body);
+		var body = Map.of("reportURL", reportFileURL);
+		return sendResponse(STATUS_OK, body);
 	}
 
 	private APIGatewayProxyResponseEvent sendError(int statusCode, Exception exception) {
@@ -412,24 +403,18 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 	}
 
 	private APIGatewayProxyResponseEvent sendError(int statusCode, String errorMessage) {
-		var body = new CheckResponse(null, errorMessage);
-		return sendBody(statusCode, body);
+		var body = Map.of("errorMessage", errorMessage);
+		return sendResponse(statusCode, body);
 	}
 
-	private APIGatewayProxyResponseEvent sendNotFound() {
-		// return "404 - not found" error response
-		return new APIGatewayProxyResponseEvent()
-				.withStatusCode(STATUS_NOT_FOUND);
-	}
-
-	private APIGatewayProxyResponseEvent sendBody(int statusCode, Object body) {
+	private APIGatewayProxyResponseEvent sendResponse(int statusCode, Object body) {
 
 		// prepare headers
 		var headers = new LinkedHashMap<String, String>();
 		headers.put("Content-Type", "application/json");
 
 		// serialize body to JSON
-		var json = gson.toJson(body);
+		var json = JsonUtils.toJSON(body);
 
 		// return API response
 		return new APIGatewayProxyResponseEvent()

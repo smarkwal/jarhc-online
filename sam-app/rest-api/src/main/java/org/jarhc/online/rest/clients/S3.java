@@ -16,8 +16,8 @@ public class S3 {
 	private static final Logger logger = LogManager.getLogger(S3.class);
 
 	private final String bucketName;
-	private final S3Client client;
 	private final String bucketUrl;
+	private final S3Client client;
 
 	public S3(String region, String bucketName, String bucketUrl) {
 		this.bucketName = bucketName;
@@ -43,6 +43,9 @@ public class S3 {
 		} catch (NoSuchKeyException e) {
 			logger.debug("Key not found: " + key);
 			return false;
+		} catch (Exception e) {
+			logger.error("Error:", e);
+			throw e;
 		}
 
 		logger.debug("Response: {}", response);
