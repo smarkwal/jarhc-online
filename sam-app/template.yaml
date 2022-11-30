@@ -168,6 +168,8 @@ Resources:
       Runtime: java11
       Architectures:
         - x86_64
+      #SnapStart:
+      #  ApplyOn: PublishedVersions
       Tracing: Active
       Role: !GetAtt RestApiFunctionRole.Arn
       # max price per execution:
@@ -220,6 +222,7 @@ Resources:
         Variables:
           BUCKET_NAME: !Ref BucketName
           BUCKET_URL: !Ref BucketURL
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
 
   # Lambda function role
   RestApiFunctionRole:
