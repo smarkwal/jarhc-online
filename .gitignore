@@ -1,6 +1,9 @@
 # IntelliJ project directory
 /.idea
 
+# IntelliJ project files
+*.iml
+
 # AWS SAM build directory
 .aws-sam
 
