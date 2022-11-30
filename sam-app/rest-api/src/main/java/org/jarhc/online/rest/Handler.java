@@ -93,21 +93,24 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 		String userAgent = null;
 
 		var context = request.getRequestContext();
-		var authorizer = context.getAuthorizer();
-		if (authorizer != null && authorizer.containsKey("claims")) {
-			Object value = authorizer.get("claims");
-			if (value instanceof Map) {
-				@SuppressWarnings("unchecked")
-				Map<String, String> claims = (Map<String, String>) value;
-				subject = claims.get("sub");
-				email = claims.get("email");
-			}
-		}
+		if (context != null) {
 
-		var identity = context.getIdentity();
-		if (identity != null) {
-			sourceIP = identity.getSourceIp();
-			userAgent = identity.getUserAgent();
+			var authorizer = context.getAuthorizer();
+			if (authorizer != null && authorizer.containsKey("claims")) {
+				Object value = authorizer.get("claims");
+				if (value instanceof Map) {
+					@SuppressWarnings("unchecked")
+					Map<String, String> claims = (Map<String, String>) value;
+					subject = claims.get("sub");
+					email = claims.get("email");
+				}
+			}
+
+			var identity = context.getIdentity();
+			if (identity != null) {
+				sourceIP = identity.getSourceIp();
+				userAgent = identity.getUserAgent();
+			}
 		}
 
 		return new User(subject, email, sourceIP, userAgent);
@@ -115,8 +118,13 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 
 	private APIGatewayProxyResponseEvent dispatch(APIGatewayProxyRequestEvent request) {
 
-		// dispatch request to correct handler
+		// get request URL path
 		var path = request.getPath();
+		if (path == null) {
+			return sendError(STATUS_BAD_REQUEST, "Missing path");
+		}
+
+		// dispatch request to correct handler
 		switch (path) {
 			case "/maven/search":
 				return handleMavenSearch(request);
@@ -402,16 +410,19 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 		// get request headers
 		var headers = request.getHeaders();
 
-		// live behind AWS API Gateway
-		var origin = headers.get("origin");
-		if (origin != null) {
-			return origin;
-		}
+		if (headers != null) {
 
-		// test on localhost with `sam local start-api`
-		origin = headers.get("Origin");
-		if (origin != null) {
-			return origin;
+			// live behind AWS API Gateway
+			var origin = headers.get("origin");
+			if (origin != null) {
+				return origin;
+			}
+
+			// test on localhost with `sam local start-api`
+			origin = headers.get("Origin");
+			if (origin != null) {
+				return origin;
+			}
 		}
 
 		// fallback
