@@ -6,6 +6,8 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
+import com.amazonaws.xray.AWSXRay;
+import com.amazonaws.xray.entities.Subsegment;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -39,6 +41,7 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 	private final Maven maven;
 
 	public Handler() {
+		logger.debug("Initializing Handler ...");
 
 		var region = System.getenv("AWS_REGION");
 		if (region == null) {
@@ -60,6 +63,7 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 		lambda = new Lambda(region);
 		maven = new Maven(10 * 1000); // 10 seconds
 
+		logger.debug("Handler initialized.");
 	}
 
 	@Override
@@ -75,6 +79,7 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 		var user = getUser(request);
 		logger.info("User: {}", user);
 
+		// dispatch request to correct method based on path
 		var response = dispatch(request);
 
 		// add CORS headers to every response
@@ -125,20 +130,25 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 			return sendError(STATUS_BAD_REQUEST, "Missing path");
 		}
 
-		// dispatch request to correct handler
-		switch (path) {
-			case "/maven/search":
-				return handleMavenSearch(request);
-			case "/japicc/submit":
-				return handleJapiccSubmit(request);
-			case "/jarhc/submit":
-				return handleJarhcSubmit(request);
-			case "/auth/validate":
-				return handleAuthValidate(request);
-			default:
-				// return "404 - not found" error response
-				return sendError(STATUS_NOT_FOUND, "Not found: " + path);
+		try (Subsegment xray = AWSXRay.beginSubsegment(path)) {
+
+			// dispatch request to correct handler
+			switch (path) {
+				case "/maven/search":
+					return handleMavenSearch(request);
+				case "/japicc/submit":
+					return handleJapiccSubmit(request);
+				case "/jarhc/submit":
+					return handleJarhcSubmit(request);
+				case "/auth/validate":
+					return handleAuthValidate(request);
+				default:
+					// return "404 - not found" error response
+					return sendError(STATUS_NOT_FOUND, "Not found: " + path);
+			}
+
 		}
+
 	}
 
 	private APIGatewayProxyResponseEvent handleMavenSearch(APIGatewayProxyRequestEvent request) {

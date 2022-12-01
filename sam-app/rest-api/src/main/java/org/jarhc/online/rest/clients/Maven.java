@@ -1,5 +1,7 @@
 package org.jarhc.online.rest.clients;
 
+import com.amazonaws.xray.AWSXRay;
+import com.amazonaws.xray.entities.Subsegment;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
@@ -28,67 +30,73 @@ public class Maven {
 	}
 
 	public boolean exists(Artifact artifact) throws Exception {
+		try (Subsegment xray = AWSXRay.beginSubsegment("Maven.exists")) {
+			xray.putAnnotation("artifact", artifact.toCoordinates());
 
-		// check if artifact result exists in cache
-		final var cacheKey = artifact.toCoordinates();
-		if (CACHE.containsKey(cacheKey)) {
-			boolean found = CACHE.get(cacheKey);
-			if (found) {
-				logger.debug("Artifact found : {} (cached)", cacheKey);
-				return true;
-			} else {
-				logger.debug("Artifact not found : {} (cached)", cacheKey);
-				return false;
+			// check if artifact result exists in cache
+			final var cacheKey = artifact.toCoordinates();
+			if (CACHE.containsKey(cacheKey)) {
+				boolean found = CACHE.get(cacheKey);
+				xray.putAnnotation("cached", found);
+				if (found) {
+					logger.debug("Artifact found : {} (cached)", cacheKey);
+					return true;
+				} else {
+					logger.debug("Artifact not found : {} (cached)", cacheKey);
+					return false;
+				}
 			}
-		}
 
-		// send HTTP HEAD request to Maven Central repository URL
-		HttpURLConnection connection = null;
-		int statusCode;
-		try {
+			// send HTTP HEAD request to Maven Central repository URL
+			HttpURLConnection connection = null;
+			int statusCode;
+			try {
 
-			// prepare URL
-			var url = new URL(BASE_URL + artifact.toURLPath());
-			logger.debug("Artifact URL: {}", url);
+				// prepare URL
+				var url = new URL(BASE_URL + artifact.toURLPath());
+				logger.debug("Artifact URL: {}", url);
 
-			// prepare HTTP connection
-			connection = (HttpURLConnection) url.openConnection();
-			connection.setRequestMethod("HEAD");
-			connection.setConnectTimeout(timeout);
-			connection.setReadTimeout(timeout);
-			connection.setDoOutput(false);
-			connection.setDoInput(true);
+				// prepare HTTP connection
+				connection = (HttpURLConnection) url.openConnection();
+				connection.setRequestMethod("HEAD");
+				connection.setConnectTimeout(timeout);
+				connection.setReadTimeout(timeout);
+				connection.setDoOutput(false);
+				connection.setDoInput(true);
 
-			// send request and get response
-			connection.connect();
+				// send request and get response
+				connection.connect();
 
-			// get response status code
-			statusCode = connection.getResponseCode();
-			logger.debug("Status code: {}", statusCode);
+				// get response status code
+				statusCode = connection.getResponseCode();
+				logger.debug("Status code: {}", statusCode);
+				xray.putAnnotation("statusCode", statusCode);
 
-		} catch (Exception e) {
-			logger.error("Error:", e);
-			throw e;
-		} finally {
-			// close connection
-			if (connection != null) {
-				connection.disconnect();
+			} catch (Exception e) {
+				logger.error("Error:", e);
+				xray.addException(e);
+				throw e;
+			} finally {
+				// close connection
+				if (connection != null) {
+					connection.disconnect();
+				}
 			}
-		}
 
-		// interpret response status code
-		switch (statusCode) {
-			case 200:
-				logger.debug("Artifact found : {}", cacheKey);
-				CACHE.put(cacheKey, true);
-				return true;
-			case 404:
-				logger.debug("Artifact not found : {}", cacheKey);
-				CACHE.put(cacheKey, false);
-				return false;
-			default:
-				logger.error("Unexpected status code: {}", statusCode);
-				throw new RuntimeException("Unexpected status code: " + statusCode);
+			// interpret response status code
+			switch (statusCode) {
+				case 200:
+					logger.debug("Artifact found : {}", cacheKey);
+					CACHE.put(cacheKey, true);
+					return true;
+				case 404:
+					logger.debug("Artifact not found : {}", cacheKey);
+					CACHE.put(cacheKey, false);
+					return false;
+				default:
+					logger.error("Unexpected status code: {}", statusCode);
+					throw new RuntimeException("Unexpected status code: " + statusCode);
+			}
 		}
 	}
 

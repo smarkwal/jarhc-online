@@ -1,5 +1,7 @@
 package org.jarhc.online.rest.clients;
 
+import com.amazonaws.xray.AWSXRay;
+import com.amazonaws.xray.entities.Subsegment;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import org.apache.logging.log4j.LogManager;
@@ -29,27 +31,33 @@ public class S3 {
 	}
 
 	public boolean exists(String reportFileName) {
+		try (Subsegment xray = AWSXRay.beginSubsegment("S3.exists")) {
+			xray.putAnnotation("reportFileName", reportFileName);
 
-		String key = "reports/" + reportFileName;
-		HeadObjectRequest request = HeadObjectRequest.builder()
-				.bucket(bucketName)
-				.key(key)
-				.build();
-		logger.debug("Request: {}", request);
+			String key = "reports/" + reportFileName;
+			HeadObjectRequest request = HeadObjectRequest.builder()
+					.bucket(bucketName)
+					.key(key)
+					.build();
+			logger.debug("Request: {}", request);
 
-		HeadObjectResponse response;
-		try {
-			response = client.headObject(request);
-		} catch (NoSuchKeyException e) {
-			logger.debug("Key not found: " + key);
-			return false;
-		} catch (Exception e) {
-			logger.error("Error:", e);
-			throw e;
+			HeadObjectResponse response;
+			try {
+				response = client.headObject(request);
+			} catch (NoSuchKeyException e) {
+				logger.debug("Key not found: " + key);
+				xray.putAnnotation("found", false);
+				return false;
+			} catch (Exception e) {
+				logger.error("Error:", e);
+				xray.addException(e);
+				throw e;
+			}
+
+			logger.debug("Response: {}", response);
+			xray.putAnnotation("found", true);
+			return true;
 		}
-
-		logger.debug("Response: {}", response);
-		return true;
 	}
 
 	public String getURL(String reportFileName) {

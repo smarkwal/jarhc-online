@@ -1,5 +1,7 @@
 package org.jarhc.online.rest.clients;
 
+import com.amazonaws.xray.AWSXRay;
+import com.amazonaws.xray.entities.Subsegment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jarhc.online.rest.JsonUtils;
@@ -25,28 +27,32 @@ public class Lambda {
 	}
 
 	public void invokeAsync(String functionName, Object payload) throws Exception {
+		try (Subsegment xray = AWSXRay.beginSubsegment("Lambda.invokeAsync")) {
+			xray.putAnnotation("functionName", functionName);
 
-		// serialize payload
-		String json = JsonUtils.toJSON(payload);
+			// serialize payload
+			String json = JsonUtils.toJSON(payload);
 
-		// prepare async event request
-		InvokeRequest request = InvokeRequest.builder()
-				.functionName(functionName)
-				.invocationType(InvocationType.EVENT) // async
-				.payload(SdkBytes.fromUtf8String(json))
-				.build();
-		logger.debug("Request: {}", request);
+			// prepare async event request
+			InvokeRequest request = InvokeRequest.builder()
+					.functionName(functionName)
+					.invocationType(InvocationType.EVENT) // async
+					.payload(SdkBytes.fromUtf8String(json))
+					.build();
+			logger.debug("Request: {}", request);
 
-		// invoke function
-		InvokeResponse response;
-		try {
-			response = client.invoke(request);
-		} catch (Exception e) {
-			logger.error("Error:", e);
-			throw e;
+			// invoke function
+			InvokeResponse response;
+			try {
+				response = client.invoke(request);
+			} catch (Exception e) {
+				logger.error("Error:", e);
+				xray.addException(e);
+				throw e;
+			}
+
+			logger.debug("Response: {}", response);
 		}
-
-		logger.debug("Response: {}", response);
 	}
 
 }
