@@ -57,11 +57,17 @@ const JapiccForm = () => {
 			.then(response => response.json())
 			.then(data => {
 
+				let reportURL = data.reportURL;
+				if (reportURL) {
+					// add timestamp to prevent loading report from cache
+					reportURL += "?timestamp=" + Date.now();
+				}
+
 				// show report or error message
 				setState({
 					...state,
 					loading: false,
-					reportURL: data.reportURL,
+					reportURL: reportURL,
 					errorMessage: data.errorMessage
 				})
 			})
