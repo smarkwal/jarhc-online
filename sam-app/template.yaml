@@ -163,6 +163,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: rest-api
+      AutoPublishAlias: Live
       CodeUri: ./rest-api
       Handler: org.jarhc.online.rest.Handler
       Runtime: java11
