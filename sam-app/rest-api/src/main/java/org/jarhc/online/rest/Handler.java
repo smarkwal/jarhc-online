@@ -120,6 +120,7 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 
 		// get request URL path
 		var path = request.getPath();
+		logger.info("Path: {}", path);
 		if (path == null) {
 			return sendError(STATUS_BAD_REQUEST, "Missing path");
 		}
