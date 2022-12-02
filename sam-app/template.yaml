@@ -250,6 +250,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: japicc-check
+      AutoPublishAlias: Live
       PackageType: Image
       Architectures:
         - x86_64
@@ -279,7 +280,10 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: jarhc-check
-      PackageType: Image
+      AutoPublishAlias: Live
+      CodeUri: ./jarhc-check
+      Handler: org.jarhc.online.jarhc.Handler
+      Runtime: java11
       Architectures:
         - x86_64
       Tracing: Active
@@ -298,10 +302,6 @@ Resources:
         Variables:
           BUCKET_NAME: !Ref BucketName
           BUCKET_URL: !Ref BucketURL
-    Metadata:
-      DockerTag: go1.x-v1
-      DockerContext: ./jarhc-check
-      Dockerfile: Dockerfile
 
   # Lambda function role
   AsyncFunctionRole:
