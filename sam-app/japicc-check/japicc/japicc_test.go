@@ -1,7 +1,7 @@
 package japicc
 
 import (
-	"github.com/smarkwal/jarhc-online/sam-app/common/maven"
+	"github.com/smarkwal/jarhc-online/sam-app/japicc-check/maven"
 	"github.com/stretchr/testify/assert"
 	"os"
 	"path"
