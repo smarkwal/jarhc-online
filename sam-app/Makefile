@@ -27,3 +27,6 @@ update:
 	@echo "Updating japicc-check ..."
 	@cd japicc-check && \
 	 go mod tidy
+
+delete:
+	sam delete
