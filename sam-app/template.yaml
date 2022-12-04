@@ -338,7 +338,11 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Ref BucketName
-      AccessControl: PublicRead
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
       CorsConfiguration:
         CorsRules:
           - Id: CorsRule1
@@ -365,12 +369,25 @@ Resources:
       PolicyDocument:
         Version: 2012-10-17
         Statement:
-          - Sid: ReadAccessForEveryone # grant read access to everyone
-            Resource: !Sub "arn:aws:s3:::${WebsiteBucket}/*"
+          - Sid: AllowCloudFrontServicePrincipal
             Effect: Allow
+            Principal:
+              Service: "cloudfront.amazonaws.com"
             Action:
               - "s3:GetObject"
-            Principal: "*"
+            Resource: !Sub "arn:aws:s3:::${WebsiteBucket}/*"
+            Condition:
+              StringEquals:
+                "AWS:SourceArn": !Sub "arn:aws:cloudfront::${AWS::AccountId}:distribution/${WebsiteCloudFrontDistribution.Id}"
+
+  WebsiteOriginAccessControl:
+    Type: AWS::CloudFront::OriginAccessControl
+    Properties:
+      OriginAccessControlConfig:
+        Name: WebsiteOriginAccessControl
+        OriginAccessControlOriginType: s3
+        SigningBehavior: always
+        SigningProtocol: sigv4
 
   # CloudFront Distribution for public website
   WebsiteCloudFrontDistribution:
@@ -384,6 +401,7 @@ Resources:
         Origins:
           - Id: DefaultOrigin
             DomainName: !GetAtt WebsiteBucket.RegionalDomainName
+            OriginAccessControlId: !GetAtt WebsiteOriginAccessControl.Id
             S3OriginConfig:
               OriginAccessIdentity: ""
         DefaultRootObject: index.html
