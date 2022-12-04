@@ -11,4 +11,5 @@ deploy:
 	sam deploy
 
 delete:
+	aws s3 rm s3://online.jarhc.org --recursive
 	sam delete
