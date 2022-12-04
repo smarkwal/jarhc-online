@@ -224,3 +224,14 @@ GET https://online.jarhc.org/img/logo.png
         client.assert(response.contentType.mimeType === "image/png", "Content-Type not image/png");
     });
 %}
+
+###
+
+# @name Generated report file (not found)
+GET https://online.jarhc.org/reports/report-xyz.html
+
+> {%
+	client.test("Status code", function() {
+		client.assert(response.status === 404, "Response status is not 404");
+	});
+%}
