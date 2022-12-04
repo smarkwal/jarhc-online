@@ -1,6 +1,9 @@
 .PHONY: build
 
-all: build sync
+all: clean build sync
+
+clean:
+	rm -rf build
 
 build:
 	npm run build
