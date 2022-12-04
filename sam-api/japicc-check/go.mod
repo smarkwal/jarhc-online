@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/aws/aws-lambda-go v1.35.0
-	github.com/aws/aws-sdk-go v1.43.12
+	github.com/aws/aws-sdk-go v1.44.152
 	github.com/stretchr/testify v1.7.2
 )
 
