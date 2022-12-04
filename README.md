@@ -70,5 +70,4 @@ aws s3 sync build/. s3://online.jarhc.org --delete --exclude reports/* # --dryru
 
 * [React 17](https://reactjs.org/)
 * [Java 11](https://dev.java/)
-* [Go 1.17](https://go.dev/)
 * [Java API Compliance Checker (JAPICC) 2.4](https://github.com/lvc/japi-compliance-checker)
