@@ -1,0 +1,51 @@
+
+# @name Public website root
+GET https://online.jarhc.org/
+
+> {%
+    client.test("Status code", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+    client.test("Headers", function() {
+        client.assert(response.contentType.mimeType === "text/html", "Content-Type not text/html");
+    });
+%}
+
+###
+
+# @name Public website index.html
+GET https://online.jarhc.org/index.html
+
+> {%
+    client.test("Status code", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+    client.test("Headers", function() {
+        client.assert(response.contentType.mimeType === "text/html", "Content-Type not text/html");
+    });
+%}
+
+###
+
+# @name Public website logo
+GET https://online.jarhc.org/img/logo.png
+
+> {%
+    client.test("Status code", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+    client.test("Headers", function() {
+        client.assert(response.contentType.mimeType === "image/png", "Content-Type not image/png");
+    });
+%}
+
+###
+
+# @name Generated report file (not found)
+GET https://online.jarhc.org/reports/report-xyz.html
+
+> {%
+	client.test("Status code", function() {
+		client.assert(response.status === 404, "Response status is not 404");
+	});
+%}
