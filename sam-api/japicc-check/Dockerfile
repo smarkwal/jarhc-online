@@ -1,14 +1,20 @@
-FROM golang:1.17-alpine AS builder
+FROM eclipse-temurin:11-jre-alpine
 
-WORKDIR /go/src
-COPY ./ ./
+# install perl
+RUN apk update && \
+    apk upgrade && \
+    apk add perl
 
-RUN CGO_ENABLED=0 go build -o ../bin
+# copy JAPICC
+COPY --from=smarkwal/japicc:2.4 /usr/bin/japi-compliance-checker /usr/bin/japi-compliance-checker
+COPY --from=smarkwal/japicc:2.4 /usr/share/japi-compliance-checker /usr/share/japi-compliance-checker
 
-FROM smarkwal/japicc:2.4
+# add function
+WORKDIR /function
+ADD ./target/japicc-check-1.0.0-SNAPSHOT.jar ./japicc-check.jar
 
-COPY --from=builder /go/bin/ /var/task/
+# configure runtime startup
+ENTRYPOINT [ "/opt/java/openjdk/bin/java", "-cp", "./japicc-check.jar", "com.amazonaws.services.lambda.runtime.api.client.AWSLambda" ]
 
-WORKDIR /var/task
-
-ENTRYPOINT ["/var/task/japicc-check"]
+# pass name of function handler as argument to runtime
+CMD [ "org.jarhc.online.japicc.Handler::handleRequest" ]

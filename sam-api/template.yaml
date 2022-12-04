@@ -248,10 +248,12 @@ Resources:
         Variables:
           BUCKET_NAME: !Ref WebsiteBucketName
           BUCKET_URL: !Ref WebsiteBucketURL
+          # TODO: JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
     Metadata:
-      DockerTag: go1.x-v1
+      DockerTag: v1
       DockerContext: ./japicc-check
       Dockerfile: Dockerfile
+      # TODO: mvn clean package -DskipTests
 
   # Lambda function
   JarhcCheckFunction:
