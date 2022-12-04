@@ -343,17 +343,6 @@ Resources:
         BlockPublicPolicy: true
         IgnorePublicAcls: true
         RestrictPublicBuckets: true
-      CorsConfiguration:
-        CorsRules:
-          - Id: CorsRule1
-            AllowedOrigins:
-              - "*"
-            AllowedMethods:
-              - GET
-              - HEAD
-            AllowedHeaders:
-              - "*"
-            MaxAge: 600
       LifecycleConfiguration:
         Rules:
           - Id: AutoCleanup
