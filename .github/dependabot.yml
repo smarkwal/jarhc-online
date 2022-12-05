@@ -5,28 +5,39 @@
 
 version: 2
 updates:
+
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
     open-pull-requests-limit: 100
+
   - package-ecosystem: "npm"
     directory: "/react-app"
     schedule:
       interval: "daily"
     open-pull-requests-limit: 100
-  - package-ecosystem: "gomod"
+
+  - package-ecosystem: "maven"
     directory: "/sam-api/japicc-check"
     schedule:
       interval: "daily"
     open-pull-requests-limit: 100
+
   - package-ecosystem: "maven"
     directory: "/sam-api/jarhc-check"
     schedule:
       interval: "daily"
     open-pull-requests-limit: 100
+
   - package-ecosystem: "maven"
     directory: "/sam-api/rest-api"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 100
+
+  - package-ecosystem: "maven"
+    directory: "/sam-api/shared"
     schedule:
       interval: "daily"
     open-pull-requests-limit: 100
