@@ -4,9 +4,9 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.xray.AWSXRay;
 import com.amazonaws.xray.entities.Subsegment;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileWriter;
-import java.util.Date;
+import java.io.InputStream;
 import java.util.regex.Pattern;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,11 +16,12 @@ import org.jarhc.online.japicc.models.Artifact;
 import org.jarhc.online.japicc.models.JapiccCheckRequest;
 
 @SuppressWarnings("unused")
-public class Handler implements RequestHandler<JapiccCheckRequest, Void> { // TODO: return String for better testing
+public class Handler implements RequestHandler<JapiccCheckRequest, String> {
 
 	private static final Logger logger = LogManager.getLogger(Handler.class);
 
 	private static final Pattern reportFileNamePattern = Pattern.compile("^[a-z][A-Za-z0-9-.]*(\\.html|\\.txt)$");
+	private static final String JAPI_COMPLIANCE_CHECKER = "/usr/bin/japi-compliance-checker";
 
 	private final S3 s3;
 	private final Maven maven;
@@ -51,7 +52,7 @@ public class Handler implements RequestHandler<JapiccCheckRequest, Void> { // TO
 	}
 
 	@Override
-	public Void handleRequest(JapiccCheckRequest request, Context context) {
+	public String handleRequest(JapiccCheckRequest request, Context context) {
 
 		if (logger.isTraceEnabled()) {
 			logger.trace("Environment:\n{}", JsonUtils.toJSON(System.getenv()));
@@ -73,6 +74,8 @@ public class Handler implements RequestHandler<JapiccCheckRequest, Void> { // TO
 			throw new IllegalArgumentException("Parameter 'reportFileName' is not valid.");
 		}
 
+		// TODO: add parameter to skip S3 check
+
 		// check if report file already exists in S3
 		boolean exists;
 		try {
@@ -84,16 +87,16 @@ public class Handler implements RequestHandler<JapiccCheckRequest, Void> { // TO
 		var reportFileURL = s3.getURL(reportFileName);
 		if (exists) {
 			logger.info("Report file found in S3: {}", reportFileURL);
-			return null;
+			return "EXISTS:" + reportFileURL;
 		}
 
-		// validate versions
-		validateLibrary(newVersion);
-		validateLibrary(oldVersion);
+		// download artifacts from Maven Central
+		File newVersionFile = downloadLibrary(newVersion);
+		File oldVersionFile = downloadLibrary(oldVersion);
 
-		// create JarHC report
+		// create JAPICC report
 		File reportFile = new File("/tmp/report.html");
-		japicc(oldVersion, newVersion, reportFile);
+		japicc(newVersionFile, oldVersionFile, reportFile);
 
 		// upload report to S3
 		try {
@@ -102,18 +105,41 @@ public class Handler implements RequestHandler<JapiccCheckRequest, Void> { // TO
 			throw new RuntimeException("Error uploading report file to S3 bucket.", e);
 		}
 
-		return null;
+		return "OK:" + reportFileURL;
 	}
 
-	private void japicc(String oldVersion, String newVersion, File reportFile) {
+	private void japicc(File oldVersionFile, File newVersionFile, File reportFile) {
 		try (Subsegment xray = AWSXRay.beginSubsegment("Handler.japicc")) {
 
 			// run JAPICC
+			int exitCode;
 			try {
 
-				// TODO: execute JAPICC
-				try (FileWriter writer = new FileWriter(reportFile)) {
-					writer.write("Date: " + new Date());
+				Process process = new ProcessBuilder()
+						.command(
+								JAPI_COMPLIANCE_CHECKER,
+								"-old", oldVersionFile.getAbsolutePath(),
+								"-new", newVersionFile.getAbsolutePath(),
+								"-report-path", reportFile.getAbsolutePath()
+						)
+						.redirectErrorStream(true)
+						.start();
+
+				exitCode = process.waitFor();
+
+				try (InputStream inputStream = process.getInputStream()) {
+					ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+					inputStream.transferTo(buffer);
+					String output = buffer.toString();
+					logger.info("JAPICC output:\n{}", output);
+					System.out.println("JAPICC output:\n" + output);
+				}
+				try (InputStream errorStream = process.getErrorStream()) {
+					ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+					errorStream.transferTo(buffer);
+					String output = buffer.toString();
+					logger.error("JAPICC error:\n{}", output);
+					System.err.println("JAPICC error:\n" + output);
 				}
 
 			} catch (Exception e) {
@@ -121,22 +147,31 @@ public class Handler implements RequestHandler<JapiccCheckRequest, Void> { // TO
 				throw new RuntimeException("Error running JAPICC.", e);
 			}
 
+			// handle exit code
+			if (exitCode != 0) {
+				if (exitCode == 1) {
+					// incompatibilities found
+				} else {
+					throw new RuntimeException("JAPICC failed with exit code " + exitCode);
+				}
+			}
+
 		}
 	}
 
-	private void validateLibrary(String version) {
-
-		// check if version exists in Maven Central
-		boolean exists;
+	private File downloadLibrary(String version) {
 		try {
-			var artifact = new Artifact(version);
-			exists = maven.exists(artifact);
+			Artifact artifact = new Artifact(version);
+			File file = new File("/tmp", artifact.toFilePath());
+			if (!file.isFile()) {
+				boolean download = maven.download(artifact, file);
+				if (!download) {
+					throw new RuntimeException("Artifact not found in Maven Central: " + artifact);
+				}
+			}
+			return file;
 		} catch (Exception e) {
-			throw new RuntimeException("Error testing if version exists in Maven Central: " + version, e);
-		}
-
-		if (!exists) {
-			throw new IllegalArgumentException("Version not found in Maven Central: " + version);
+			throw new RuntimeException("Error downloading version from Maven Central: " + version, e);
 		}
 	}
 

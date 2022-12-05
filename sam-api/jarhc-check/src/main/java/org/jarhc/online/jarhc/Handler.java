@@ -25,7 +25,7 @@ import org.jarhc.utils.JarHcException;
 import org.slf4j.LoggerFactory;
 
 @SuppressWarnings("unused")
-public class Handler implements RequestHandler<JarhcCheckRequest, Void> {
+public class Handler implements RequestHandler<JarhcCheckRequest, String> {
 
 	private static final Logger logger = LogManager.getLogger(Handler.class);
 
@@ -60,7 +60,7 @@ public class Handler implements RequestHandler<JarhcCheckRequest, Void> {
 	}
 
 	@Override
-	public Void handleRequest(JarhcCheckRequest request, Context context) {
+	public String handleRequest(JarhcCheckRequest request, Context context) {
 
 		if (logger.isTraceEnabled()) {
 			logger.trace("Environment:\n{}", JsonUtils.toJSON(System.getenv()));
@@ -82,6 +82,8 @@ public class Handler implements RequestHandler<JarhcCheckRequest, Void> {
 			throw new IllegalArgumentException("Parameter 'reportFileName' is not valid.");
 		}
 
+		// TODO: add parameter to skip S3 check
+
 		// check if report file already exists in S3
 		boolean exists;
 		try {
@@ -93,7 +95,7 @@ public class Handler implements RequestHandler<JarhcCheckRequest, Void> {
 		var reportFileURL = s3.getURL(reportFileName);
 		if (exists) {
 			logger.info("Report file found in S3: {}", reportFileURL);
-			return null;
+			return "EXISTS:" + reportFileURL;
 		}
 
 		// validate classpath libraries
@@ -125,7 +127,7 @@ public class Handler implements RequestHandler<JarhcCheckRequest, Void> {
 			throw new RuntimeException("Error uploading report file to S3 bucket.", e);
 		}
 
-		return null;
+		return "OK:" + reportFileURL;
 	}
 
 	private void jarHC(List<String> classpath, List<String> provided, File reportFile) {
