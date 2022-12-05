@@ -1,6 +1,6 @@
-package org.jarhc.online.japicc.models;
+package org.jarhc.online;
 
-import static org.jarhc.online.japicc.Utils.encodeURL;
+import static org.jarhc.online.Utils.encodeURL;
 
 public class Artifact {
 

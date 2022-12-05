@@ -1,10 +1,10 @@
-package org.jarhc.online.rest.clients;
+package org.jarhc.online.clients;
 
 import com.amazonaws.xray.AWSXRay;
 import com.amazonaws.xray.entities.Subsegment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jarhc.online.rest.JsonUtils;
+import org.jarhc.online.JsonUtils;
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
 import software.amazon.awssdk.regions.Region;

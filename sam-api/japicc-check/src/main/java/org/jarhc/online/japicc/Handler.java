@@ -10,10 +10,10 @@ import java.io.InputStream;
 import java.util.regex.Pattern;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jarhc.online.japicc.clients.Maven;
-import org.jarhc.online.japicc.clients.S3;
-import org.jarhc.online.japicc.models.Artifact;
-import org.jarhc.online.japicc.models.JapiccCheckRequest;
+import org.jarhc.online.Artifact;
+import org.jarhc.online.JsonUtils;
+import org.jarhc.online.clients.Maven;
+import org.jarhc.online.clients.S3;
 
 @SuppressWarnings("unused")
 public class Handler implements RequestHandler<JapiccCheckRequest, String> {

@@ -1,6 +1,6 @@
 package org.jarhc.online.rest;
 
-import static org.jarhc.online.rest.models.Artifact.isValidVersion;
+import static org.jarhc.online.Artifact.isValidVersion;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -14,10 +14,12 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jarhc.online.rest.clients.Lambda;
-import org.jarhc.online.rest.clients.Maven;
-import org.jarhc.online.rest.clients.S3;
-import org.jarhc.online.rest.models.Artifact;
+import org.jarhc.online.Artifact;
+import org.jarhc.online.JsonUtils;
+import org.jarhc.online.Utils;
+import org.jarhc.online.clients.Lambda;
+import org.jarhc.online.clients.Maven;
+import org.jarhc.online.clients.S3;
 import org.jarhc.online.rest.models.JapiccCheckMessage;
 import org.jarhc.online.rest.models.JapiccCheckRequest;
 import org.jarhc.online.rest.models.JarhcCheckMessage;

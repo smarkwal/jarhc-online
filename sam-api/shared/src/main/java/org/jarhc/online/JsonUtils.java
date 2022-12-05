@@ -1,4 +1,4 @@
-package org.jarhc.online.rest;
+package org.jarhc.online;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;

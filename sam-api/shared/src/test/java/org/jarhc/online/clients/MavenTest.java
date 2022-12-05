@@ -1,12 +1,12 @@
-package org.jarhc.online.japicc.clients;
+package org.jarhc.online.clients;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
-import org.jarhc.online.japicc.AWSXRayExtension;
-import org.jarhc.online.japicc.models.Artifact;
+import org.jarhc.online.Artifact;
+import org.jarhc.online.clients.Maven;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;

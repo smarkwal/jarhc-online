@@ -1,4 +1,4 @@
-package org.jarhc.online.japicc.clients;
+package org.jarhc.online.clients;
 
 import com.amazonaws.xray.AWSXRay;
 import com.amazonaws.xray.entities.Subsegment;
@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jarhc.online.japicc.models.Artifact;
+import org.jarhc.online.Artifact;
 
 public class Maven {
 

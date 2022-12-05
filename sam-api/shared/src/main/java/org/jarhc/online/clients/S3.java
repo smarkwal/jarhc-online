@@ -1,4 +1,4 @@
-package org.jarhc.online.japicc.clients;
+package org.jarhc.online.clients;
 
 import com.amazonaws.xray.AWSXRay;
 import com.amazonaws.xray.entities.Subsegment;

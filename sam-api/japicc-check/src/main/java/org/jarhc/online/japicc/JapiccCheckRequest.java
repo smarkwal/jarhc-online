@@ -1,4 +1,4 @@
-package org.jarhc.online.japicc.models;
+package org.jarhc.online.japicc;
 
 public class JapiccCheckRequest {
 

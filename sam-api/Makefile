@@ -2,14 +2,20 @@
 all: validate build deploy
 
 clean:
+	@cd shared && mvn clean
+	@cd japicc-check && mvn clean
 	rm -rf .aws-sam
-	@cd japicc-check && mvn clean --quiet
 
 validate:
 	sam validate
 
 build:
-	@cd japicc-check && mvn clean package -DskipTests
+	# build and install shared library
+	# (this is a workaround for SAM not supporting multi-module builds)
+	@cd shared && mvn clean install -DskipTests
+	# build japicc-check function
+	# (artifact and dependencies will be used in Dockerfile)
+	@cd japicc-check && mvn clean package
 	sam build
 
 deploy:

@@ -1,4 +1,4 @@
-package org.jarhc.online.jarhc.models;
+package org.jarhc.online.jarhc;
 
 import java.util.List;
 

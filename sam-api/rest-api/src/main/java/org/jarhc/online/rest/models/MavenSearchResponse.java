@@ -1,6 +1,7 @@
 package org.jarhc.online.rest.models;
 
 import java.util.List;
+import org.jarhc.online.Artifact;
 
 public class MavenSearchResponse {
 

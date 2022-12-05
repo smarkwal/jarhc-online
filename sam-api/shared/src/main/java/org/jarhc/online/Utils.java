@@ -1,4 +1,4 @@
-package org.jarhc.online.japicc;
+package org.jarhc.online;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;

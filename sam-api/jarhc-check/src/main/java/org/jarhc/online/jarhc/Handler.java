@@ -17,10 +17,10 @@ import org.jarhc.artifacts.ArtifactFinder;
 import org.jarhc.artifacts.MavenArtifactFinder;
 import org.jarhc.artifacts.MavenRepository;
 import org.jarhc.artifacts.Repository;
-import org.jarhc.online.jarhc.clients.Maven;
-import org.jarhc.online.jarhc.clients.S3;
-import org.jarhc.online.jarhc.models.Artifact;
-import org.jarhc.online.jarhc.models.JarhcCheckRequest;
+import org.jarhc.online.Artifact;
+import org.jarhc.online.JsonUtils;
+import org.jarhc.online.clients.Maven;
+import org.jarhc.online.clients.S3;
 import org.jarhc.utils.JarHcException;
 import org.slf4j.LoggerFactory;
 
