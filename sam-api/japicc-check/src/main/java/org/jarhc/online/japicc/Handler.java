@@ -122,7 +122,7 @@ public class Handler implements RequestHandler<JapiccCheckRequest, String> {
 								"-new", newVersionFile.getAbsolutePath(),
 								"-report-path", reportFile.getAbsolutePath()
 						)
-						.redirectErrorStream(true)
+						//.redirectErrorStream(true)
 						.start();
 
 				exitCode = process.waitFor();
@@ -132,14 +132,14 @@ public class Handler implements RequestHandler<JapiccCheckRequest, String> {
 					inputStream.transferTo(buffer);
 					String output = buffer.toString();
 					logger.info("JAPICC output:\n{}", output);
-					System.out.println("JAPICC output:\n" + output);
 				}
 				try (InputStream errorStream = process.getErrorStream()) {
 					ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 					errorStream.transferTo(buffer);
 					String output = buffer.toString();
-					logger.error("JAPICC error:\n{}", output);
-					System.err.println("JAPICC error:\n" + output);
+					if (!output.isEmpty()) {
+						logger.error("JAPICC error:\n{}", output);
+					}
 				}
 
 			} catch (Exception e) {

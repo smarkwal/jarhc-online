@@ -11,10 +11,11 @@ COPY --from=smarkwal/japicc:2.4 /usr/share/japi-compliance-checker /usr/share/ja
 
 # add function
 WORKDIR /function
-ADD ./target/japicc-check-1.0.0-SNAPSHOT.jar ./japicc-check.jar
+ADD ./target/dependency/*.jar ./
+ADD ./target/japicc-check-1.0.0-SNAPSHOT.jar ./
 
 # configure runtime startup
-ENTRYPOINT [ "/opt/java/openjdk/bin/java", "-cp", "./japicc-check.jar", "com.amazonaws.services.lambda.runtime.api.client.AWSLambda" ]
+ENTRYPOINT [ "/opt/java/openjdk/bin/java", "-cp", "./*", "com.amazonaws.services.lambda.runtime.api.client.AWSLambda" ]
 
 # pass name of function handler as argument to runtime
 CMD [ "org.jarhc.online.japicc.Handler::handleRequest" ]
