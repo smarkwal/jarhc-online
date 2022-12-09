@@ -253,7 +253,7 @@ Resources:
       DockerTag: v1
       DockerContext: ./japicc-check
       Dockerfile: Dockerfile
-      # TODO: mvn clean package -DskipTests
+      # TODO: ./gradlew clean build publishToMavenLocal -x test
 
   # Lambda function
   JarhcCheckFunction:
