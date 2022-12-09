@@ -10,6 +10,10 @@
 # Maven build directory
 target/
 
+# Gradle cache and build directories
+.gradle/
+build/
+
 # files with local environment configurations
 set-env.sh
 
