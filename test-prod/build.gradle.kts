@@ -23,7 +23,7 @@ repositories {
 dependencies {
     // note: this is a tests-only project and all classes are in main source set
     implementation("software.amazon.awssdk:s3:2.18.31")
-    implementation("software.amazon.awssdk:lambda:2.18.31")
+    implementation("software.amazon.awssdk:lambda:2.18.35")
     implementation("com.amazonaws:aws-java-sdk-cognitoidp:1.12.361")
     implementation("org.apache.httpcomponents:httpmime:4.5.14")
     implementation("org.json:json:20220924")
