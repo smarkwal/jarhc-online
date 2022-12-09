@@ -1,4 +1,4 @@
-package org.jarhc.online.tests;
+package org.jarhc.online.tests.cognito;
 
 import com.amazonaws.services.cognitoidp.AWSCognitoIdentityProvider;
 import com.amazonaws.services.cognitoidp.AWSCognitoIdentityProviderClient;

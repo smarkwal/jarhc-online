@@ -1,4 +1,4 @@
-package org.jarhc.online.tests;
+package org.jarhc.online.tests.webclient;
 
 import org.assertj.core.api.SoftAssertions;
 

@@ -2,6 +2,10 @@ package org.jarhc.online.tests;
 
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
+import org.jarhc.online.tests.cognito.Cognito;
+import org.jarhc.online.tests.webclient.AbstractWebTest;
+import org.jarhc.online.tests.webclient.WebClient;
+import org.jarhc.online.tests.webclient.WebResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -119,17 +123,14 @@ class ApiTest extends AbstractWebTest {
 					.execute();
 
 			// assert
-			String expectedReportURL = "https://online.jarhc.org/reports/report-5d75918f818d3baf3565a9ac506b4eb4d08b2e7341f979d1bc99c06ab8e2ab1d.html";
 			assertThat(response)
 					.isOK()
 					.hasContentType("application/json")
 					.hasContentLength(131)
-					.hasJsonObject("{\"reportURL\":\"" + expectedReportURL + "\"}");
+					.hasJsonObject("{\"reportURL\":\"https://online.jarhc.org/reports/report-5d75918f818d3baf3565a9ac506b4eb4d08b2e7341f979d1bc99c06ab8e2ab1d.html\"}");
 
 			assertCorsResponseHeaders(response);
 			assertApiGatewayHeaders(response, true);
-
-			test_report(expectedReportURL);
 		}
 
 		@Test
@@ -185,17 +186,14 @@ class ApiTest extends AbstractWebTest {
 					.execute();
 
 			// assert
-			String expectedReportURL = "https://online.jarhc.org/reports/report-cbbcae8ff7d5ad70f56a1f5abfa2e705dc2eb50ad6eb574cbd66d983a2b2731d.html";
 			assertThat(response)
 					.isOK()
 					.hasContentType("application/json")
 					.hasContentLength(131)
-					.hasJsonObject("{\"reportURL\":\"" + expectedReportURL + "\"}");
+					.hasJsonObject("{\"reportURL\":\"https://online.jarhc.org/reports/report-cbbcae8ff7d5ad70f56a1f5abfa2e705dc2eb50ad6eb574cbd66d983a2b2731d.html\"}");
 
 			assertCorsResponseHeaders(response);
 			assertApiGatewayHeaders(response, true);
-
-			test_report(expectedReportURL);
 		}
 
 		@Test
@@ -248,25 +246,6 @@ class ApiTest extends AbstractWebTest {
 				.hasHeader("Access-Control-Max-Age", "600");
 
 		assertApiGatewayHeaders(response, false);
-	}
-
-	private void test_report(String expectedReportURL) {
-
-		// test
-		WebResponse response = WebClient.head(expectedReportURL)
-				.addHeader("Origin", ORIGIN)
-				.execute();
-
-		// assert
-		assertThat(response)
-				.isOK()
-				.hasHeader("Server", "AmazonS3")
-				.hasHeader("Cache-Control", "no-cache")
-				.hasContentType("text/html")
-				.hasContentLength()
-				.hasNoBody();
-
-		assertSecurityHeaders(response, true);
 	}
 
 	private void assertCorsResponseHeaders(WebResponse response) {

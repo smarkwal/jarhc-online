@@ -1,4 +1,4 @@
-package org.jarhc.online.tests;
+package org.jarhc.online.tests.webclient;
 
 import static org.apache.http.HttpHeaders.CONTENT_LENGTH;
 import static org.apache.http.HttpHeaders.CONTENT_TYPE;
@@ -12,7 +12,7 @@ import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.apache.http.HttpStatus.SC_SERVICE_UNAVAILABLE;
 import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
-import static org.jarhc.online.tests.ContentTypes.APPLICATION_JSON_UTF8;
+import static org.jarhc.online.tests.webclient.ContentTypes.APPLICATION_JSON_UTF8;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;

@@ -1,5 +1,8 @@
 package org.jarhc.online.tests;
 
+import org.jarhc.online.tests.webclient.AbstractWebTest;
+import org.jarhc.online.tests.webclient.WebClient;
+import org.jarhc.online.tests.webclient.WebResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
