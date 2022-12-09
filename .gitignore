@@ -10,5 +10,8 @@
 # Maven build directory
 target/
 
+# files with local environment configurations
+set-env.sh
+
 # Misc
 .DS_Store
