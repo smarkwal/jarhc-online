@@ -1,12 +1,9 @@
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat
-import org.gradle.api.tasks.testing.logging.TestLogEvent
-
 plugins {
     java
+    id("com.adarshr.test-logger") version ("3.2.0")
 }
 
 group = "org.jarhc.online"
-version = "1.0.0-SNAPSHOT"
 
 if (!JavaVersion.current().isJava11Compatible) {
     val error = "Build requires Java 11 and does not run on Java ${JavaVersion.current().majorVersion}."
@@ -48,20 +45,12 @@ tasks {
         // settings
         maxHeapSize = "1G"
 
-        // test task output
-        testLogging {
-            events = mutableSetOf(
-                TestLogEvent.FAILED,
-                TestLogEvent.SKIPPED,
-                TestLogEvent.STANDARD_OUT,
-                TestLogEvent.STANDARD_ERROR
-            )
+        // output
+        testlogger {
             showStandardStreams = true
-            exceptionFormat = TestExceptionFormat.SHORT
-            showExceptions = true
-            showCauses = true
-            showStackTraces = true
+            showPassedStandardStreams = false
         }
+
     }
 
 }
