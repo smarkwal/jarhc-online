@@ -16,7 +16,7 @@ dependencies {
     api("com.amazonaws:aws-lambda-java-events:3.11.0")
     api("com.amazonaws:aws-lambda-java-log4j2:1.5.1")
     api("org.apache.logging.log4j:log4j-slf4j18-impl:2.18.0")
-    api("software.amazon.awssdk:s3:2.18.32") {
+    api("software.amazon.awssdk:s3:2.18.35") {
         exclude("software.amazon.awssdk", "apache-client")
         exclude("software.amazon.awssdk", "netty-nio-client")
     }
