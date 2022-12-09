@@ -3,7 +3,7 @@ all: validate build deploy
 
 clean:
 	@cd shared && mvn clean
-	@cd japicc-check && mvn clean
+	@cd japicc-check && ./gradlew clean
 	rm -rf .aws-sam
 
 validate:
@@ -15,7 +15,7 @@ build:
 	@cd shared && mvn clean install -DskipTests
 	# build japicc-check function
 	# (artifact and dependencies will be used in Dockerfile)
-	@cd japicc-check && mvn clean package
+	@cd japicc-check && ./gradlew clean build
 	sam build
 
 deploy:
