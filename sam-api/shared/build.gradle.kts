@@ -20,7 +20,7 @@ dependencies {
         exclude("software.amazon.awssdk", "apache-client")
         exclude("software.amazon.awssdk", "netty-nio-client")
     }
-    api("software.amazon.awssdk:lambda:2.18.32") {
+    api("software.amazon.awssdk:lambda:2.18.35") {
         exclude("software.amazon.awssdk", "apache-client")
         exclude("software.amazon.awssdk", "netty-nio-client")
     }
