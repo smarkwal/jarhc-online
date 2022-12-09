@@ -24,7 +24,7 @@ dependencies {
         exclude("software.amazon.awssdk", "apache-client")
         exclude("software.amazon.awssdk", "netty-nio-client")
     }
-    api("software.amazon.awssdk:url-connection-client:2.18.32")
+    api("software.amazon.awssdk:url-connection-client:2.18.35")
     api("com.amazonaws:aws-xray-recorder-sdk-core:2.13.0")
     testImplementation("org.junit.jupiter:junit-jupiter:5.9.1")
 }
