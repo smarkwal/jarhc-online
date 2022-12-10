@@ -19,25 +19,7 @@ updates:
     open-pull-requests-limit: 100
 
   - package-ecosystem: "gradle"
-    directory: "/sam-api/japicc-check"
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 100
-
-  - package-ecosystem: "gradle"
-    directory: "/sam-api/jarhc-check"
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 100
-
-  - package-ecosystem: "gradle"
-    directory: "/sam-api/rest-api"
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 100
-
-  - package-ecosystem: "gradle"
-    directory: "/sam-api/shared"
+    directory: "/sam-api"
     schedule:
       interval: "daily"
     open-pull-requests-limit: 100
