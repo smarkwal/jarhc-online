@@ -3,9 +3,9 @@ all: validate build deploy
 
 clean:
 	# clean shared ...
-	@cd shared && ./gradlew clean
+	@cd shared && ../gradlew clean
 	# clean japicc-check ...
-	@cd japicc-check && ./gradlew clean
+	@cd japicc-check && ../gradlew clean
 	rm -rf .aws-sam
 
 validate:
@@ -14,10 +14,10 @@ validate:
 build:
 	# build and install shared library
 	# (this is a workaround for SAM not supporting multi-module builds)
-	@cd shared && ./gradlew clean build publishToMavenLocal -x test
+	@cd shared && ../gradlew clean build publishToMavenLocal -x test
 	# build japicc-check function
 	# (artifact and dependencies will be used in Dockerfile)
-	@cd japicc-check && ./gradlew clean build
+	@cd japicc-check && ../gradlew clean build
 	sam build
 
 deploy:
