@@ -1,3 +1,5 @@
+import java.util.*
+
 plugins {
     java
 
@@ -11,6 +13,19 @@ plugins {
 }
 
 group = "org.jarhc.online"
+
+// load user-specific properties -----------------------------------------------
+
+val userPropertiesFile = file("${projectDir}/gradle.user.properties")
+if (userPropertiesFile.exists()) {
+    val userProperties = Properties()
+    userProperties.load(userPropertiesFile.inputStream())
+    userProperties.forEach {
+        project.ext.set(it.key.toString(), it.value)
+    }
+}
+
+// Java version check ----------------------------------------------------------
 
 if (!JavaVersion.current().isJava11Compatible) {
     val error = "Build requires Java 11 and does not run on Java ${JavaVersion.current().majorVersion}."
@@ -68,6 +83,13 @@ tasks {
 
         // settings
         maxHeapSize = "1G"
+
+        // pass all 'jarhc.*' Gradle properties as system properties to JUnit JVM
+        project.properties.forEach {
+            if (it.key.startsWith("jarhc.")) {
+                systemProperty(it.key, it.value.toString())
+            }
+        }
 
         // output
         testlogger {

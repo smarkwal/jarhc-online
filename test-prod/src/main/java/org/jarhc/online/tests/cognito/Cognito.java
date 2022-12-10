@@ -34,10 +34,10 @@ public class Cognito implements BeforeAllCallback, AfterAllCallback, ParameterRe
 	@Override
 	public void beforeAll(ExtensionContext extensionContext) {
 
-		clientId = getEnvironmentVariable("COGNITO_CLIENT_ID");
-		clientSecret = getEnvironmentVariable("COGNITO_CLIENT_SECRET");
-		String username = getEnvironmentVariable("COGNITO_USERNAME");
-		String password = getEnvironmentVariable("COGNITO_PASSWORD");
+		clientId = getSystemProperty("jarhc.cognito.client.id");
+		clientSecret = getSystemProperty("jarhc.cognito.client.secret");
+		String username = getSystemProperty("jarhc.cognito.username");
+		String password = getSystemProperty("jarhc.cognito.password");
 
 		if (clientId == null || clientSecret == null || username == null || password == null) {
 			return;
@@ -91,10 +91,10 @@ public class Cognito implements BeforeAllCallback, AfterAllCallback, ParameterRe
 		client.revokeToken(request);
 	}
 
-	private static String getEnvironmentVariable(String name) {
-		String value = System.getenv(name);
+	private static String getSystemProperty(String name) {
+		String value = System.getProperty(name);
 		if (value == null) {
-			String message = "WARN: Environment variable '" + name + "' is not defined.";
+			String message = "WARN: System property '" + name + "' is not defined.";
 			System.err.println(message);
 		}
 		return value;

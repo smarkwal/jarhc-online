@@ -15,7 +15,7 @@ target/
 build/
 
 # files with local environment configurations
-set-env.sh
+gradle.user.properties
 
 # Misc
 .DS_Store
