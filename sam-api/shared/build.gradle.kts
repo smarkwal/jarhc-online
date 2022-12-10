@@ -1,21 +1,6 @@
 plugins {
     `java-library`
     `maven-publish`
-
-    // Gradle Versions Plugin
-    // https://github.com/ben-manes/gradle-versions-plugin
-    id("com.github.ben-manes.versions") version "0.44.0"
-
-    // Gradle Test Logger Plugin
-    // https://github.com/radarsh/gradle-test-logger-plugin
-    id("com.adarshr.test-logger") version "3.2.0"
-}
-
-group = "org.jarhc.online"
-
-repositories {
-    mavenLocal()
-    mavenCentral()
 }
 
 dependencies {
@@ -44,46 +29,6 @@ dependencies {
     api("com.amazonaws:aws-xray-recorder-sdk-core:2.13.0")
 
     testImplementation("org.junit.jupiter:junit-jupiter")
-}
-
-tasks {
-
-    compileJava {
-        options.encoding = "ASCII"
-    }
-
-    test {
-
-        // use JUnit 5
-        useJUnitPlatform()
-
-        // settings
-        maxHeapSize = "1G"
-
-        // output
-        testlogger {
-            showStandardStreams = true
-            showPassedStandardStreams = false
-        }
-
-    }
-
-    register("dumpDependencies") {
-        doLast {
-            val dependencies = arrayListOf<String>()
-            val configuration = project.configurations.getByName("runtimeClasspath")
-            configuration.resolvedConfiguration.resolvedArtifacts.forEach { artifact ->
-                dependencies.add(artifact.moduleVersion.id.toString())
-            }
-            dependencies.sort()
-            file("dependencies.txt").writeText(dependencies.joinToString("\n"))
-        }
-    }
-
-    build {
-        dependsOn("dumpDependencies")
-    }
-
 }
 
 publishing {
