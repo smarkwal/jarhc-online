@@ -2,7 +2,9 @@
 all: validate build deploy
 
 clean:
+	# clean shared ...
 	@cd shared && ./gradlew clean
+	# clean japicc-check ...
 	@cd japicc-check && ./gradlew clean
 	rm -rf .aws-sam
 

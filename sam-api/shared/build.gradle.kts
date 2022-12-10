@@ -21,8 +21,8 @@ repositories {
 dependencies {
 
     // BOMs for version constraints
-    implementation(platform("software.amazon.awssdk:bom:2.18.35"))
-    implementation(platform("org.apache.logging.log4j:log4j-bom:2.19.0"))
+    api(platform("software.amazon.awssdk:bom:2.18.35"))
+    api(platform("org.apache.logging.log4j:log4j-bom:2.19.0"))
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
 
     // AWS Lambda Java API and logging
