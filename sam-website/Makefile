@@ -1,5 +1,9 @@
+.PHONY: build
 
 all: validate build deploy
+
+clean:
+	rm -rf .aws-sam
 
 validate:
 	sam validate
