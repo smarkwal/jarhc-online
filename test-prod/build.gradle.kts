@@ -1,6 +1,13 @@
 plugins {
     java
-    id("com.adarshr.test-logger") version ("3.2.0")
+
+    // Gradle Versions Plugin
+    // https://github.com/ben-manes/gradle-versions-plugin
+    id("com.github.ben-manes.versions") version "0.44.0"
+
+    // Gradle Test Logger Plugin
+    // https://github.com/radarsh/gradle-test-logger-plugin
+    id("com.adarshr.test-logger") version "3.2.0"
 }
 
 group = "org.jarhc.online"
@@ -26,8 +33,8 @@ dependencies {
 
     // BOMs for version constraints
     implementation(platform("org.junit:junit-bom:5.9.1"))
-    implementation(platform("software.amazon.awssdk:bom:2.18.31"))
-    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.361"))
+    implementation(platform("software.amazon.awssdk:bom:2.18.35"))
+    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.362"))
 
     // test libraries
     implementation("org.junit.jupiter:junit-jupiter")

@@ -1,7 +1,14 @@
 plugins {
     `java-library`
     `maven-publish`
-    id("com.adarshr.test-logger") version ("3.2.0")
+
+    // Gradle Versions Plugin
+    // https://github.com/ben-manes/gradle-versions-plugin
+    id("com.github.ben-manes.versions") version "0.44.0"
+
+    // Gradle Test Logger Plugin
+    // https://github.com/radarsh/gradle-test-logger-plugin
+    id("com.adarshr.test-logger") version "3.2.0"
 }
 
 group = "org.jarhc.online"
@@ -14,15 +21,15 @@ repositories {
 dependencies {
 
     // BOMs for version constraints
-    implementation(platform("software.amazon.awssdk:bom:2.18.32"))
-    implementation(platform("org.apache.logging.log4j:log4j-bom:2.18.0"))
+    implementation(platform("software.amazon.awssdk:bom:2.18.35"))
+    implementation(platform("org.apache.logging.log4j:log4j-bom:2.19.0"))
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
 
     // AWS Lambda Java API and logging
     api("com.amazonaws:aws-lambda-java-core:1.2.2")
     api("com.amazonaws:aws-lambda-java-events:3.11.0")
     api("com.amazonaws:aws-lambda-java-log4j2:1.5.1")
-    api("org.apache.logging.log4j:log4j-slf4j18-impl")
+    api("org.apache.logging.log4j:log4j-slf4j18-impl:2.18.0")
 
     // AWS SDK for S3, Lambda, and X-Ray (excluding HttpClient and Netty)
     api("software.amazon.awssdk:s3") {

@@ -1,5 +1,9 @@
 plugins {
     `java-library`
+
+    // Gradle Versions Plugin
+    // https://github.com/ben-manes/gradle-versions-plugin
+    id("com.github.ben-manes.versions") version "0.44.0"
 }
 
 group = "org.jarhc.online"
