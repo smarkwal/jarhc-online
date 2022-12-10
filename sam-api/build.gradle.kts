@@ -23,7 +23,6 @@ subprojects {
     apply(plugin = "com.adarshr.test-logger")
 
     repositories {
-        mavenLocal()
         mavenCentral()
     }
 

@@ -1,6 +1,5 @@
 plugins {
     `java-library`
-    `maven-publish`
 }
 
 dependencies {
@@ -8,7 +7,6 @@ dependencies {
     // BOMs for version constraints
     api(platform("software.amazon.awssdk:bom:2.18.35"))
     api(platform("org.apache.logging.log4j:log4j-bom:2.19.0"))
-    testImplementation(platform("org.junit:junit-bom:5.9.1"))
 
     // AWS Lambda Java API and logging
     api("com.amazonaws:aws-lambda-java-core:1.2.2")
@@ -28,13 +26,7 @@ dependencies {
     api("software.amazon.awssdk:url-connection-client")
     api("com.amazonaws:aws-xray-recorder-sdk-core:2.13.0")
 
-    testImplementation("org.junit.jupiter:junit-jupiter")
-}
+    // test dependencies -------------------------------------
 
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            from(components["java"])
-        }
-    }
+    testImplementation("org.junit.jupiter:junit-jupiter:5.9.1")
 }

@@ -2,30 +2,22 @@
 all: validate build deploy
 
 clean:
-	# clean shared ...
-	@cd shared && ../gradlew clean
-	# clean japicc-check ...
-	@cd japicc-check && ../gradlew clean
-	rm -rf .aws-sam
+	./gradlew clean
 
 validate:
+	./gradlew test
 	sam validate
 
 build:
-	# build and install shared library
-	# (this is a workaround for SAM not supporting multi-module builds)
-	@cd shared && ../gradlew clean build publishToMavenLocal -x test
 	# build japicc-check function
 	# (artifact and dependencies will be used in Dockerfile)
-	@cd japicc-check && ../gradlew clean build
+	@cd japicc-check && ../gradlew build -x test
 	sam build
 
 deploy:
 	sam deploy
 
-run:
-	sam validate || exit 1
-	sam build || exit 2
+run: validate build
 	sam local start-api --port 3001 --parameter-overrides "ApiDomain=localhost:3001 WebsiteDomain=localhost:3000 WebsiteURL=http://localhost:3000"
 
 delete:
