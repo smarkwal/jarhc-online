@@ -12,8 +12,6 @@ plugins {
     id("com.adarshr.test-logger") version "3.2.0"
 }
 
-group = "org.jarhc.online"
-
 // load user-specific properties -----------------------------------------------
 
 val userPropertiesFile = file("${projectDir}/gradle.user.properties")
@@ -60,6 +58,10 @@ dependencies {
     implementation("software.amazon.awssdk:s3")
     implementation("software.amazon.awssdk:lambda")
     implementation("com.amazonaws:aws-java-sdk-cognitoidp")
+
+    // logging
+    implementation("org.slf4j:slf4j-api:1.7.36")
+    implementation("org.slf4j:slf4j-simple:1.7.36")
 
     // helpers
     implementation("org.apache.httpcomponents:httpmime:4.5.14")

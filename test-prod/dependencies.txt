@@ -34,7 +34,8 @@ org.junit.platform:junit-platform-engine:1.9.1
 org.opentest4j:opentest4j:1.2.0
 org.reactivestreams:reactive-streams:1.0.3
 org.skyscreamer:jsonassert:1.5.1
-org.slf4j:slf4j-api:1.7.30
+org.slf4j:slf4j-api:1.7.36
+org.slf4j:slf4j-simple:1.7.36
 software.amazon.awssdk:annotations:2.18.35
 software.amazon.awssdk:apache-client:2.18.35
 software.amazon.awssdk:arns:2.18.35
