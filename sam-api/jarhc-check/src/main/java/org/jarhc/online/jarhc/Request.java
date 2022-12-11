@@ -2,13 +2,13 @@ package org.jarhc.online.jarhc;
 
 import java.util.List;
 
-public class JarhcCheckRequest {
+public class Request {
 
-	private List<String> classpath;
-	private List<String> provided;
+	private List<String> classpath = List.of();
+	private List<String> provided = List.of();
 	private String reportFileName;
 
-	public JarhcCheckRequest() {
+	public Request() {
 	}
 
 	public List<String> getClasspath() {
@@ -16,6 +16,9 @@ public class JarhcCheckRequest {
 	}
 
 	public void setClasspath(List<String> classpath) {
+		if (classpath == null) {
+			classpath = List.of();
+		}
 		this.classpath = classpath;
 	}
 
@@ -24,6 +27,9 @@ public class JarhcCheckRequest {
 	}
 
 	public void setProvided(List<String> provided) {
+		if (provided == null) {
+			provided = List.of();
+		}
 		this.provided = provided;
 	}
 

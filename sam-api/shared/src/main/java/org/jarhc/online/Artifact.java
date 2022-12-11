@@ -2,6 +2,8 @@ package org.jarhc.online;
 
 import static org.jarhc.online.Utils.encodeURL;
 
+import java.util.Objects;
+
 public class Artifact {
 
 	private final String groupId;
@@ -70,4 +72,16 @@ public class Artifact {
 		return version.matches("^[^:]+:[^:]+:[^:]*[^.]$");
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null || getClass() != obj.getClass()) return false;
+		Artifact artifact = (Artifact) obj;
+		return groupId.equals(artifact.groupId) && artifactId.equals(artifact.artifactId) && version.equals(artifact.version);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(groupId, artifactId, version);
+	}
 }

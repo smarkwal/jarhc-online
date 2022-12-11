@@ -9,6 +9,10 @@ dependencies {
     // Entrypoint in Docker image, see Dockerfile.
     // https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-runtime-interface-client
     implementation("com.amazonaws:aws-lambda-java-runtime-interface-client:2.1.1")
+
+    // test dependencies -------------------------------------
+
+    testImplementation(testFixtures(project(":shared")))
 }
 
 tasks {

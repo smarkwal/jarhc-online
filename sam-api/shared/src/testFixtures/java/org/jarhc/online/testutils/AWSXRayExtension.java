@@ -1,4 +1,4 @@
-package org.jarhc.online.clients;
+package org.jarhc.online.testutils;
 
 import com.amazonaws.xray.AWSXRay;
 import com.amazonaws.xray.entities.Segment;

@@ -1,0 +1,7 @@
+<Configuration status="WARN">
+    <Appenders/>
+    <Loggers>
+        <Root level="INFO"/>
+        <Logger name="org.jarhc" level="DEBUG"/>
+    </Loggers>
+</Configuration>

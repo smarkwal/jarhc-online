@@ -7,7 +7,6 @@ import org.apache.logging.log4j.Logger;
 import org.jarhc.online.JsonUtils;
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
-import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.lambda.LambdaClient;
 import software.amazon.awssdk.services.lambda.model.InvocationType;
 import software.amazon.awssdk.services.lambda.model.InvokeRequest;
@@ -15,18 +14,17 @@ import software.amazon.awssdk.services.lambda.model.InvokeResponse;
 
 public class Lambda {
 
-	private static final Logger logger = LogManager.getLogger(Lambda.class);
+	private static final Logger logger = LogManager.getLogger();
 
 	private final LambdaClient client;
 
-	public Lambda(String region) {
+	public Lambda() {
 		this.client = LambdaClient.builder()
-				.region(Region.of(region))
 				.httpClientBuilder(UrlConnectionHttpClient.builder())
 				.build();
 	}
 
-	public void invokeAsync(String functionName, Object payload) throws Exception {
+	public void invokeAsync(String functionName, Object payload) throws LambdaException {
 		try (Subsegment xray = AWSXRay.beginSubsegment("Lambda.invokeAsync")) {
 			xray.putAnnotation("functionName", functionName);
 
@@ -46,9 +44,8 @@ public class Lambda {
 			try {
 				response = client.invoke(request);
 			} catch (Exception e) {
-				logger.error("Error:", e);
 				xray.addException(e);
-				throw e;
+				throw new LambdaException("Lambda error", e);
 			}
 
 			logger.debug("Response: {}", response);

@@ -31,7 +31,7 @@ import org.jarhc.online.rest.models.User;
 @SuppressWarnings({ "unused", "DuplicatedCode" })
 public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
-	private static final Logger logger = LogManager.getLogger(Handler.class);
+	private static final Logger logger = LogManager.getLogger();
 
 	private static final int STATUS_OK = 200;
 	private static final int STATUS_BAD_REQUEST = 400;
@@ -45,11 +45,6 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 	public Handler() {
 		logger.debug("Initializing Handler ...");
 
-		var region = System.getenv("AWS_REGION");
-		if (region == null) {
-			region = "eu-central-1";
-		}
-
 		var bucketName = System.getenv("BUCKET_NAME");
 		if (bucketName == null) {
 			bucketName = "localhost";
@@ -61,8 +56,8 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
 		}
 
 		// create AWS clients
-		s3 = new S3(region, bucketName, bucketUrl);
-		lambda = new Lambda(region);
+		s3 = new S3(bucketName, bucketUrl);
+		lambda = new Lambda();
 		maven = new Maven(10 * 1000); // 10 seconds
 
 		logger.debug("Handler initialized.");

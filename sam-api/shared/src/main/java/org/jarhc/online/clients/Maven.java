@@ -18,7 +18,7 @@ import org.jarhc.online.Artifact;
 
 public class Maven {
 
-	private static final Logger logger = LogManager.getLogger(Maven.class);
+	private static final Logger logger = LogManager.getLogger();
 
 	private static final String BASE_URL = "https://repo1.maven.org/maven2";
 	private static final int STATUS_OK = 200;
@@ -37,12 +37,12 @@ public class Maven {
 		this.timeout = timeout;
 	}
 
-	public boolean exists(Artifact artifact) throws Exception {
+	public boolean exists(Artifact artifact) throws MavenException {
 		try (Subsegment xray = AWSXRay.beginSubsegment("Maven.exists")) {
-			xray.putAnnotation("artifact", artifact.toCoordinates());
+			var coordinates = artifact.toCoordinates();
+			xray.putAnnotation("artifact", coordinates);
 
 			// check if artifact result exists in cache
-			final var coordinates = artifact.toCoordinates();
 			if (CACHE.containsKey(coordinates)) {
 				boolean found = CACHE.get(coordinates);
 				xray.putAnnotation("cached", found);
@@ -69,15 +69,14 @@ public class Maven {
 					CACHE.put(coordinates, false);
 					return false;
 				default:
-					logger.error("Unexpected status code: {} -> {}", coordinates, statusCode);
-					throw new RuntimeException("Unexpected status code: " + statusCode);
+					throw new MavenException("Unexpected status code: " + statusCode);
 			}
 		}
 	}
 
-	public boolean download(Artifact artifact, File file) throws Exception {
+	public boolean download(Artifact artifact, File file) throws MavenException {
 		try (Subsegment xray = AWSXRay.beginSubsegment("Maven.download")) {
-			String coordinates = artifact.toCoordinates();
+			var coordinates = artifact.toCoordinates();
 			xray.putAnnotation("artifact", coordinates);
 
 			// send HTTP GET request to Maven Central repository URL
@@ -99,13 +98,12 @@ public class Maven {
 					logger.warn("Artifact not found : {}", coordinates);
 					return false;
 				default:
-					logger.error("Unexpected status code: {} -> {}", coordinates, statusCode);
-					throw new RuntimeException("Unexpected status code: " + statusCode);
+					throw new MavenException("Unexpected status code: " + statusCode);
 			}
 		}
 	}
 
-	private int sendRequest(String method, Artifact artifact, Consumer<HttpURLConnection> processor, Subsegment xray) throws IOException {
+	private int sendRequest(String method, Artifact artifact, Consumer<HttpURLConnection> processor, Subsegment xray) throws MavenException {
 
 		HttpURLConnection connection = null;
 		try {
@@ -137,9 +135,8 @@ public class Maven {
 			return statusCode;
 
 		} catch (Exception e) {
-			logger.error("Error:", e);
 			xray.addException(e);
-			throw e;
+			throw new MavenException("HTTP error", e);
 		} finally {
 			// close connection
 			if (connection != null) {
@@ -151,22 +148,18 @@ public class Maven {
 	private static void saveResponseToFile(HttpURLConnection connection, File file) throws IOException {
 
 		// make sure that parent directory exists
-		createParentDirectories(file);
+		File directory = file.getParentFile();
+		if (!directory.isDirectory()) {
+			boolean created = directory.mkdirs();
+			if (!created) {
+				throw new IOException("Error creating directory: " + directory.getAbsolutePath());
+			}
+		}
 
 		// save response body to file
 		try (InputStream inputStream = connection.getInputStream()) {
 			try (FileOutputStream outputStream = new FileOutputStream(file)) {
 				inputStream.transferTo(outputStream);
-			}
-		}
-	}
-
-	private static void createParentDirectories(File file) {
-		File directory = file.getParentFile();
-		if (!directory.isDirectory()) {
-			boolean created = directory.mkdirs();
-			if (!created) {
-				throw new RuntimeException("Error creating directory: " + directory.getAbsolutePath());
 			}
 		}
 	}

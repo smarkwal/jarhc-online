@@ -7,4 +7,8 @@ dependencies {
     // JarHC - JAR Health Check
     // https://github.com/smarkwal/jarhc
     implementation("org.jarhc:jarhc:2.0.0")
+
+    // test dependencies -------------------------------------
+
+    testImplementation(testFixtures(project(":shared")))
 }

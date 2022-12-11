@@ -1,46 +1,33 @@
 package org.jarhc.online.jarhc;
 
-import static org.jarhc.artifacts.MavenRepository.MAVEN_CENTRAL_URL;
+import static org.jarhc.online.jarhc.Response.errorMessage;
+import static org.jarhc.online.jarhc.Response.reportURL;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import com.amazonaws.xray.AWSXRay;
-import com.amazonaws.xray.entities.Subsegment;
 import java.io.File;
 import java.util.List;
 import java.util.regex.Pattern;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jarhc.app.Application;
-import org.jarhc.app.Options;
-import org.jarhc.artifacts.ArtifactFinder;
-import org.jarhc.artifacts.MavenArtifactFinder;
-import org.jarhc.artifacts.MavenRepository;
-import org.jarhc.artifacts.Repository;
 import org.jarhc.online.Artifact;
 import org.jarhc.online.JsonUtils;
 import org.jarhc.online.clients.Maven;
+import org.jarhc.online.clients.MavenException;
 import org.jarhc.online.clients.S3;
-import org.jarhc.utils.JarHcException;
-import org.slf4j.LoggerFactory;
 
-@SuppressWarnings("unused")
-public class Handler implements RequestHandler<JarhcCheckRequest, String> {
+public class Handler implements RequestHandler<Request, Response> {
 
-	private static final Logger logger = LogManager.getLogger(Handler.class);
+	private static final Logger logger = LogManager.getLogger();
 
 	private static final Pattern reportFileNamePattern = Pattern.compile("^[a-z][A-Za-z0-9-.]*(\\.html|\\.txt)$");
 
 	private final S3 s3;
 	private final Maven maven;
+	private final JarHC jarhc;
 
 	public Handler() {
 		logger.debug("Initializing Handler ...");
-
-		var region = System.getenv("AWS_REGION");
-		if (region == null) {
-			region = "eu-central-1";
-		}
 
 		var bucketName = System.getenv("BUCKET_NAME");
 		if (bucketName == null) {
@@ -53,14 +40,24 @@ public class Handler implements RequestHandler<JarhcCheckRequest, String> {
 		}
 
 		// create AWS clients
-		s3 = new S3(region, bucketName, bucketUrl);
+		s3 = new S3(bucketName, bucketUrl);
 		maven = new Maven(10 * 1000); // 10 seconds
+
+		// create JARHC wrapper
+		jarhc = new JarHC();
 
 		logger.debug("Handler initialized.");
 	}
 
+	// visible for testing
+	Handler(S3 s3, Maven maven, JarHC jarhc) {
+		this.s3 = s3;
+		this.maven = maven;
+		this.jarhc = jarhc;
+	}
+
 	@Override
-	public String handleRequest(JarhcCheckRequest request, Context context) {
+	public Response handleRequest(Request request, Context context) {
 
 		if (logger.isTraceEnabled()) {
 			logger.trace("Environment:\n{}", JsonUtils.toJSON(System.getenv()));
@@ -68,140 +65,107 @@ public class Handler implements RequestHandler<JarhcCheckRequest, String> {
 			logger.trace("Context:\n{}", JsonUtils.toJSON(context));
 		}
 
+		try {
+
+			// validate request
+			Response response = validateRequest(request);
+			if (response != null) {
+				return response;
+			}
+
+			// check if report file already exists in S3
+			String reportFileName = request.getReportFileName();
+			boolean exists = s3.exists(reportFileName);
+			var reportFileURL = s3.getURL(reportFileName);
+			if (exists) {
+				if (logger.isInfoEnabled()) {
+					logger.info("Report file found in S3: {}", reportFileURL);
+				}
+				return reportURL(reportFileURL);
+			}
+
+			// create JarHC report
+			List<String> classpath = request.getClasspath();
+			List<String> provided = request.getProvided();
+			File reportFile = new File("/tmp/report.html");
+			jarhc.execute(classpath, provided, reportFile);
+
+			// upload report to S3
+			s3.upload(reportFile, reportFileName);
+
+			return reportURL(reportFileURL);
+
+		} catch (Exception e) {
+			logger.error("Internal error", e);
+			return errorMessage("Internal error: " + e);
+		}
+
+	}
+
+	private Response validateRequest(Request request) throws MavenException {
+
 		List<String> classpath = request.getClasspath();
 		List<String> provided = request.getProvided();
 		String reportFileName = request.getReportFileName();
-		logger.info("Classpath: {}", classpath);
-		logger.info("Provided: {}", provided);
-		logger.info("Report file name: {}", reportFileName);
-
-		// validate report file name
-		if (reportFileName == null || reportFileName.isEmpty()) {
-			throw new IllegalArgumentException("Parameter 'reportFileName' must not be null or empty.");
-		} else if (!reportFileNamePattern.matcher(reportFileName).matches()) {
-			throw new IllegalArgumentException("Parameter 'reportFileName' is not valid.");
-		}
-
-		// TODO: add parameter to skip S3 check
-
-		// check if report file already exists in S3
-		boolean exists;
-		try {
-			exists = s3.exists(reportFileName);
-		} catch (Exception e) {
-			throw new RuntimeException("Error testing if report file exists in S3 bucket.", e);
-		}
-
-		var reportFileURL = s3.getURL(reportFileName);
-		if (exists) {
-			logger.info("Report file found in S3: {}", reportFileURL);
-			return "EXISTS:" + reportFileURL;
+		if (logger.isInfoEnabled()) {
+			logger.info("Classpath: {}", classpath);
+			logger.info("Provided: {}", provided);
+			logger.info("Report file name: {}", reportFileName);
 		}
 
 		// validate classpath libraries
-		if (classpath == null || classpath.isEmpty()) {
-			throw new IllegalArgumentException("Parameter 'classpath' must not be null or empty.");
+		if (classpath.isEmpty()) {
+			return errorMessage("Classpath must not be empty.");
 		} else if (classpath.size() > 10) {
-			throw new IllegalArgumentException("Parameter 'classpath' must not contain more than 10 values.");
+			return errorMessage("Classpath must not contain more than 10 artifacts.");
+		} else {
+			Response response = validateLibraries(classpath);
+			if (response != null) {
+				return response;
+			}
 		}
-		validateLibraries(classpath);
 
 		// validate provided libraries
-		if (provided != null) {
-			if (provided.size() > 10) {
-				throw new IllegalArgumentException("Parameter 'provided' must not contain more than 10 values.");
-			}
-			validateLibraries(provided);
+		if (provided.isEmpty()) {
+			// OK (provided is optional)
+		} else if (provided.size() > 10) {
+			return errorMessage("Provided must not contain more than 10 artifacts.");
 		} else {
-			provided = List.of();
+			Response response = validateLibraries(provided);
+			if (response != null) {
+				return response;
+			}
 		}
 
-		// create JarHC report
-		File reportFile = new File("/tmp/report.html");
-		jarHC(classpath, provided, reportFile);
-
-		// upload report to S3
-		try {
-			s3.upload(reportFile, reportFileName);
-		} catch (Exception e) {
-			throw new RuntimeException("Error uploading report file to S3 bucket.", e);
+		// validate report file name
+		if (reportFileName == null || reportFileName.isEmpty()) {
+			return errorMessage("Report file name must not be null or empty.");
+		} else if (!reportFileNamePattern.matcher(reportFileName).matches()) {
+			return errorMessage("Report file name is not valid.");
 		}
 
-		return "OK:" + reportFileURL;
+		// request is valid
+		return null;
 	}
 
-	private void jarHC(List<String> classpath, List<String> provided, File reportFile) {
-		try (Subsegment xray = AWSXRay.beginSubsegment("Handler.jarHC")) {
-
-			// prepare JarHC options
-			Options options = new Options();
-			options.setDataPath("/tmp/jarhc-data");
-			for (String version : classpath) {
-				options.addClasspathJarPath(version);
-			}
-			for (String version : provided) {
-				options.addProvidedJarPath(version);
-			}
-			options.addReportFile(reportFile.getAbsolutePath());
-
-			// prepare repository
-			Repository repository = createRepository(options);
-
-			// run JarHC
-			try {
-				org.slf4j.Logger appLogger = LoggerFactory.getLogger(Application.class);
-				Application app = new Application(appLogger);
-				app.setRepository(repository);
-				int exitCode = app.run(options);
-				if (exitCode != 0) {
-					throw new RuntimeException("JarHC check failed with exit code " + exitCode + ".");
-				}
-			} catch (Exception e) {
-				xray.addException(e);
-				throw new RuntimeException("Error running JarHC.", e);
-			}
-
-		}
-	}
-
-	private Repository createRepository(Options options) {
-
-		String dataPath = options.getDataPath();
-
-		File directory = new File(dataPath);
-		if (!directory.isDirectory()) {
-			boolean created = directory.mkdirs();
-			if (!created) {
-				throw new JarHcException("Failed to create directory: " + directory.getAbsolutePath());
-			}
-		}
-
-		File cacheDir = new File(dataPath, "checksums");
-		org.slf4j.Logger mavenArtifactFinderLogger = LoggerFactory.getLogger(MavenArtifactFinder.class);
-		ArtifactFinder artifactFinder = new MavenArtifactFinder(cacheDir, mavenArtifactFinderLogger);
-
-		int javaVersion = options.getRelease();
-		org.slf4j.Logger mavenRepositoryLogger = LoggerFactory.getLogger(MavenRepository.class);
-		return new MavenRepository(javaVersion, MAVEN_CENTRAL_URL, dataPath, artifactFinder, mavenRepositoryLogger);
-	}
-
-	private void validateLibraries(List<String> versions) {
+	private Response validateLibraries(List<String> versions) throws MavenException {
 
 		for (String version : versions) {
 
-			// check if version exists in Maven Central
-			boolean exists;
-			try {
-				var artifact = new Artifact(version);
-				exists = maven.exists(artifact);
-			} catch (Exception e) {
-				throw new RuntimeException("Error testing if version exists in Maven Central: " + version, e);
+			// validate coordinates
+			if (!Artifact.isValidVersion(version)) {
+				return errorMessage("Artifact coordinates '" + version + "' are not valid.");
 			}
 
+			// check if artifact exists in Maven Central
+			var artifact = new Artifact(version);
+			boolean exists = maven.exists(artifact);
 			if (!exists) {
-				throw new IllegalArgumentException("Version not found in Maven Central: " + version);
+				return errorMessage("Artifact '" + version + "' not found in Maven Central.");
 			}
 		}
+
+		return null;
 	}
 
 }

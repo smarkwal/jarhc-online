@@ -1,12 +1,12 @@
 package org.jarhc.online.japicc;
 
-public class JapiccCheckRequest {
+public class Request {
 
 	private String oldVersion;
 	private String newVersion;
 	private String reportFileName;
 
-	public JapiccCheckRequest() {
+	public Request() {
 	}
 
 	public String getOldVersion() {
