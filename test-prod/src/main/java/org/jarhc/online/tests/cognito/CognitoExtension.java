@@ -6,8 +6,8 @@ import com.amazonaws.services.cognitoidp.model.AuthenticationResultType;
 import com.amazonaws.services.cognitoidp.model.InitiateAuthRequest;
 import com.amazonaws.services.cognitoidp.model.InitiateAuthResult;
 import com.amazonaws.services.cognitoidp.model.RevokeTokenRequest;
-import com.amazonaws.util.Base64;
 import java.lang.reflect.Parameter;
+import java.util.Base64;
 import java.util.Map;
 import javax.crypto.Mac;
 import org.apache.commons.codec.digest.HmacAlgorithms;
@@ -22,14 +22,14 @@ import org.junit.jupiter.api.extension.ParameterResolver;
 /**
  * JUnit 5 extension for Cognito authentication.
  */
-public class Cognito implements BeforeAllCallback, AfterAllCallback, ParameterResolver {
+public class CognitoExtension implements BeforeAllCallback, AfterAllCallback, ParameterResolver {
 
 	private static final String AWS_REGION = "eu-central-1";
 
 	private AWSCognitoIdentityProvider client;
 	private String clientId = null;
 	private String clientSecret = null;
-	private Tokens tokens = null;
+	private CognitoTokens tokens = null;
 
 	@Override
 	public void beforeAll(ExtensionContext extensionContext) {
@@ -51,7 +51,7 @@ public class Cognito implements BeforeAllCallback, AfterAllCallback, ParameterRe
 			// calculate secret hash
 			Mac mac = HmacUtils.getInitializedMac(HmacAlgorithms.HMAC_SHA_256, clientSecret.getBytes());
 			byte[] hash = mac.doFinal((username + clientId).getBytes());
-			String secretHash = Base64.encodeAsString(hash);
+			String secretHash = Base64.getEncoder().encodeToString(hash);
 
 			// prepare authentication parameters
 			Map<String, String> authParameters = Map.of(
@@ -68,7 +68,7 @@ public class Cognito implements BeforeAllCallback, AfterAllCallback, ParameterRe
 			InitiateAuthResult response = client.initiateAuth(request);
 			AuthenticationResultType result = response.getAuthenticationResult();
 
-			tokens = new Tokens(result.getIdToken(), result.getAccessToken(), result.getRefreshToken());
+			tokens = new CognitoTokens(result.getIdToken(), result.getAccessToken(), result.getRefreshToken());
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -104,44 +104,18 @@ public class Cognito implements BeforeAllCallback, AfterAllCallback, ParameterRe
 	public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
 		Parameter parameter = parameterContext.getParameter();
 		Class<?> parameterType = parameter.getType();
-		return parameterType.equals(Tokens.class);
+		return parameterType.equals(CognitoTokens.class);
 	}
 
 	@Override
 	public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
 		Parameter parameter = parameterContext.getParameter();
 		Class<?> parameterType = parameter.getType();
-		if (parameterType.equals(Tokens.class)) {
+		if (parameterType.equals(CognitoTokens.class)) {
 			return tokens;
 		} else {
 			return null;
 		}
-	}
-
-	public static class Tokens {
-
-		private final String idToken;
-		private final String accessToken;
-		private final String refreshToken;
-
-		public Tokens(String idToken, String accessToken, String refreshToken) {
-			this.idToken = idToken;
-			this.accessToken = accessToken;
-			this.refreshToken = refreshToken;
-		}
-
-		public String getIdToken() {
-			return idToken;
-		}
-
-		public String getAccessToken() {
-			return accessToken;
-		}
-
-		public String getRefreshToken() {
-			return refreshToken;
-		}
-
 	}
 
 }

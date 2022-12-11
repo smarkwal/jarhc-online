@@ -2,7 +2,8 @@ package org.jarhc.online.tests;
 
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
-import org.jarhc.online.tests.cognito.Cognito;
+import org.jarhc.online.tests.cognito.CognitoExtension;
+import org.jarhc.online.tests.cognito.CognitoTokens;
 import org.jarhc.online.tests.webclient.AbstractWebTest;
 import org.jarhc.online.tests.webclient.WebClient;
 import org.jarhc.online.tests.webclient.WebResponse;
@@ -97,7 +98,7 @@ class ApiTest extends AbstractWebTest {
 
 	@Nested
 	@DisplayName("/japicc/submit")
-	@ExtendWith(Cognito.class)
+	@ExtendWith(CognitoExtension.class)
 	class JapiccSubmit {
 
 		String url = "https://api.jarhc.org/japicc/submit";
@@ -111,7 +112,7 @@ class ApiTest extends AbstractWebTest {
 
 		@Test
 		@DisplayName("POST")
-		void post(Cognito.Tokens tokens) {
+		void post(CognitoTokens tokens) {
 			assumeTrue(tokens != null, "Cognito tokens are required for this test.");
 
 			// test
@@ -160,7 +161,7 @@ class ApiTest extends AbstractWebTest {
 
 	@Nested
 	@DisplayName("/japicc/submit")
-	@ExtendWith(Cognito.class)
+	@ExtendWith(CognitoExtension.class)
 	class JarhcSubmit {
 
 		String url = "https://api.jarhc.org/jarhc/submit";
@@ -174,7 +175,7 @@ class ApiTest extends AbstractWebTest {
 
 		@Test
 		@DisplayName("POST")
-		void post(Cognito.Tokens tokens) {
+		void post(CognitoTokens tokens) {
 			assumeTrue(tokens != null, "Cognito tokens are required for this test.");
 
 			// test
