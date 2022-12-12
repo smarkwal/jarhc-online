@@ -5,8 +5,8 @@ import com.amazonaws.xray.entities.Subsegment;
 import java.io.File;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.HeadObjectRequest;
@@ -17,7 +17,7 @@ import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 
 public class S3 {
 
-	private static final Logger logger = LogManager.getLogger();
+	private static final Logger logger = LoggerFactory.getLogger(S3.class);
 
 	private final String bucketName;
 	private final String bucketUrl;

@@ -12,13 +12,13 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jarhc.online.Artifact;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Maven {
 
-	private static final Logger logger = LogManager.getLogger();
+	private static final Logger logger = LoggerFactory.getLogger(Maven.class);
 
 	private static final String BASE_URL = "https://repo1.maven.org/maven2";
 	private static final int STATUS_OK = 200;

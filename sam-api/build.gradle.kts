@@ -45,6 +45,7 @@ subprojects {
 
             // settings
             maxHeapSize = "1G"
+            environment("AWS_REGION", "eu-central-1")
 
             // output
             testlogger {

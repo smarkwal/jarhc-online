@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jarhc.online.Artifact;
 import org.jarhc.online.JsonUtils;
 import org.jarhc.online.Utils;
@@ -27,11 +25,12 @@ import org.jarhc.online.rest.models.JarhcCheckRequest;
 import org.jarhc.online.rest.models.MavenSearchRequest;
 import org.jarhc.online.rest.models.MavenSearchResponse;
 import org.jarhc.online.rest.models.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@SuppressWarnings({ "unused", "DuplicatedCode" })
 public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
-	private static final Logger logger = LogManager.getLogger();
+	private static final Logger logger = LoggerFactory.getLogger(Handler.class);
 
 	private static final int STATUS_OK = 200;
 	private static final int STATUS_BAD_REQUEST = 400;

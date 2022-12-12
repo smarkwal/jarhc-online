@@ -5,7 +5,7 @@ clean:
 	./gradlew clean
 
 validate:
-	./gradlew test
+	./gradlew check
 	sam validate
 
 build:

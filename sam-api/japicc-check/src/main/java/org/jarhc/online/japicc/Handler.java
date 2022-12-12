@@ -7,17 +7,17 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import java.io.File;
 import java.util.regex.Pattern;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jarhc.online.Artifact;
 import org.jarhc.online.JsonUtils;
 import org.jarhc.online.clients.Maven;
 import org.jarhc.online.clients.MavenException;
 import org.jarhc.online.clients.S3;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Handler implements RequestHandler<Request, Response> {
 
-	private static final Logger logger = LogManager.getLogger();
+	private static final Logger logger = LoggerFactory.getLogger(Handler.class);
 
 	private static final Pattern reportFileNamePattern = Pattern.compile("^[a-z][A-Za-z0-9-.]*(\\.html|\\.txt)$");
 

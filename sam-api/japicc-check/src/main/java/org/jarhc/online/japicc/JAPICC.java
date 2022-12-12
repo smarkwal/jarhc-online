@@ -5,12 +5,12 @@ import com.amazonaws.xray.entities.Subsegment;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 class JAPICC {
 
-	private static final Logger logger = LogManager.getLogger();
+	private static final Logger logger = LoggerFactory.getLogger(JAPICC.class);
 
 	private static final String JAPI_COMPLIANCE_CHECKER = "/usr/bin/japi-compliance-checker";
 

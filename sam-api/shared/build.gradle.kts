@@ -7,13 +7,13 @@ dependencies {
 
     // BOMs for version constraints
     api(platform("software.amazon.awssdk:bom:2.18.35"))
-    api(platform("org.apache.logging.log4j:log4j-bom:2.19.0"))
 
-    // AWS Lambda Java API and logging
+    // logging
+    api("org.slf4j:slf4j-api:2.0.5")
+
+    // AWS Lambda Java API
     api("com.amazonaws:aws-lambda-java-core:1.2.2")
     api("com.amazonaws:aws-lambda-java-events:3.11.0")
-    api("com.amazonaws:aws-lambda-java-log4j2:1.5.1")
-    api("org.apache.logging.log4j:log4j-slf4j18-impl:2.18.0")
 
     // AWS SDK for S3, Lambda, and X-Ray (excluding HttpClient and Netty)
     api("software.amazon.awssdk:s3") {

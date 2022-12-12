@@ -10,9 +10,17 @@ dependencies {
     // https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-runtime-interface-client
     implementation("com.amazonaws:aws-lambda-java-runtime-interface-client:2.1.1")
 
+    // logging implementation
+    runtimeOnly("org.slf4j:slf4j-simple:2.0.5")
+
     // test dependencies -------------------------------------
 
     testImplementation(testFixtures(project(":shared")))
+}
+
+// exclude slf4j-simple from tests
+configurations.testRuntimeClasspath {
+    exclude("org.slf4j", "slf4j-simple")
 }
 
 tasks {

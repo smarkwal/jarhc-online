@@ -16,8 +16,8 @@ import org.jarhc.online.clients.Maven;
 import org.jarhc.online.clients.MavenException;
 import org.jarhc.online.clients.S3;
 import org.jarhc.online.clients.S3Exception;
-import org.jarhc.online.testutils.Log4jExtension;
-import org.jarhc.online.testutils.Log4jMemoryAppender;
+import org.jarhc.online.testutils.slf4j.SLF4JExtension;
+import org.jarhc.online.testutils.slf4j.SLF4JLogEvents;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +27,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-@ExtendWith(Log4jExtension.class)
+@ExtendWith(SLF4JExtension.class)
 class HandlerTest {
 
 	private static final String BUCKET_URL = "https://online.jarhc.org/reports/";
@@ -59,11 +59,11 @@ class HandlerTest {
 
 	Request request = new Request();
 
-	Log4jMemoryAppender appender;
+	SLF4JLogEvents logEvents;
 
 	@BeforeEach
-	void setUp(Log4jMemoryAppender appender) {
-		this.appender = appender;
+	void setUp(SLF4JLogEvents logEvents) {
+		this.logEvents = logEvents;
 
 		request.setOldVersion(OLD_VERSION);
 		request.setNewVersion(NEW_VERSION);
@@ -72,7 +72,7 @@ class HandlerTest {
 
 	@AfterEach
 	void tearDown() {
-		appender.assertNoEvents();
+		logEvents.assertNoEvents();
 		verifyNoMoreInteractions(maven, s3, japicc);
 	}
 
@@ -83,8 +83,8 @@ class HandlerTest {
 		new Handler();
 
 		// assert
-		appender.assertDebug("Initializing Handler ...");
-		appender.assertDebug("Handler initialized.");
+		logEvents.assertDebug("Initializing Handler ...");
+		logEvents.assertDebug("Handler initialized.");
 	}
 
 	@Test
@@ -100,9 +100,9 @@ class HandlerTest {
 		Response response = handler.handleRequest(request, context);
 
 		// assert
-		appender.assertInfo("Old version: commons-io:commons-io:2.10.0");
-		appender.assertInfo("New version: commons-io:commons-io:2.11.0");
-		appender.assertInfo("Report file name: report-1234567890.html");
+		logEvents.assertInfo("Old version: commons-io:commons-io:2.10.0");
+		logEvents.assertInfo("New version: commons-io:commons-io:2.11.0");
+		logEvents.assertInfo("Report file name: report-1234567890.html");
 		assertReportURL(response);
 
 		// verify
@@ -121,10 +121,10 @@ class HandlerTest {
 		Response response = handler.handleRequest(request, context);
 
 		// assert
-		appender.assertInfo("Old version: commons-io:commons-io:2.10.0");
-		appender.assertInfo("New version: commons-io:commons-io:2.11.0");
-		appender.assertInfo("Report file name: report-1234567890.html");
-		appender.assertInfo("Report file found in S3: https://online.jarhc.org/reports/report-1234567890.html");
+		logEvents.assertInfo("Old version: commons-io:commons-io:2.10.0");
+		logEvents.assertInfo("New version: commons-io:commons-io:2.11.0");
+		logEvents.assertInfo("Report file name: report-1234567890.html");
+		logEvents.assertInfo("Report file found in S3: https://online.jarhc.org/reports/report-1234567890.html");
 		assertReportURL(response);
 	}
 
@@ -138,9 +138,9 @@ class HandlerTest {
 		Response response = handler.handleRequest(request, context);
 
 		// assert
-		appender.assertInfo("Old version: abc:xyz");
-		appender.assertInfo("New version: commons-io:commons-io:2.11.0");
-		appender.assertInfo("Report file name: report-1234567890.html");
+		logEvents.assertInfo("Old version: abc:xyz");
+		logEvents.assertInfo("New version: commons-io:commons-io:2.11.0");
+		logEvents.assertInfo("Report file name: report-1234567890.html");
 		assertErrorMessage(response, "Artifact coordinates 'abc:xyz' are not valid.");
 	}
 
@@ -154,9 +154,9 @@ class HandlerTest {
 		Response response = handler.handleRequest(request, context);
 
 		// assert
-		appender.assertInfo("Old version: commons-io:commons-io:2.10.0");
-		appender.assertInfo("New version: xyz:abc");
-		appender.assertInfo("Report file name: report-1234567890.html");
+		logEvents.assertInfo("Old version: commons-io:commons-io:2.10.0");
+		logEvents.assertInfo("New version: xyz:abc");
+		logEvents.assertInfo("Report file name: report-1234567890.html");
 		assertErrorMessage(response, "Artifact coordinates 'xyz:abc' are not valid.");
 	}
 
@@ -170,9 +170,9 @@ class HandlerTest {
 		Response response = handler.handleRequest(request, context);
 
 		// assert
-		appender.assertInfo("Old version: commons-io:commons-io:2.10.0");
-		appender.assertInfo("New version: commons-io:commons-io:2.11.0");
-		appender.assertInfo("Report file name: null");
+		logEvents.assertInfo("Old version: commons-io:commons-io:2.10.0");
+		logEvents.assertInfo("New version: commons-io:commons-io:2.11.0");
+		logEvents.assertInfo("Report file name: null");
 		assertErrorMessage(response, "Report file name must not be null or empty.");
 	}
 
@@ -186,9 +186,9 @@ class HandlerTest {
 		Response response = handler.handleRequest(request, context);
 
 		// assert
-		appender.assertInfo("Old version: commons-io:commons-io:2.10.0");
-		appender.assertInfo("New version: commons-io:commons-io:2.11.0");
-		appender.assertInfo("Report file name: ");
+		logEvents.assertInfo("Old version: commons-io:commons-io:2.10.0");
+		logEvents.assertInfo("New version: commons-io:commons-io:2.11.0");
+		logEvents.assertInfo("Report file name: ");
 		assertErrorMessage(response, "Report file name must not be null or empty.");
 	}
 
@@ -202,9 +202,9 @@ class HandlerTest {
 		Response response = handler.handleRequest(request, context);
 
 		// assert
-		appender.assertInfo("Old version: commons-io:commons-io:2.10.0");
-		appender.assertInfo("New version: commons-io:commons-io:2.11.0");
-		appender.assertInfo("Report file name: output/result.json");
+		logEvents.assertInfo("Old version: commons-io:commons-io:2.10.0");
+		logEvents.assertInfo("New version: commons-io:commons-io:2.11.0");
+		logEvents.assertInfo("Report file name: output/result.json");
 		assertErrorMessage(response, "Report file name is not valid.");
 	}
 
@@ -220,9 +220,9 @@ class HandlerTest {
 		Response response = handler.handleRequest(request, context);
 
 		// assert
-		appender.assertInfo("Old version: commons-io:commons-io:2.10.0");
-		appender.assertInfo("New version: commons-io:commons-io:2.11.0");
-		appender.assertInfo("Report file name: report-1234567890.html");
+		logEvents.assertInfo("Old version: commons-io:commons-io:2.10.0");
+		logEvents.assertInfo("New version: commons-io:commons-io:2.11.0");
+		logEvents.assertInfo("Report file name: report-1234567890.html");
 		assertErrorMessage(response, "Artifact 'commons-io:commons-io:2.10.0' not found in Maven Central.");
 
 		// verify
@@ -242,9 +242,9 @@ class HandlerTest {
 		Response response = handler.handleRequest(request, context);
 
 		// assert
-		appender.assertInfo("Old version: commons-io:commons-io:2.10.0");
-		appender.assertInfo("New version: commons-io:commons-io:2.11.0");
-		appender.assertInfo("Report file name: report-1234567890.html");
+		logEvents.assertInfo("Old version: commons-io:commons-io:2.10.0");
+		logEvents.assertInfo("New version: commons-io:commons-io:2.11.0");
+		logEvents.assertInfo("Report file name: report-1234567890.html");
 		assertErrorMessage(response, "Artifact 'commons-io:commons-io:2.11.0' not found in Maven Central.");
 
 		// verify
@@ -262,10 +262,10 @@ class HandlerTest {
 		Response response = handler.handleRequest(request, context);
 
 		// assert
-		appender.assertInfo("Old version: commons-io:commons-io:2.10.0");
-		appender.assertInfo("New version: commons-io:commons-io:2.11.0");
-		appender.assertInfo("Report file name: report-1234567890.html");
-		appender.assertError("Internal error");
+		logEvents.assertInfo("Old version: commons-io:commons-io:2.10.0");
+		logEvents.assertInfo("New version: commons-io:commons-io:2.11.0");
+		logEvents.assertInfo("Report file name: report-1234567890.html");
+		logEvents.assertError("Internal error");
 		assertErrorMessage(response, "Internal error: org.jarhc.online.clients.S3Exception: S3 error");
 	}
 
@@ -281,10 +281,10 @@ class HandlerTest {
 		Response response = handler.handleRequest(request, context);
 
 		// assert
-		appender.assertInfo("Old version: commons-io:commons-io:2.10.0");
-		appender.assertInfo("New version: commons-io:commons-io:2.11.0");
-		appender.assertInfo("Report file name: report-1234567890.html");
-		appender.assertError("Internal error");
+		logEvents.assertInfo("Old version: commons-io:commons-io:2.10.0");
+		logEvents.assertInfo("New version: commons-io:commons-io:2.11.0");
+		logEvents.assertInfo("Report file name: report-1234567890.html");
+		logEvents.assertError("Internal error");
 		assertErrorMessage(response, "Internal error: org.jarhc.online.clients.MavenException: Maven error");
 	}
 
@@ -302,10 +302,10 @@ class HandlerTest {
 		Response response = handler.handleRequest(request, context);
 
 		// assert
-		appender.assertInfo("Old version: commons-io:commons-io:2.10.0");
-		appender.assertInfo("New version: commons-io:commons-io:2.11.0");
-		appender.assertInfo("Report file name: report-1234567890.html");
-		appender.assertError("Internal error");
+		logEvents.assertInfo("Old version: commons-io:commons-io:2.10.0");
+		logEvents.assertInfo("New version: commons-io:commons-io:2.11.0");
+		logEvents.assertInfo("Report file name: report-1234567890.html");
+		logEvents.assertError("Internal error");
 		assertErrorMessage(response, "Internal error: java.lang.RuntimeException: JAPICC error");
 	}
 
