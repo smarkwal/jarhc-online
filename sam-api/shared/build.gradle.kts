@@ -6,10 +6,10 @@ plugins {
 dependencies {
 
     // BOMs for version constraints
-    api(platform("software.amazon.awssdk:bom:2.18.35"))
+    api(platform("software.amazon.awssdk:bom:2.18.38"))
 
     // logging
-    api("org.slf4j:slf4j-api:2.0.5")
+    api("org.slf4j:slf4j-api:2.0.6")
 
     // AWS Lambda Java API
     api("com.amazonaws:aws-lambda-java-core:1.2.2")
