@@ -5,7 +5,7 @@ dependencies {
     implementation(project(":shared"))
 
     // logging implementation
-    runtimeOnly("org.slf4j:slf4j-simple:2.0.5")
+    runtimeOnly("org.slf4j:slf4j-simple:2.0.6")
 
     // test dependencies -------------------------------------
 

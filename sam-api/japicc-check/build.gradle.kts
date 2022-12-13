@@ -11,7 +11,7 @@ dependencies {
     implementation("com.amazonaws:aws-lambda-java-runtime-interface-client:2.1.1")
 
     // logging implementation
-    runtimeOnly("org.slf4j:slf4j-simple:2.0.5")
+    runtimeOnly("org.slf4j:slf4j-simple:2.0.6")
 
     // test dependencies -------------------------------------
 
