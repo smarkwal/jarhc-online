@@ -17,7 +17,7 @@ dependencies {
 
     // add SLF4J 2.0
     implementation("org.slf4j:jcl-over-slf4j:2.0.5")
-    implementation("org.slf4j:jul-to-slf4j:2.0.5")
+    implementation("org.slf4j:jul-to-slf4j:2.0.6")
     runtimeOnly("org.slf4j:slf4j-simple:2.0.5")
 
     // test dependencies -------------------------------------
