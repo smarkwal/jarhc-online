@@ -47,7 +47,7 @@ dependencies {
     // BOMs for version constraints
     implementation(platform("org.junit:junit-bom:5.9.1"))
     implementation(platform("software.amazon.awssdk:bom:2.18.38"))
-    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.362"))
+    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.364"))
 
     // test libraries
     implementation("org.junit.jupiter:junit-jupiter")
@@ -60,8 +60,8 @@ dependencies {
     implementation("com.amazonaws:aws-java-sdk-cognitoidp")
 
     // logging
-    implementation("org.slf4j:slf4j-api:1.7.36")
-    implementation("org.slf4j:slf4j-simple:1.7.36")
+    implementation("org.slf4j:slf4j-api:2.0.6")
+    implementation("org.slf4j:slf4j-simple:2.0.6")
 
     // helpers
     implementation("org.apache.httpcomponents:httpmime:4.5.14")
