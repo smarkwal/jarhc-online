@@ -6,7 +6,7 @@ plugins {
 dependencies {
 
     // BOMs for version constraints
-    api(platform("software.amazon.awssdk:bom:2.18.35"))
+    api(platform("software.amazon.awssdk:bom:2.18.37"))
     api(platform("org.apache.logging.log4j:log4j-bom:2.19.0"))
 
     // AWS Lambda Java API and logging
