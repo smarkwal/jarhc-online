@@ -30,7 +30,7 @@ dependencies {
     // test dependencies -------------------------------------
 
     testFixturesApi("org.junit.jupiter:junit-jupiter:5.9.1")
-    testFixturesApi("org.mockito:mockito-core:4.9.0")
+    testFixturesApi("org.mockito:mockito-core:4.10.0")
     testFixturesApi("org.mockito:mockito-junit-jupiter:4.9.0")
     testFixturesApi("org.assertj:assertj-core:3.23.1")
 }
