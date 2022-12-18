@@ -46,9 +46,10 @@ jobs:
         path: /home/runner/.sonar/cache
         key: sonar-cache
 
-    - name: Set Push Gradle options
-      if: ${{ github.event_name == 'push' && !startsWith(github.ref_name, 'dependabot/') }}
-      run: echo "PUSH_GRADLE_OPTIONS=sonar" >> $GITHUB_ENV
+    # TODO: support SonarQube scan
+    #- name: Set Push Gradle options
+    #  if: ${{ github.event_name == 'push' && !startsWith(github.ref_name, 'dependabot/') }}
+    #  run: echo "PUSH_GRADLE_OPTIONS=sonar" >> $GITHUB_ENV
 
     - name: Build with Gradle
       uses: gradle/gradle-build-action@v2
