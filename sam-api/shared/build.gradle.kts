@@ -6,7 +6,7 @@ plugins {
 dependencies {
 
     // BOMs for version constraints
-    api(platform("software.amazon.awssdk:bom:2.18.38"))
+    api(platform("software.amazon.awssdk:bom:2.18.41"))
 
     // logging
     api("org.slf4j:slf4j-api:2.0.6")
@@ -30,7 +30,7 @@ dependencies {
     // test dependencies -------------------------------------
 
     testFixturesApi("org.junit.jupiter:junit-jupiter:5.9.1")
-    testFixturesApi("org.mockito:mockito-core:4.9.0")
-    testFixturesApi("org.mockito:mockito-junit-jupiter:4.9.0")
+    testFixturesApi("org.mockito:mockito-core:4.10.0")
+    testFixturesApi("org.mockito:mockito-junit-jupiter:4.10.0")
     testFixturesApi("org.assertj:assertj-core:3.23.1")
 }
