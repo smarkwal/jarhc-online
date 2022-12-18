@@ -37,3 +37,10 @@ jobs:
     - name: Build with NPM
       run: npm run build
       working-directory: react-app
+
+    - name: Upload build
+      uses: actions/upload-artifact@v3
+      with:
+        name: build
+        path: react-app/build
+        retention-days: 7
