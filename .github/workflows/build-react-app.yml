@@ -12,6 +12,9 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
+      AWS_REGION: eu-central-1
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       PUSH_GRADLE_OPTIONS: ''
 
@@ -29,10 +32,8 @@ jobs:
 
     - name: Install dependencies
       run: npm ci
-      with:
-        working-directory: react-app
+      working-directory: react-app
 
     - name: Build with NPM
       run: npm run build
-      with:
-        working-directory: react-app
+      working-directory: react-app
