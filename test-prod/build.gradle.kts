@@ -93,6 +93,14 @@ tasks {
             }
         }
 
+        // pass all 'JARHC_' environment variables as system properties to JUnit JVM
+        // (used in GitHub Actions to pass secrets)
+        System.getenv().forEach() {
+            if (it.key.startsWith("JARHC_")) {
+                systemProperty(it.key.toLowerCase().replace('_', '.'), it.value)
+            }
+        }
+
         // output
         testlogger {
             showStandardStreams = true
