@@ -8,6 +8,9 @@ plugins {
     // Gradle Test Logger Plugin
     // https://github.com/radarsh/gradle-test-logger-plugin
     id("com.adarshr.test-logger") version "3.2.0"
+
+    // JarHC Gradle plugin
+    id("org.jarhc") version "1.0.0"
 }
 
 tasks {
@@ -21,6 +24,7 @@ subprojects {
     apply(plugin = "java")
     apply(plugin = "com.github.ben-manes.versions")
     apply(plugin = "com.adarshr.test-logger")
+    apply(plugin = "org.jarhc")
 
     repositories {
         mavenCentral()
@@ -55,20 +59,21 @@ subprojects {
 
         }
 
-        register("dumpDependencies") {
-            doLast {
-                val dependencies = arrayListOf<String>()
-                val configuration = project.configurations.getByName("runtimeClasspath")
-                configuration.resolvedConfiguration.resolvedArtifacts.forEach { artifact ->
-                    dependencies.add(artifact.moduleVersion.id.toString())
-                }
-                dependencies.sort()
-                file("dependencies.txt").writeText(dependencies.joinToString("\n"))
-            }
+        jarhcReport {
+            dependsOn(jar)
+            classpath.setFrom(
+                jar.get().archiveFile,
+                configurations.runtimeClasspath
+            )
+            reportFiles.setFrom(
+                file("${projectDir}/jarhc-report.html"),
+                file("${projectDir}/jarhc-report.txt")
+            )
+            dataDir.set(file("${rootDir}/.jarhc"))
         }
 
         build {
-            dependsOn("dumpDependencies")
+            dependsOn(jarhcReport)
         }
 
     }
