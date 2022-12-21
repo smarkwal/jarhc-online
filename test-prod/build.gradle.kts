@@ -12,7 +12,7 @@ plugins {
     id("com.adarshr.test-logger") version "3.2.0"
 
     // JarHC Gradle plugin
-    id("org.jarhc") version "1.0.0"
+    id("org.jarhc") version "1.0.1"
 }
 
 // load user-specific properties -----------------------------------------------
@@ -122,7 +122,6 @@ tasks {
             file("${projectDir}/jarhc-report.html"),
             file("${projectDir}/jarhc-report.txt")
         )
-        dataDir.set(file("${rootDir}/.jarhc"))
     }
 
     build {
