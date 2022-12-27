@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'test-prod/**'
+      - '.github/workflows/build-test-prod.yml'
   workflow_dispatch:
     inputs:
       additionalGradleOptions:

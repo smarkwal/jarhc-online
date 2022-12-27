@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'react-app/**'
+      - '.github/workflows/build-react-app.yml'
   workflow_dispatch:
 
 jobs:

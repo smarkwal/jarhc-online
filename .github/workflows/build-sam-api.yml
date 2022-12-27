@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'sam-api/**'
+      - '.github/workflows/build-sam-api.yml'
   workflow_dispatch:
     inputs:
       additionalGradleOptions:
