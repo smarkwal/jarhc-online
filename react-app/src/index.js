@@ -7,7 +7,6 @@ import JAPICC from "./JAPICC";
 import JarHC from "./JarHC";
 import JarDiff from "./JarDiff";
 import SrcDiff from "./SrcDiff";
-import reportWebVitals from './reportWebVitals';
 
 let rootElement = document.getElementById('root');
 ReactDOM.render(<React.StrictMode>
@@ -21,8 +20,3 @@ ReactDOM.render(<React.StrictMode>
 		</Routes>
 	</HashRouter>
 </React.StrictMode>, rootElement);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
