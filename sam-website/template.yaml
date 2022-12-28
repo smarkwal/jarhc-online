@@ -48,6 +48,9 @@ Resources:
             Status: Enabled
             Prefix: "reports/"
             ExpirationInDays: 30
+      LoggingConfiguration:
+        DestinationBucketName: "aws-cloud-reports"
+        LogFilePrefix: "s3-access-logs/"
 
   # S3 Bucket Policy for public website
   WebsiteBucketPolicy:
