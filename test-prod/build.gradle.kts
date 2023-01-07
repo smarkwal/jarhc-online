@@ -49,12 +49,12 @@ dependencies {
 
     // BOMs for version constraints
     implementation(platform("org.junit:junit-bom:5.9.1"))
-    implementation(platform("software.amazon.awssdk:bom:2.19.8"))
-    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.376"))
+    implementation(platform("software.amazon.awssdk:bom:2.19.12"))
+    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.380"))
 
     // test libraries
     implementation("org.junit.jupiter:junit-jupiter")
-    implementation("org.assertj:assertj-core:3.23.1")
+    implementation("org.assertj:assertj-core:3.24.1")
     implementation("org.skyscreamer:jsonassert:1.5.1")
 
     // AWS SDK for S3, Lambda, and Cognito
