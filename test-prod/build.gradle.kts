@@ -49,7 +49,7 @@ dependencies {
 
     // BOMs for version constraints
     implementation(platform("org.junit:junit-bom:5.9.1"))
-    implementation(platform("software.amazon.awssdk:bom:2.19.12"))
+    implementation(platform("software.amazon.awssdk:bom:2.19.20"))
     implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.380"))
 
     // test libraries
