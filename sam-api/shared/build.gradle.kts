@@ -6,7 +6,7 @@ plugins {
 dependencies {
 
     // BOMs for version constraints
-    api(platform("software.amazon.awssdk:bom:2.19.12"))
+    api(platform("software.amazon.awssdk:bom:2.19.20"))
 
     // logging
     api("org.slf4j:slf4j-api:2.0.6")
