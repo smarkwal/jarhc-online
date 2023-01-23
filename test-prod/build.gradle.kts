@@ -48,13 +48,13 @@ dependencies {
     // note: this is a tests-only project and all classes are in main source set
 
     // BOMs for version constraints
-    implementation(platform("org.junit:junit-bom:5.9.1"))
-    implementation(platform("software.amazon.awssdk:bom:2.19.12"))
-    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.380"))
+    implementation(platform("org.junit:junit-bom:5.9.2"))
+    implementation(platform("software.amazon.awssdk:bom:2.19.21"))
+    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.389"))
 
     // test libraries
     implementation("org.junit.jupiter:junit-jupiter")
-    implementation("org.assertj:assertj-core:3.24.1")
+    implementation("org.assertj:assertj-core:3.24.2")
     implementation("org.skyscreamer:jsonassert:1.5.1")
 
     // AWS SDK for S3, Lambda, and Cognito
