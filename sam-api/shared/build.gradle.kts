@@ -13,7 +13,7 @@ dependencies {
 
     // AWS Lambda Java API
     api("com.amazonaws:aws-lambda-java-core:1.2.2")
-    api("com.amazonaws:aws-lambda-java-events:3.11.0")
+    api("com.amazonaws:aws-lambda-java-events:3.11.1")
 
     // AWS SDK for S3, Lambda, and X-Ray (excluding HttpClient and Netty)
     api("software.amazon.awssdk:s3") {
