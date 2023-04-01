@@ -12,7 +12,7 @@ dependencies {
     implementation("org.jarhc:jarhc:2.1.0")
 
     // add slf4j-simple
-    runtimeOnly("org.slf4j:slf4j-simple:2.0.6")
+    runtimeOnly("org.slf4j:slf4j-simple:2.0.7")
 
     // test dependencies -------------------------------------
 
