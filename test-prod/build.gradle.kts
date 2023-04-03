@@ -5,7 +5,7 @@ plugins {
 
     // Gradle Versions Plugin
     // https://github.com/ben-manes/gradle-versions-plugin
-    id("com.github.ben-manes.versions") version "0.45.0"
+    id("com.github.ben-manes.versions") version "0.46.0"
 
     // Gradle Test Logger Plugin
     // https://github.com/radarsh/gradle-test-logger-plugin
@@ -49,8 +49,8 @@ dependencies {
 
     // BOMs for version constraints
     implementation(platform("org.junit:junit-bom:5.9.2"))
-    implementation(platform("software.amazon.awssdk:bom:2.19.31"))
-    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.400"))
+    implementation(platform("software.amazon.awssdk:bom:2.20.37"))
+    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.440"))
 
     // test libraries
     implementation("org.junit.jupiter:junit-jupiter")
@@ -63,12 +63,12 @@ dependencies {
     implementation("com.amazonaws:aws-java-sdk-cognitoidp")
 
     // logging
-    implementation("org.slf4j:slf4j-api:2.0.6")
-    implementation("org.slf4j:slf4j-simple:2.0.6")
+    implementation("org.slf4j:slf4j-api:2.0.7")
+    implementation("org.slf4j:slf4j-simple:2.0.7")
 
     // helpers
     implementation("org.apache.httpcomponents:httpmime:4.5.14")
-    implementation("org.json:json:20220924")
+    implementation("org.json:json:20230227")
 
 }
 

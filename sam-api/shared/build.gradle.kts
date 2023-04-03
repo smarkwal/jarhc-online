@@ -6,14 +6,14 @@ plugins {
 dependencies {
 
     // BOMs for version constraints
-    api(platform("software.amazon.awssdk:bom:2.19.31"))
+    api(platform("software.amazon.awssdk:bom:2.20.37"))
 
     // logging
-    api("org.slf4j:slf4j-api:2.0.6")
+    api("org.slf4j:slf4j-api:2.0.7")
 
     // AWS Lambda Java API
     api("com.amazonaws:aws-lambda-java-core:1.2.2")
-    api("com.amazonaws:aws-lambda-java-events:3.11.0")
+    api("com.amazonaws:aws-lambda-java-events:3.11.1")
 
     // AWS SDK for S3, Lambda, and X-Ray (excluding HttpClient and Netty)
     api("software.amazon.awssdk:s3") {
@@ -30,7 +30,7 @@ dependencies {
     // test dependencies -------------------------------------
 
     testFixturesApi("org.junit.jupiter:junit-jupiter:5.9.2")
-    testFixturesApi("org.mockito:mockito-core:5.1.1")
-    testFixturesApi("org.mockito:mockito-junit-jupiter:5.1.1")
+    testFixturesApi("org.mockito:mockito-core:5.2.0")
+    testFixturesApi("org.mockito:mockito-junit-jupiter:5.2.0")
     testFixturesApi("org.assertj:assertj-core:3.24.2")
 }

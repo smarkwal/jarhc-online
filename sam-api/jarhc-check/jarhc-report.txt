@@ -7,33 +7,34 @@ List of JAR files found in classpath.
 
 JAR file                                                       | Size    | Classes | Resources | Checksum (SHA-1)                         | Artifact coordinates
 ---------------------------------------------------------------+---------+---------+-----------+------------------------------------------+----------------------------------------------------------------------------
-jarhc-check-1.0.0-SNAPSHOT.jar                                 | 7.40 KB | 4       | 0         | 25c0be65baf9565143f2a7e62ea61078f4f4eb5f | [unknown]
-shared-1.0.0-SNAPSHOT.jar                                      | 13.9 KB | 9       | 1         | 3ef590e472dab589cd27c40f31b27acbbfaf46ad | [unknown]
+jarhc-check-1.0.0-SNAPSHOT.jar                                 | 7.40 KB | 4       | 0         | db05a4f0cd9dd08c3fd8b37c92803f7d82063145 | [unknown]
+shared-1.0.0-SNAPSHOT.jar                                      | 13.9 KB | 9       | 1         | 397d7d4450c399fec442a1225dab2543b11c1210 | [unknown]
 jarhc-2.1.0.jar                                                | 225 KB  | 130     | 6         | d5fbdfbb704b664f72cec6cce954571b813d51db | org.jarhc:jarhc:2.1.0
-slf4j-simple-2.0.6.jar                                         | 14.9 KB | 7       | 0         | 78c57967fe87a823697fe6cf0f5b394b0aa18337 | org.slf4j:slf4j-simple:2.0.6
+slf4j-simple-2.0.7.jar                                         | 15.6 KB | 7       | 0         | bfa4d4dad645a5b11c022ae0043bac2df6cf16b5 | org.slf4j:slf4j-simple:2.0.7
 jul-to-slf4j-2.0.6.jar                                         | 4.74 KB | 1       | 0         | c4d348977a83a0bfcf42fd6fd1fee6e7904f1a0c | org.slf4j:jul-to-slf4j:2.0.6
 aether-transport-http-1.1.0.jar                                | 35.8 KB | 20      | 1         | 5beffae29e88251ac419bf96dd1426babdb6a66f | org.eclipse.aether:aether-transport-http:1.1.0
 jcl-over-slf4j-2.0.6.jar                                       | 17.0 KB | 8       | 0         | 839ff57e112f2e28ef372e96d135696a6896b9ad | org.slf4j:jcl-over-slf4j:2.0.6
-url-connection-client-2.19.31.jar                              | 31.9 KB | 13      | 0         | bd48cdf55a458f20a7abe5fadbbd10ec9c088d31 | software.amazon.awssdk:url-connection-client:2.19.31
-lambda-2.19.31.jar                                             | 2.04 MB | 1199    | 1         | 4e033900aa6a5df3bf2f6a4dd6e4d7b2cf1463f2 | software.amazon.awssdk:lambda:2.19.31
-s3-2.19.31.jar                                                 | 3.10 MB | 1880    | 1         | 183fe83671c9244f1a9e3b9f3e30a7bde1481e20 | software.amazon.awssdk:s3:2.19.31
-aws-json-protocol-2.19.31.jar                                  | 112 KB  | 86      | 0         | 8cfb204166ec14076497a8a9a3d6e0c3153bfd79 | software.amazon.awssdk:aws-json-protocol:2.19.31
-aws-xml-protocol-2.19.31.jar                                   | 95.8 KB | 61      | 0         | d199819fddf5bc44498d2b2206d476fe89f0a212 | software.amazon.awssdk:aws-xml-protocol:2.19.31
-aws-query-protocol-2.19.31.jar                                 | 68.9 KB | 45      | 0         | 47057a71e4be593cd8584b81ff6e345dba33696b | software.amazon.awssdk:aws-query-protocol:2.19.31
-protocol-core-2.19.31.jar                                      | 34.4 KB | 27      | 0         | 0e9b92956a8c20cdb6a2b2de0d21f4f4ece5fd2d | software.amazon.awssdk:protocol-core:2.19.31
-aws-core-2.19.31.jar                                           | 144 KB  | 104     | 1         | cc44d2af6d2eff328b3789d4f65e59d54c933ea7 | software.amazon.awssdk:aws-core:2.19.31
-auth-2.19.31.jar                                               | 197 KB  | 138     | 0         | 114dc9a1d9d3a1ee175fe2df4024a57455e3bfdc | software.amazon.awssdk:auth:2.19.31
-regions-2.19.31.jar                                            | 768 KB  | 401     | 1         | ba3fd08fdc48b561cf45fd8f6c3527aa9acf918a | software.amazon.awssdk:regions:2.19.31
-sdk-core-2.19.31.jar                                           | 761 KB  | 558     | 4         | 113eb62ecc96d27a1b7376c85221034c096eaf74 | software.amazon.awssdk:sdk-core:2.19.31
-http-client-spi-2.19.31.jar                                    | 79.4 KB | 67      | 0         | e811acb64090d4f3cef4407b98297f8a0ee70560 | software.amazon.awssdk:http-client-spi:2.19.31
-metrics-spi-2.19.31.jar                                        | 26.6 KB | 16      | 0         | 952b4650db4e8264d49c19e3839e91985d580200 | software.amazon.awssdk:metrics-spi:2.19.31
-json-utils-2.19.31.jar                                         | 29.3 KB | 16      | 0         | 16358988f933cfeb78ea652f64caa45cf443df72 | software.amazon.awssdk:json-utils:2.19.31
-arns-2.19.31.jar                                               | 15.4 KB | 8       | 0         | 3747207925c6fdabe4e004eca94e037f833d0fa7 | software.amazon.awssdk:arns:2.19.31
-profiles-2.19.31.jar                                           | 34.6 KB | 17      | 0         | 053dcf8a074a08eb4497376ccd933c1d8bebd475 | software.amazon.awssdk:profiles:2.19.31
-utils-2.19.31.jar                                              | 177 KB  | 123     | 0         | 0e5d51fd8374fd6c98bcacfab20778f94801a5b3 | software.amazon.awssdk:utils:2.19.31
-slf4j-api-2.0.6.jar                                            | 61.1 KB | 51      | 0         | 88c40d8b4f33326f19a7d3c0aaf2c7e8721d4953 | org.slf4j:slf4j-api:2.0.6
+url-connection-client-2.20.37.jar                              | 31.9 KB | 13      | 0         | 172e9cf1d40c8cfc3f32c8947c6ea0727f09c091 | software.amazon.awssdk:url-connection-client:2.20.37
+lambda-2.20.37.jar                                             | 2.05 MB | 1208    | 1         | 0da62cf4bb06493e720af97f3c122c30d10780dc | software.amazon.awssdk:lambda:2.20.37
+s3-2.20.37.jar                                                 | 3.12 MB | 1898    | 1         | f707d8170ee079d67dfca5a27f65e460522afaff | software.amazon.awssdk:s3:2.20.37
+aws-json-protocol-2.20.37.jar                                  | 112 KB  | 86      | 0         | 5877b3c0520604cbc41798b43d95275e24033bb3 | software.amazon.awssdk:aws-json-protocol:2.20.37
+aws-xml-protocol-2.20.37.jar                                   | 95.8 KB | 61      | 0         | c62f9b3525518ea3b9103501c97232675ae5a264 | software.amazon.awssdk:aws-xml-protocol:2.20.37
+aws-query-protocol-2.20.37.jar                                 | 68.9 KB | 45      | 0         | f9ea77e049e9ebb8be8912979b5058ac15faf2cd | software.amazon.awssdk:aws-query-protocol:2.20.37
+protocol-core-2.20.37.jar                                      | 34.4 KB | 27      | 0         | 5e729ed4d6f02e8f2152143dadbf042e3d4f44a0 | software.amazon.awssdk:protocol-core:2.20.37
+aws-core-2.20.37.jar                                           | 147 KB  | 108     | 1         | 6c5881ac9a17defed3774241737c1c59be0d66b1 | software.amazon.awssdk:aws-core:2.20.37
+auth-2.20.37.jar                                               | 200 KB  | 138     | 0         | 42224fbeabe86b39912d3538896e4ff6599d5ed1 | software.amazon.awssdk:auth:2.20.37
+regions-2.20.37.jar                                            | 779 KB  | 404     | 1         | f13ea7a945c0a1e0a14ccfc52feaef94a853be65 | software.amazon.awssdk:regions:2.20.37
+sdk-core-2.20.37.jar                                           | 763 KB  | 560     | 4         | 4ae5a39e9a936e4b7e8cc29047b0a40edc3f0f76 | software.amazon.awssdk:sdk-core:2.20.37
+http-client-spi-2.20.37.jar                                    | 79.4 KB | 67      | 0         | adfda0fe8eeb06c6d16e1a74a709e2a02c94e63d | software.amazon.awssdk:http-client-spi:2.20.37
+metrics-spi-2.20.37.jar                                        | 26.6 KB | 16      | 0         | da932a2598a1b846ab3b118c160b62bce7cedbc9 | software.amazon.awssdk:metrics-spi:2.20.37
+json-utils-2.20.37.jar                                         | 29.3 KB | 16      | 0         | a14a49c47ee6cc101f33ac810a08f8c4a758ccef | software.amazon.awssdk:json-utils:2.20.37
+crt-core-2.20.37.jar                                           | 15.7 KB | 7       | 0         | dcde5efd6ff417bf62e7fee6c21613e51c576071 | software.amazon.awssdk:crt-core:2.20.37
+arns-2.20.37.jar                                               | 15.4 KB | 8       | 0         | 9d4436996adb74bbe263ac4a5f8cf6f15ac32e2a | software.amazon.awssdk:arns:2.20.37
+profiles-2.20.37.jar                                           | 48.1 KB | 27      | 0         | 4f2adb413aa1a38605e08cb8f08734dad6db4398 | software.amazon.awssdk:profiles:2.20.37
+utils-2.20.37.jar                                              | 178 KB  | 123     | 0         | 9aac71168828a3caf4e317f9ae02c80ec28aa420 | software.amazon.awssdk:utils:2.20.37
+slf4j-api-2.0.7.jar                                            | 62.1 KB | 51      | 0         | 41eb7184ea9d556f23e18b5cb99cad1f8581fc00 | org.slf4j:slf4j-api:2.0.7
 aws-lambda-java-core-1.2.2.jar                                 | 7.80 KB | 11      | 0         | 7f6586f0892a7d5277e02d6b2649eb6a19be82b8 | com.amazonaws:aws-lambda-java-core:1.2.2
-aws-lambda-java-events-3.11.0.jar                              | 410 KB  | 270     | 0         | 04b75095a69f1095f37f763bc389475ce9fcc2ea | com.amazonaws:aws-lambda-java-events:3.11.0
+aws-lambda-java-events-3.11.1.jar                              | 410 KB  | 270     | 0         | cf338fc18481fd67e973c554e3e68b81e5b38e72 | com.amazonaws:aws-lambda-java-events:3.11.1
 aws-xray-recorder-sdk-core-2.13.0.jar                          | 222 KB  | 129     | 2         | ad0a3331505003c9d6c49a55b6b3dec04141e0d0 | com.amazonaws:aws-xray-recorder-sdk-core:2.13.0
 asm-9.4.jar                                                    | 120 KB  | 37      | 0         | b4e0e2d2e023aa317b7cfcfc916377ea348e07d1 | org.ow2.asm:asm:9.4
 json-20220924.jar                                              | 68.7 KB | 27      | 0         | 5aa95e7688f76c664af205c5937620f02688dfbc | org.json:json:20220924
@@ -55,10 +56,10 @@ maven-artifact-3.3.9.jar                                       | 53.7 KB | 32   
 maven-builder-support-3.3.9.jar                                | 14.5 KB | 10      | 0         | a96f29da7623c0e1db9824f628548fe8181f6dd0 | org.apache.maven:maven-builder-support:3.3.9
 plexus-utils-3.5.0.jar                                         | 261 KB  | 107     | 3         | ff9f0881396a06b31ff548048256e9a7c8f1207a | org.codehaus.plexus:plexus-utils:3.5.0
 commons-codec-1.15.jar                                         | 346 KB  | 106     | 128       | 49d94806b6e3dc933dacbd8acb0fdbab8ebd1e5d | commons-codec:commons-codec:1.15
-endpoints-spi-2.19.31.jar                                      | 12.8 KB | 6       | 0         | 63279cd4676079a973bec863f202de063fc4f1da | software.amazon.awssdk:endpoints-spi:2.19.31
-annotations-2.19.31.jar                                        | 12.9 KB | 12      | 0         | 0f7e5b0aa6c594127123dfb32fed08dbc637bd29 | software.amazon.awssdk:annotations:2.19.31
-third-party-jackson-core-2.19.31.jar                           | 376 KB  | 127     | 0         | ddf589ade424b9b834b32a148f1220c71b391e3e | software.amazon.awssdk:third-party-jackson-core:2.19.31
-joda-time-2.8.1.jar                                            | 607 KB  | 246     | 469       | f5bfc718c95a7b1d3c371bb02a188a4df18361a9 | joda-time:joda-time:2.8.1
+endpoints-spi-2.20.37.jar                                      | 12.8 KB | 6       | 0         | 0d6b72cf8c38ad7dd9b3542df21792bf3ea29f72 | software.amazon.awssdk:endpoints-spi:2.20.37
+annotations-2.20.37.jar                                        | 12.9 KB | 12      | 0         | 6cf316d6ea5fb62947363239e0cfbeaaed2923bf | software.amazon.awssdk:annotations:2.20.37
+third-party-jackson-core-2.20.37.jar                           | 376 KB  | 127     | 0         | 32902aab718ed8d8287fdeaf7602310230d2ea2f | software.amazon.awssdk:third-party-jackson-core:2.20.37
+joda-time-2.10.8.jar                                           | 629 KB  | 247     | 485       | b0442d652c209a7ba7af0410ce219d997a447701 | joda-time:joda-time:2.10.8
 plexus-component-annotations-1.6.jar                           | 4.17 KB | 3       | 0         | 1a34a4e12b5fded8c548a568f463dfee21500927 | org.codehaus.plexus:plexus-component-annotations:1.6
 commons-lang3-3.4.jar                                          | 424 KB  | 224     | 0         | 5fe28b9518e58819180a43a850fbc0dd24b7c050 | org.apache.commons:commons-lang3:3.4
 failureaccess-1.0.1.jar                                        | 4.51 KB | 2       | 0         | 1dcf1de382a0bf95a3d8b0849546c88bac1292c9 | com.google.guava:failureaccess:1.0.1
@@ -77,7 +78,7 @@ jackson-annotations-2.12.6.jar                                 | 73.9 KB | 71   
 jackson-core-2.12.6.jar                                        | 357 KB  | 124     | 0         | 5bf206c0b5982cfcd868b3d9349dc5190db8bab5 | com.fasterxml.jackson.core:jackson-core:2.12.6
 jackson-dataformat-cbor-2.12.6.jar                             | 60.1 KB | 14      | 0         | 3cd2e6a538f73483c6c59c354ce2276bcdc5ba7b | com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.12.6
 jackson-databind-2.12.6.1.jar                                  | 1.45 MB | 700     | 0         | df01cc0c2d4acb913d73d587274986a12e3dec8c | com.fasterxml.jackson.core:jackson-databind:2.12.6.1
-Classpath                                                      | 20.1 MB | 12643   | 631       | -                                        | -
+Classpath                                                      | 20.2 MB | 12697   | 647       | -                                        | -
 
 Modules
 -------
@@ -88,35 +89,36 @@ JAR file                                                       | Module name    
 jarhc-check-1.0.0-SNAPSHOT.jar                                 | jarhc.check                                         | Auto-generated | Yes       | -                                | [all packages]
 shared-1.0.0-SNAPSHOT.jar                                      | shared                                              | Auto-generated | Yes       | -                                | [all packages]
 jarhc-2.1.0.jar                                                | org.jarhc                                           | Manifest       | Yes       | -                                | [all packages]
-slf4j-simple-2.0.6.jar                                         | org.slf4j.simple                                    | Module-Info    | No        | org.slf4j                        |
+slf4j-simple-2.0.7.jar                                         | org.slf4j.simple                                    | Module-Info    | No        | org.slf4j                        |
                                                                |                                                     |                |           | java.base                        |
 jul-to-slf4j-2.0.6.jar                                         | jul.to.slf4j                                        | Manifest       | Yes       | -                                | [all packages]
 aether-transport-http-1.1.0.jar                                | aether.transport.http                               | Auto-generated | Yes       | -                                | [all packages]
 jcl-over-slf4j-2.0.6.jar                                       | org.apache.commons.logging                          | Module-Info    | No        | org.slf4j                        | org.apache.commons.logging
                                                                |                                                     |                |           | java.base                        |
-url-connection-client-2.19.31.jar                              | software.amazon.awssdk.http.urlconnection           | Manifest       | Yes       | -                                | [all packages]
-lambda-2.19.31.jar                                             | software.amazon.awssdk.services.lambda              | Manifest       | Yes       | -                                | [all packages]
-s3-2.19.31.jar                                                 | software.amazon.awssdk.services.s3                  | Manifest       | Yes       | -                                | [all packages]
-aws-json-protocol-2.19.31.jar                                  | software.amazon.awssdk.protocols.json               | Manifest       | Yes       | -                                | [all packages]
-aws-xml-protocol-2.19.31.jar                                   | software.amazon.awssdk.protocols.xml                | Manifest       | Yes       | -                                | [all packages]
-aws-query-protocol-2.19.31.jar                                 | software.amazon.awssdk.protocols.query              | Manifest       | Yes       | -                                | [all packages]
-protocol-core-2.19.31.jar                                      | software.amazon.awssdk.protocols.core               | Manifest       | Yes       | -                                | [all packages]
-aws-core-2.19.31.jar                                           | software.amazon.awssdk.awscore                      | Manifest       | Yes       | -                                | [all packages]
-auth-2.19.31.jar                                               | software.amazon.awssdk.auth                         | Manifest       | Yes       | -                                | [all packages]
-regions-2.19.31.jar                                            | software.amazon.awssdk.regions                      | Manifest       | Yes       | -                                | [all packages]
-sdk-core-2.19.31.jar                                           | software.amazon.awssdk.core                         | Manifest       | Yes       | -                                | [all packages]
-http-client-spi-2.19.31.jar                                    | software.amazon.awssdk.http                         | Manifest       | Yes       | -                                | [all packages]
-metrics-spi-2.19.31.jar                                        | software.amazon.awssdk.metrics                      | Manifest       | Yes       | -                                | [all packages]
-json-utils-2.19.31.jar                                         | software.amazon.awssdk.protocols.jsoncore           | Manifest       | Yes       | -                                | [all packages]
-arns-2.19.31.jar                                               | software.amazon.awssdk.arns                         | Manifest       | Yes       | -                                | [all packages]
-profiles-2.19.31.jar                                           | software.amazon.awssdk.profiles                     | Manifest       | Yes       | -                                | [all packages]
-utils-2.19.31.jar                                              | software.amazon.awssdk.utils                        | Manifest       | Yes       | -                                | [all packages]
-slf4j-api-2.0.6.jar                                            | org.slf4j                                           | Module-Info    | No        | java.base                        | org.slf4j
+url-connection-client-2.20.37.jar                              | software.amazon.awssdk.http.urlconnection           | Manifest       | Yes       | -                                | [all packages]
+lambda-2.20.37.jar                                             | software.amazon.awssdk.services.lambda              | Manifest       | Yes       | -                                | [all packages]
+s3-2.20.37.jar                                                 | software.amazon.awssdk.services.s3                  | Manifest       | Yes       | -                                | [all packages]
+aws-json-protocol-2.20.37.jar                                  | software.amazon.awssdk.protocols.json               | Manifest       | Yes       | -                                | [all packages]
+aws-xml-protocol-2.20.37.jar                                   | software.amazon.awssdk.protocols.xml                | Manifest       | Yes       | -                                | [all packages]
+aws-query-protocol-2.20.37.jar                                 | software.amazon.awssdk.protocols.query              | Manifest       | Yes       | -                                | [all packages]
+protocol-core-2.20.37.jar                                      | software.amazon.awssdk.protocols.core               | Manifest       | Yes       | -                                | [all packages]
+aws-core-2.20.37.jar                                           | software.amazon.awssdk.awscore                      | Manifest       | Yes       | -                                | [all packages]
+auth-2.20.37.jar                                               | software.amazon.awssdk.auth                         | Manifest       | Yes       | -                                | [all packages]
+regions-2.20.37.jar                                            | software.amazon.awssdk.regions                      | Manifest       | Yes       | -                                | [all packages]
+sdk-core-2.20.37.jar                                           | software.amazon.awssdk.core                         | Manifest       | Yes       | -                                | [all packages]
+http-client-spi-2.20.37.jar                                    | software.amazon.awssdk.http                         | Manifest       | Yes       | -                                | [all packages]
+metrics-spi-2.20.37.jar                                        | software.amazon.awssdk.metrics                      | Manifest       | Yes       | -                                | [all packages]
+json-utils-2.20.37.jar                                         | software.amazon.awssdk.protocols.jsoncore           | Manifest       | Yes       | -                                | [all packages]
+crt-core-2.20.37.jar                                           | software.amazon.awssdk.crtcore                      | Manifest       | Yes       | -                                | [all packages]
+arns-2.20.37.jar                                               | software.amazon.awssdk.arns                         | Manifest       | Yes       | -                                | [all packages]
+profiles-2.20.37.jar                                           | software.amazon.awssdk.profiles                     | Manifest       | Yes       | -                                | [all packages]
+utils-2.20.37.jar                                              | software.amazon.awssdk.utils                        | Manifest       | Yes       | -                                | [all packages]
+slf4j-api-2.0.7.jar                                            | org.slf4j                                           | Module-Info    | No        | java.base                        | org.slf4j
                                                                |                                                     |                |           |                                  | org.slf4j.event
                                                                |                                                     |                |           |                                  | org.slf4j.helpers
                                                                |                                                     |                |           |                                  | org.slf4j.spi
 aws-lambda-java-core-1.2.2.jar                                 | aws.lambda.java.core                                | Auto-generated | Yes       | -                                | [all packages]
-aws-lambda-java-events-3.11.0.jar                              | aws.lambda.java.events                              | Auto-generated | Yes       | -                                | [all packages]
+aws-lambda-java-events-3.11.1.jar                              | aws.lambda.java.events                              | Auto-generated | Yes       | -                                | [all packages]
 aws-xray-recorder-sdk-core-2.13.0.jar                          | com.amazonaws.xray.sdk_core                         | Manifest       | Yes       | -                                | [all packages]
 asm-9.4.jar                                                    | org.objectweb.asm                                   | Module-Info    | No        | java.base                        | org.objectweb.asm
                                                                |                                                     |                |           |                                  | org.objectweb.asm.signature
@@ -139,10 +141,10 @@ maven-artifact-3.3.9.jar                                       | maven.artifact 
 maven-builder-support-3.3.9.jar                                | maven.builder.support                               | Auto-generated | Yes       | -                                | [all packages]
 plexus-utils-3.5.0.jar                                         | plexus.utils                                        | Auto-generated | Yes       | -                                | [all packages]
 commons-codec-1.15.jar                                         | org.apache.commons.codec                            | Manifest       | Yes       | -                                | [all packages]
-endpoints-spi-2.19.31.jar                                      | software.amazon.awssdk.endpoints                    | Manifest       | Yes       | -                                | [all packages]
-annotations-2.19.31.jar                                        | software.amazon.awssdk.annotations                  | Manifest       | Yes       | -                                | [all packages]
-third-party-jackson-core-2.19.31.jar                           | software.amazon.awssdk.thirdparty.jackson.core      | Manifest       | Yes       | -                                | [all packages]
-joda-time-2.8.1.jar                                            | joda.time                                           | Auto-generated | Yes       | -                                | [all packages]
+endpoints-spi-2.20.37.jar                                      | software.amazon.awssdk.endpoints                    | Manifest       | Yes       | -                                | [all packages]
+annotations-2.20.37.jar                                        | software.amazon.awssdk.annotations                  | Manifest       | Yes       | -                                | [all packages]
+third-party-jackson-core-2.20.37.jar                           | software.amazon.awssdk.thirdparty.jackson.core      | Manifest       | Yes       | -                                | [all packages]
+joda-time-2.10.8.jar                                           | org.joda.time                                       | Manifest       | Yes       | -                                | [all packages]
 plexus-component-annotations-1.6.jar                           | plexus.component.annotations                        | Auto-generated | Yes       | -                                | [all packages]
 commons-lang3-3.4.jar                                          | commons.lang3                                       | Auto-generated | Yes       | -                                | [all packages]
 failureaccess-1.0.1.jar                                        | failureaccess                                       | Auto-generated | Yes       | -                                | [all packages]
@@ -204,30 +206,31 @@ JAR file                                                       | Multi-release  
 jarhc-check-1.0.0-SNAPSHOT.jar                                 | No                    | Java 11 (4)
 shared-1.0.0-SNAPSHOT.jar                                      | No                    | Java 11 (9)
 jarhc-2.1.0.jar                                                | No                    | Java 11 (130)
-slf4j-simple-2.0.6.jar                                         | Yes (Java 9)          | Java 8 (7)
+slf4j-simple-2.0.7.jar                                         | Yes (Java 9)          | Java 8 (7)
 jul-to-slf4j-2.0.6.jar                                         | No                    | Java 8 (1)
 aether-transport-http-1.1.0.jar                                | No                    | Java 5 (20)
 jcl-over-slf4j-2.0.6.jar                                       | Yes (Java 9)          | Java 8 (8)
-url-connection-client-2.19.31.jar                              | No                    | Java 8 (13)
-lambda-2.19.31.jar                                             | No                    | Java 8 (1199)
-s3-2.19.31.jar                                                 | No                    | Java 8 (1880)
-aws-json-protocol-2.19.31.jar                                  | No                    | Java 8 (86)
-aws-xml-protocol-2.19.31.jar                                   | No                    | Java 8 (61)
-aws-query-protocol-2.19.31.jar                                 | No                    | Java 8 (45)
-protocol-core-2.19.31.jar                                      | No                    | Java 8 (27)
-aws-core-2.19.31.jar                                           | No                    | Java 8 (104)
-auth-2.19.31.jar                                               | No                    | Java 8 (138)
-regions-2.19.31.jar                                            | No                    | Java 8 (401)
-sdk-core-2.19.31.jar                                           | No                    | Java 8 (558)
-http-client-spi-2.19.31.jar                                    | No                    | Java 8 (67)
-metrics-spi-2.19.31.jar                                        | No                    | Java 8 (16)
-json-utils-2.19.31.jar                                         | No                    | Java 8 (16)
-arns-2.19.31.jar                                               | No                    | Java 8 (8)
-profiles-2.19.31.jar                                           | No                    | Java 8 (17)
-utils-2.19.31.jar                                              | No                    | Java 8 (123)
-slf4j-api-2.0.6.jar                                            | Yes (Java 9)          | Java 8 (51)
+url-connection-client-2.20.37.jar                              | No                    | Java 8 (13)
+lambda-2.20.37.jar                                             | No                    | Java 8 (1208)
+s3-2.20.37.jar                                                 | No                    | Java 8 (1898)
+aws-json-protocol-2.20.37.jar                                  | No                    | Java 8 (86)
+aws-xml-protocol-2.20.37.jar                                   | No                    | Java 8 (61)
+aws-query-protocol-2.20.37.jar                                 | No                    | Java 8 (45)
+protocol-core-2.20.37.jar                                      | No                    | Java 8 (27)
+aws-core-2.20.37.jar                                           | No                    | Java 8 (108)
+auth-2.20.37.jar                                               | No                    | Java 8 (138)
+regions-2.20.37.jar                                            | No                    | Java 8 (404)
+sdk-core-2.20.37.jar                                           | No                    | Java 8 (560)
+http-client-spi-2.20.37.jar                                    | No                    | Java 8 (67)
+metrics-spi-2.20.37.jar                                        | No                    | Java 8 (16)
+json-utils-2.20.37.jar                                         | No                    | Java 8 (16)
+crt-core-2.20.37.jar                                           | No                    | Java 8 (7)
+arns-2.20.37.jar                                               | No                    | Java 8 (8)
+profiles-2.20.37.jar                                           | No                    | Java 8 (27)
+utils-2.20.37.jar                                              | No                    | Java 8 (123)
+slf4j-api-2.0.7.jar                                            | Yes (Java 9)          | Java 8 (51)
 aws-lambda-java-core-1.2.2.jar                                 | No                    | Java 8 (11)
-aws-lambda-java-events-3.11.0.jar                              | No                    | Java 8 (270)
+aws-lambda-java-events-3.11.1.jar                              | No                    | Java 8 (270)
 aws-xray-recorder-sdk-core-2.13.0.jar                          | No                    | Java 8 (129)
 asm-9.4.jar                                                    | No                    | Java 5 (37)
 json-20220924.jar                                              | No                    | Java 6 (27)
@@ -249,10 +252,10 @@ maven-artifact-3.3.9.jar                                       | No             
 maven-builder-support-3.3.9.jar                                | No                    | Java 7 (10)
 plexus-utils-3.5.0.jar                                         | Yes (Java 9, Java 10) | Java 10 (1), Java 8 (106)
 commons-codec-1.15.jar                                         | No                    | Java 7 (106)
-endpoints-spi-2.19.31.jar                                      | No                    | Java 8 (6)
-annotations-2.19.31.jar                                        | No                    | Java 8 (12)
-third-party-jackson-core-2.19.31.jar                           | No                    | Java 6 (127)
-joda-time-2.8.1.jar                                            | No                    | Java 5 (246)
+endpoints-spi-2.20.37.jar                                      | No                    | Java 8 (6)
+annotations-2.20.37.jar                                        | No                    | Java 8 (12)
+third-party-jackson-core-2.20.37.jar                           | No                    | Java 6 (127)
+joda-time-2.10.8.jar                                           | No                    | Java 5 (247)
 plexus-component-annotations-1.6.jar                           | No                    | Java 5 (3)
 commons-lang3-3.4.jar                                          | No                    | Java 6 (224)
 failureaccess-1.0.1.jar                                        | No                    | Java 7 (2)
@@ -271,8 +274,8 @@ jackson-annotations-2.12.6.jar                                 | No             
 jackson-core-2.12.6.jar                                        | No                    | Java 6 (124)
 jackson-dataformat-cbor-2.12.6.jar                             | No                    | Java 7 (14)
 jackson-databind-2.12.6.1.jar                                  | No                    | Java 7 (700)
-Classpath                                                      | -                     | Java 11 (143), Java 10 (1), Java 8 (7720), Java 7 (2353),
-                                                               |                       | Java 6 (1309), Java 5 (1117)
+Classpath                                                      | -                     | Java 11 (143), Java 10 (1), Java 8 (7773), Java 7 (2353),
+                                                               |                       | Java 6 (1309), Java 5 (1118)
 
 JAR Dependencies
 ----------------
@@ -284,15 +287,15 @@ jarhc-check-1.0.0-SNAPSHOT.jar                                 | aws-lambda-java
                                                                | aws-xray-recorder-sdk-core-2.13.0.jar |
                                                                | jarhc-2.1.0.jar                       |
                                                                | shared-1.0.0-SNAPSHOT.jar             |
-                                                               | slf4j-api-2.0.6.jar                   |
+                                                               | slf4j-api-2.0.7.jar                   |
 shared-1.0.0-SNAPSHOT.jar                                      | aws-xray-recorder-sdk-core-2.13.0.jar | jarhc-check-1.0.0-SNAPSHOT.jar
-                                                               | http-client-spi-2.19.31.jar           |
+                                                               | http-client-spi-2.20.37.jar           |
                                                                | jackson-databind-2.12.6.1.jar         |
-                                                               | lambda-2.19.31.jar                    |
-                                                               | s3-2.19.31.jar                        |
-                                                               | sdk-core-2.19.31.jar                  |
-                                                               | slf4j-api-2.0.6.jar                   |
-                                                               | url-connection-client-2.19.31.jar     |
+                                                               | lambda-2.20.37.jar                    |
+                                                               | s3-2.20.37.jar                        |
+                                                               | sdk-core-2.20.37.jar                  |
+                                                               | slf4j-api-2.0.7.jar                   |
+                                                               | url-connection-client-2.20.37.jar     |
 jarhc-2.1.0.jar                                                | aether-api-1.1.0.jar                  | jarhc-check-1.0.0-SNAPSHOT.jar
                                                                | aether-connector-basic-1.1.0.jar      |
                                                                | aether-impl-1.1.0.jar                 |
@@ -305,186 +308,190 @@ jarhc-2.1.0.jar                                                | aether-api-1.1.
                                                                | json-20220924.jar                     |
                                                                | jul-to-slf4j-2.0.6.jar                |
                                                                | maven-aether-provider-3.3.9.jar       |
-                                                               | slf4j-api-2.0.6.jar                   |
-slf4j-simple-2.0.6.jar                                         | slf4j-api-2.0.6.jar                   | [none]
-jul-to-slf4j-2.0.6.jar                                         | slf4j-api-2.0.6.jar                   | jarhc-2.1.0.jar
+                                                               | slf4j-api-2.0.7.jar                   |
+slf4j-simple-2.0.7.jar                                         | slf4j-api-2.0.7.jar                   | [none]
+jul-to-slf4j-2.0.6.jar                                         | slf4j-api-2.0.7.jar                   | jarhc-2.1.0.jar
 aether-transport-http-1.1.0.jar                                | aether-api-1.1.0.jar                  | jarhc-2.1.0.jar
                                                                | aether-spi-1.1.0.jar                  |
                                                                | aether-util-1.1.0.jar                 |
                                                                | httpclient-4.5.14.jar                 |
                                                                | httpcore-4.4.16.jar                   |
-jcl-over-slf4j-2.0.6.jar                                       | slf4j-api-2.0.6.jar                   | aws-java-sdk-core-1.12.228.jar
+jcl-over-slf4j-2.0.6.jar                                       | slf4j-api-2.0.7.jar                   | aws-java-sdk-core-1.12.228.jar
                                                                |                                       | aws-java-sdk-xray-1.12.228.jar
                                                                |                                       | aws-xray-recorder-sdk-core-2.13.0.jar
                                                                |                                       | httpclient-4.5.14.jar
                                                                |                                       | jarhc-2.1.0.jar
-url-connection-client-2.19.31.jar                              | annotations-2.19.31.jar               | shared-1.0.0-SNAPSHOT.jar
-                                                               | http-client-spi-2.19.31.jar           |
-                                                               | utils-2.19.31.jar                     |
-lambda-2.19.31.jar                                             | annotations-2.19.31.jar               | shared-1.0.0-SNAPSHOT.jar
-                                                               | auth-2.19.31.jar                      |
-                                                               | aws-core-2.19.31.jar                  |
-                                                               | aws-json-protocol-2.19.31.jar         |
-                                                               | endpoints-spi-2.19.31.jar             |
-                                                               | http-client-spi-2.19.31.jar           |
-                                                               | json-utils-2.19.31.jar                |
-                                                               | metrics-spi-2.19.31.jar               |
-                                                               | protocol-core-2.19.31.jar             |
+url-connection-client-2.20.37.jar                              | annotations-2.20.37.jar               | shared-1.0.0-SNAPSHOT.jar
+                                                               | http-client-spi-2.20.37.jar           |
+                                                               | utils-2.20.37.jar                     |
+lambda-2.20.37.jar                                             | annotations-2.20.37.jar               | shared-1.0.0-SNAPSHOT.jar
+                                                               | auth-2.20.37.jar                      |
+                                                               | aws-core-2.20.37.jar                  |
+                                                               | aws-json-protocol-2.20.37.jar         |
+                                                               | endpoints-spi-2.20.37.jar             |
+                                                               | http-client-spi-2.20.37.jar           |
+                                                               | json-utils-2.20.37.jar                |
+                                                               | metrics-spi-2.20.37.jar               |
+                                                               | protocol-core-2.20.37.jar             |
                                                                | reactive-streams-1.0.3.jar            |
-                                                               | regions-2.19.31.jar                   |
-                                                               | sdk-core-2.19.31.jar                  |
-                                                               | slf4j-api-2.0.6.jar                   |
-                                                               | utils-2.19.31.jar                     |
-s3-2.19.31.jar                                                 | annotations-2.19.31.jar               | shared-1.0.0-SNAPSHOT.jar
-                                                               | arns-2.19.31.jar                      |
-                                                               | auth-2.19.31.jar                      |
-                                                               | aws-core-2.19.31.jar                  |
-                                                               | aws-xml-protocol-2.19.31.jar          |
-                                                               | endpoints-spi-2.19.31.jar             |
-                                                               | http-client-spi-2.19.31.jar           |
-                                                               | json-utils-2.19.31.jar                |
-                                                               | metrics-spi-2.19.31.jar               |
-                                                               | profiles-2.19.31.jar                  |
-                                                               | protocol-core-2.19.31.jar             |
+                                                               | regions-2.20.37.jar                   |
+                                                               | sdk-core-2.20.37.jar                  |
+                                                               | slf4j-api-2.0.7.jar                   |
+                                                               | utils-2.20.37.jar                     |
+s3-2.20.37.jar                                                 | annotations-2.20.37.jar               | shared-1.0.0-SNAPSHOT.jar
+                                                               | arns-2.20.37.jar                      |
+                                                               | auth-2.20.37.jar                      |
+                                                               | aws-core-2.20.37.jar                  |
+                                                               | aws-xml-protocol-2.20.37.jar          |
+                                                               | crt-core-2.20.37.jar                  |
+                                                               | endpoints-spi-2.20.37.jar             |
+                                                               | http-client-spi-2.20.37.jar           |
+                                                               | json-utils-2.20.37.jar                |
+                                                               | metrics-spi-2.20.37.jar               |
+                                                               | profiles-2.20.37.jar                  |
+                                                               | protocol-core-2.20.37.jar             |
                                                                | reactive-streams-1.0.3.jar            |
-                                                               | regions-2.19.31.jar                   |
-                                                               | sdk-core-2.19.31.jar                  |
-                                                               | slf4j-api-2.0.6.jar                   |
-                                                               | utils-2.19.31.jar                     |
-aws-json-protocol-2.19.31.jar                                  | annotations-2.19.31.jar               | lambda-2.19.31.jar
-                                                               | aws-core-2.19.31.jar                  |
-                                                               | http-client-spi-2.19.31.jar           |
-                                                               | json-utils-2.19.31.jar                |
-                                                               | metrics-spi-2.19.31.jar               |
-                                                               | protocol-core-2.19.31.jar             |
-                                                               | sdk-core-2.19.31.jar                  |
-                                                               | slf4j-api-2.0.6.jar                   |
-                                                               | third-party-jackson-core-2.19.31.jar  |
-                                                               | utils-2.19.31.jar                     |
-aws-xml-protocol-2.19.31.jar                                   | annotations-2.19.31.jar               | s3-2.19.31.jar
-                                                               | aws-core-2.19.31.jar                  |
-                                                               | aws-query-protocol-2.19.31.jar        |
-                                                               | http-client-spi-2.19.31.jar           |
-                                                               | metrics-spi-2.19.31.jar               |
-                                                               | protocol-core-2.19.31.jar             |
-                                                               | sdk-core-2.19.31.jar                  |
-                                                               | slf4j-api-2.0.6.jar                   |
-                                                               | utils-2.19.31.jar                     |
-aws-query-protocol-2.19.31.jar                                 | annotations-2.19.31.jar               | aws-xml-protocol-2.19.31.jar
-                                                               | aws-core-2.19.31.jar                  |
-                                                               | http-client-spi-2.19.31.jar           |
-                                                               | metrics-spi-2.19.31.jar               |
-                                                               | protocol-core-2.19.31.jar             |
-                                                               | sdk-core-2.19.31.jar                  |
-                                                               | utils-2.19.31.jar                     |
-protocol-core-2.19.31.jar                                      | annotations-2.19.31.jar               | aws-json-protocol-2.19.31.jar
-                                                               | http-client-spi-2.19.31.jar           | aws-query-protocol-2.19.31.jar
-                                                               | sdk-core-2.19.31.jar                  | aws-xml-protocol-2.19.31.jar
-                                                               | utils-2.19.31.jar                     | lambda-2.19.31.jar
-                                                               |                                       | s3-2.19.31.jar
-aws-core-2.19.31.jar                                           | annotations-2.19.31.jar               | aws-json-protocol-2.19.31.jar
-                                                               | auth-2.19.31.jar                      | aws-query-protocol-2.19.31.jar
-                                                               | endpoints-spi-2.19.31.jar             | aws-xml-protocol-2.19.31.jar
-                                                               | eventstream-1.0.1.jar                 | lambda-2.19.31.jar
-                                                               | http-client-spi-2.19.31.jar           | s3-2.19.31.jar
-                                                               | metrics-spi-2.19.31.jar               |
-                                                               | profiles-2.19.31.jar                  |
+                                                               | regions-2.20.37.jar                   |
+                                                               | sdk-core-2.20.37.jar                  |
+                                                               | slf4j-api-2.0.7.jar                   |
+                                                               | utils-2.20.37.jar                     |
+aws-json-protocol-2.20.37.jar                                  | annotations-2.20.37.jar               | lambda-2.20.37.jar
+                                                               | aws-core-2.20.37.jar                  |
+                                                               | http-client-spi-2.20.37.jar           |
+                                                               | json-utils-2.20.37.jar                |
+                                                               | metrics-spi-2.20.37.jar               |
+                                                               | protocol-core-2.20.37.jar             |
+                                                               | sdk-core-2.20.37.jar                  |
+                                                               | slf4j-api-2.0.7.jar                   |
+                                                               | third-party-jackson-core-2.20.37.jar  |
+                                                               | utils-2.20.37.jar                     |
+aws-xml-protocol-2.20.37.jar                                   | annotations-2.20.37.jar               | s3-2.20.37.jar
+                                                               | aws-core-2.20.37.jar                  |
+                                                               | aws-query-protocol-2.20.37.jar        |
+                                                               | http-client-spi-2.20.37.jar           |
+                                                               | metrics-spi-2.20.37.jar               |
+                                                               | protocol-core-2.20.37.jar             |
+                                                               | sdk-core-2.20.37.jar                  |
+                                                               | slf4j-api-2.0.7.jar                   |
+                                                               | utils-2.20.37.jar                     |
+aws-query-protocol-2.20.37.jar                                 | annotations-2.20.37.jar               | aws-xml-protocol-2.20.37.jar
+                                                               | aws-core-2.20.37.jar                  |
+                                                               | http-client-spi-2.20.37.jar           |
+                                                               | metrics-spi-2.20.37.jar               |
+                                                               | protocol-core-2.20.37.jar             |
+                                                               | sdk-core-2.20.37.jar                  |
+                                                               | utils-2.20.37.jar                     |
+protocol-core-2.20.37.jar                                      | annotations-2.20.37.jar               | aws-json-protocol-2.20.37.jar
+                                                               | http-client-spi-2.20.37.jar           | aws-query-protocol-2.20.37.jar
+                                                               | sdk-core-2.20.37.jar                  | aws-xml-protocol-2.20.37.jar
+                                                               | utils-2.20.37.jar                     | lambda-2.20.37.jar
+                                                               |                                       | s3-2.20.37.jar
+aws-core-2.20.37.jar                                           | annotations-2.20.37.jar               | aws-json-protocol-2.20.37.jar
+                                                               | auth-2.20.37.jar                      | aws-query-protocol-2.20.37.jar
+                                                               | endpoints-spi-2.20.37.jar             | aws-xml-protocol-2.20.37.jar
+                                                               | eventstream-1.0.1.jar                 | lambda-2.20.37.jar
+                                                               | http-client-spi-2.20.37.jar           | s3-2.20.37.jar
+                                                               | metrics-spi-2.20.37.jar               |
+                                                               | profiles-2.20.37.jar                  |
                                                                | reactive-streams-1.0.3.jar            |
-                                                               | regions-2.19.31.jar                   |
-                                                               | sdk-core-2.19.31.jar                  |
-                                                               | utils-2.19.31.jar                     |
-auth-2.19.31.jar                                               | annotations-2.19.31.jar               | aws-core-2.19.31.jar
-                                                               | eventstream-1.0.1.jar                 | lambda-2.19.31.jar
-                                                               | http-client-spi-2.19.31.jar           | s3-2.19.31.jar
-                                                               | json-utils-2.19.31.jar                |
-                                                               | profiles-2.19.31.jar                  |
+                                                               | regions-2.20.37.jar                   |
+                                                               | sdk-core-2.20.37.jar                  |
+                                                               | utils-2.20.37.jar                     |
+auth-2.20.37.jar                                               | annotations-2.20.37.jar               | aws-core-2.20.37.jar
+                                                               | eventstream-1.0.1.jar                 | lambda-2.20.37.jar
+                                                               | http-client-spi-2.20.37.jar           | s3-2.20.37.jar
+                                                               | json-utils-2.20.37.jar                |
+                                                               | profiles-2.20.37.jar                  |
                                                                | reactive-streams-1.0.3.jar            |
-                                                               | regions-2.19.31.jar                   |
-                                                               | sdk-core-2.19.31.jar                  |
-                                                               | slf4j-api-2.0.6.jar                   |
-                                                               | utils-2.19.31.jar                     |
-regions-2.19.31.jar                                            | annotations-2.19.31.jar               | auth-2.19.31.jar
-                                                               | json-utils-2.19.31.jar                | aws-core-2.19.31.jar
-                                                               | profiles-2.19.31.jar                  | lambda-2.19.31.jar
-                                                               | sdk-core-2.19.31.jar                  | s3-2.19.31.jar
-                                                               | slf4j-api-2.0.6.jar                   |
-                                                               | utils-2.19.31.jar                     |
-sdk-core-2.19.31.jar                                           | annotations-2.19.31.jar               | auth-2.19.31.jar
-                                                               | endpoints-spi-2.19.31.jar             | aws-core-2.19.31.jar
-                                                               | http-client-spi-2.19.31.jar           | aws-json-protocol-2.19.31.jar
-                                                               | metrics-spi-2.19.31.jar               | aws-query-protocol-2.19.31.jar
-                                                               | profiles-2.19.31.jar                  | aws-xml-protocol-2.19.31.jar
-                                                               | reactive-streams-1.0.3.jar            | lambda-2.19.31.jar
-                                                               | slf4j-api-2.0.6.jar                   | protocol-core-2.19.31.jar
-                                                               | utils-2.19.31.jar                     | regions-2.19.31.jar
-                                                               |                                       | s3-2.19.31.jar
+                                                               | regions-2.20.37.jar                   |
+                                                               | sdk-core-2.20.37.jar                  |
+                                                               | slf4j-api-2.0.7.jar                   |
+                                                               | utils-2.20.37.jar                     |
+regions-2.20.37.jar                                            | annotations-2.20.37.jar               | auth-2.20.37.jar
+                                                               | json-utils-2.20.37.jar                | aws-core-2.20.37.jar
+                                                               | profiles-2.20.37.jar                  | lambda-2.20.37.jar
+                                                               | sdk-core-2.20.37.jar                  | s3-2.20.37.jar
+                                                               | slf4j-api-2.0.7.jar                   |
+                                                               | utils-2.20.37.jar                     |
+sdk-core-2.20.37.jar                                           | annotations-2.20.37.jar               | auth-2.20.37.jar
+                                                               | endpoints-spi-2.20.37.jar             | aws-core-2.20.37.jar
+                                                               | http-client-spi-2.20.37.jar           | aws-json-protocol-2.20.37.jar
+                                                               | metrics-spi-2.20.37.jar               | aws-query-protocol-2.20.37.jar
+                                                               | profiles-2.20.37.jar                  | aws-xml-protocol-2.20.37.jar
+                                                               | reactive-streams-1.0.3.jar            | lambda-2.20.37.jar
+                                                               | slf4j-api-2.0.7.jar                   | protocol-core-2.20.37.jar
+                                                               | utils-2.20.37.jar                     | regions-2.20.37.jar
+                                                               |                                       | s3-2.20.37.jar
                                                                |                                       | shared-1.0.0-SNAPSHOT.jar
-http-client-spi-2.19.31.jar                                    | annotations-2.19.31.jar               | auth-2.19.31.jar
-                                                               | metrics-spi-2.19.31.jar               | aws-core-2.19.31.jar
-                                                               | reactive-streams-1.0.3.jar            | aws-json-protocol-2.19.31.jar
-                                                               | utils-2.19.31.jar                     | aws-query-protocol-2.19.31.jar
-                                                               |                                       | aws-xml-protocol-2.19.31.jar
-                                                               |                                       | lambda-2.19.31.jar
-                                                               |                                       | protocol-core-2.19.31.jar
-                                                               |                                       | s3-2.19.31.jar
-                                                               |                                       | sdk-core-2.19.31.jar
+http-client-spi-2.20.37.jar                                    | annotations-2.20.37.jar               | auth-2.20.37.jar
+                                                               | metrics-spi-2.20.37.jar               | aws-core-2.20.37.jar
+                                                               | reactive-streams-1.0.3.jar            | aws-json-protocol-2.20.37.jar
+                                                               | utils-2.20.37.jar                     | aws-query-protocol-2.20.37.jar
+                                                               |                                       | aws-xml-protocol-2.20.37.jar
+                                                               |                                       | lambda-2.20.37.jar
+                                                               |                                       | protocol-core-2.20.37.jar
+                                                               |                                       | s3-2.20.37.jar
+                                                               |                                       | sdk-core-2.20.37.jar
                                                                |                                       | shared-1.0.0-SNAPSHOT.jar
-                                                               |                                       | url-connection-client-2.19.31.jar
-metrics-spi-2.19.31.jar                                        | annotations-2.19.31.jar               | aws-core-2.19.31.jar
-                                                               | slf4j-api-2.0.6.jar                   | aws-json-protocol-2.19.31.jar
-                                                               | utils-2.19.31.jar                     | aws-query-protocol-2.19.31.jar
-                                                               |                                       | aws-xml-protocol-2.19.31.jar
-                                                               |                                       | http-client-spi-2.19.31.jar
-                                                               |                                       | lambda-2.19.31.jar
-                                                               |                                       | s3-2.19.31.jar
-                                                               |                                       | sdk-core-2.19.31.jar
-json-utils-2.19.31.jar                                         | annotations-2.19.31.jar               | auth-2.19.31.jar
-                                                               | third-party-jackson-core-2.19.31.jar  | aws-json-protocol-2.19.31.jar
-                                                               | utils-2.19.31.jar                     | lambda-2.19.31.jar
-                                                               |                                       | regions-2.19.31.jar
-                                                               |                                       | s3-2.19.31.jar
-arns-2.19.31.jar                                               | annotations-2.19.31.jar               | s3-2.19.31.jar
-                                                               | utils-2.19.31.jar                     |
-profiles-2.19.31.jar                                           | annotations-2.19.31.jar               | auth-2.19.31.jar
-                                                               | slf4j-api-2.0.6.jar                   | aws-core-2.19.31.jar
-                                                               | utils-2.19.31.jar                     | regions-2.19.31.jar
-                                                               |                                       | s3-2.19.31.jar
-                                                               |                                       | sdk-core-2.19.31.jar
-utils-2.19.31.jar                                              | annotations-2.19.31.jar               | arns-2.19.31.jar
-                                                               | reactive-streams-1.0.3.jar            | auth-2.19.31.jar
-                                                               | slf4j-api-2.0.6.jar                   | aws-core-2.19.31.jar
-                                                               |                                       | aws-json-protocol-2.19.31.jar
-                                                               |                                       | aws-query-protocol-2.19.31.jar
-                                                               |                                       | aws-xml-protocol-2.19.31.jar
-                                                               |                                       | http-client-spi-2.19.31.jar
-                                                               |                                       | json-utils-2.19.31.jar
-                                                               |                                       | lambda-2.19.31.jar
-                                                               |                                       | metrics-spi-2.19.31.jar
-                                                               |                                       | profiles-2.19.31.jar
-                                                               |                                       | protocol-core-2.19.31.jar
-                                                               |                                       | regions-2.19.31.jar
-                                                               |                                       | s3-2.19.31.jar
-                                                               |                                       | sdk-core-2.19.31.jar
-                                                               |                                       | url-connection-client-2.19.31.jar
-slf4j-api-2.0.6.jar                                            | [none]                                | aether-impl-1.1.0.jar
-                                                               |                                       | auth-2.19.31.jar
-                                                               |                                       | aws-json-protocol-2.19.31.jar
-                                                               |                                       | aws-xml-protocol-2.19.31.jar
+                                                               |                                       | url-connection-client-2.20.37.jar
+metrics-spi-2.20.37.jar                                        | annotations-2.20.37.jar               | aws-core-2.20.37.jar
+                                                               | slf4j-api-2.0.7.jar                   | aws-json-protocol-2.20.37.jar
+                                                               | utils-2.20.37.jar                     | aws-query-protocol-2.20.37.jar
+                                                               |                                       | aws-xml-protocol-2.20.37.jar
+                                                               |                                       | http-client-spi-2.20.37.jar
+                                                               |                                       | lambda-2.20.37.jar
+                                                               |                                       | s3-2.20.37.jar
+                                                               |                                       | sdk-core-2.20.37.jar
+json-utils-2.20.37.jar                                         | annotations-2.20.37.jar               | auth-2.20.37.jar
+                                                               | third-party-jackson-core-2.20.37.jar  | aws-json-protocol-2.20.37.jar
+                                                               | utils-2.20.37.jar                     | lambda-2.20.37.jar
+                                                               |                                       | regions-2.20.37.jar
+                                                               |                                       | s3-2.20.37.jar
+crt-core-2.20.37.jar                                           | annotations-2.20.37.jar               | s3-2.20.37.jar
+                                                               | utils-2.20.37.jar                     |
+arns-2.20.37.jar                                               | annotations-2.20.37.jar               | s3-2.20.37.jar
+                                                               | utils-2.20.37.jar                     |
+profiles-2.20.37.jar                                           | annotations-2.20.37.jar               | auth-2.20.37.jar
+                                                               | slf4j-api-2.0.7.jar                   | aws-core-2.20.37.jar
+                                                               | utils-2.20.37.jar                     | regions-2.20.37.jar
+                                                               |                                       | s3-2.20.37.jar
+                                                               |                                       | sdk-core-2.20.37.jar
+utils-2.20.37.jar                                              | annotations-2.20.37.jar               | arns-2.20.37.jar
+                                                               | reactive-streams-1.0.3.jar            | auth-2.20.37.jar
+                                                               | slf4j-api-2.0.7.jar                   | aws-core-2.20.37.jar
+                                                               |                                       | aws-json-protocol-2.20.37.jar
+                                                               |                                       | aws-query-protocol-2.20.37.jar
+                                                               |                                       | aws-xml-protocol-2.20.37.jar
+                                                               |                                       | crt-core-2.20.37.jar
+                                                               |                                       | http-client-spi-2.20.37.jar
+                                                               |                                       | json-utils-2.20.37.jar
+                                                               |                                       | lambda-2.20.37.jar
+                                                               |                                       | metrics-spi-2.20.37.jar
+                                                               |                                       | profiles-2.20.37.jar
+                                                               |                                       | protocol-core-2.20.37.jar
+                                                               |                                       | regions-2.20.37.jar
+                                                               |                                       | s3-2.20.37.jar
+                                                               |                                       | sdk-core-2.20.37.jar
+                                                               |                                       | url-connection-client-2.20.37.jar
+slf4j-api-2.0.7.jar                                            | [none]                                | aether-impl-1.1.0.jar
+                                                               |                                       | auth-2.20.37.jar
+                                                               |                                       | aws-json-protocol-2.20.37.jar
+                                                               |                                       | aws-xml-protocol-2.20.37.jar
                                                                |                                       | jarhc-2.1.0.jar
                                                                |                                       | jarhc-check-1.0.0-SNAPSHOT.jar
                                                                |                                       | jcl-over-slf4j-2.0.6.jar
                                                                |                                       | jul-to-slf4j-2.0.6.jar
-                                                               |                                       | lambda-2.19.31.jar
-                                                               |                                       | metrics-spi-2.19.31.jar
-                                                               |                                       | profiles-2.19.31.jar
-                                                               |                                       | regions-2.19.31.jar
-                                                               |                                       | s3-2.19.31.jar
-                                                               |                                       | sdk-core-2.19.31.jar
+                                                               |                                       | lambda-2.20.37.jar
+                                                               |                                       | metrics-spi-2.20.37.jar
+                                                               |                                       | profiles-2.20.37.jar
+                                                               |                                       | regions-2.20.37.jar
+                                                               |                                       | s3-2.20.37.jar
+                                                               |                                       | sdk-core-2.20.37.jar
                                                                |                                       | shared-1.0.0-SNAPSHOT.jar
-                                                               |                                       | slf4j-simple-2.0.6.jar
-                                                               |                                       | utils-2.19.31.jar
+                                                               |                                       | slf4j-simple-2.0.7.jar
+                                                               |                                       | utils-2.20.37.jar
 aws-lambda-java-core-1.2.2.jar                                 | [none]                                | jarhc-check-1.0.0-SNAPSHOT.jar
-aws-lambda-java-events-3.11.0.jar                              | joda-time-2.8.1.jar                   | [none]
+aws-lambda-java-events-3.11.1.jar                              | joda-time-2.10.8.jar                  | [none]
 aws-xray-recorder-sdk-core-2.13.0.jar                          | aws-java-sdk-core-1.12.228.jar        | jarhc-check-1.0.0-SNAPSHOT.jar
                                                                | aws-java-sdk-xray-1.12.228.jar        | shared-1.0.0-SNAPSHOT.jar
                                                                | checker-qual-3.12.0.jar               |
@@ -511,7 +518,7 @@ maven-aether-provider-3.3.9.jar                                | aether-api-1.1.
 aether-impl-1.1.0.jar                                          | aether-api-1.1.0.jar                  | jarhc-2.1.0.jar
                                                                | aether-spi-1.1.0.jar                  | maven-aether-provider-3.3.9.jar
                                                                | aether-util-1.1.0.jar                 |
-                                                               | slf4j-api-2.0.6.jar                   |
+                                                               | slf4j-api-2.0.7.jar                   |
 aether-connector-basic-1.1.0.jar                               | aether-api-1.1.0.jar                  | jarhc-2.1.0.jar
                                                                | aether-spi-1.1.0.jar                  |
                                                                | aether-util-1.1.0.jar                 |
@@ -561,7 +568,7 @@ aws-java-sdk-core-1.12.228.jar                                 | httpclient-4.5.
                                                                | jackson-databind-2.12.6.1.jar         |
                                                                | jackson-dataformat-cbor-2.12.6.jar    |
                                                                | jcl-over-slf4j-2.0.6.jar              |
-                                                               | joda-time-2.8.1.jar                   |
+                                                               | joda-time-2.10.8.jar                  |
 httpclient-4.5.14.jar                                          | commons-codec-1.15.jar                | aether-transport-http-1.1.0.jar
                                                                | httpcore-4.4.16.jar                   | aws-java-sdk-core-1.12.228.jar
                                                                | jcl-over-slf4j-2.0.6.jar              | aws-xray-recorder-sdk-core-2.13.0.jar
@@ -577,32 +584,33 @@ plexus-utils-3.5.0.jar                                         | [none]         
                                                                |                                       | maven-model-builder-3.3.9.jar
                                                                |                                       | maven-repository-metadata-3.3.9.jar
 commons-codec-1.15.jar                                         | [none]                                | httpclient-4.5.14.jar
-endpoints-spi-2.19.31.jar                                      | annotations-2.19.31.jar               | aws-core-2.19.31.jar
-                                                               |                                       | lambda-2.19.31.jar
-                                                               |                                       | s3-2.19.31.jar
-                                                               |                                       | sdk-core-2.19.31.jar
-annotations-2.19.31.jar                                        | [none]                                | arns-2.19.31.jar
-                                                               |                                       | auth-2.19.31.jar
-                                                               |                                       | aws-core-2.19.31.jar
-                                                               |                                       | aws-json-protocol-2.19.31.jar
-                                                               |                                       | aws-query-protocol-2.19.31.jar
-                                                               |                                       | aws-xml-protocol-2.19.31.jar
-                                                               |                                       | endpoints-spi-2.19.31.jar
-                                                               |                                       | http-client-spi-2.19.31.jar
-                                                               |                                       | json-utils-2.19.31.jar
-                                                               |                                       | lambda-2.19.31.jar
-                                                               |                                       | metrics-spi-2.19.31.jar
-                                                               |                                       | profiles-2.19.31.jar
-                                                               |                                       | protocol-core-2.19.31.jar
-                                                               |                                       | regions-2.19.31.jar
-                                                               |                                       | s3-2.19.31.jar
-                                                               |                                       | sdk-core-2.19.31.jar
-                                                               |                                       | url-connection-client-2.19.31.jar
-                                                               |                                       | utils-2.19.31.jar
-third-party-jackson-core-2.19.31.jar                           | [none]                                | aws-json-protocol-2.19.31.jar
-                                                               |                                       | json-utils-2.19.31.jar
-joda-time-2.8.1.jar                                            | [none]                                | aws-java-sdk-core-1.12.228.jar
-                                                               |                                       | aws-lambda-java-events-3.11.0.jar
+endpoints-spi-2.20.37.jar                                      | annotations-2.20.37.jar               | aws-core-2.20.37.jar
+                                                               |                                       | lambda-2.20.37.jar
+                                                               |                                       | s3-2.20.37.jar
+                                                               |                                       | sdk-core-2.20.37.jar
+annotations-2.20.37.jar                                        | [none]                                | arns-2.20.37.jar
+                                                               |                                       | auth-2.20.37.jar
+                                                               |                                       | aws-core-2.20.37.jar
+                                                               |                                       | aws-json-protocol-2.20.37.jar
+                                                               |                                       | aws-query-protocol-2.20.37.jar
+                                                               |                                       | aws-xml-protocol-2.20.37.jar
+                                                               |                                       | crt-core-2.20.37.jar
+                                                               |                                       | endpoints-spi-2.20.37.jar
+                                                               |                                       | http-client-spi-2.20.37.jar
+                                                               |                                       | json-utils-2.20.37.jar
+                                                               |                                       | lambda-2.20.37.jar
+                                                               |                                       | metrics-spi-2.20.37.jar
+                                                               |                                       | profiles-2.20.37.jar
+                                                               |                                       | protocol-core-2.20.37.jar
+                                                               |                                       | regions-2.20.37.jar
+                                                               |                                       | s3-2.20.37.jar
+                                                               |                                       | sdk-core-2.20.37.jar
+                                                               |                                       | url-connection-client-2.20.37.jar
+                                                               |                                       | utils-2.20.37.jar
+third-party-jackson-core-2.20.37.jar                           | [none]                                | aws-json-protocol-2.20.37.jar
+                                                               |                                       | json-utils-2.20.37.jar
+joda-time-2.10.8.jar                                           | [none]                                | aws-java-sdk-core-1.12.228.jar
+                                                               |                                       | aws-lambda-java-events-3.11.1.jar
 plexus-component-annotations-1.6.jar                           | [none]                                | maven-aether-provider-3.3.9.jar
                                                                |                                       | maven-model-builder-3.3.9.jar
 commons-lang3-3.4.jar                                          | [none]                                | maven-aether-provider-3.3.9.jar
@@ -624,15 +632,15 @@ httpcore-4.4.16.jar                                            | [none]         
                                                                |                                       | httpclient-4.5.14.jar
 jmespath-java-1.12.228.jar                                     | jackson-databind-2.12.6.1.jar         | [none]
 plexus-interpolation-1.21.jar                                  | [none]                                | maven-model-builder-3.3.9.jar
-reactive-streams-1.0.3.jar                                     | [none]                                | auth-2.19.31.jar
-                                                               |                                       | aws-core-2.19.31.jar
-                                                               |                                       | http-client-spi-2.19.31.jar
-                                                               |                                       | lambda-2.19.31.jar
-                                                               |                                       | s3-2.19.31.jar
-                                                               |                                       | sdk-core-2.19.31.jar
-                                                               |                                       | utils-2.19.31.jar
-eventstream-1.0.1.jar                                          | [none]                                | auth-2.19.31.jar
-                                                               |                                       | aws-core-2.19.31.jar
+reactive-streams-1.0.3.jar                                     | [none]                                | auth-2.20.37.jar
+                                                               |                                       | aws-core-2.20.37.jar
+                                                               |                                       | http-client-spi-2.20.37.jar
+                                                               |                                       | lambda-2.20.37.jar
+                                                               |                                       | s3-2.20.37.jar
+                                                               |                                       | sdk-core-2.20.37.jar
+                                                               |                                       | utils-2.20.37.jar
+eventstream-1.0.1.jar                                          | [none]                                | auth-2.20.37.jar
+                                                               |                                       | aws-core-2.20.37.jar
 ion-java-1.0.2.jar                                             | [none]                                | aws-java-sdk-core-1.12.228.jar
 jackson-annotations-2.12.6.jar                                 | [none]                                | aws-java-sdk-core-1.12.228.jar
                                                                |                                       | aws-java-sdk-xray-1.12.228.jar
@@ -659,7 +667,7 @@ JAR file                                                       | Maven coordinat
 ---------------------------------------------------------------+-----------------------------------------------------------------------------+-----------------------------------------------------------------------------+----------------------
 jarhc-check-1.0.0-SNAPSHOT.jar                                 | [unknown]                                                                   | [unknown]                                                                   |
 shared-1.0.0-SNAPSHOT.jar                                      | [unknown]                                                                   | [unknown]                                                                   |
-jarhc-2.1.0.jar                                                | org.jarhc:jarhc:2.1.0                                                       | org.slf4j:slf4j-api:2.0.6                                                   | OK
+jarhc-2.1.0.jar                                                | org.jarhc:jarhc:2.1.0                                                       | org.slf4j:slf4j-api:2.0.6                                                   | OK (version 2.0.7)
                                                                |                                                                             | org.slf4j:jul-to-slf4j:2.0.6                                                | OK
                                                                |                                                                             | org.slf4j:jcl-over-slf4j:2.0.6                                              | OK
                                                                |                                                                             | org.ow2.asm:asm:9.4 (runtime)                                               | OK
@@ -676,126 +684,130 @@ jarhc-2.1.0.jar                                                | org.jarhc:jarhc
                                                                |                                                                             | org.apache.httpcomponents:httpclient:4.5.14 (runtime)                       | OK
                                                                |                                                                             | org.codehaus.plexus:plexus-utils:3.5.0 (runtime)                            | OK
                                                                |                                                                             | commons-codec:commons-codec:1.15 (runtime)                                  | OK
-slf4j-simple-2.0.6.jar                                         | org.slf4j:slf4j-simple:2.0.6                                                | org.slf4j:slf4j-api:2.0.6                                                   | OK
-jul-to-slf4j-2.0.6.jar                                         | org.slf4j:jul-to-slf4j:2.0.6                                                | org.slf4j:slf4j-api:2.0.6                                                   | OK
+slf4j-simple-2.0.7.jar                                         | org.slf4j:slf4j-simple:2.0.7                                                | org.slf4j:slf4j-api:2.0.7                                                   | OK
+jul-to-slf4j-2.0.6.jar                                         | org.slf4j:jul-to-slf4j:2.0.6                                                | org.slf4j:slf4j-api:2.0.6                                                   | OK (version 2.0.7)
 aether-transport-http-1.1.0.jar                                | org.eclipse.aether:aether-transport-http:1.1.0                              | org.eclipse.aether:aether-api:1.1.0                                         | OK
                                                                |                                                                             | org.eclipse.aether:aether-spi:1.1.0                                         | OK
                                                                |                                                                             | org.eclipse.aether:aether-util:1.1.0                                        | OK
                                                                |                                                                             | org.apache.httpcomponents:httpclient:4.3.5                                  | OK (version 4.5.14)
                                                                |                                                                             | org.slf4j:jcl-over-slf4j:1.6.2                                              | OK (version 2.0.6)
                                                                |                                                                             | javax.inject:javax.inject:1 (provided, optional)                            | Unsatisfied
-jcl-over-slf4j-2.0.6.jar                                       | org.slf4j:jcl-over-slf4j:2.0.6                                              | org.slf4j:slf4j-api:2.0.6                                                   | OK
-url-connection-client-2.19.31.jar                              | software.amazon.awssdk:url-connection-client:2.19.31                        | software.amazon.awssdk:utils:2.19.31                                        | OK
-                                                               |                                                                             | software.amazon.awssdk:annotations:2.19.31                                  | OK
-                                                               |                                                                             | software.amazon.awssdk:http-client-spi:2.19.31                              | OK
-lambda-2.19.31.jar                                             | software.amazon.awssdk:lambda:2.19.31                                       | software.amazon.awssdk:aws-json-protocol:2.19.31                            | OK
-                                                               |                                                                             | software.amazon.awssdk:protocol-core:2.19.31                                | OK
-                                                               |                                                                             | software.amazon.awssdk:sdk-core:2.19.31                                     | OK
-                                                               |                                                                             | software.amazon.awssdk:auth:2.19.31                                         | OK
-                                                               |                                                                             | software.amazon.awssdk:http-client-spi:2.19.31                              | OK
-                                                               |                                                                             | software.amazon.awssdk:regions:2.19.31                                      | OK
-                                                               |                                                                             | software.amazon.awssdk:annotations:2.19.31                                  | OK
-                                                               |                                                                             | software.amazon.awssdk:utils:2.19.31                                        | OK
-                                                               |                                                                             | software.amazon.awssdk:aws-core:2.19.31                                     | OK
-                                                               |                                                                             | software.amazon.awssdk:metrics-spi:2.19.31                                  | OK
-                                                               |                                                                             | software.amazon.awssdk:json-utils:2.19.31                                   | OK
-                                                               |                                                                             | software.amazon.awssdk:endpoints-spi:2.19.31                                | OK
-                                                               |                                                                             | software.amazon.awssdk:apache-client:2.19.31 (runtime)                      | Unsatisfied
-                                                               |                                                                             | software.amazon.awssdk:netty-nio-client:2.19.31 (runtime)                   | Unsatisfied
-s3-2.19.31.jar                                                 | software.amazon.awssdk:s3:2.19.31                                           | software.amazon.awssdk:aws-xml-protocol:2.19.31                             | OK
-                                                               |                                                                             | software.amazon.awssdk:protocol-core:2.19.31                                | OK
-                                                               |                                                                             | software.amazon.awssdk:arns:2.19.31                                         | OK
-                                                               |                                                                             | software.amazon.awssdk:profiles:2.19.31                                     | OK
-                                                               |                                                                             | software.amazon.awssdk.crt:aws-crt:0.21.4 (optional)                        | Unsatisfied
-                                                               |                                                                             | software.amazon.awssdk:sdk-core:2.19.31                                     | OK
-                                                               |                                                                             | software.amazon.awssdk:auth:2.19.31                                         | OK
-                                                               |                                                                             | software.amazon.awssdk:http-client-spi:2.19.31                              | OK
-                                                               |                                                                             | software.amazon.awssdk:regions:2.19.31                                      | OK
-                                                               |                                                                             | software.amazon.awssdk:annotations:2.19.31                                  | OK
-                                                               |                                                                             | software.amazon.awssdk:utils:2.19.31                                        | OK
-                                                               |                                                                             | software.amazon.awssdk:aws-core:2.19.31                                     | OK
-                                                               |                                                                             | software.amazon.awssdk:metrics-spi:2.19.31                                  | OK
-                                                               |                                                                             | software.amazon.awssdk:json-utils:2.19.31                                   | OK
-                                                               |                                                                             | software.amazon.awssdk:endpoints-spi:2.19.31                                | OK
-                                                               |                                                                             | software.amazon.awssdk:apache-client:2.19.31 (runtime)                      | Unsatisfied
-                                                               |                                                                             | software.amazon.awssdk:netty-nio-client:2.19.31 (runtime)                   | Unsatisfied
-aws-json-protocol-2.19.31.jar                                  | software.amazon.awssdk:aws-json-protocol:2.19.31                            | software.amazon.awssdk:aws-core:2.19.31                                     | OK
-                                                               |                                                                             | software.amazon.awssdk:protocol-core:2.19.31                                | OK
-                                                               |                                                                             | software.amazon.awssdk:sdk-core:2.19.31                                     | OK
-                                                               |                                                                             | software.amazon.awssdk:annotations:2.19.31                                  | OK
-                                                               |                                                                             | software.amazon.awssdk:http-client-spi:2.19.31                              | OK
-                                                               |                                                                             | software.amazon.awssdk:utils:2.19.31                                        | OK
-                                                               |                                                                             | software.amazon.awssdk:third-party-jackson-core:2.19.31                     | OK
-                                                               |                                                                             | software.amazon.awssdk:json-utils:2.19.31                                   | OK
-aws-xml-protocol-2.19.31.jar                                   | software.amazon.awssdk:aws-xml-protocol:2.19.31                             | software.amazon.awssdk:aws-query-protocol:2.19.31                           | OK
-                                                               |                                                                             | software.amazon.awssdk:protocol-core:2.19.31                                | OK
-                                                               |                                                                             | software.amazon.awssdk:aws-core:2.19.31                                     | OK
-                                                               |                                                                             | software.amazon.awssdk:sdk-core:2.19.31                                     | OK
-                                                               |                                                                             | software.amazon.awssdk:annotations:2.19.31                                  | OK
-                                                               |                                                                             | software.amazon.awssdk:http-client-spi:2.19.31                              | OK
-                                                               |                                                                             | software.amazon.awssdk:utils:2.19.31                                        | OK
-aws-query-protocol-2.19.31.jar                                 | software.amazon.awssdk:aws-query-protocol:2.19.31                           | software.amazon.awssdk:protocol-core:2.19.31                                | OK
-                                                               |                                                                             | software.amazon.awssdk:aws-core:2.19.31                                     | OK
-                                                               |                                                                             | software.amazon.awssdk:sdk-core:2.19.31                                     | OK
-                                                               |                                                                             | software.amazon.awssdk:annotations:2.19.31                                  | OK
-                                                               |                                                                             | software.amazon.awssdk:http-client-spi:2.19.31                              | OK
-                                                               |                                                                             | software.amazon.awssdk:utils:2.19.31                                        | OK
-protocol-core-2.19.31.jar                                      | software.amazon.awssdk:protocol-core:2.19.31                                | software.amazon.awssdk:sdk-core:2.19.31                                     | OK
-                                                               |                                                                             | software.amazon.awssdk:annotations:2.19.31                                  | OK
-                                                               |                                                                             | software.amazon.awssdk:utils:2.19.31                                        | OK
-                                                               |                                                                             | software.amazon.awssdk:http-client-spi:2.19.31                              | OK
-aws-core-2.19.31.jar                                           | software.amazon.awssdk:aws-core:2.19.31                                     | software.amazon.awssdk:annotations:2.19.31                                  | OK
-                                                               |                                                                             | software.amazon.awssdk:regions:2.19.31                                      | OK
-                                                               |                                                                             | software.amazon.awssdk:auth:2.19.31                                         | OK
-                                                               |                                                                             | software.amazon.awssdk:profiles:2.19.31                                     | OK
-                                                               |                                                                             | software.amazon.awssdk:sdk-core:2.19.31                                     | OK
-                                                               |                                                                             | software.amazon.awssdk:http-client-spi:2.19.31                              | OK
-                                                               |                                                                             | software.amazon.awssdk:metrics-spi:2.19.31                                  | OK
-                                                               |                                                                             | software.amazon.awssdk:endpoints-spi:2.19.31                                | OK
-                                                               |                                                                             | software.amazon.awssdk:utils:2.19.31                                        | OK
+jcl-over-slf4j-2.0.6.jar                                       | org.slf4j:jcl-over-slf4j:2.0.6                                              | org.slf4j:slf4j-api:2.0.6                                                   | OK (version 2.0.7)
+url-connection-client-2.20.37.jar                              | software.amazon.awssdk:url-connection-client:2.20.37                        | software.amazon.awssdk:utils:2.20.37                                        | OK
+                                                               |                                                                             | software.amazon.awssdk:annotations:2.20.37                                  | OK
+                                                               |                                                                             | software.amazon.awssdk:http-client-spi:2.20.37                              | OK
+lambda-2.20.37.jar                                             | software.amazon.awssdk:lambda:2.20.37                                       | software.amazon.awssdk:aws-json-protocol:2.20.37                            | OK
+                                                               |                                                                             | software.amazon.awssdk:protocol-core:2.20.37                                | OK
+                                                               |                                                                             | software.amazon.awssdk:sdk-core:2.20.37                                     | OK
+                                                               |                                                                             | software.amazon.awssdk:auth:2.20.37                                         | OK
+                                                               |                                                                             | software.amazon.awssdk:http-client-spi:2.20.37                              | OK
+                                                               |                                                                             | software.amazon.awssdk:regions:2.20.37                                      | OK
+                                                               |                                                                             | software.amazon.awssdk:annotations:2.20.37                                  | OK
+                                                               |                                                                             | software.amazon.awssdk:utils:2.20.37                                        | OK
+                                                               |                                                                             | software.amazon.awssdk:aws-core:2.20.37                                     | OK
+                                                               |                                                                             | software.amazon.awssdk:metrics-spi:2.20.37                                  | OK
+                                                               |                                                                             | software.amazon.awssdk:json-utils:2.20.37                                   | OK
+                                                               |                                                                             | software.amazon.awssdk:endpoints-spi:2.20.37                                | OK
+                                                               |                                                                             | software.amazon.awssdk:apache-client:2.20.37 (runtime)                      | Unsatisfied
+                                                               |                                                                             | software.amazon.awssdk:netty-nio-client:2.20.37 (runtime)                   | Unsatisfied
+s3-2.20.37.jar                                                 | software.amazon.awssdk:s3:2.20.37                                           | software.amazon.awssdk:aws-xml-protocol:2.20.37                             | OK
+                                                               |                                                                             | software.amazon.awssdk:protocol-core:2.20.37                                | OK
+                                                               |                                                                             | software.amazon.awssdk:arns:2.20.37                                         | OK
+                                                               |                                                                             | software.amazon.awssdk:profiles:2.20.37                                     | OK
+                                                               |                                                                             | software.amazon.awssdk:crt-core:2.20.37                                     | OK
+                                                               |                                                                             | software.amazon.awssdk.crt:aws-crt:0.21.7 (optional)                        | Unsatisfied
+                                                               |                                                                             | software.amazon.awssdk:sdk-core:2.20.37                                     | OK
+                                                               |                                                                             | software.amazon.awssdk:auth:2.20.37                                         | OK
+                                                               |                                                                             | software.amazon.awssdk:http-client-spi:2.20.37                              | OK
+                                                               |                                                                             | software.amazon.awssdk:regions:2.20.37                                      | OK
+                                                               |                                                                             | software.amazon.awssdk:annotations:2.20.37                                  | OK
+                                                               |                                                                             | software.amazon.awssdk:utils:2.20.37                                        | OK
+                                                               |                                                                             | software.amazon.awssdk:aws-core:2.20.37                                     | OK
+                                                               |                                                                             | software.amazon.awssdk:metrics-spi:2.20.37                                  | OK
+                                                               |                                                                             | software.amazon.awssdk:json-utils:2.20.37                                   | OK
+                                                               |                                                                             | software.amazon.awssdk:endpoints-spi:2.20.37                                | OK
+                                                               |                                                                             | software.amazon.awssdk:apache-client:2.20.37 (runtime)                      | Unsatisfied
+                                                               |                                                                             | software.amazon.awssdk:netty-nio-client:2.20.37 (runtime)                   | Unsatisfied
+aws-json-protocol-2.20.37.jar                                  | software.amazon.awssdk:aws-json-protocol:2.20.37                            | software.amazon.awssdk:aws-core:2.20.37                                     | OK
+                                                               |                                                                             | software.amazon.awssdk:protocol-core:2.20.37                                | OK
+                                                               |                                                                             | software.amazon.awssdk:sdk-core:2.20.37                                     | OK
+                                                               |                                                                             | software.amazon.awssdk:annotations:2.20.37                                  | OK
+                                                               |                                                                             | software.amazon.awssdk:http-client-spi:2.20.37                              | OK
+                                                               |                                                                             | software.amazon.awssdk:utils:2.20.37                                        | OK
+                                                               |                                                                             | software.amazon.awssdk:third-party-jackson-core:2.20.37                     | OK
+                                                               |                                                                             | software.amazon.awssdk:json-utils:2.20.37                                   | OK
+aws-xml-protocol-2.20.37.jar                                   | software.amazon.awssdk:aws-xml-protocol:2.20.37                             | software.amazon.awssdk:aws-query-protocol:2.20.37                           | OK
+                                                               |                                                                             | software.amazon.awssdk:protocol-core:2.20.37                                | OK
+                                                               |                                                                             | software.amazon.awssdk:aws-core:2.20.37                                     | OK
+                                                               |                                                                             | software.amazon.awssdk:sdk-core:2.20.37                                     | OK
+                                                               |                                                                             | software.amazon.awssdk:annotations:2.20.37                                  | OK
+                                                               |                                                                             | software.amazon.awssdk:http-client-spi:2.20.37                              | OK
+                                                               |                                                                             | software.amazon.awssdk:utils:2.20.37                                        | OK
+aws-query-protocol-2.20.37.jar                                 | software.amazon.awssdk:aws-query-protocol:2.20.37                           | software.amazon.awssdk:protocol-core:2.20.37                                | OK
+                                                               |                                                                             | software.amazon.awssdk:aws-core:2.20.37                                     | OK
+                                                               |                                                                             | software.amazon.awssdk:sdk-core:2.20.37                                     | OK
+                                                               |                                                                             | software.amazon.awssdk:annotations:2.20.37                                  | OK
+                                                               |                                                                             | software.amazon.awssdk:http-client-spi:2.20.37                              | OK
+                                                               |                                                                             | software.amazon.awssdk:utils:2.20.37                                        | OK
+protocol-core-2.20.37.jar                                      | software.amazon.awssdk:protocol-core:2.20.37                                | software.amazon.awssdk:sdk-core:2.20.37                                     | OK
+                                                               |                                                                             | software.amazon.awssdk:annotations:2.20.37                                  | OK
+                                                               |                                                                             | software.amazon.awssdk:utils:2.20.37                                        | OK
+                                                               |                                                                             | software.amazon.awssdk:http-client-spi:2.20.37                              | OK
+aws-core-2.20.37.jar                                           | software.amazon.awssdk:aws-core:2.20.37                                     | software.amazon.awssdk:annotations:2.20.37                                  | OK
+                                                               |                                                                             | software.amazon.awssdk:regions:2.20.37                                      | OK
+                                                               |                                                                             | software.amazon.awssdk:auth:2.20.37                                         | OK
+                                                               |                                                                             | software.amazon.awssdk:profiles:2.20.37                                     | OK
+                                                               |                                                                             | software.amazon.awssdk:sdk-core:2.20.37                                     | OK
+                                                               |                                                                             | software.amazon.awssdk:http-client-spi:2.20.37                              | OK
+                                                               |                                                                             | software.amazon.awssdk:metrics-spi:2.20.37                                  | OK
+                                                               |                                                                             | software.amazon.awssdk:endpoints-spi:2.20.37                                | OK
+                                                               |                                                                             | software.amazon.awssdk:utils:2.20.37                                        | OK
                                                                |                                                                             | software.amazon.eventstream:eventstream:1.0.1                               | OK
-auth-2.19.31.jar                                               | software.amazon.awssdk:auth:2.19.31                                         | software.amazon.awssdk:annotations:2.19.31                                  | OK
-                                                               |                                                                             | software.amazon.awssdk:utils:2.19.31                                        | OK
-                                                               |                                                                             | software.amazon.awssdk:sdk-core:2.19.31                                     | OK
-                                                               |                                                                             | software.amazon.awssdk:regions:2.19.31                                      | OK
-                                                               |                                                                             | software.amazon.awssdk:profiles:2.19.31                                     | OK
-                                                               |                                                                             | software.amazon.awssdk:http-client-spi:2.19.31                              | OK
-                                                               |                                                                             | software.amazon.awssdk:json-utils:2.19.31                                   | OK
+auth-2.20.37.jar                                               | software.amazon.awssdk:auth:2.20.37                                         | software.amazon.awssdk:annotations:2.20.37                                  | OK
+                                                               |                                                                             | software.amazon.awssdk:utils:2.20.37                                        | OK
+                                                               |                                                                             | software.amazon.awssdk:sdk-core:2.20.37                                     | OK
+                                                               |                                                                             | software.amazon.awssdk:regions:2.20.37                                      | OK
+                                                               |                                                                             | software.amazon.awssdk:profiles:2.20.37                                     | OK
+                                                               |                                                                             | software.amazon.awssdk:http-client-spi:2.20.37                              | OK
+                                                               |                                                                             | software.amazon.awssdk:json-utils:2.20.37                                   | OK
                                                                |                                                                             | software.amazon.eventstream:eventstream:1.0.1                               | OK
-regions-2.19.31.jar                                            | software.amazon.awssdk:regions:2.19.31                                      | software.amazon.awssdk:annotations:2.19.31                                  | OK
-                                                               |                                                                             | software.amazon.awssdk:utils:2.19.31                                        | OK
-                                                               |                                                                             | software.amazon.awssdk:sdk-core:2.19.31                                     | OK
-                                                               |                                                                             | software.amazon.awssdk:profiles:2.19.31                                     | OK
-                                                               |                                                                             | software.amazon.awssdk:json-utils:2.19.31                                   | OK
-                                                               |                                                                             | org.slf4j:slf4j-api:1.7.30                                                  | OK (version 2.0.6)
-sdk-core-2.19.31.jar                                           | software.amazon.awssdk:sdk-core:2.19.31                                     | software.amazon.awssdk:annotations:2.19.31                                  | OK
-                                                               |                                                                             | software.amazon.awssdk:http-client-spi:2.19.31                              | OK
-                                                               |                                                                             | software.amazon.awssdk:metrics-spi:2.19.31                                  | OK
-                                                               |                                                                             | software.amazon.awssdk:endpoints-spi:2.19.31                                | OK
-                                                               |                                                                             | software.amazon.awssdk:utils:2.19.31                                        | OK
-                                                               |                                                                             | software.amazon.awssdk:profiles:2.19.31                                     | OK
-                                                               |                                                                             | org.slf4j:slf4j-api:1.7.30                                                  | OK (version 2.0.6)
+regions-2.20.37.jar                                            | software.amazon.awssdk:regions:2.20.37                                      | software.amazon.awssdk:annotations:2.20.37                                  | OK
+                                                               |                                                                             | software.amazon.awssdk:utils:2.20.37                                        | OK
+                                                               |                                                                             | software.amazon.awssdk:sdk-core:2.20.37                                     | OK
+                                                               |                                                                             | software.amazon.awssdk:profiles:2.20.37                                     | OK
+                                                               |                                                                             | software.amazon.awssdk:json-utils:2.20.37                                   | OK
+                                                               |                                                                             | org.slf4j:slf4j-api:1.7.30                                                  | OK (version 2.0.7)
+sdk-core-2.20.37.jar                                           | software.amazon.awssdk:sdk-core:2.20.37                                     | software.amazon.awssdk:annotations:2.20.37                                  | OK
+                                                               |                                                                             | software.amazon.awssdk:http-client-spi:2.20.37                              | OK
+                                                               |                                                                             | software.amazon.awssdk:metrics-spi:2.20.37                                  | OK
+                                                               |                                                                             | software.amazon.awssdk:endpoints-spi:2.20.37                                | OK
+                                                               |                                                                             | software.amazon.awssdk:utils:2.20.37                                        | OK
+                                                               |                                                                             | software.amazon.awssdk:profiles:2.20.37                                     | OK
+                                                               |                                                                             | org.slf4j:slf4j-api:1.7.30                                                  | OK (version 2.0.7)
                                                                |                                                                             | org.reactivestreams:reactive-streams:1.0.3                                  | OK
-http-client-spi-2.19.31.jar                                    | software.amazon.awssdk:http-client-spi:2.19.31                              | software.amazon.awssdk:annotations:2.19.31                                  | OK
-                                                               |                                                                             | software.amazon.awssdk:utils:2.19.31                                        | OK
-                                                               |                                                                             | software.amazon.awssdk:metrics-spi:2.19.31                                  | OK
+http-client-spi-2.20.37.jar                                    | software.amazon.awssdk:http-client-spi:2.20.37                              | software.amazon.awssdk:annotations:2.20.37                                  | OK
+                                                               |                                                                             | software.amazon.awssdk:utils:2.20.37                                        | OK
+                                                               |                                                                             | software.amazon.awssdk:metrics-spi:2.20.37                                  | OK
                                                                |                                                                             | org.reactivestreams:reactive-streams:1.0.3                                  | OK
-metrics-spi-2.19.31.jar                                        | software.amazon.awssdk:metrics-spi:2.19.31                                  | software.amazon.awssdk:annotations:2.19.31                                  | OK
-                                                               |                                                                             | software.amazon.awssdk:utils:2.19.31                                        | OK
-json-utils-2.19.31.jar                                         | software.amazon.awssdk:json-utils:2.19.31                                   | software.amazon.awssdk:utils:2.19.31                                        | OK
-                                                               |                                                                             | software.amazon.awssdk:annotations:2.19.31                                  | OK
-                                                               |                                                                             | software.amazon.awssdk:third-party-jackson-core:2.19.31                     | OK
-arns-2.19.31.jar                                               | software.amazon.awssdk:arns:2.19.31                                         | software.amazon.awssdk:annotations:2.19.31                                  | OK
-                                                               |                                                                             | software.amazon.awssdk:utils:2.19.31                                        | OK
-profiles-2.19.31.jar                                           | software.amazon.awssdk:profiles:2.19.31                                     | software.amazon.awssdk:utils:2.19.31                                        | OK
-                                                               |                                                                             | software.amazon.awssdk:annotations:2.19.31                                  | OK
-utils-2.19.31.jar                                              | software.amazon.awssdk:utils:2.19.31                                        | org.reactivestreams:reactive-streams:1.0.3                                  | OK
-                                                               |                                                                             | software.amazon.awssdk:annotations:2.19.31                                  | OK
-                                                               |                                                                             | org.slf4j:slf4j-api:1.7.30                                                  | OK (version 2.0.6)
-slf4j-api-2.0.6.jar                                            | org.slf4j:slf4j-api:2.0.6                                                   | [none]                                                                      |
+metrics-spi-2.20.37.jar                                        | software.amazon.awssdk:metrics-spi:2.20.37                                  | software.amazon.awssdk:annotations:2.20.37                                  | OK
+                                                               |                                                                             | software.amazon.awssdk:utils:2.20.37                                        | OK
+json-utils-2.20.37.jar                                         | software.amazon.awssdk:json-utils:2.20.37                                   | software.amazon.awssdk:utils:2.20.37                                        | OK
+                                                               |                                                                             | software.amazon.awssdk:annotations:2.20.37                                  | OK
+                                                               |                                                                             | software.amazon.awssdk:third-party-jackson-core:2.20.37                     | OK
+crt-core-2.20.37.jar                                           | software.amazon.awssdk:crt-core:2.20.37                                     | software.amazon.awssdk:annotations:2.20.37                                  | OK
+                                                               |                                                                             | software.amazon.awssdk:utils:2.20.37                                        | OK
+                                                               |                                                                             | software.amazon.awssdk.crt:aws-crt:0.21.7 (optional)                        | Unsatisfied
+arns-2.20.37.jar                                               | software.amazon.awssdk:arns:2.20.37                                         | software.amazon.awssdk:annotations:2.20.37                                  | OK
+                                                               |                                                                             | software.amazon.awssdk:utils:2.20.37                                        | OK
+profiles-2.20.37.jar                                           | software.amazon.awssdk:profiles:2.20.37                                     | software.amazon.awssdk:utils:2.20.37                                        | OK
+                                                               |                                                                             | software.amazon.awssdk:annotations:2.20.37                                  | OK
+utils-2.20.37.jar                                              | software.amazon.awssdk:utils:2.20.37                                        | org.reactivestreams:reactive-streams:1.0.3                                  | OK
+                                                               |                                                                             | software.amazon.awssdk:annotations:2.20.37                                  | OK
+                                                               |                                                                             | org.slf4j:slf4j-api:1.7.30                                                  | OK (version 2.0.7)
+slf4j-api-2.0.7.jar                                            | org.slf4j:slf4j-api:2.0.7                                                   | [none]                                                                      |
 aws-lambda-java-core-1.2.2.jar                                 | com.amazonaws:aws-lambda-java-core:1.2.2                                    | [none]                                                                      |
-aws-lambda-java-events-3.11.0.jar                              | com.amazonaws:aws-lambda-java-events:3.11.0                                 | joda-time:joda-time:2.6                                                     | OK (version 2.8.1)
-                                                               |                                                                             | org.projectlombok:lombok:1.18.16 (provided)                                 | Unsatisfied
+aws-lambda-java-events-3.11.1.jar                              | com.amazonaws:aws-lambda-java-events:3.11.1                                 | joda-time:joda-time:2.10.8                                                  | OK
+                                                               |                                                                             | org.projectlombok:lombok:1.18.22 (provided)                                 | Unsatisfied
 aws-xray-recorder-sdk-core-2.13.0.jar                          | com.amazonaws:aws-xray-recorder-sdk-core:2.13.0                             | com.amazonaws:aws-java-sdk-xray:1.12.228                                    | OK
 asm-9.4.jar                                                    | org.ow2.asm:asm:9.4                                                         | [none]                                                                      |
 json-20220924.jar                                              | org.json:json:20220924                                                      | [none]                                                                      |
@@ -816,7 +828,7 @@ aether-impl-1.1.0.jar                                          | org.eclipse.aet
                                                                |                                                                             | javax.inject:javax.inject:1 (provided, optional)                            | Unsatisfied
                                                                |                                                                             | org.eclipse.sisu:org.eclipse.sisu.inject:0.1.1 (provided, optional)         | Unsatisfied
                                                                |                                                                             | org.sonatype.sisu:sisu-guice:3.1.6 (provided, optional)                     | Unsatisfied
-                                                               |                                                                             | org.slf4j:slf4j-api:1.6.2 (provided, optional)                              | OK (version 2.0.6)
+                                                               |                                                                             | org.slf4j:slf4j-api:1.6.2 (provided, optional)                              | OK (version 2.0.7)
 aether-connector-basic-1.1.0.jar                               | org.eclipse.aether:aether-connector-basic:1.1.0                             | org.eclipse.aether:aether-api:1.1.0                                         | OK
                                                                |                                                                             | org.eclipse.aether:aether-spi:1.1.0                                         | OK
                                                                |                                                                             | org.eclipse.aether:aether-util:1.1.0                                        | OK
@@ -850,7 +862,7 @@ aws-java-sdk-core-1.12.228.jar                                 | com.amazonaws:a
                                                                |                                                                             | software.amazon.ion:ion-java:1.0.2                                          | OK
                                                                |                                                                             | com.fasterxml.jackson.core:jackson-databind:2.12.6.1                        | OK
                                                                |                                                                             | com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.12.6             | OK
-                                                               |                                                                             | joda-time:joda-time:2.8.1                                                   | OK
+                                                               |                                                                             | joda-time:joda-time:2.8.1                                                   | OK (version 2.10.8)
 httpclient-4.5.14.jar                                          | org.apache.httpcomponents:httpclient:4.5.14                                 | org.apache.httpcomponents:httpcore:4.4.16                                   | OK
                                                                |                                                                             | commons-logging:commons-logging:1.2                                         | Unsatisfied
                                                                |                                                                             | commons-codec:commons-codec:1.11                                            | OK (version 1.15)
@@ -863,10 +875,10 @@ maven-builder-support-3.3.9.jar                                | org.apache.mave
                                                                |                                                                             | org.apache.commons:commons-lang3:3.4                                        | OK
 plexus-utils-3.5.0.jar                                         | org.codehaus.plexus:plexus-utils:3.5.0                                      | [none]                                                                      |
 commons-codec-1.15.jar                                         | commons-codec:commons-codec:1.15                                            | [none]                                                                      |
-endpoints-spi-2.19.31.jar                                      | software.amazon.awssdk:endpoints-spi:2.19.31                                | software.amazon.awssdk:annotations:2.19.31                                  | OK
-annotations-2.19.31.jar                                        | software.amazon.awssdk:annotations:2.19.31                                  | [none]                                                                      |
-third-party-jackson-core-2.19.31.jar                           | software.amazon.awssdk:third-party-jackson-core:2.19.31                     | [none]                                                                      |
-joda-time-2.8.1.jar                                            | joda-time:joda-time:2.8.1                                                   | org.joda:joda-convert:1.2 (optional)                                        | Unsatisfied
+endpoints-spi-2.20.37.jar                                      | software.amazon.awssdk:endpoints-spi:2.20.37                                | software.amazon.awssdk:annotations:2.20.37                                  | OK
+annotations-2.20.37.jar                                        | software.amazon.awssdk:annotations:2.20.37                                  | [none]                                                                      |
+third-party-jackson-core-2.20.37.jar                           | software.amazon.awssdk:third-party-jackson-core:2.20.37                     | [none]                                                                      |
+joda-time-2.10.8.jar                                           | joda-time:joda-time:2.10.8                                                  | org.joda:joda-convert:1.9.2 (optional)                                      | Unsatisfied
 plexus-component-annotations-1.6.jar                           | org.codehaus.plexus:plexus-component-annotations:1.6                        | [none]                                                                      |
 commons-lang3-3.4.jar                                          | org.apache.commons:commons-lang3:3.4                                        | [none]                                                                      |
 failureaccess-1.0.1.jar                                        | com.google.guava:failureaccess:1.0.1                                        | [none]                                                                      |
@@ -913,11 +925,11 @@ aether-spi-1.1.0.jar                  | 8     | org.eclipse.aether.spi.* (8 subp
 aether-transport-file-1.1.0.jar       | 1     | org.eclipse.aether.transport.file                                |
 aether-transport-http-1.1.0.jar       | 1     | org.eclipse.aether.transport.http                                |
 aether-util-1.1.0.jar                 | 13    | org.eclipse.aether.util (+12 subpackages)                        |
-annotations-2.19.31.jar               | 1     | software.amazon.awssdk.annotations                               |
-arns-2.19.31.jar                      | 1     | software.amazon.awssdk.arns                                      |
+annotations-2.20.37.jar               | 1     | software.amazon.awssdk.annotations                               |
+arns-2.20.37.jar                      | 1     | software.amazon.awssdk.arns                                      |
 asm-9.4.jar                           | 2     | org.objectweb.asm (+1 subpackage)                                |
-auth-2.19.31.jar                      | 12    | software.amazon.awssdk.auth.* (12 subpackages)                   |
-aws-core-2.19.31.jar                  | 20    | software.amazon.awssdk.awscore (+19 subpackages)                 |
+auth-2.20.37.jar                      | 12    | software.amazon.awssdk.auth.* (12 subpackages)                   |
+aws-core-2.20.37.jar                  | 20    | software.amazon.awssdk.awscore (+19 subpackages)                 |
 aws-java-sdk-core-1.12.228.jar        | 66    | com.amazonaws                                                    |
                                       |       | com.amazonaws.adapters.types                                     |
                                       |       | com.amazonaws.annotation                                         |
@@ -943,16 +955,17 @@ aws-java-sdk-core-1.12.228.jar        | 66    | com.amazonaws                   
                                       |       | com.amazonaws.util (+2 subpackages)                              |
                                       |       | com.amazonaws.waiters                                            |
 aws-java-sdk-xray-1.12.228.jar        | 3     | com.amazonaws.services.xray (+2 subpackages)                     |
-aws-json-protocol-2.19.31.jar         | 5     | software.amazon.awssdk.protocols.json (+4 subpackages)           |
+aws-json-protocol-2.20.37.jar         | 5     | software.amazon.awssdk.protocols.json (+4 subpackages)           |
 aws-lambda-java-core-1.2.2.jar        | 1     | com.amazonaws.services.lambda.runtime                            |
-aws-lambda-java-events-3.11.0.jar     | 5     | com.amazonaws.services.lambda.runtime.events (+4 subpackages)    |
-aws-query-protocol-2.19.31.jar        | 5     | software.amazon.awssdk.protocols.query (+4 subpackages)          |
-aws-xml-protocol-2.19.31.jar          | 3     | software.amazon.awssdk.protocols.xml (+2 subpackages)            |
+aws-lambda-java-events-3.11.1.jar     | 5     | com.amazonaws.services.lambda.runtime.events (+4 subpackages)    |
+aws-query-protocol-2.20.37.jar        | 5     | software.amazon.awssdk.protocols.query (+4 subpackages)          |
+aws-xml-protocol-2.20.37.jar          | 3     | software.amazon.awssdk.protocols.xml (+2 subpackages)            |
 aws-xray-recorder-sdk-core-2.13.0.jar | 19    | com.amazonaws.xray (+18 subpackages)                             |
 checker-qual-3.12.0.jar               | 29    | org.checkerframework.* (29 subpackages)                          |
 commons-codec-1.15.jar                | 7     | org.apache.commons.codec (+6 subpackages)                        |
 commons-lang3-3.4.jar                 | 12    | org.apache.commons.lang3 (+11 subpackages)                       |
-endpoints-spi-2.19.31.jar             | 1     | software.amazon.awssdk.endpoints                                 |
+crt-core-2.20.37.jar                  | 1     | software.amazon.awssdk.crtcore                                   |
+endpoints-spi-2.20.37.jar             | 1     | software.amazon.awssdk.endpoints                                 |
 error_prone_annotations-2.11.0.jar    | 2     | com.google.errorprone.annotations (+1 subpackage)                |
 eventstream-1.0.1.jar                 | 1     | software.amazon.eventstream                                      |
 failureaccess-1.0.1.jar               | 1     | com.google.common.util.concurrent.internal                       |
@@ -973,7 +986,7 @@ guava-31.1-jre.jar                    | 18    | com.google.common.annotations   
                                       |       | com.google.common.util.concurrent                                |
                                       |       | com.google.common.xml                                            |
                                       |       | com.google.thirdparty.publicsuffix                               |
-http-client-spi-2.19.31.jar           | 3     | software.amazon.awssdk.http                                      |
+http-client-spi-2.20.37.jar           | 3     | software.amazon.awssdk.http                                      |
                                       |       | software.amazon.awssdk.http.async                                |
                                       |       | software.amazon.awssdk.internal.http                             |
 httpclient-4.5.14.jar                 | 24    | org.apache.http.auth (+1 subpackage)                             |
@@ -1023,12 +1036,12 @@ jarhc-2.1.0.jar                       | 18    | org.jarhc                       
 jarhc-check-1.0.0-SNAPSHOT.jar        | 1     | org.jarhc.online.jarhc                                           |
 jcl-over-slf4j-2.0.6.jar              | 2     | org.apache.commons.logging (+1 subpackage)                       |
 jmespath-java-1.12.228.jar            | 1     | com.amazonaws.jmespath                                           |
-joda-time-2.8.1.jar                   | 7     | org.joda.time (+6 subpackages)                                   |
+joda-time-2.10.8.jar                  | 7     | org.joda.time (+6 subpackages)                                   |
 json-20220924.jar                     | 1     | org.json                                                         |
-json-utils-2.19.31.jar                | 2     | software.amazon.awssdk.protocols.jsoncore (+1 subpackage)        |
+json-utils-2.20.37.jar                | 2     | software.amazon.awssdk.protocols.jsoncore (+1 subpackage)        |
 jsr305-3.0.2.jar                      | 3     | javax.annotation (+2 subpackages)                                |
 jul-to-slf4j-2.0.6.jar                | 1     | org.slf4j.bridge                                                 |
-lambda-2.19.31.jar                    | 9     | software.amazon.awssdk.services.lambda (+8 subpackages)          |
+lambda-2.20.37.jar                    | 9     | software.amazon.awssdk.services.lambda (+8 subpackages)          |
 maven-aether-provider-3.3.9.jar       | 1     | org.apache.maven.repository.internal                             |
 maven-artifact-3.3.9.jar              | 11    | org.apache.maven.artifact                                        | Split Package: org.apache.maven.artifact.repository.metadata
                                       |       | org.apache.maven.artifact.handler                                |
@@ -1061,26 +1074,26 @@ maven-model-builder-3.3.9.jar         | 16    | org.apache.maven.model.building 
                                       |       | org.apache.maven.model.validation                                |
 maven-repository-metadata-3.3.9.jar   | 2     | org.apache.maven.artifact.repository.metadata                    | Split Package: org.apache.maven.artifact.repository.metadata
                                       |       | org.apache.maven.artifact.repository.metadata.io.xpp3            |
-metrics-spi-2.19.31.jar               | 2     | software.amazon.awssdk.metrics (+1 subpackage)                   |
+metrics-spi-2.20.37.jar               | 2     | software.amazon.awssdk.metrics (+1 subpackage)                   |
 plexus-component-annotations-1.6.jar  | 1     | org.codehaus.plexus.component.annotations                        |
 plexus-interpolation-1.21.jar         | 6     | org.codehaus.plexus.interpolation (+5 subpackages)               |
 plexus-utils-3.5.0.jar                | 9     | org.codehaus.plexus.util (+8 subpackages)                        |
-profiles-2.19.31.jar                  | 2     | software.amazon.awssdk.profiles (+1 subpackage)                  |
-protocol-core-2.19.31.jar             | 1     | software.amazon.awssdk.protocols.core                            |
+profiles-2.20.37.jar                  | 2     | software.amazon.awssdk.profiles (+1 subpackage)                  |
+protocol-core-2.20.37.jar             | 1     | software.amazon.awssdk.protocols.core                            |
 reactive-streams-1.0.3.jar            | 1     | org.reactivestreams                                              |
-regions-2.19.31.jar                   | 8     | software.amazon.awssdk.regions (+7 subpackages)                  |
-s3-2.19.31.jar                        | 19    | software.amazon.awssdk.services.s3 (+18 subpackages)             |
-sdk-core-2.19.31.jar                  | 53    | software.amazon.awssdk.core (+52 subpackages)                    |
+regions-2.20.37.jar                   | 8     | software.amazon.awssdk.regions (+7 subpackages)                  |
+s3-2.20.37.jar                        | 20    | software.amazon.awssdk.services.s3 (+19 subpackages)             |
+sdk-core-2.20.37.jar                  | 53    | software.amazon.awssdk.core (+52 subpackages)                    |
 shared-1.0.0-SNAPSHOT.jar             | 2     | org.jarhc.online                                                 |
                                       |       | org.jarhc.online.clients                                         |
-slf4j-api-2.0.6.jar                   | 4     | org.slf4j                                                        |
+slf4j-api-2.0.7.jar                   | 4     | org.slf4j                                                        |
                                       |       | org.slf4j.event                                                  |
                                       |       | org.slf4j.helpers                                                |
                                       |       | org.slf4j.spi                                                    |
-slf4j-simple-2.0.6.jar                | 1     | org.slf4j.simple                                                 |
-third-party-jackson-core-2.19.31.jar  | 12    | software.amazon.awssdk.thirdparty.jackson.core (+11 subpackages) |
-url-connection-client-2.19.31.jar     | 1     | software.amazon.awssdk.http.urlconnection                        |
-utils-2.19.31.jar                     | 8     | software.amazon.awssdk.utils (+7 subpackages)                    |
+slf4j-simple-2.0.7.jar                | 1     | org.slf4j.simple                                                 |
+third-party-jackson-core-2.20.37.jar  | 12    | software.amazon.awssdk.thirdparty.jackson.core (+11 subpackages) |
+url-connection-client-2.20.37.jar     | 1     | software.amazon.awssdk.http.urlconnection                        |
+utils-2.20.37.jar                     | 8     | software.amazon.awssdk.utils (+7 subpackages)                    |
 
 Duplicate Classes
 -----------------
@@ -1105,7 +1118,7 @@ JAR file                              | Issues
 aether-transport-http-1.1.0.jar       | org.eclipse.aether.transport.http.HttpTransporterFactory
                                       | • Annotation not found: javax.inject.Inject (package not found)
                                       | • Annotation not found: javax.inject.Named (package not found)
-s3-2.19.31.jar                        | software.amazon.awssdk.services.s3.internal.crt.CrtChecksumUtils
+s3-2.20.37.jar                        | software.amazon.awssdk.services.s3.internal.crt.CrtChecksumUtils
                                       | • Class not found: software.amazon.awssdk.crt.s3.ChecksumAlgorithm (package not found)
                                       | • Class not found: software.amazon.awssdk.crt.s3.ChecksumConfig (package not found)
                                       | • Class not found: software.amazon.awssdk.crt.s3.ChecksumConfig$ChecksumLocation (package not found)
@@ -1153,9 +1166,19 @@ s3-2.19.31.jar                        | software.amazon.awssdk.services.s3.inter
                                       |
                                       | software.amazon.awssdk.services.s3.internal.crt.S3NativeClientConfiguration
                                       | • Class not found: software.amazon.awssdk.crt.auth.credentials.CredentialsProvider (package not found)
+                                      | • Class not found: software.amazon.awssdk.crt.http.HttpMonitoringOptions (package not found)
+                                      | • Class not found: software.amazon.awssdk.crt.http.HttpProxyOptions (package not found)
                                       | • Class not found: software.amazon.awssdk.crt.io.ClientBootstrap (package not found)
                                       | • Class not found: software.amazon.awssdk.crt.io.EventLoopGroup (package not found)
                                       | • Class not found: software.amazon.awssdk.crt.io.HostResolver (package not found)
+                                      | • Class not found: software.amazon.awssdk.crt.io.TlsCipherPreference (package not found)
+                                      | • Class not found: software.amazon.awssdk.crt.io.TlsContext (package not found)
+                                      | • Class not found: software.amazon.awssdk.crt.io.TlsContextOptions (package not found)
+crt-core-2.20.37.jar                  | software.amazon.awssdk.crtcore.CrtConfigurationUtils
+                                      | • Class not found: software.amazon.awssdk.crt.http.HttpMonitoringOptions (package not found)
+                                      | • Class not found: software.amazon.awssdk.crt.http.HttpProxyOptions (package not found)
+                                      | • Class not found: software.amazon.awssdk.crt.http.HttpProxyOptions$HttpProxyAuthorizationType (package not found)
+                                      | • Class not found: software.amazon.awssdk.crt.io.TlsContext (package not found)
 aws-xray-recorder-sdk-core-2.13.0.jar | com.amazonaws.xray.javax.servlet.AWSXRayServletAsyncListener
                                       | • Interface not found: javax.servlet.AsyncListener
                                       | • Class not found: javax.servlet.AsyncEvent (package not found)
@@ -1344,7 +1367,7 @@ aether-transport-file-1.1.0.jar       | org.eclipse.aether.transport.file.FileTr
 aws-java-sdk-core-1.12.228.jar        | com.amazonaws.util.Base64
                                       | • Class not found: javax.xml.bind.DatatypeConverter (package not found)
                                       | • Class not found: javax.xml.bind.JAXBContext (package not found)
-joda-time-2.8.1.jar                   | org.joda.time.DateMidnight
+joda-time-2.10.8.jar                  | org.joda.time.DateMidnight
                                       | • Annotation not found: org.joda.convert.FromString (package not found)
                                       |
                                       | org.joda.time.DateTime
@@ -1465,12 +1488,14 @@ aether-transport-http-1.1.0.jar       | org.eclipse.aether.transport.http.Global
                                       |
                                       | org.eclipse.aether.transport.http.X509HostnameVerifierAdapter
                                       | • @Deprecated: public interface org.apache.http.conn.ssl.X509HostnameVerifier
-s3-2.19.31.jar                        | software.amazon.awssdk.services.s3.DefaultS3AsyncClient
+s3-2.20.37.jar                        | software.amazon.awssdk.services.s3.DefaultS3AsyncClient
                                       | • @Deprecated: public software.amazon.awssdk.awscore.eventstream.EventStreamAsyncResponseTransformer$Builder software.amazon.awssdk.awscore.eventstream.EventStreamAsyncResponseTransformer$Builder.executor(java.util.concurrent.Executor)
                                       |
                                       | software.amazon.awssdk.services.s3.internal.handlers.SyncChecksumValidationInterceptor
                                       | • @Deprecated: public long software.amazon.awssdk.core.sync.RequestBody.contentLength()
-http-client-spi-2.19.31.jar           | software.amazon.awssdk.http.SdkHttpHeaders
+aws-core-2.20.37.jar                  | software.amazon.awssdk.awscore.internal.AwsExecutionContextBuilder
+                                      | • @Deprecated: public static final software.amazon.awssdk.core.interceptor.ExecutionAttribute software.amazon.awssdk.core.interceptor.SdkExecutionAttribute.PROFILE_FILE
+http-client-spi-2.20.37.jar           | software.amazon.awssdk.http.SdkHttpHeaders
                                       | • @Deprecated: public static java.util.Optional software.amazon.awssdk.utils.http.SdkHttpUtils.firstMatchingHeader(java.util.Map,java.lang.String)
                                       | • @Deprecated: public static java.util.Optional software.amazon.awssdk.utils.http.SdkHttpUtils.firstMatchingHeaderFromCollection(java.util.Map,java.util.Collection)
                                       | • @Deprecated: public static java.util.stream.Stream software.amazon.awssdk.utils.http.SdkHttpUtils.allMatchingHeaders(java.util.Map,java.lang.String)
