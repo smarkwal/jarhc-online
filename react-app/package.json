@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "react-scripts": "5.0.1",
-    "webpack": "5.77.0"
+    "webpack": "5.81.0"
   },
   "scripts": {
     "start": "react-scripts start",
