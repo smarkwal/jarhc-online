@@ -48,9 +48,9 @@ dependencies {
     // note: this is a tests-only project and all classes are in main source set
 
     // BOMs for version constraints
-    implementation(platform("org.junit:junit-bom:5.9.2"))
-    implementation(platform("software.amazon.awssdk:bom:2.20.38"))
-    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.441"))
+    implementation(platform("org.junit:junit-bom:5.9.3"))
+    implementation(platform("software.amazon.awssdk:bom:2.20.65"))
+    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.468"))
 
     // test libraries
     implementation("org.junit.jupiter:junit-jupiter")
@@ -100,7 +100,7 @@ tasks {
         // (used in GitHub Actions to pass secrets)
         System.getenv().forEach() {
             if (it.key.startsWith("JARHC_")) {
-                systemProperty(it.key.toLowerCase().replace('_', '.'), it.value)
+                systemProperty(it.key.lowercase().replace('_', '.'), it.value)
             }
         }
 

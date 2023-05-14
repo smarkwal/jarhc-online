@@ -6,7 +6,7 @@ plugins {
 dependencies {
 
     // BOMs for version constraints
-    api(platform("software.amazon.awssdk:bom:2.20.38"))
+    api(platform("software.amazon.awssdk:bom:2.20.65"))
 
     // logging
     api("org.slf4j:slf4j-api:2.0.7")
@@ -25,12 +25,12 @@ dependencies {
         exclude("software.amazon.awssdk", "netty-nio-client")
     }
     api("software.amazon.awssdk:url-connection-client")
-    api("com.amazonaws:aws-xray-recorder-sdk-core:2.13.0")
+    api("com.amazonaws:aws-xray-recorder-sdk-core:2.14.0")
 
     // test dependencies -------------------------------------
 
-    testFixturesApi("org.junit.jupiter:junit-jupiter:5.9.2")
-    testFixturesApi("org.mockito:mockito-core:5.2.0")
-    testFixturesApi("org.mockito:mockito-junit-jupiter:5.2.0")
+    testFixturesApi("org.junit.jupiter:junit-jupiter:5.9.3")
+    testFixturesApi("org.mockito:mockito-core:5.3.1")
+    testFixturesApi("org.mockito:mockito-junit-jupiter:5.3.1")
     testFixturesApi("org.assertj:assertj-core:3.24.2")
 }
