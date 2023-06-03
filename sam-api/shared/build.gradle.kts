@@ -6,14 +6,14 @@ plugins {
 dependencies {
 
     // BOMs for version constraints
-    api(platform("software.amazon.awssdk:bom:2.20.65"))
+    api(platform("software.amazon.awssdk:bom:2.20.78"))
 
     // logging
     api("org.slf4j:slf4j-api:2.0.7")
 
     // AWS Lambda Java API
     api("com.amazonaws:aws-lambda-java-core:1.2.2")
-    api("com.amazonaws:aws-lambda-java-events:3.11.1")
+    api("com.amazonaws:aws-lambda-java-events:3.11.2")
 
     // AWS SDK for S3, Lambda, and X-Ray (excluding HttpClient and Netty)
     api("software.amazon.awssdk:s3") {

@@ -5,12 +5,13 @@
   "dependencies": {
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-router-dom": "6.11.1",
+    "react-router-dom": "6.11.2",
     "react-debounce-input": "3.3.0"
   },
   "devDependencies": {
     "react-scripts": "5.0.1",
-    "webpack": "5.82.1"
+    "webpack": "5.85.0",
+    "@babel/plugin-proposal-private-property-in-object": "7.21.10"
   },
   "scripts": {
     "start": "react-scripts start",
