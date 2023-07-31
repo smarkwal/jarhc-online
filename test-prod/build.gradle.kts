@@ -48,9 +48,9 @@ dependencies {
     // note: this is a tests-only project and all classes are in main source set
 
     // BOMs for version constraints
-    implementation(platform("org.junit:junit-bom:5.9.3"))
-    implementation(platform("software.amazon.awssdk:bom:2.20.97"))
-    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.500"))
+    implementation(platform("org.junit:junit-bom:5.10.0"))
+    implementation(platform("software.amazon.awssdk:bom:2.20.115"))
+    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.518"))
 
     // test libraries
     implementation("org.junit.jupiter:junit-jupiter")
