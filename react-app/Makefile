@@ -5,6 +5,9 @@ all: clean build sync
 clean:
 	rm -rf build
 
+outdated:
+	npm outdated
+
 build:
 	npm run build
 

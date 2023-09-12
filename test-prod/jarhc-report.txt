@@ -7,7 +7,7 @@ List of JAR files found in classpath.
 
 JAR file                                            | Size    | Classes | Resources | Checksum (SHA-1)                         | Artifact coordinates
 ----------------------------------------------------+---------+---------+-----------+------------------------------------------+----------------------------------------------------------------
-test-prod-1.0.0-SNAPSHOT.jar                        | 31.7 KB | 17      | 0         | e70c8c5b6c27f8cafb80c0e8e8fde0612851c2e7 | [unknown]
+test-prod-1.0.0-SNAPSHOT.jar                        | 31.7 KB | 17      | 0         | f2420947e2cb77921b1b0f834c7e3fd42ea4f81b | [unknown]
 junit-jupiter-5.10.0.jar                            | 6.21 KB | 0       | 0         | 8fea1d9c58b2156f1b998f2f18da04bc9e087f74 | org.junit.jupiter:junit-jupiter:5.10.0
 junit-jupiter-params-5.10.0.jar                     | 572 KB  | 346     | 0         | 9041c7365495a897a64782ea5a6fdb99dab1814e | org.junit.jupiter:junit-jupiter-params:5.10.0
 junit-jupiter-engine-5.10.0.jar                     | 238 KB  | 129     | 0         | 90587932d718fc51a48112d33045a18476c542ad | org.junit.jupiter:junit-jupiter-engine:5.10.0
@@ -16,35 +16,35 @@ junit-platform-engine-1.10.0.jar                    | 200 KB  | 135     | 0     
 junit-platform-commons-1.10.0.jar                   | 104 KB  | 43      | 0         | d533ff2c286eaf963566f92baf5f8a06628d2609 | org.junit.platform:junit-platform-commons:1.10.0
 assertj-core-3.24.2.jar                             | 1.28 MB | 813     | 0         | ebbf338e33f893139459ce5df023115971c2786f | org.assertj:assertj-core:3.24.2
 jsonassert-1.5.1.jar                                | 29.8 KB | 20      | 0         | 6d842d0faf4cf6725c509a5e5347d319ee0431c3 | org.skyscreamer:jsonassert:1.5.1
-s3-2.20.115.jar                                     | 3.17 MB | 1918    | 1         | 0c97a6ca79fdf9fe81c2000817eb250d2a037f3b | software.amazon.awssdk:s3:2.20.115
-lambda-2.20.115.jar                                 | 2.11 MB | 1250    | 1         | a8a3545dcaca8e01a4379d4e2176ff730610d45a | software.amazon.awssdk:lambda:2.20.115
-aws-java-sdk-cognitoidp-1.12.518.jar                | 1.45 MB | 929     | 0         | 09475890f26edfffc183e28f7bf401bd6061cb77 | com.amazonaws:aws-java-sdk-cognitoidp:1.12.518
-slf4j-simple-2.0.7.jar                              | 15.6 KB | 7       | 0         | bfa4d4dad645a5b11c022ae0043bac2df6cf16b5 | org.slf4j:slf4j-simple:2.0.7
-aws-json-protocol-2.20.115.jar                      | 112 KB  | 86      | 0         | 473af38de1f59c20d8de8a4bc252de644cdb9961 | software.amazon.awssdk:aws-json-protocol:2.20.115
-aws-xml-protocol-2.20.115.jar                       | 95.8 KB | 61      | 0         | 1c00e5a40d6cafb3a3e83d7c6dcf2cf8e4442f3b | software.amazon.awssdk:aws-xml-protocol:2.20.115
-aws-query-protocol-2.20.115.jar                     | 68.9 KB | 45      | 0         | b9ef719266b51a1b0e550f97804bd1ed1e537c3d | software.amazon.awssdk:aws-query-protocol:2.20.115
-protocol-core-2.20.115.jar                          | 34.4 KB | 27      | 0         | 2389ef7a379cdf1610053ec2890bd23957770fb7 | software.amazon.awssdk:protocol-core:2.20.115
-aws-core-2.20.115.jar                               | 149 KB  | 109     | 1         | 0215bd9289331103d4640f838d7a7cb6ea5cf3f3 | software.amazon.awssdk:aws-core:2.20.115
-auth-2.20.115.jar                                   | 204 KB  | 140     | 0         | e65456c7623b1d346b7c5320656f4a49c4346914 | software.amazon.awssdk:auth:2.20.115
-regions-2.20.115.jar                                | 800 KB  | 412     | 1         | de93cd8fbebe12119bb422b7d697b405f0d7c1dc | software.amazon.awssdk:regions:2.20.115
-sdk-core-2.20.115.jar                               | 764 KB  | 558     | 4         | 1330f1339ca3985933643048e2575814d170665e | software.amazon.awssdk:sdk-core:2.20.115
-apache-client-2.20.115.jar                          | 73.0 KB | 41      | 0         | 82236c6848405c560e29dd7b4ebb4d200a6464c8 | software.amazon.awssdk:apache-client:2.20.115
-netty-nio-client-2.20.115.jar                       | 278 KB  | 162     | 0         | 9cb74c2f60593e0e4dedd324b0f231e3132286cc | software.amazon.awssdk:netty-nio-client:2.20.115
-http-client-spi-2.20.115.jar                        | 79.4 KB | 67      | 0         | d0db67f79979a33a9d2882091181a17b84204680 | software.amazon.awssdk:http-client-spi:2.20.115
-metrics-spi-2.20.115.jar                            | 26.6 KB | 16      | 0         | 4a814fe3c5226537b53dc18797825873a8c9f9ed | software.amazon.awssdk:metrics-spi:2.20.115
-json-utils-2.20.115.jar                             | 30.3 KB | 17      | 0         | 20cfb5d21387f08f7205a142dd1972edf9aa43a1 | software.amazon.awssdk:json-utils:2.20.115
-crt-core-2.20.115.jar                               | 15.7 KB | 7       | 0         | 136aae2950f4990f154b598e53f9d398b5596a4a | software.amazon.awssdk:crt-core:2.20.115
-arns-2.20.115.jar                                   | 15.4 KB | 8       | 0         | b107a109219da7d5f40493314746c566305e6ff8 | software.amazon.awssdk:arns:2.20.115
-profiles-2.20.115.jar                               | 48.1 KB | 27      | 0         | 678e0d7b7ab16a01ec794f76488178591129f92f | software.amazon.awssdk:profiles:2.20.115
-utils-2.20.115.jar                                  | 187 KB  | 129     | 0         | 979bee33ca5d7db5dcf68eb00e268cb7ba824071 | software.amazon.awssdk:utils:2.20.115
-slf4j-api-2.0.7.jar                                 | 62.1 KB | 51      | 0         | 41eb7184ea9d556f23e18b5cb99cad1f8581fc00 | org.slf4j:slf4j-api:2.0.7
+s3-2.20.145.jar                                     | 3.21 MB | 1944    | 1         | f45be58c9ee9b5a7d8c931384c013f07145589c5 | software.amazon.awssdk:s3:2.20.145
+lambda-2.20.145.jar                                 | 2.11 MB | 1250    | 1         | b0485957c540be9c2c94303f1f4bdbc7359f5906 | software.amazon.awssdk:lambda:2.20.145
+aws-java-sdk-cognitoidp-1.12.548.jar                | 1.49 MB | 952     | 0         | 050cf06eea65f8a21b161ecff112bb39cd100689 | com.amazonaws:aws-java-sdk-cognitoidp:1.12.548
+slf4j-simple-2.0.9.jar                              | 15.7 KB | 7       | 0         | 6367825de95d8885aae056afa793f25a76a84b7d | org.slf4j:slf4j-simple:2.0.9
+aws-json-protocol-2.20.145.jar                      | 112 KB  | 86      | 0         | 2d04ee6d54bf70bc9e97d5f30b91ba8a441d1670 | software.amazon.awssdk:aws-json-protocol:2.20.145
+aws-xml-protocol-2.20.145.jar                       | 95.8 KB | 61      | 0         | 4c50c0dbd41971c96f43970a1a4788cdf529a974 | software.amazon.awssdk:aws-xml-protocol:2.20.145
+aws-query-protocol-2.20.145.jar                     | 68.9 KB | 45      | 0         | b9b6caede3691fbe762f7584c168c60b90216eed | software.amazon.awssdk:aws-query-protocol:2.20.145
+protocol-core-2.20.145.jar                          | 34.4 KB | 27      | 0         | 027dd008d94c468d768204ee9633689511954a2a | software.amazon.awssdk:protocol-core:2.20.145
+aws-core-2.20.145.jar                               | 149 KB  | 109     | 1         | 494b098c6c34109f7a121a531444834eee96d65b | software.amazon.awssdk:aws-core:2.20.145
+auth-2.20.145.jar                                   | 204 KB  | 140     | 0         | c5a6aad38602cac1203cdb6b16bc4572829dae3e | software.amazon.awssdk:auth:2.20.145
+regions-2.20.145.jar                                | 807 KB  | 414     | 1         | 18a3037db296049a5496c880808b694348a42175 | software.amazon.awssdk:regions:2.20.145
+sdk-core-2.20.145.jar                               | 819 KB  | 596     | 4         | eb26f5af1a6c330e6be6dd69026d12cf3036025d | software.amazon.awssdk:sdk-core:2.20.145
+apache-client-2.20.145.jar                          | 73.0 KB | 41      | 0         | 19acb9c3c331e4622c32546c4aa74cfcfa2be5da | software.amazon.awssdk:apache-client:2.20.145
+netty-nio-client-2.20.145.jar                       | 278 KB  | 162     | 0         | 17e62b096a3f66642ddc1036d8b7ce75b4472f7a | software.amazon.awssdk:netty-nio-client:2.20.145
+http-client-spi-2.20.145.jar                        | 79.4 KB | 67      | 0         | 2801896f60f23531694d2d4f59ef4bb18c53622b | software.amazon.awssdk:http-client-spi:2.20.145
+metrics-spi-2.20.145.jar                            | 26.6 KB | 16      | 0         | 912b01935477da2941d6ac765452265918671984 | software.amazon.awssdk:metrics-spi:2.20.145
+json-utils-2.20.145.jar                             | 30.3 KB | 17      | 0         | 99275ae9070461a4b3aeb763c7e41c705f9cd1fa | software.amazon.awssdk:json-utils:2.20.145
+crt-core-2.20.145.jar                               | 15.7 KB | 7       | 0         | f083d114e0b1e846c076ecec666bc0136dcab06e | software.amazon.awssdk:crt-core:2.20.145
+arns-2.20.145.jar                                   | 15.4 KB | 8       | 0         | e6acbaf84822b215652b76744f132b6ba5db56a6 | software.amazon.awssdk:arns:2.20.145
+profiles-2.20.145.jar                               | 48.2 KB | 27      | 0         | cd5aeeaa94842b9ef550472984dc4b504fbe6493 | software.amazon.awssdk:profiles:2.20.145
+utils-2.20.145.jar                                  | 190 KB  | 131     | 0         | 5b45f434a17dc790385bcf869b940e61a5123bdd | software.amazon.awssdk:utils:2.20.145
+slf4j-api-2.0.9.jar                                 | 63.1 KB | 51      | 0         | 7cf2726fdcfbc8610f9a71fb3ed639871f315340 | org.slf4j:slf4j-api:2.0.9
 httpmime-4.5.14.jar                                 | 40.7 KB | 23      | 1         | 6662758a1f1cb1149cf916bdac28332e0902ec44 | org.apache.httpcomponents:httpmime:4.5.14
 json-20230618.jar                                   | 71.7 KB | 29      | 0         | 1ae16df7d556d02713e241086f878399e99260d6 | org.json:json:20230618
-endpoints-spi-2.20.115.jar                          | 12.8 KB | 6       | 0         | 63a4b40f8c030fc6d5672871db093f494066e6f9 | software.amazon.awssdk:endpoints-spi:2.20.115
-annotations-2.20.115.jar                            | 13.4 KB | 13      | 0         | 95e8b71267b04f33b9314749cc29d18c384628f0 | software.amazon.awssdk:annotations:2.20.115
-third-party-jackson-core-2.20.115.jar               | 376 KB  | 127     | 0         | bbb50fead825b2fbffe7335714f4c7583f94cb57 | software.amazon.awssdk:third-party-jackson-core:2.20.115
-jmespath-java-1.12.518.jar                          | 26.9 KB | 29      | 0         | 30a40f7575e67f067202a56682b7d2a9f33793a2 | com.amazonaws:jmespath-java:1.12.518
-aws-java-sdk-core-1.12.518.jar                      | 1.01 MB | 876     | 3         | 718621e89f63ee451b75476e5d36dbc9aa0a7f0c | com.amazonaws:aws-java-sdk-core:1.12.518
+endpoints-spi-2.20.145.jar                          | 12.9 KB | 6       | 0         | 2c1728617ca8ed320ac5d8bc8d094d7e7bc18995 | software.amazon.awssdk:endpoints-spi:2.20.145
+annotations-2.20.145.jar                            | 13.4 KB | 13      | 0         | b88311a6252ac04baf56d14b030a82f8cc829c18 | software.amazon.awssdk:annotations:2.20.145
+third-party-jackson-core-2.20.145.jar               | 522 KB  | 174     | 0         | 26c8f435550acd3483156b4a5ec7ac7e1a4494d9 | software.amazon.awssdk:third-party-jackson-core:2.20.145
+jmespath-java-1.12.548.jar                          | 26.9 KB | 29      | 0         | 0d70abfa219d1b9b51ec736ef8adc10b504ffe45 | com.amazonaws:jmespath-java:1.12.548
+aws-java-sdk-core-1.12.548.jar                      | 1.01 MB | 876     | 3         | 79e909b68b904c94127728c035fb7dfd41afecaf | com.amazonaws:aws-java-sdk-core:1.12.548
 byte-buddy-1.12.21.jar                              | 3.73 MB | 2652    | 0         | 1a257bbdb9288f2558d3767cc2cc22b499d5091c | net.bytebuddy:byte-buddy:1.12.21
 android-json-0.0.20131108.vaadin1.jar               | 17.9 KB | 8       | 0         | fa26d351fe62a6a17f5cda1287c1c6110dec413f | com.vaadin.external.google:android-json:0.0.20131108.vaadin1
 httpclient-4.5.14.jar                               | 767 KB  | 470     | 2         | 1194890e6f56ec29177673f2f12d0b8e627dec98 | org.apache.httpcomponents:httpclient:4.5.14
@@ -52,7 +52,7 @@ httpcore-4.4.16.jar                                 | 320 KB  | 253     | 1     
 commons-logging-1.2.jar                             | 60.4 KB | 28      | 0         | 4bfc12adfe4842bf07b657f0369c4cb522955686 | commons-logging:commons-logging:1.2
 commons-codec-1.15.jar                              | 346 KB  | 106     | 128       | 49d94806b6e3dc933dacbd8acb0fdbab8ebd1e5d | commons-codec:commons-codec:1.15
 opentest4j-1.3.0.jar                                | 14.0 KB | 8       | 0         | 152ea56b3a72f655d4fd677fc0ef2596c3dd5e6e | org.opentest4j:opentest4j:1.3.0
-reactive-streams-1.0.3.jar                          | 11.1 KB | 13      | 0         | d9fb7a7926ffa635b3dcaa5049fb2bfa25b3e7d0 | org.reactivestreams:reactive-streams:1.0.3
+reactive-streams-1.0.4.jar                          | 11.4 KB | 13      | 0         | 3864a1320d97d7b045f729a326e1e077661f31b7 | org.reactivestreams:reactive-streams:1.0.4
 eventstream-1.0.1.jar                               | 29.5 KB | 19      | 0         | 6ff8649dffc5190366ada897ba8525a836297784 | software.amazon.eventstream:eventstream:1.0.1
 netty-codec-http2-4.1.94.Final.jar                  | 472 KB  | 279     | 0         | f651595784d6cca4cbca6a8ad74c48fceed6cea8 | io.netty:netty-codec-http2:4.1.94.Final
 netty-codec-http-4.1.94.Final.jar                   | 641 KB  | 386     | 0         | 9e5404764092c1f6305ad5719078f46ab228d587 | io.netty:netty-codec-http:4.1.94.Final
@@ -70,7 +70,7 @@ jackson-dataformat-cbor-2.12.7.jar                  | 60.1 KB | 14      | 0     
 jackson-core-2.12.7.jar                             | 357 KB  | 124     | 0         | 04669a54b799c105572aa8de2a1ae0fe64a17745 | com.fasterxml.jackson.core:jackson-core:2.12.7
 jackson-databind-2.12.7.1.jar                       | 1.44 MB | 700     | 0         | 48d6674adb5a077f2c04b42795e2e7624997b8b9 | com.fasterxml.jackson.core:jackson-databind:2.12.7.1
 joda-time-2.8.1.jar                                 | 607 KB  | 246     | 469       | f5bfc718c95a7b1d3c371bb02a188a4df18361a9 | joda-time:joda-time:2.8.1
-Classpath                                           | 25.8 MB | 16258   | 612       | -                                        | -
+Classpath                                           | 26.0 MB | 16396   | 612       | -                                        | -
 
 Modules
 -------
@@ -139,39 +139,39 @@ assertj-core-3.24.2.jar                             | org.assertj.core          
                                                     |                                                |                |           |                                  | org.assertj.core.util.introspection
                                                     |                                                |                |           |                                  | org.assertj.core.util.xml
 jsonassert-1.5.1.jar                                | jsonassert                                     | Auto-generated | Yes       | -                                | [all packages]
-s3-2.20.115.jar                                     | software.amazon.awssdk.services.s3             | Manifest       | Yes       | -                                | [all packages]
-lambda-2.20.115.jar                                 | software.amazon.awssdk.services.lambda         | Manifest       | Yes       | -                                | [all packages]
-aws-java-sdk-cognitoidp-1.12.518.jar                | aws.java.sdk.cognitoidp                        | Auto-generated | Yes       | -                                | [all packages]
-slf4j-simple-2.0.7.jar                              | org.slf4j.simple                               | Module-Info    | No        | org.slf4j                        |
+s3-2.20.145.jar                                     | software.amazon.awssdk.services.s3             | Manifest       | Yes       | -                                | [all packages]
+lambda-2.20.145.jar                                 | software.amazon.awssdk.services.lambda         | Manifest       | Yes       | -                                | [all packages]
+aws-java-sdk-cognitoidp-1.12.548.jar                | aws.java.sdk.cognitoidp                        | Auto-generated | Yes       | -                                | [all packages]
+slf4j-simple-2.0.9.jar                              | org.slf4j.simple                               | Module-Info    | No        | org.slf4j                        |
                                                     |                                                |                |           | java.base                        |
-aws-json-protocol-2.20.115.jar                      | software.amazon.awssdk.protocols.json          | Manifest       | Yes       | -                                | [all packages]
-aws-xml-protocol-2.20.115.jar                       | software.amazon.awssdk.protocols.xml           | Manifest       | Yes       | -                                | [all packages]
-aws-query-protocol-2.20.115.jar                     | software.amazon.awssdk.protocols.query         | Manifest       | Yes       | -                                | [all packages]
-protocol-core-2.20.115.jar                          | software.amazon.awssdk.protocols.core          | Manifest       | Yes       | -                                | [all packages]
-aws-core-2.20.115.jar                               | software.amazon.awssdk.awscore                 | Manifest       | Yes       | -                                | [all packages]
-auth-2.20.115.jar                                   | software.amazon.awssdk.auth                    | Manifest       | Yes       | -                                | [all packages]
-regions-2.20.115.jar                                | software.amazon.awssdk.regions                 | Manifest       | Yes       | -                                | [all packages]
-sdk-core-2.20.115.jar                               | software.amazon.awssdk.core                    | Manifest       | Yes       | -                                | [all packages]
-apache-client-2.20.115.jar                          | software.amazon.awssdk.http.apache             | Manifest       | Yes       | -                                | [all packages]
-netty-nio-client-2.20.115.jar                       | software.amazon.awssdk.http.nio.netty          | Manifest       | Yes       | -                                | [all packages]
-http-client-spi-2.20.115.jar                        | software.amazon.awssdk.http                    | Manifest       | Yes       | -                                | [all packages]
-metrics-spi-2.20.115.jar                            | software.amazon.awssdk.metrics                 | Manifest       | Yes       | -                                | [all packages]
-json-utils-2.20.115.jar                             | software.amazon.awssdk.protocols.jsoncore      | Manifest       | Yes       | -                                | [all packages]
-crt-core-2.20.115.jar                               | software.amazon.awssdk.crtcore                 | Manifest       | Yes       | -                                | [all packages]
-arns-2.20.115.jar                                   | software.amazon.awssdk.arns                    | Manifest       | Yes       | -                                | [all packages]
-profiles-2.20.115.jar                               | software.amazon.awssdk.profiles                | Manifest       | Yes       | -                                | [all packages]
-utils-2.20.115.jar                                  | software.amazon.awssdk.utils                   | Manifest       | Yes       | -                                | [all packages]
-slf4j-api-2.0.7.jar                                 | org.slf4j                                      | Module-Info    | No        | java.base                        | org.slf4j
+aws-json-protocol-2.20.145.jar                      | software.amazon.awssdk.protocols.json          | Manifest       | Yes       | -                                | [all packages]
+aws-xml-protocol-2.20.145.jar                       | software.amazon.awssdk.protocols.xml           | Manifest       | Yes       | -                                | [all packages]
+aws-query-protocol-2.20.145.jar                     | software.amazon.awssdk.protocols.query         | Manifest       | Yes       | -                                | [all packages]
+protocol-core-2.20.145.jar                          | software.amazon.awssdk.protocols.core          | Manifest       | Yes       | -                                | [all packages]
+aws-core-2.20.145.jar                               | software.amazon.awssdk.awscore                 | Manifest       | Yes       | -                                | [all packages]
+auth-2.20.145.jar                                   | software.amazon.awssdk.auth                    | Manifest       | Yes       | -                                | [all packages]
+regions-2.20.145.jar                                | software.amazon.awssdk.regions                 | Manifest       | Yes       | -                                | [all packages]
+sdk-core-2.20.145.jar                               | software.amazon.awssdk.core                    | Manifest       | Yes       | -                                | [all packages]
+apache-client-2.20.145.jar                          | software.amazon.awssdk.http.apache             | Manifest       | Yes       | -                                | [all packages]
+netty-nio-client-2.20.145.jar                       | software.amazon.awssdk.http.nio.netty          | Manifest       | Yes       | -                                | [all packages]
+http-client-spi-2.20.145.jar                        | software.amazon.awssdk.http                    | Manifest       | Yes       | -                                | [all packages]
+metrics-spi-2.20.145.jar                            | software.amazon.awssdk.metrics                 | Manifest       | Yes       | -                                | [all packages]
+json-utils-2.20.145.jar                             | software.amazon.awssdk.protocols.jsoncore      | Manifest       | Yes       | -                                | [all packages]
+crt-core-2.20.145.jar                               | software.amazon.awssdk.crtcore                 | Manifest       | Yes       | -                                | [all packages]
+arns-2.20.145.jar                                   | software.amazon.awssdk.arns                    | Manifest       | Yes       | -                                | [all packages]
+profiles-2.20.145.jar                               | software.amazon.awssdk.profiles                | Manifest       | Yes       | -                                | [all packages]
+utils-2.20.145.jar                                  | software.amazon.awssdk.utils                   | Manifest       | Yes       | -                                | [all packages]
+slf4j-api-2.0.9.jar                                 | org.slf4j                                      | Module-Info    | No        | java.base                        | org.slf4j
                                                     |                                                |                |           |                                  | org.slf4j.event
                                                     |                                                |                |           |                                  | org.slf4j.helpers
                                                     |                                                |                |           |                                  | org.slf4j.spi
 httpmime-4.5.14.jar                                 | org.apache.httpcomponents.httpmime             | Manifest       | Yes       | -                                | [all packages]
 json-20230618.jar                                   | org.json                                       | Manifest       | Yes       | -                                | [all packages]
-endpoints-spi-2.20.115.jar                          | software.amazon.awssdk.endpoints               | Manifest       | Yes       | -                                | [all packages]
-annotations-2.20.115.jar                            | software.amazon.awssdk.annotations             | Manifest       | Yes       | -                                | [all packages]
-third-party-jackson-core-2.20.115.jar               | software.amazon.awssdk.thirdparty.jackson.core | Manifest       | Yes       | -                                | [all packages]
-jmespath-java-1.12.518.jar                          | jmespath.java                                  | Auto-generated | Yes       | -                                | [all packages]
-aws-java-sdk-core-1.12.518.jar                      | aws.java.sdk.core                              | Auto-generated | Yes       | -                                | [all packages]
+endpoints-spi-2.20.145.jar                          | software.amazon.awssdk.endpoints               | Manifest       | Yes       | -                                | [all packages]
+annotations-2.20.145.jar                            | software.amazon.awssdk.annotations             | Manifest       | Yes       | -                                | [all packages]
+third-party-jackson-core-2.20.145.jar               | software.amazon.awssdk.thirdparty.jackson.core | Manifest       | Yes       | -                                | [all packages]
+jmespath-java-1.12.548.jar                          | jmespath.java                                  | Auto-generated | Yes       | -                                | [all packages]
+aws-java-sdk-core-1.12.548.jar                      | aws.java.sdk.core                              | Auto-generated | Yes       | -                                | [all packages]
 byte-buddy-1.12.21.jar                              | net.bytebuddy                                  | Module-Info    | No        | com.sun.jna                      | net.bytebuddy
                                                     |                                                |                |           | com.sun.jna.platform             | net.bytebuddy.agent.builder
                                                     |                                                |                |           | net.bytebuddy.agent              | net.bytebuddy.asm
@@ -215,7 +215,7 @@ httpcore-4.4.16.jar                                 | org.apache.httpcomponents.
 commons-logging-1.2.jar                             | commons.logging                                | Auto-generated | Yes       | -                                | [all packages]
 commons-codec-1.15.jar                              | org.apache.commons.codec                       | Manifest       | Yes       | -                                | [all packages]
 opentest4j-1.3.0.jar                                | org.opentest4j                                 | Module-Info    | No        | java.base                        | org.opentest4j
-reactive-streams-1.0.3.jar                          | org.reactivestreams                            | Manifest       | Yes       | -                                | [all packages]
+reactive-streams-1.0.4.jar                          | org.reactivestreams                            | Manifest       | Yes       | -                                | [all packages]
 eventstream-1.0.1.jar                               | software.amazon.eventstream                    | Manifest       | Yes       | -                                | [all packages]
 netty-codec-http2-4.1.94.Final.jar                  | io.netty.codec.http2                           | Manifest       | Yes       | -                                | [all packages]
 netty-codec-http-4.1.94.Final.jar                   | io.netty.codec.http                            | Manifest       | Yes       | -                                | [all packages]
@@ -282,35 +282,35 @@ junit-platform-engine-1.10.0.jar                    | No            | Java 8 (13
 junit-platform-commons-1.10.0.jar                   | Yes (Java 9)  | Java 9 (2), Java 8 (41)
 assertj-core-3.24.2.jar                             | Yes (Java 9)  | Java 8 (813)
 jsonassert-1.5.1.jar                                | No            | Java 6 (20)
-s3-2.20.115.jar                                     | No            | Java 8 (1918)
-lambda-2.20.115.jar                                 | No            | Java 8 (1250)
-aws-java-sdk-cognitoidp-1.12.518.jar                | No            | Java 7 (929)
-slf4j-simple-2.0.7.jar                              | Yes (Java 9)  | Java 8 (7)
-aws-json-protocol-2.20.115.jar                      | No            | Java 8 (86)
-aws-xml-protocol-2.20.115.jar                       | No            | Java 8 (61)
-aws-query-protocol-2.20.115.jar                     | No            | Java 8 (45)
-protocol-core-2.20.115.jar                          | No            | Java 8 (27)
-aws-core-2.20.115.jar                               | No            | Java 8 (109)
-auth-2.20.115.jar                                   | No            | Java 8 (140)
-regions-2.20.115.jar                                | No            | Java 8 (412)
-sdk-core-2.20.115.jar                               | No            | Java 8 (558)
-apache-client-2.20.115.jar                          | No            | Java 8 (41)
-netty-nio-client-2.20.115.jar                       | No            | Java 8 (162)
-http-client-spi-2.20.115.jar                        | No            | Java 8 (67)
-metrics-spi-2.20.115.jar                            | No            | Java 8 (16)
-json-utils-2.20.115.jar                             | No            | Java 8 (17)
-crt-core-2.20.115.jar                               | No            | Java 8 (7)
-arns-2.20.115.jar                                   | No            | Java 8 (8)
-profiles-2.20.115.jar                               | No            | Java 8 (27)
-utils-2.20.115.jar                                  | No            | Java 8 (129)
-slf4j-api-2.0.7.jar                                 | Yes (Java 9)  | Java 8 (51)
+s3-2.20.145.jar                                     | No            | Java 8 (1944)
+lambda-2.20.145.jar                                 | No            | Java 8 (1250)
+aws-java-sdk-cognitoidp-1.12.548.jar                | No            | Java 7 (952)
+slf4j-simple-2.0.9.jar                              | Yes (Java 9)  | Java 8 (7)
+aws-json-protocol-2.20.145.jar                      | No            | Java 8 (86)
+aws-xml-protocol-2.20.145.jar                       | No            | Java 8 (61)
+aws-query-protocol-2.20.145.jar                     | No            | Java 8 (45)
+protocol-core-2.20.145.jar                          | No            | Java 8 (27)
+aws-core-2.20.145.jar                               | No            | Java 8 (109)
+auth-2.20.145.jar                                   | No            | Java 8 (140)
+regions-2.20.145.jar                                | No            | Java 8 (414)
+sdk-core-2.20.145.jar                               | No            | Java 8 (596)
+apache-client-2.20.145.jar                          | No            | Java 8 (41)
+netty-nio-client-2.20.145.jar                       | No            | Java 8 (162)
+http-client-spi-2.20.145.jar                        | No            | Java 8 (67)
+metrics-spi-2.20.145.jar                            | No            | Java 8 (16)
+json-utils-2.20.145.jar                             | No            | Java 8 (17)
+crt-core-2.20.145.jar                               | No            | Java 8 (7)
+arns-2.20.145.jar                                   | No            | Java 8 (8)
+profiles-2.20.145.jar                               | No            | Java 8 (27)
+utils-2.20.145.jar                                  | No            | Java 8 (131)
+slf4j-api-2.0.9.jar                                 | Yes (Java 9)  | Java 8 (51)
 httpmime-4.5.14.jar                                 | No            | Java 6 (23)
 json-20230618.jar                                   | No            | Java 6 (29)
-endpoints-spi-2.20.115.jar                          | No            | Java 8 (6)
-annotations-2.20.115.jar                            | No            | Java 8 (13)
-third-party-jackson-core-2.20.115.jar               | No            | Java 6 (127)
-jmespath-java-1.12.518.jar                          | No            | Java 7 (29)
-aws-java-sdk-core-1.12.518.jar                      | No            | Java 7 (876)
+endpoints-spi-2.20.145.jar                          | No            | Java 8 (6)
+annotations-2.20.145.jar                            | No            | Java 8 (13)
+third-party-jackson-core-2.20.145.jar               | No            | Java 8 (174)
+jmespath-java-1.12.548.jar                          | No            | Java 7 (29)
+aws-java-sdk-core-1.12.548.jar                      | No            | Java 7 (876)
 byte-buddy-1.12.21.jar                              | Yes (Java 9)  | Java 6 (9), Java 5 (2643)
 android-json-0.0.20131108.vaadin1.jar               | No            | Java 5 (8)
 httpclient-4.5.14.jar                               | No            | Java 6 (470)
@@ -318,7 +318,7 @@ httpcore-4.4.16.jar                                 | No            | Java 6 (25
 commons-logging-1.2.jar                             | No            | Java 1.2 (28)
 commons-codec-1.15.jar                              | No            | Java 7 (106)
 opentest4j-1.3.0.jar                                | No            | Java 6 (8)
-reactive-streams-1.0.3.jar                          | No            | Java 6 (13)
+reactive-streams-1.0.4.jar                          | No            | Java 6 (13)
 eventstream-1.0.1.jar                               | No            | Java 8 (19)
 netty-codec-http2-4.1.94.Final.jar                  | No            | Java 6 (279)
 netty-codec-http-4.1.94.Final.jar                   | No            | Java 6 (386)
@@ -336,8 +336,8 @@ jackson-dataformat-cbor-2.12.7.jar                  | No            | Java 7 (14
 jackson-core-2.12.7.jar                             | No            | Java 6 (124)
 jackson-databind-2.12.7.1.jar                       | No            | Java 7 (700)
 joda-time-2.8.1.jar                                 | No            | Java 5 (246)
-Classpath                                           | -             | Java 11 (17), Java 9 (2), Java 8 (6548), Java 7 (2654),
-                                                    |               | Java 6 (3776), Java 5 (3233), Java 1.2 (28)
+Classpath                                           | -             | Java 11 (17), Java 9 (2), Java 8 (6790), Java 7 (2677),
+                                                    |               | Java 6 (3649), Java 5 (3233), Java 1.2 (28)
 
 JAR Dependencies
 ----------------
@@ -347,7 +347,7 @@ JAR file                                            | Uses                      
 ----------------------------------------------------+-----------------------------------------------------+----------------------------------------------------
 test-prod-1.0.0-SNAPSHOT.jar                        | android-json-0.0.20131108.vaadin1.jar               | [none]
                                                     | assertj-core-3.24.2.jar                             |
-                                                    | aws-java-sdk-cognitoidp-1.12.518.jar                |
+                                                    | aws-java-sdk-cognitoidp-1.12.548.jar                |
                                                     | commons-codec-1.15.jar                              |
                                                     | httpclient-4.5.14.jar                               |
                                                     | httpcore-4.4.16.jar                                 |
@@ -355,8 +355,8 @@ test-prod-1.0.0-SNAPSHOT.jar                        | android-json-0.0.20131108.
                                                     | json-20230618.jar                                   |
                                                     | jsonassert-1.5.1.jar                                |
                                                     | junit-jupiter-api-5.10.0.jar                        |
-                                                    | lambda-2.20.115.jar                                 |
-                                                    | sdk-core-2.20.115.jar                               |
+                                                    | lambda-2.20.145.jar                                 |
+                                                    | sdk-core-2.20.145.jar                               |
 junit-jupiter-5.10.0.jar                            | [none]                                              | [none]
 junit-jupiter-params-5.10.0.jar                     | junit-jupiter-api-5.10.0.jar                        | [none]
                                                     | junit-platform-commons-1.10.0.jar                   |
@@ -381,119 +381,119 @@ assertj-core-3.24.2.jar                             | byte-buddy-1.12.21.jar    
                                                     | opentest4j-1.3.0.jar                                |
 jsonassert-1.5.1.jar                                | android-json-0.0.20131108.vaadin1.jar               | json-20230618.jar
                                                     | json-20230618.jar                                   | test-prod-1.0.0-SNAPSHOT.jar
-s3-2.20.115.jar                                     | annotations-2.20.115.jar                            | [none]
-                                                    | arns-2.20.115.jar                                   |
-                                                    | auth-2.20.115.jar                                   |
-                                                    | aws-core-2.20.115.jar                               |
-                                                    | aws-xml-protocol-2.20.115.jar                       |
-                                                    | crt-core-2.20.115.jar                               |
-                                                    | endpoints-spi-2.20.115.jar                          |
-                                                    | http-client-spi-2.20.115.jar                        |
-                                                    | json-utils-2.20.115.jar                             |
-                                                    | metrics-spi-2.20.115.jar                            |
-                                                    | profiles-2.20.115.jar                               |
-                                                    | protocol-core-2.20.115.jar                          |
-                                                    | reactive-streams-1.0.3.jar                          |
-                                                    | regions-2.20.115.jar                                |
-                                                    | sdk-core-2.20.115.jar                               |
-                                                    | slf4j-api-2.0.7.jar                                 |
-                                                    | utils-2.20.115.jar                                  |
-lambda-2.20.115.jar                                 | annotations-2.20.115.jar                            | test-prod-1.0.0-SNAPSHOT.jar
-                                                    | auth-2.20.115.jar                                   |
-                                                    | aws-core-2.20.115.jar                               |
-                                                    | aws-json-protocol-2.20.115.jar                      |
-                                                    | endpoints-spi-2.20.115.jar                          |
-                                                    | http-client-spi-2.20.115.jar                        |
-                                                    | json-utils-2.20.115.jar                             |
-                                                    | metrics-spi-2.20.115.jar                            |
-                                                    | protocol-core-2.20.115.jar                          |
-                                                    | reactive-streams-1.0.3.jar                          |
-                                                    | regions-2.20.115.jar                                |
-                                                    | sdk-core-2.20.115.jar                               |
-                                                    | slf4j-api-2.0.7.jar                                 |
-                                                    | utils-2.20.115.jar                                  |
-aws-java-sdk-cognitoidp-1.12.518.jar                | aws-java-sdk-core-1.12.518.jar                      | test-prod-1.0.0-SNAPSHOT.jar
+s3-2.20.145.jar                                     | annotations-2.20.145.jar                            | [none]
+                                                    | arns-2.20.145.jar                                   |
+                                                    | auth-2.20.145.jar                                   |
+                                                    | aws-core-2.20.145.jar                               |
+                                                    | aws-xml-protocol-2.20.145.jar                       |
+                                                    | crt-core-2.20.145.jar                               |
+                                                    | endpoints-spi-2.20.145.jar                          |
+                                                    | http-client-spi-2.20.145.jar                        |
+                                                    | json-utils-2.20.145.jar                             |
+                                                    | metrics-spi-2.20.145.jar                            |
+                                                    | profiles-2.20.145.jar                               |
+                                                    | protocol-core-2.20.145.jar                          |
+                                                    | reactive-streams-1.0.4.jar                          |
+                                                    | regions-2.20.145.jar                                |
+                                                    | sdk-core-2.20.145.jar                               |
+                                                    | slf4j-api-2.0.9.jar                                 |
+                                                    | utils-2.20.145.jar                                  |
+lambda-2.20.145.jar                                 | annotations-2.20.145.jar                            | test-prod-1.0.0-SNAPSHOT.jar
+                                                    | auth-2.20.145.jar                                   |
+                                                    | aws-core-2.20.145.jar                               |
+                                                    | aws-json-protocol-2.20.145.jar                      |
+                                                    | endpoints-spi-2.20.145.jar                          |
+                                                    | http-client-spi-2.20.145.jar                        |
+                                                    | json-utils-2.20.145.jar                             |
+                                                    | metrics-spi-2.20.145.jar                            |
+                                                    | protocol-core-2.20.145.jar                          |
+                                                    | reactive-streams-1.0.4.jar                          |
+                                                    | regions-2.20.145.jar                                |
+                                                    | sdk-core-2.20.145.jar                               |
+                                                    | slf4j-api-2.0.9.jar                                 |
+                                                    | utils-2.20.145.jar                                  |
+aws-java-sdk-cognitoidp-1.12.548.jar                | aws-java-sdk-core-1.12.548.jar                      | test-prod-1.0.0-SNAPSHOT.jar
                                                     | commons-logging-1.2.jar                             |
                                                     | jackson-core-2.12.7.jar                             |
-slf4j-simple-2.0.7.jar                              | slf4j-api-2.0.7.jar                                 | [none]
-aws-json-protocol-2.20.115.jar                      | annotations-2.20.115.jar                            | lambda-2.20.115.jar
-                                                    | aws-core-2.20.115.jar                               |
-                                                    | http-client-spi-2.20.115.jar                        |
-                                                    | json-utils-2.20.115.jar                             |
-                                                    | metrics-spi-2.20.115.jar                            |
-                                                    | protocol-core-2.20.115.jar                          |
-                                                    | sdk-core-2.20.115.jar                               |
-                                                    | slf4j-api-2.0.7.jar                                 |
-                                                    | third-party-jackson-core-2.20.115.jar               |
-                                                    | utils-2.20.115.jar                                  |
-aws-xml-protocol-2.20.115.jar                       | annotations-2.20.115.jar                            | s3-2.20.115.jar
-                                                    | aws-core-2.20.115.jar                               |
-                                                    | aws-query-protocol-2.20.115.jar                     |
-                                                    | http-client-spi-2.20.115.jar                        |
-                                                    | metrics-spi-2.20.115.jar                            |
-                                                    | protocol-core-2.20.115.jar                          |
-                                                    | sdk-core-2.20.115.jar                               |
-                                                    | slf4j-api-2.0.7.jar                                 |
-                                                    | utils-2.20.115.jar                                  |
-aws-query-protocol-2.20.115.jar                     | annotations-2.20.115.jar                            | aws-xml-protocol-2.20.115.jar
-                                                    | aws-core-2.20.115.jar                               |
-                                                    | http-client-spi-2.20.115.jar                        |
-                                                    | metrics-spi-2.20.115.jar                            |
-                                                    | protocol-core-2.20.115.jar                          |
-                                                    | sdk-core-2.20.115.jar                               |
-                                                    | utils-2.20.115.jar                                  |
-protocol-core-2.20.115.jar                          | annotations-2.20.115.jar                            | aws-json-protocol-2.20.115.jar
-                                                    | http-client-spi-2.20.115.jar                        | aws-query-protocol-2.20.115.jar
-                                                    | sdk-core-2.20.115.jar                               | aws-xml-protocol-2.20.115.jar
-                                                    | utils-2.20.115.jar                                  | lambda-2.20.115.jar
-                                                    |                                                     | s3-2.20.115.jar
-aws-core-2.20.115.jar                               | annotations-2.20.115.jar                            | aws-json-protocol-2.20.115.jar
-                                                    | auth-2.20.115.jar                                   | aws-query-protocol-2.20.115.jar
-                                                    | endpoints-spi-2.20.115.jar                          | aws-xml-protocol-2.20.115.jar
-                                                    | eventstream-1.0.1.jar                               | lambda-2.20.115.jar
-                                                    | http-client-spi-2.20.115.jar                        | s3-2.20.115.jar
-                                                    | metrics-spi-2.20.115.jar                            |
-                                                    | profiles-2.20.115.jar                               |
-                                                    | reactive-streams-1.0.3.jar                          |
-                                                    | regions-2.20.115.jar                                |
-                                                    | sdk-core-2.20.115.jar                               |
-                                                    | utils-2.20.115.jar                                  |
-auth-2.20.115.jar                                   | annotations-2.20.115.jar                            | aws-core-2.20.115.jar
-                                                    | eventstream-1.0.1.jar                               | lambda-2.20.115.jar
-                                                    | http-client-spi-2.20.115.jar                        | s3-2.20.115.jar
-                                                    | json-utils-2.20.115.jar                             |
-                                                    | profiles-2.20.115.jar                               |
-                                                    | reactive-streams-1.0.3.jar                          |
-                                                    | regions-2.20.115.jar                                |
-                                                    | sdk-core-2.20.115.jar                               |
-                                                    | slf4j-api-2.0.7.jar                                 |
-                                                    | utils-2.20.115.jar                                  |
-regions-2.20.115.jar                                | annotations-2.20.115.jar                            | auth-2.20.115.jar
-                                                    | json-utils-2.20.115.jar                             | aws-core-2.20.115.jar
-                                                    | profiles-2.20.115.jar                               | lambda-2.20.115.jar
-                                                    | sdk-core-2.20.115.jar                               | s3-2.20.115.jar
-                                                    | slf4j-api-2.0.7.jar                                 |
-                                                    | utils-2.20.115.jar                                  |
-sdk-core-2.20.115.jar                               | annotations-2.20.115.jar                            | auth-2.20.115.jar
-                                                    | endpoints-spi-2.20.115.jar                          | aws-core-2.20.115.jar
-                                                    | http-client-spi-2.20.115.jar                        | aws-json-protocol-2.20.115.jar
-                                                    | metrics-spi-2.20.115.jar                            | aws-query-protocol-2.20.115.jar
-                                                    | profiles-2.20.115.jar                               | aws-xml-protocol-2.20.115.jar
-                                                    | reactive-streams-1.0.3.jar                          | lambda-2.20.115.jar
-                                                    | slf4j-api-2.0.7.jar                                 | protocol-core-2.20.115.jar
-                                                    | utils-2.20.115.jar                                  | regions-2.20.115.jar
-                                                    |                                                     | s3-2.20.115.jar
+slf4j-simple-2.0.9.jar                              | slf4j-api-2.0.9.jar                                 | [none]
+aws-json-protocol-2.20.145.jar                      | annotations-2.20.145.jar                            | lambda-2.20.145.jar
+                                                    | aws-core-2.20.145.jar                               |
+                                                    | http-client-spi-2.20.145.jar                        |
+                                                    | json-utils-2.20.145.jar                             |
+                                                    | metrics-spi-2.20.145.jar                            |
+                                                    | protocol-core-2.20.145.jar                          |
+                                                    | sdk-core-2.20.145.jar                               |
+                                                    | slf4j-api-2.0.9.jar                                 |
+                                                    | third-party-jackson-core-2.20.145.jar               |
+                                                    | utils-2.20.145.jar                                  |
+aws-xml-protocol-2.20.145.jar                       | annotations-2.20.145.jar                            | s3-2.20.145.jar
+                                                    | aws-core-2.20.145.jar                               |
+                                                    | aws-query-protocol-2.20.145.jar                     |
+                                                    | http-client-spi-2.20.145.jar                        |
+                                                    | metrics-spi-2.20.145.jar                            |
+                                                    | protocol-core-2.20.145.jar                          |
+                                                    | sdk-core-2.20.145.jar                               |
+                                                    | slf4j-api-2.0.9.jar                                 |
+                                                    | utils-2.20.145.jar                                  |
+aws-query-protocol-2.20.145.jar                     | annotations-2.20.145.jar                            | aws-xml-protocol-2.20.145.jar
+                                                    | aws-core-2.20.145.jar                               |
+                                                    | http-client-spi-2.20.145.jar                        |
+                                                    | metrics-spi-2.20.145.jar                            |
+                                                    | protocol-core-2.20.145.jar                          |
+                                                    | sdk-core-2.20.145.jar                               |
+                                                    | utils-2.20.145.jar                                  |
+protocol-core-2.20.145.jar                          | annotations-2.20.145.jar                            | aws-json-protocol-2.20.145.jar
+                                                    | http-client-spi-2.20.145.jar                        | aws-query-protocol-2.20.145.jar
+                                                    | sdk-core-2.20.145.jar                               | aws-xml-protocol-2.20.145.jar
+                                                    | utils-2.20.145.jar                                  | lambda-2.20.145.jar
+                                                    |                                                     | s3-2.20.145.jar
+aws-core-2.20.145.jar                               | annotations-2.20.145.jar                            | aws-json-protocol-2.20.145.jar
+                                                    | auth-2.20.145.jar                                   | aws-query-protocol-2.20.145.jar
+                                                    | endpoints-spi-2.20.145.jar                          | aws-xml-protocol-2.20.145.jar
+                                                    | eventstream-1.0.1.jar                               | lambda-2.20.145.jar
+                                                    | http-client-spi-2.20.145.jar                        | s3-2.20.145.jar
+                                                    | metrics-spi-2.20.145.jar                            |
+                                                    | profiles-2.20.145.jar                               |
+                                                    | reactive-streams-1.0.4.jar                          |
+                                                    | regions-2.20.145.jar                                |
+                                                    | sdk-core-2.20.145.jar                               |
+                                                    | utils-2.20.145.jar                                  |
+auth-2.20.145.jar                                   | annotations-2.20.145.jar                            | aws-core-2.20.145.jar
+                                                    | eventstream-1.0.1.jar                               | lambda-2.20.145.jar
+                                                    | http-client-spi-2.20.145.jar                        | s3-2.20.145.jar
+                                                    | json-utils-2.20.145.jar                             |
+                                                    | profiles-2.20.145.jar                               |
+                                                    | reactive-streams-1.0.4.jar                          |
+                                                    | regions-2.20.145.jar                                |
+                                                    | sdk-core-2.20.145.jar                               |
+                                                    | slf4j-api-2.0.9.jar                                 |
+                                                    | utils-2.20.145.jar                                  |
+regions-2.20.145.jar                                | annotations-2.20.145.jar                            | auth-2.20.145.jar
+                                                    | json-utils-2.20.145.jar                             | aws-core-2.20.145.jar
+                                                    | profiles-2.20.145.jar                               | lambda-2.20.145.jar
+                                                    | sdk-core-2.20.145.jar                               | s3-2.20.145.jar
+                                                    | slf4j-api-2.0.9.jar                                 |
+                                                    | utils-2.20.145.jar                                  |
+sdk-core-2.20.145.jar                               | annotations-2.20.145.jar                            | auth-2.20.145.jar
+                                                    | endpoints-spi-2.20.145.jar                          | aws-core-2.20.145.jar
+                                                    | http-client-spi-2.20.145.jar                        | aws-json-protocol-2.20.145.jar
+                                                    | metrics-spi-2.20.145.jar                            | aws-query-protocol-2.20.145.jar
+                                                    | profiles-2.20.145.jar                               | aws-xml-protocol-2.20.145.jar
+                                                    | reactive-streams-1.0.4.jar                          | lambda-2.20.145.jar
+                                                    | slf4j-api-2.0.9.jar                                 | protocol-core-2.20.145.jar
+                                                    | utils-2.20.145.jar                                  | regions-2.20.145.jar
+                                                    |                                                     | s3-2.20.145.jar
                                                     |                                                     | test-prod-1.0.0-SNAPSHOT.jar
-apache-client-2.20.115.jar                          | annotations-2.20.115.jar                            | [none]
-                                                    | http-client-spi-2.20.115.jar                        |
+apache-client-2.20.145.jar                          | annotations-2.20.145.jar                            | [none]
+                                                    | http-client-spi-2.20.145.jar                        |
                                                     | httpclient-4.5.14.jar                               |
                                                     | httpcore-4.4.16.jar                                 |
-                                                    | metrics-spi-2.20.115.jar                            |
-                                                    | slf4j-api-2.0.7.jar                                 |
-                                                    | utils-2.20.115.jar                                  |
-netty-nio-client-2.20.115.jar                       | annotations-2.20.115.jar                            | [none]
-                                                    | http-client-spi-2.20.115.jar                        |
-                                                    | metrics-spi-2.20.115.jar                            |
+                                                    | metrics-spi-2.20.145.jar                            |
+                                                    | slf4j-api-2.0.9.jar                                 |
+                                                    | utils-2.20.145.jar                                  |
+netty-nio-client-2.20.145.jar                       | annotations-2.20.145.jar                            | [none]
+                                                    | http-client-spi-2.20.145.jar                        |
+                                                    | metrics-spi-2.20.145.jar                            |
                                                     | netty-buffer-4.1.94.Final.jar                       |
                                                     | netty-codec-4.1.94.Final.jar                        |
                                                     | netty-codec-http-4.1.94.Final.jar                   |
@@ -503,108 +503,108 @@ netty-nio-client-2.20.115.jar                       | annotations-2.20.115.jar  
                                                     | netty-resolver-4.1.94.Final.jar                     |
                                                     | netty-transport-4.1.94.Final.jar                    |
                                                     | netty-transport-classes-epoll-4.1.94.Final.jar      |
-                                                    | reactive-streams-1.0.3.jar                          |
-                                                    | slf4j-api-2.0.7.jar                                 |
-                                                    | utils-2.20.115.jar                                  |
-http-client-spi-2.20.115.jar                        | annotations-2.20.115.jar                            | apache-client-2.20.115.jar
-                                                    | metrics-spi-2.20.115.jar                            | auth-2.20.115.jar
-                                                    | reactive-streams-1.0.3.jar                          | aws-core-2.20.115.jar
-                                                    | utils-2.20.115.jar                                  | aws-json-protocol-2.20.115.jar
-                                                    |                                                     | aws-query-protocol-2.20.115.jar
-                                                    |                                                     | aws-xml-protocol-2.20.115.jar
-                                                    |                                                     | lambda-2.20.115.jar
-                                                    |                                                     | netty-nio-client-2.20.115.jar
-                                                    |                                                     | protocol-core-2.20.115.jar
-                                                    |                                                     | s3-2.20.115.jar
-                                                    |                                                     | sdk-core-2.20.115.jar
-metrics-spi-2.20.115.jar                            | annotations-2.20.115.jar                            | apache-client-2.20.115.jar
-                                                    | slf4j-api-2.0.7.jar                                 | aws-core-2.20.115.jar
-                                                    | utils-2.20.115.jar                                  | aws-json-protocol-2.20.115.jar
-                                                    |                                                     | aws-query-protocol-2.20.115.jar
-                                                    |                                                     | aws-xml-protocol-2.20.115.jar
-                                                    |                                                     | http-client-spi-2.20.115.jar
-                                                    |                                                     | lambda-2.20.115.jar
-                                                    |                                                     | netty-nio-client-2.20.115.jar
-                                                    |                                                     | s3-2.20.115.jar
-                                                    |                                                     | sdk-core-2.20.115.jar
-json-utils-2.20.115.jar                             | annotations-2.20.115.jar                            | auth-2.20.115.jar
-                                                    | third-party-jackson-core-2.20.115.jar               | aws-json-protocol-2.20.115.jar
-                                                    | utils-2.20.115.jar                                  | lambda-2.20.115.jar
-                                                    |                                                     | regions-2.20.115.jar
-                                                    |                                                     | s3-2.20.115.jar
-crt-core-2.20.115.jar                               | annotations-2.20.115.jar                            | s3-2.20.115.jar
-                                                    | utils-2.20.115.jar                                  |
-arns-2.20.115.jar                                   | annotations-2.20.115.jar                            | s3-2.20.115.jar
-                                                    | utils-2.20.115.jar                                  |
-profiles-2.20.115.jar                               | annotations-2.20.115.jar                            | auth-2.20.115.jar
-                                                    | slf4j-api-2.0.7.jar                                 | aws-core-2.20.115.jar
-                                                    | utils-2.20.115.jar                                  | regions-2.20.115.jar
-                                                    |                                                     | s3-2.20.115.jar
-                                                    |                                                     | sdk-core-2.20.115.jar
-utils-2.20.115.jar                                  | annotations-2.20.115.jar                            | apache-client-2.20.115.jar
-                                                    | reactive-streams-1.0.3.jar                          | arns-2.20.115.jar
-                                                    | slf4j-api-2.0.7.jar                                 | auth-2.20.115.jar
-                                                    |                                                     | aws-core-2.20.115.jar
-                                                    |                                                     | aws-json-protocol-2.20.115.jar
-                                                    |                                                     | aws-query-protocol-2.20.115.jar
-                                                    |                                                     | aws-xml-protocol-2.20.115.jar
-                                                    |                                                     | crt-core-2.20.115.jar
-                                                    |                                                     | http-client-spi-2.20.115.jar
-                                                    |                                                     | json-utils-2.20.115.jar
-                                                    |                                                     | lambda-2.20.115.jar
-                                                    |                                                     | metrics-spi-2.20.115.jar
-                                                    |                                                     | netty-nio-client-2.20.115.jar
-                                                    |                                                     | profiles-2.20.115.jar
-                                                    |                                                     | protocol-core-2.20.115.jar
-                                                    |                                                     | regions-2.20.115.jar
-                                                    |                                                     | s3-2.20.115.jar
-                                                    |                                                     | sdk-core-2.20.115.jar
-slf4j-api-2.0.7.jar                                 | [none]                                              | apache-client-2.20.115.jar
-                                                    |                                                     | auth-2.20.115.jar
-                                                    |                                                     | aws-json-protocol-2.20.115.jar
-                                                    |                                                     | aws-xml-protocol-2.20.115.jar
-                                                    |                                                     | lambda-2.20.115.jar
-                                                    |                                                     | metrics-spi-2.20.115.jar
+                                                    | reactive-streams-1.0.4.jar                          |
+                                                    | slf4j-api-2.0.9.jar                                 |
+                                                    | utils-2.20.145.jar                                  |
+http-client-spi-2.20.145.jar                        | annotations-2.20.145.jar                            | apache-client-2.20.145.jar
+                                                    | metrics-spi-2.20.145.jar                            | auth-2.20.145.jar
+                                                    | reactive-streams-1.0.4.jar                          | aws-core-2.20.145.jar
+                                                    | utils-2.20.145.jar                                  | aws-json-protocol-2.20.145.jar
+                                                    |                                                     | aws-query-protocol-2.20.145.jar
+                                                    |                                                     | aws-xml-protocol-2.20.145.jar
+                                                    |                                                     | lambda-2.20.145.jar
+                                                    |                                                     | netty-nio-client-2.20.145.jar
+                                                    |                                                     | protocol-core-2.20.145.jar
+                                                    |                                                     | s3-2.20.145.jar
+                                                    |                                                     | sdk-core-2.20.145.jar
+metrics-spi-2.20.145.jar                            | annotations-2.20.145.jar                            | apache-client-2.20.145.jar
+                                                    | slf4j-api-2.0.9.jar                                 | aws-core-2.20.145.jar
+                                                    | utils-2.20.145.jar                                  | aws-json-protocol-2.20.145.jar
+                                                    |                                                     | aws-query-protocol-2.20.145.jar
+                                                    |                                                     | aws-xml-protocol-2.20.145.jar
+                                                    |                                                     | http-client-spi-2.20.145.jar
+                                                    |                                                     | lambda-2.20.145.jar
+                                                    |                                                     | netty-nio-client-2.20.145.jar
+                                                    |                                                     | s3-2.20.145.jar
+                                                    |                                                     | sdk-core-2.20.145.jar
+json-utils-2.20.145.jar                             | annotations-2.20.145.jar                            | auth-2.20.145.jar
+                                                    | third-party-jackson-core-2.20.145.jar               | aws-json-protocol-2.20.145.jar
+                                                    | utils-2.20.145.jar                                  | lambda-2.20.145.jar
+                                                    |                                                     | regions-2.20.145.jar
+                                                    |                                                     | s3-2.20.145.jar
+crt-core-2.20.145.jar                               | annotations-2.20.145.jar                            | s3-2.20.145.jar
+                                                    | utils-2.20.145.jar                                  |
+arns-2.20.145.jar                                   | annotations-2.20.145.jar                            | s3-2.20.145.jar
+                                                    | utils-2.20.145.jar                                  |
+profiles-2.20.145.jar                               | annotations-2.20.145.jar                            | auth-2.20.145.jar
+                                                    | slf4j-api-2.0.9.jar                                 | aws-core-2.20.145.jar
+                                                    | utils-2.20.145.jar                                  | regions-2.20.145.jar
+                                                    |                                                     | s3-2.20.145.jar
+                                                    |                                                     | sdk-core-2.20.145.jar
+utils-2.20.145.jar                                  | annotations-2.20.145.jar                            | apache-client-2.20.145.jar
+                                                    | reactive-streams-1.0.4.jar                          | arns-2.20.145.jar
+                                                    | slf4j-api-2.0.9.jar                                 | auth-2.20.145.jar
+                                                    |                                                     | aws-core-2.20.145.jar
+                                                    |                                                     | aws-json-protocol-2.20.145.jar
+                                                    |                                                     | aws-query-protocol-2.20.145.jar
+                                                    |                                                     | aws-xml-protocol-2.20.145.jar
+                                                    |                                                     | crt-core-2.20.145.jar
+                                                    |                                                     | http-client-spi-2.20.145.jar
+                                                    |                                                     | json-utils-2.20.145.jar
+                                                    |                                                     | lambda-2.20.145.jar
+                                                    |                                                     | metrics-spi-2.20.145.jar
+                                                    |                                                     | netty-nio-client-2.20.145.jar
+                                                    |                                                     | profiles-2.20.145.jar
+                                                    |                                                     | protocol-core-2.20.145.jar
+                                                    |                                                     | regions-2.20.145.jar
+                                                    |                                                     | s3-2.20.145.jar
+                                                    |                                                     | sdk-core-2.20.145.jar
+slf4j-api-2.0.9.jar                                 | [none]                                              | apache-client-2.20.145.jar
+                                                    |                                                     | auth-2.20.145.jar
+                                                    |                                                     | aws-json-protocol-2.20.145.jar
+                                                    |                                                     | aws-xml-protocol-2.20.145.jar
+                                                    |                                                     | lambda-2.20.145.jar
+                                                    |                                                     | metrics-spi-2.20.145.jar
                                                     |                                                     | netty-common-4.1.94.Final.jar
-                                                    |                                                     | netty-nio-client-2.20.115.jar
-                                                    |                                                     | profiles-2.20.115.jar
-                                                    |                                                     | regions-2.20.115.jar
-                                                    |                                                     | s3-2.20.115.jar
-                                                    |                                                     | sdk-core-2.20.115.jar
-                                                    |                                                     | slf4j-simple-2.0.7.jar
-                                                    |                                                     | utils-2.20.115.jar
+                                                    |                                                     | netty-nio-client-2.20.145.jar
+                                                    |                                                     | profiles-2.20.145.jar
+                                                    |                                                     | regions-2.20.145.jar
+                                                    |                                                     | s3-2.20.145.jar
+                                                    |                                                     | sdk-core-2.20.145.jar
+                                                    |                                                     | slf4j-simple-2.0.9.jar
+                                                    |                                                     | utils-2.20.145.jar
 httpmime-4.5.14.jar                                 | httpcore-4.4.16.jar                                 | test-prod-1.0.0-SNAPSHOT.jar
 json-20230618.jar                                   | android-json-0.0.20131108.vaadin1.jar               | android-json-0.0.20131108.vaadin1.jar
                                                     | jsonassert-1.5.1.jar                                | jsonassert-1.5.1.jar
                                                     |                                                     | test-prod-1.0.0-SNAPSHOT.jar
-endpoints-spi-2.20.115.jar                          | annotations-2.20.115.jar                            | aws-core-2.20.115.jar
-                                                    |                                                     | lambda-2.20.115.jar
-                                                    |                                                     | s3-2.20.115.jar
-                                                    |                                                     | sdk-core-2.20.115.jar
-annotations-2.20.115.jar                            | [none]                                              | apache-client-2.20.115.jar
-                                                    |                                                     | arns-2.20.115.jar
-                                                    |                                                     | auth-2.20.115.jar
-                                                    |                                                     | aws-core-2.20.115.jar
-                                                    |                                                     | aws-json-protocol-2.20.115.jar
-                                                    |                                                     | aws-query-protocol-2.20.115.jar
-                                                    |                                                     | aws-xml-protocol-2.20.115.jar
-                                                    |                                                     | crt-core-2.20.115.jar
-                                                    |                                                     | endpoints-spi-2.20.115.jar
-                                                    |                                                     | http-client-spi-2.20.115.jar
-                                                    |                                                     | json-utils-2.20.115.jar
-                                                    |                                                     | lambda-2.20.115.jar
-                                                    |                                                     | metrics-spi-2.20.115.jar
-                                                    |                                                     | netty-nio-client-2.20.115.jar
-                                                    |                                                     | profiles-2.20.115.jar
-                                                    |                                                     | protocol-core-2.20.115.jar
-                                                    |                                                     | regions-2.20.115.jar
-                                                    |                                                     | s3-2.20.115.jar
-                                                    |                                                     | sdk-core-2.20.115.jar
-                                                    |                                                     | utils-2.20.115.jar
-third-party-jackson-core-2.20.115.jar               | [none]                                              | aws-json-protocol-2.20.115.jar
-                                                    |                                                     | json-utils-2.20.115.jar
-jmespath-java-1.12.518.jar                          | jackson-databind-2.12.7.1.jar                       | [none]
-aws-java-sdk-core-1.12.518.jar                      | commons-logging-1.2.jar                             | aws-java-sdk-cognitoidp-1.12.518.jar
+endpoints-spi-2.20.145.jar                          | annotations-2.20.145.jar                            | aws-core-2.20.145.jar
+                                                    |                                                     | lambda-2.20.145.jar
+                                                    |                                                     | s3-2.20.145.jar
+                                                    |                                                     | sdk-core-2.20.145.jar
+annotations-2.20.145.jar                            | [none]                                              | apache-client-2.20.145.jar
+                                                    |                                                     | arns-2.20.145.jar
+                                                    |                                                     | auth-2.20.145.jar
+                                                    |                                                     | aws-core-2.20.145.jar
+                                                    |                                                     | aws-json-protocol-2.20.145.jar
+                                                    |                                                     | aws-query-protocol-2.20.145.jar
+                                                    |                                                     | aws-xml-protocol-2.20.145.jar
+                                                    |                                                     | crt-core-2.20.145.jar
+                                                    |                                                     | endpoints-spi-2.20.145.jar
+                                                    |                                                     | http-client-spi-2.20.145.jar
+                                                    |                                                     | json-utils-2.20.145.jar
+                                                    |                                                     | lambda-2.20.145.jar
+                                                    |                                                     | metrics-spi-2.20.145.jar
+                                                    |                                                     | netty-nio-client-2.20.145.jar
+                                                    |                                                     | profiles-2.20.145.jar
+                                                    |                                                     | protocol-core-2.20.145.jar
+                                                    |                                                     | regions-2.20.145.jar
+                                                    |                                                     | s3-2.20.145.jar
+                                                    |                                                     | sdk-core-2.20.145.jar
+                                                    |                                                     | utils-2.20.145.jar
+third-party-jackson-core-2.20.145.jar               | [none]                                              | aws-json-protocol-2.20.145.jar
+                                                    |                                                     | json-utils-2.20.145.jar
+jmespath-java-1.12.548.jar                          | jackson-databind-2.12.7.1.jar                       | [none]
+aws-java-sdk-core-1.12.548.jar                      | commons-logging-1.2.jar                             | aws-java-sdk-cognitoidp-1.12.548.jar
                                                     | httpclient-4.5.14.jar                               |
                                                     | httpcore-4.4.16.jar                                 |
                                                     | ion-java-1.0.2.jar                                  |
@@ -617,16 +617,16 @@ byte-buddy-1.12.21.jar                              | [none]                    
 android-json-0.0.20131108.vaadin1.jar               | json-20230618.jar                                   | json-20230618.jar
                                                     |                                                     | jsonassert-1.5.1.jar
                                                     |                                                     | test-prod-1.0.0-SNAPSHOT.jar
-httpclient-4.5.14.jar                               | commons-codec-1.15.jar                              | apache-client-2.20.115.jar
-                                                    | commons-logging-1.2.jar                             | aws-java-sdk-core-1.12.518.jar
+httpclient-4.5.14.jar                               | commons-codec-1.15.jar                              | apache-client-2.20.145.jar
+                                                    | commons-logging-1.2.jar                             | aws-java-sdk-core-1.12.548.jar
                                                     | httpcore-4.4.16.jar                                 | test-prod-1.0.0-SNAPSHOT.jar
-httpcore-4.4.16.jar                                 | [none]                                              | apache-client-2.20.115.jar
-                                                    |                                                     | aws-java-sdk-core-1.12.518.jar
+httpcore-4.4.16.jar                                 | [none]                                              | apache-client-2.20.145.jar
+                                                    |                                                     | aws-java-sdk-core-1.12.548.jar
                                                     |                                                     | httpclient-4.5.14.jar
                                                     |                                                     | httpmime-4.5.14.jar
                                                     |                                                     | test-prod-1.0.0-SNAPSHOT.jar
-commons-logging-1.2.jar                             | [none]                                              | aws-java-sdk-cognitoidp-1.12.518.jar
-                                                    |                                                     | aws-java-sdk-core-1.12.518.jar
+commons-logging-1.2.jar                             | [none]                                              | aws-java-sdk-cognitoidp-1.12.548.jar
+                                                    |                                                     | aws-java-sdk-core-1.12.548.jar
                                                     |                                                     | httpclient-4.5.14.jar
                                                     |                                                     | netty-common-4.1.94.Final.jar
 commons-codec-1.15.jar                              | [none]                                              | httpclient-4.5.14.jar
@@ -635,38 +635,38 @@ opentest4j-1.3.0.jar                                | [none]                    
                                                     |                                                     | junit-jupiter-api-5.10.0.jar
                                                     |                                                     | junit-jupiter-engine-5.10.0.jar
                                                     |                                                     | junit-platform-engine-1.10.0.jar
-reactive-streams-1.0.3.jar                          | [none]                                              | auth-2.20.115.jar
-                                                    |                                                     | aws-core-2.20.115.jar
-                                                    |                                                     | http-client-spi-2.20.115.jar
-                                                    |                                                     | lambda-2.20.115.jar
-                                                    |                                                     | netty-nio-client-2.20.115.jar
-                                                    |                                                     | s3-2.20.115.jar
-                                                    |                                                     | sdk-core-2.20.115.jar
-                                                    |                                                     | utils-2.20.115.jar
-eventstream-1.0.1.jar                               | [none]                                              | auth-2.20.115.jar
-                                                    |                                                     | aws-core-2.20.115.jar
-netty-codec-http2-4.1.94.Final.jar                  | netty-buffer-4.1.94.Final.jar                       | netty-nio-client-2.20.115.jar
+reactive-streams-1.0.4.jar                          | [none]                                              | auth-2.20.145.jar
+                                                    |                                                     | aws-core-2.20.145.jar
+                                                    |                                                     | http-client-spi-2.20.145.jar
+                                                    |                                                     | lambda-2.20.145.jar
+                                                    |                                                     | netty-nio-client-2.20.145.jar
+                                                    |                                                     | s3-2.20.145.jar
+                                                    |                                                     | sdk-core-2.20.145.jar
+                                                    |                                                     | utils-2.20.145.jar
+eventstream-1.0.1.jar                               | [none]                                              | auth-2.20.145.jar
+                                                    |                                                     | aws-core-2.20.145.jar
+netty-codec-http2-4.1.94.Final.jar                  | netty-buffer-4.1.94.Final.jar                       | netty-nio-client-2.20.145.jar
                                                     | netty-codec-4.1.94.Final.jar                        |
                                                     | netty-codec-http-4.1.94.Final.jar                   |
                                                     | netty-common-4.1.94.Final.jar                       |
                                                     | netty-handler-4.1.94.Final.jar                      |
                                                     | netty-transport-4.1.94.Final.jar                    |
 netty-codec-http-4.1.94.Final.jar                   | netty-buffer-4.1.94.Final.jar                       | netty-codec-http2-4.1.94.Final.jar
-                                                    | netty-codec-4.1.94.Final.jar                        | netty-nio-client-2.20.115.jar
+                                                    | netty-codec-4.1.94.Final.jar                        | netty-nio-client-2.20.145.jar
                                                     | netty-common-4.1.94.Final.jar                       |
                                                     | netty-handler-4.1.94.Final.jar                      |
                                                     | netty-transport-4.1.94.Final.jar                    |
 netty-handler-4.1.94.Final.jar                      | netty-buffer-4.1.94.Final.jar                       | netty-codec-http-4.1.94.Final.jar
                                                     | netty-codec-4.1.94.Final.jar                        | netty-codec-http2-4.1.94.Final.jar
-                                                    | netty-common-4.1.94.Final.jar                       | netty-nio-client-2.20.115.jar
+                                                    | netty-common-4.1.94.Final.jar                       | netty-nio-client-2.20.145.jar
                                                     | netty-resolver-4.1.94.Final.jar                     |
                                                     | netty-transport-4.1.94.Final.jar                    |
                                                     | netty-transport-native-unix-common-4.1.94.Final.jar |
 netty-codec-4.1.94.Final.jar                        | netty-buffer-4.1.94.Final.jar                       | netty-codec-http-4.1.94.Final.jar
                                                     | netty-common-4.1.94.Final.jar                       | netty-codec-http2-4.1.94.Final.jar
                                                     | netty-transport-4.1.94.Final.jar                    | netty-handler-4.1.94.Final.jar
-                                                    |                                                     | netty-nio-client-2.20.115.jar
-netty-transport-classes-epoll-4.1.94.Final.jar      | netty-buffer-4.1.94.Final.jar                       | netty-nio-client-2.20.115.jar
+                                                    |                                                     | netty-nio-client-2.20.145.jar
+netty-transport-classes-epoll-4.1.94.Final.jar      | netty-buffer-4.1.94.Final.jar                       | netty-nio-client-2.20.145.jar
                                                     | netty-common-4.1.94.Final.jar                       |
                                                     | netty-transport-4.1.94.Final.jar                    |
                                                     | netty-transport-native-unix-common-4.1.94.Final.jar |
@@ -677,43 +677,43 @@ netty-transport-4.1.94.Final.jar                    | netty-buffer-4.1.94.Final.
                                                     | netty-common-4.1.94.Final.jar                       | netty-codec-http-4.1.94.Final.jar
                                                     | netty-resolver-4.1.94.Final.jar                     | netty-codec-http2-4.1.94.Final.jar
                                                     |                                                     | netty-handler-4.1.94.Final.jar
-                                                    |                                                     | netty-nio-client-2.20.115.jar
+                                                    |                                                     | netty-nio-client-2.20.145.jar
                                                     |                                                     | netty-transport-classes-epoll-4.1.94.Final.jar
                                                     |                                                     | netty-transport-native-unix-common-4.1.94.Final.jar
 netty-buffer-4.1.94.Final.jar                       | netty-common-4.1.94.Final.jar                       | netty-codec-4.1.94.Final.jar
                                                     |                                                     | netty-codec-http-4.1.94.Final.jar
                                                     |                                                     | netty-codec-http2-4.1.94.Final.jar
                                                     |                                                     | netty-handler-4.1.94.Final.jar
-                                                    |                                                     | netty-nio-client-2.20.115.jar
+                                                    |                                                     | netty-nio-client-2.20.145.jar
                                                     |                                                     | netty-transport-4.1.94.Final.jar
                                                     |                                                     | netty-transport-classes-epoll-4.1.94.Final.jar
                                                     |                                                     | netty-transport-native-unix-common-4.1.94.Final.jar
 netty-resolver-4.1.94.Final.jar                     | netty-common-4.1.94.Final.jar                       | netty-handler-4.1.94.Final.jar
-                                                    |                                                     | netty-nio-client-2.20.115.jar
+                                                    |                                                     | netty-nio-client-2.20.145.jar
                                                     |                                                     | netty-transport-4.1.94.Final.jar
 netty-common-4.1.94.Final.jar                       | commons-logging-1.2.jar                             | netty-buffer-4.1.94.Final.jar
-                                                    | slf4j-api-2.0.7.jar                                 | netty-codec-4.1.94.Final.jar
+                                                    | slf4j-api-2.0.9.jar                                 | netty-codec-4.1.94.Final.jar
                                                     |                                                     | netty-codec-http-4.1.94.Final.jar
                                                     |                                                     | netty-codec-http2-4.1.94.Final.jar
                                                     |                                                     | netty-handler-4.1.94.Final.jar
-                                                    |                                                     | netty-nio-client-2.20.115.jar
+                                                    |                                                     | netty-nio-client-2.20.145.jar
                                                     |                                                     | netty-resolver-4.1.94.Final.jar
                                                     |                                                     | netty-transport-4.1.94.Final.jar
                                                     |                                                     | netty-transport-classes-epoll-4.1.94.Final.jar
                                                     |                                                     | netty-transport-native-unix-common-4.1.94.Final.jar
-ion-java-1.0.2.jar                                  | [none]                                              | aws-java-sdk-core-1.12.518.jar
-jackson-annotations-2.12.7.jar                      | [none]                                              | aws-java-sdk-core-1.12.518.jar
+ion-java-1.0.2.jar                                  | [none]                                              | aws-java-sdk-core-1.12.548.jar
+jackson-annotations-2.12.7.jar                      | [none]                                              | aws-java-sdk-core-1.12.548.jar
                                                     |                                                     | jackson-databind-2.12.7.1.jar
-jackson-dataformat-cbor-2.12.7.jar                  | jackson-core-2.12.7.jar                             | aws-java-sdk-core-1.12.518.jar
+jackson-dataformat-cbor-2.12.7.jar                  | jackson-core-2.12.7.jar                             | aws-java-sdk-core-1.12.548.jar
                                                     | jackson-databind-2.12.7.1.jar                       |
-jackson-core-2.12.7.jar                             | [none]                                              | aws-java-sdk-cognitoidp-1.12.518.jar
-                                                    |                                                     | aws-java-sdk-core-1.12.518.jar
+jackson-core-2.12.7.jar                             | [none]                                              | aws-java-sdk-cognitoidp-1.12.548.jar
+                                                    |                                                     | aws-java-sdk-core-1.12.548.jar
                                                     |                                                     | jackson-databind-2.12.7.1.jar
                                                     |                                                     | jackson-dataformat-cbor-2.12.7.jar
-jackson-databind-2.12.7.1.jar                       | jackson-annotations-2.12.7.jar                      | aws-java-sdk-core-1.12.518.jar
+jackson-databind-2.12.7.1.jar                       | jackson-annotations-2.12.7.jar                      | aws-java-sdk-core-1.12.548.jar
                                                     | jackson-core-2.12.7.jar                             | jackson-dataformat-cbor-2.12.7.jar
-                                                    |                                                     | jmespath-java-1.12.518.jar
-joda-time-2.8.1.jar                                 | [none]                                              | aws-java-sdk-core-1.12.518.jar
+                                                    |                                                     | jmespath-java-1.12.548.jar
+joda-time-2.8.1.jar                                 | [none]                                              | aws-java-sdk-core-1.12.548.jar
 
 Dependencies
 ------------
@@ -743,109 +743,109 @@ assertj-core-3.24.2.jar                             | org.assertj:assertj-core:3
                                                     |                                                                 | org.junit.jupiter:junit-jupiter-api:5.9.1 (provided, optional)       | OK (version 5.10.0)
                                                     |                                                                 | org.opentest4j:opentest4j:1.2.0 (provided, optional)                 | OK (version 1.3.0)
 jsonassert-1.5.1.jar                                | org.skyscreamer:jsonassert:1.5.1                                | com.vaadin.external.google:android-json:0.0.20131108.vaadin1         | OK
-s3-2.20.115.jar                                     | software.amazon.awssdk:s3:2.20.115                              | software.amazon.awssdk:aws-xml-protocol:2.20.115                     | OK
-                                                    |                                                                 | software.amazon.awssdk:protocol-core:2.20.115                        | OK
-                                                    |                                                                 | software.amazon.awssdk:arns:2.20.115                                 | OK
-                                                    |                                                                 | software.amazon.awssdk:profiles:2.20.115                             | OK
-                                                    |                                                                 | software.amazon.awssdk:crt-core:2.20.115                             | OK
-                                                    |                                                                 | software.amazon.awssdk.crt:aws-crt:0.22.2 (optional)                 | Unsatisfied
-                                                    |                                                                 | software.amazon.awssdk:sdk-core:2.20.115                             | OK
-                                                    |                                                                 | software.amazon.awssdk:auth:2.20.115                                 | OK
-                                                    |                                                                 | software.amazon.awssdk:http-client-spi:2.20.115                      | OK
-                                                    |                                                                 | software.amazon.awssdk:regions:2.20.115                              | OK
-                                                    |                                                                 | software.amazon.awssdk:annotations:2.20.115                          | OK
-                                                    |                                                                 | software.amazon.awssdk:utils:2.20.115                                | OK
-                                                    |                                                                 | software.amazon.awssdk:aws-core:2.20.115                             | OK
-                                                    |                                                                 | software.amazon.awssdk:metrics-spi:2.20.115                          | OK
-                                                    |                                                                 | software.amazon.awssdk:json-utils:2.20.115                           | OK
-                                                    |                                                                 | software.amazon.awssdk:endpoints-spi:2.20.115                        | OK
-                                                    |                                                                 | software.amazon.awssdk:apache-client:2.20.115 (runtime)              | OK
-                                                    |                                                                 | software.amazon.awssdk:netty-nio-client:2.20.115 (runtime)           | OK
-lambda-2.20.115.jar                                 | software.amazon.awssdk:lambda:2.20.115                          | software.amazon.awssdk:aws-json-protocol:2.20.115                    | OK
-                                                    |                                                                 | software.amazon.awssdk:protocol-core:2.20.115                        | OK
-                                                    |                                                                 | software.amazon.awssdk:sdk-core:2.20.115                             | OK
-                                                    |                                                                 | software.amazon.awssdk:auth:2.20.115                                 | OK
-                                                    |                                                                 | software.amazon.awssdk:http-client-spi:2.20.115                      | OK
-                                                    |                                                                 | software.amazon.awssdk:regions:2.20.115                              | OK
-                                                    |                                                                 | software.amazon.awssdk:annotations:2.20.115                          | OK
-                                                    |                                                                 | software.amazon.awssdk:utils:2.20.115                                | OK
-                                                    |                                                                 | software.amazon.awssdk:aws-core:2.20.115                             | OK
-                                                    |                                                                 | software.amazon.awssdk:metrics-spi:2.20.115                          | OK
-                                                    |                                                                 | software.amazon.awssdk:json-utils:2.20.115                           | OK
-                                                    |                                                                 | software.amazon.awssdk:endpoints-spi:2.20.115                        | OK
-                                                    |                                                                 | software.amazon.awssdk:apache-client:2.20.115 (runtime)              | OK
-                                                    |                                                                 | software.amazon.awssdk:netty-nio-client:2.20.115 (runtime)           | OK
-aws-java-sdk-cognitoidp-1.12.518.jar                | com.amazonaws:aws-java-sdk-cognitoidp:1.12.518                  | com.amazonaws:aws-java-sdk-core:1.12.518                             | OK
-                                                    |                                                                 | com.amazonaws:jmespath-java:1.12.518                                 | OK
-slf4j-simple-2.0.7.jar                              | org.slf4j:slf4j-simple:2.0.7                                    | org.slf4j:slf4j-api:2.0.7                                            | OK
-aws-json-protocol-2.20.115.jar                      | software.amazon.awssdk:aws-json-protocol:2.20.115               | software.amazon.awssdk:aws-core:2.20.115                             | OK
-                                                    |                                                                 | software.amazon.awssdk:protocol-core:2.20.115                        | OK
-                                                    |                                                                 | software.amazon.awssdk:sdk-core:2.20.115                             | OK
-                                                    |                                                                 | software.amazon.awssdk:annotations:2.20.115                          | OK
-                                                    |                                                                 | software.amazon.awssdk:http-client-spi:2.20.115                      | OK
-                                                    |                                                                 | software.amazon.awssdk:utils:2.20.115                                | OK
-                                                    |                                                                 | software.amazon.awssdk:third-party-jackson-core:2.20.115             | OK
-                                                    |                                                                 | software.amazon.awssdk:json-utils:2.20.115                           | OK
-aws-xml-protocol-2.20.115.jar                       | software.amazon.awssdk:aws-xml-protocol:2.20.115                | software.amazon.awssdk:aws-query-protocol:2.20.115                   | OK
-                                                    |                                                                 | software.amazon.awssdk:protocol-core:2.20.115                        | OK
-                                                    |                                                                 | software.amazon.awssdk:aws-core:2.20.115                             | OK
-                                                    |                                                                 | software.amazon.awssdk:sdk-core:2.20.115                             | OK
-                                                    |                                                                 | software.amazon.awssdk:annotations:2.20.115                          | OK
-                                                    |                                                                 | software.amazon.awssdk:http-client-spi:2.20.115                      | OK
-                                                    |                                                                 | software.amazon.awssdk:utils:2.20.115                                | OK
-aws-query-protocol-2.20.115.jar                     | software.amazon.awssdk:aws-query-protocol:2.20.115              | software.amazon.awssdk:protocol-core:2.20.115                        | OK
-                                                    |                                                                 | software.amazon.awssdk:aws-core:2.20.115                             | OK
-                                                    |                                                                 | software.amazon.awssdk:sdk-core:2.20.115                             | OK
-                                                    |                                                                 | software.amazon.awssdk:annotations:2.20.115                          | OK
-                                                    |                                                                 | software.amazon.awssdk:http-client-spi:2.20.115                      | OK
-                                                    |                                                                 | software.amazon.awssdk:utils:2.20.115                                | OK
-protocol-core-2.20.115.jar                          | software.amazon.awssdk:protocol-core:2.20.115                   | software.amazon.awssdk:sdk-core:2.20.115                             | OK
-                                                    |                                                                 | software.amazon.awssdk:annotations:2.20.115                          | OK
-                                                    |                                                                 | software.amazon.awssdk:utils:2.20.115                                | OK
-                                                    |                                                                 | software.amazon.awssdk:http-client-spi:2.20.115                      | OK
-aws-core-2.20.115.jar                               | software.amazon.awssdk:aws-core:2.20.115                        | software.amazon.awssdk:annotations:2.20.115                          | OK
-                                                    |                                                                 | software.amazon.awssdk:regions:2.20.115                              | OK
-                                                    |                                                                 | software.amazon.awssdk:auth:2.20.115                                 | OK
-                                                    |                                                                 | software.amazon.awssdk:profiles:2.20.115                             | OK
-                                                    |                                                                 | software.amazon.awssdk:sdk-core:2.20.115                             | OK
-                                                    |                                                                 | software.amazon.awssdk:http-client-spi:2.20.115                      | OK
-                                                    |                                                                 | software.amazon.awssdk:metrics-spi:2.20.115                          | OK
-                                                    |                                                                 | software.amazon.awssdk:endpoints-spi:2.20.115                        | OK
-                                                    |                                                                 | software.amazon.awssdk:utils:2.20.115                                | OK
+s3-2.20.145.jar                                     | software.amazon.awssdk:s3:2.20.145                              | software.amazon.awssdk:aws-xml-protocol:2.20.145                     | OK
+                                                    |                                                                 | software.amazon.awssdk:protocol-core:2.20.145                        | OK
+                                                    |                                                                 | software.amazon.awssdk:arns:2.20.145                                 | OK
+                                                    |                                                                 | software.amazon.awssdk:profiles:2.20.145                             | OK
+                                                    |                                                                 | software.amazon.awssdk:crt-core:2.20.145                             | OK
+                                                    |                                                                 | software.amazon.awssdk.crt:aws-crt:0.24.0 (optional)                 | Unsatisfied
+                                                    |                                                                 | software.amazon.awssdk:sdk-core:2.20.145                             | OK
+                                                    |                                                                 | software.amazon.awssdk:auth:2.20.145                                 | OK
+                                                    |                                                                 | software.amazon.awssdk:http-client-spi:2.20.145                      | OK
+                                                    |                                                                 | software.amazon.awssdk:regions:2.20.145                              | OK
+                                                    |                                                                 | software.amazon.awssdk:annotations:2.20.145                          | OK
+                                                    |                                                                 | software.amazon.awssdk:utils:2.20.145                                | OK
+                                                    |                                                                 | software.amazon.awssdk:aws-core:2.20.145                             | OK
+                                                    |                                                                 | software.amazon.awssdk:metrics-spi:2.20.145                          | OK
+                                                    |                                                                 | software.amazon.awssdk:json-utils:2.20.145                           | OK
+                                                    |                                                                 | software.amazon.awssdk:endpoints-spi:2.20.145                        | OK
+                                                    |                                                                 | software.amazon.awssdk:apache-client:2.20.145 (runtime)              | OK
+                                                    |                                                                 | software.amazon.awssdk:netty-nio-client:2.20.145 (runtime)           | OK
+lambda-2.20.145.jar                                 | software.amazon.awssdk:lambda:2.20.145                          | software.amazon.awssdk:aws-json-protocol:2.20.145                    | OK
+                                                    |                                                                 | software.amazon.awssdk:protocol-core:2.20.145                        | OK
+                                                    |                                                                 | software.amazon.awssdk:sdk-core:2.20.145                             | OK
+                                                    |                                                                 | software.amazon.awssdk:auth:2.20.145                                 | OK
+                                                    |                                                                 | software.amazon.awssdk:http-client-spi:2.20.145                      | OK
+                                                    |                                                                 | software.amazon.awssdk:regions:2.20.145                              | OK
+                                                    |                                                                 | software.amazon.awssdk:annotations:2.20.145                          | OK
+                                                    |                                                                 | software.amazon.awssdk:utils:2.20.145                                | OK
+                                                    |                                                                 | software.amazon.awssdk:aws-core:2.20.145                             | OK
+                                                    |                                                                 | software.amazon.awssdk:metrics-spi:2.20.145                          | OK
+                                                    |                                                                 | software.amazon.awssdk:json-utils:2.20.145                           | OK
+                                                    |                                                                 | software.amazon.awssdk:endpoints-spi:2.20.145                        | OK
+                                                    |                                                                 | software.amazon.awssdk:apache-client:2.20.145 (runtime)              | OK
+                                                    |                                                                 | software.amazon.awssdk:netty-nio-client:2.20.145 (runtime)           | OK
+aws-java-sdk-cognitoidp-1.12.548.jar                | com.amazonaws:aws-java-sdk-cognitoidp:1.12.548                  | com.amazonaws:aws-java-sdk-core:1.12.548                             | OK
+                                                    |                                                                 | com.amazonaws:jmespath-java:1.12.548                                 | OK
+slf4j-simple-2.0.9.jar                              | org.slf4j:slf4j-simple:2.0.9                                    | org.slf4j:slf4j-api:2.0.9                                            | OK
+aws-json-protocol-2.20.145.jar                      | software.amazon.awssdk:aws-json-protocol:2.20.145               | software.amazon.awssdk:aws-core:2.20.145                             | OK
+                                                    |                                                                 | software.amazon.awssdk:protocol-core:2.20.145                        | OK
+                                                    |                                                                 | software.amazon.awssdk:sdk-core:2.20.145                             | OK
+                                                    |                                                                 | software.amazon.awssdk:annotations:2.20.145                          | OK
+                                                    |                                                                 | software.amazon.awssdk:http-client-spi:2.20.145                      | OK
+                                                    |                                                                 | software.amazon.awssdk:utils:2.20.145                                | OK
+                                                    |                                                                 | software.amazon.awssdk:third-party-jackson-core:2.20.145             | OK
+                                                    |                                                                 | software.amazon.awssdk:json-utils:2.20.145                           | OK
+aws-xml-protocol-2.20.145.jar                       | software.amazon.awssdk:aws-xml-protocol:2.20.145                | software.amazon.awssdk:aws-query-protocol:2.20.145                   | OK
+                                                    |                                                                 | software.amazon.awssdk:protocol-core:2.20.145                        | OK
+                                                    |                                                                 | software.amazon.awssdk:aws-core:2.20.145                             | OK
+                                                    |                                                                 | software.amazon.awssdk:sdk-core:2.20.145                             | OK
+                                                    |                                                                 | software.amazon.awssdk:annotations:2.20.145                          | OK
+                                                    |                                                                 | software.amazon.awssdk:http-client-spi:2.20.145                      | OK
+                                                    |                                                                 | software.amazon.awssdk:utils:2.20.145                                | OK
+aws-query-protocol-2.20.145.jar                     | software.amazon.awssdk:aws-query-protocol:2.20.145              | software.amazon.awssdk:protocol-core:2.20.145                        | OK
+                                                    |                                                                 | software.amazon.awssdk:aws-core:2.20.145                             | OK
+                                                    |                                                                 | software.amazon.awssdk:sdk-core:2.20.145                             | OK
+                                                    |                                                                 | software.amazon.awssdk:annotations:2.20.145                          | OK
+                                                    |                                                                 | software.amazon.awssdk:http-client-spi:2.20.145                      | OK
+                                                    |                                                                 | software.amazon.awssdk:utils:2.20.145                                | OK
+protocol-core-2.20.145.jar                          | software.amazon.awssdk:protocol-core:2.20.145                   | software.amazon.awssdk:sdk-core:2.20.145                             | OK
+                                                    |                                                                 | software.amazon.awssdk:annotations:2.20.145                          | OK
+                                                    |                                                                 | software.amazon.awssdk:utils:2.20.145                                | OK
+                                                    |                                                                 | software.amazon.awssdk:http-client-spi:2.20.145                      | OK
+aws-core-2.20.145.jar                               | software.amazon.awssdk:aws-core:2.20.145                        | software.amazon.awssdk:annotations:2.20.145                          | OK
+                                                    |                                                                 | software.amazon.awssdk:regions:2.20.145                              | OK
+                                                    |                                                                 | software.amazon.awssdk:auth:2.20.145                                 | OK
+                                                    |                                                                 | software.amazon.awssdk:profiles:2.20.145                             | OK
+                                                    |                                                                 | software.amazon.awssdk:sdk-core:2.20.145                             | OK
+                                                    |                                                                 | software.amazon.awssdk:http-client-spi:2.20.145                      | OK
+                                                    |                                                                 | software.amazon.awssdk:metrics-spi:2.20.145                          | OK
+                                                    |                                                                 | software.amazon.awssdk:endpoints-spi:2.20.145                        | OK
+                                                    |                                                                 | software.amazon.awssdk:utils:2.20.145                                | OK
                                                     |                                                                 | software.amazon.eventstream:eventstream:1.0.1                        | OK
-auth-2.20.115.jar                                   | software.amazon.awssdk:auth:2.20.115                            | software.amazon.awssdk:annotations:2.20.115                          | OK
-                                                    |                                                                 | software.amazon.awssdk:utils:2.20.115                                | OK
-                                                    |                                                                 | software.amazon.awssdk:sdk-core:2.20.115                             | OK
-                                                    |                                                                 | software.amazon.awssdk:regions:2.20.115                              | OK
-                                                    |                                                                 | software.amazon.awssdk:profiles:2.20.115                             | OK
-                                                    |                                                                 | software.amazon.awssdk:http-client-spi:2.20.115                      | OK
-                                                    |                                                                 | software.amazon.awssdk:json-utils:2.20.115                           | OK
+auth-2.20.145.jar                                   | software.amazon.awssdk:auth:2.20.145                            | software.amazon.awssdk:annotations:2.20.145                          | OK
+                                                    |                                                                 | software.amazon.awssdk:utils:2.20.145                                | OK
+                                                    |                                                                 | software.amazon.awssdk:sdk-core:2.20.145                             | OK
+                                                    |                                                                 | software.amazon.awssdk:regions:2.20.145                              | OK
+                                                    |                                                                 | software.amazon.awssdk:profiles:2.20.145                             | OK
+                                                    |                                                                 | software.amazon.awssdk:http-client-spi:2.20.145                      | OK
+                                                    |                                                                 | software.amazon.awssdk:json-utils:2.20.145                           | OK
                                                     |                                                                 | software.amazon.eventstream:eventstream:1.0.1                        | OK
-regions-2.20.115.jar                                | software.amazon.awssdk:regions:2.20.115                         | software.amazon.awssdk:annotations:2.20.115                          | OK
-                                                    |                                                                 | software.amazon.awssdk:utils:2.20.115                                | OK
-                                                    |                                                                 | software.amazon.awssdk:sdk-core:2.20.115                             | OK
-                                                    |                                                                 | software.amazon.awssdk:profiles:2.20.115                             | OK
-                                                    |                                                                 | software.amazon.awssdk:json-utils:2.20.115                           | OK
-                                                    |                                                                 | org.slf4j:slf4j-api:1.7.30                                           | OK (version 2.0.7)
-sdk-core-2.20.115.jar                               | software.amazon.awssdk:sdk-core:2.20.115                        | software.amazon.awssdk:annotations:2.20.115                          | OK
-                                                    |                                                                 | software.amazon.awssdk:http-client-spi:2.20.115                      | OK
-                                                    |                                                                 | software.amazon.awssdk:metrics-spi:2.20.115                          | OK
-                                                    |                                                                 | software.amazon.awssdk:endpoints-spi:2.20.115                        | OK
-                                                    |                                                                 | software.amazon.awssdk:utils:2.20.115                                | OK
-                                                    |                                                                 | software.amazon.awssdk:profiles:2.20.115                             | OK
-                                                    |                                                                 | org.slf4j:slf4j-api:1.7.30                                           | OK (version 2.0.7)
-                                                    |                                                                 | org.reactivestreams:reactive-streams:1.0.3                           | OK
-apache-client-2.20.115.jar                          | software.amazon.awssdk:apache-client:2.20.115                   | software.amazon.awssdk:http-client-spi:2.20.115                      | OK
-                                                    |                                                                 | software.amazon.awssdk:metrics-spi:2.20.115                          | OK
-                                                    |                                                                 | software.amazon.awssdk:utils:2.20.115                                | OK
-                                                    |                                                                 | software.amazon.awssdk:annotations:2.20.115                          | OK
+regions-2.20.145.jar                                | software.amazon.awssdk:regions:2.20.145                         | software.amazon.awssdk:annotations:2.20.145                          | OK
+                                                    |                                                                 | software.amazon.awssdk:utils:2.20.145                                | OK
+                                                    |                                                                 | software.amazon.awssdk:sdk-core:2.20.145                             | OK
+                                                    |                                                                 | software.amazon.awssdk:profiles:2.20.145                             | OK
+                                                    |                                                                 | software.amazon.awssdk:json-utils:2.20.145                           | OK
+                                                    |                                                                 | org.slf4j:slf4j-api:1.7.30                                           | OK (version 2.0.9)
+sdk-core-2.20.145.jar                               | software.amazon.awssdk:sdk-core:2.20.145                        | software.amazon.awssdk:annotations:2.20.145                          | OK
+                                                    |                                                                 | software.amazon.awssdk:http-client-spi:2.20.145                      | OK
+                                                    |                                                                 | software.amazon.awssdk:metrics-spi:2.20.145                          | OK
+                                                    |                                                                 | software.amazon.awssdk:endpoints-spi:2.20.145                        | OK
+                                                    |                                                                 | software.amazon.awssdk:utils:2.20.145                                | OK
+                                                    |                                                                 | software.amazon.awssdk:profiles:2.20.145                             | OK
+                                                    |                                                                 | org.slf4j:slf4j-api:1.7.30                                           | OK (version 2.0.9)
+                                                    |                                                                 | org.reactivestreams:reactive-streams:1.0.4                           | OK
+apache-client-2.20.145.jar                          | software.amazon.awssdk:apache-client:2.20.145                   | software.amazon.awssdk:http-client-spi:2.20.145                      | OK
+                                                    |                                                                 | software.amazon.awssdk:metrics-spi:2.20.145                          | OK
+                                                    |                                                                 | software.amazon.awssdk:utils:2.20.145                                | OK
+                                                    |                                                                 | software.amazon.awssdk:annotations:2.20.145                          | OK
                                                     |                                                                 | org.apache.httpcomponents:httpclient:4.5.13                          | OK (version 4.5.14)
                                                     |                                                                 | org.apache.httpcomponents:httpcore:4.4.13                            | OK (version 4.4.16)
                                                     |                                                                 | commons-codec:commons-codec:1.15                                     | OK
-netty-nio-client-2.20.115.jar                       | software.amazon.awssdk:netty-nio-client:2.20.115                | software.amazon.awssdk:annotations:2.20.115                          | OK
-                                                    |                                                                 | software.amazon.awssdk:http-client-spi:2.20.115                      | OK
-                                                    |                                                                 | software.amazon.awssdk:utils:2.20.115                                | OK
-                                                    |                                                                 | software.amazon.awssdk:metrics-spi:2.20.115                          | OK
+netty-nio-client-2.20.145.jar                       | software.amazon.awssdk:netty-nio-client:2.20.145                | software.amazon.awssdk:annotations:2.20.145                          | OK
+                                                    |                                                                 | software.amazon.awssdk:http-client-spi:2.20.145                      | OK
+                                                    |                                                                 | software.amazon.awssdk:utils:2.20.145                                | OK
+                                                    |                                                                 | software.amazon.awssdk:metrics-spi:2.20.145                          | OK
                                                     |                                                                 | io.netty:netty-codec-http:4.1.94.Final                               | OK
                                                     |                                                                 | io.netty:netty-codec-http2:4.1.94.Final                              | OK
                                                     |                                                                 | io.netty:netty-codec:4.1.94.Final                                    | OK
@@ -856,35 +856,35 @@ netty-nio-client-2.20.115.jar                       | software.amazon.awssdk:net
                                                     |                                                                 | io.netty:netty-transport-classes-epoll:4.1.94.Final                  | OK
                                                     |                                                                 | io.netty:netty-resolver:4.1.94.Final                                 | OK
                                                     |                                                                 | io.netty:netty-resolver-dns:4.1.94.Final (optional)                  | Unsatisfied
-                                                    |                                                                 | org.reactivestreams:reactive-streams:1.0.3                           | OK
-                                                    |                                                                 | org.slf4j:slf4j-api:1.7.30                                           | OK (version 2.0.7)
-http-client-spi-2.20.115.jar                        | software.amazon.awssdk:http-client-spi:2.20.115                 | software.amazon.awssdk:annotations:2.20.115                          | OK
-                                                    |                                                                 | software.amazon.awssdk:utils:2.20.115                                | OK
-                                                    |                                                                 | software.amazon.awssdk:metrics-spi:2.20.115                          | OK
-                                                    |                                                                 | org.reactivestreams:reactive-streams:1.0.3                           | OK
-metrics-spi-2.20.115.jar                            | software.amazon.awssdk:metrics-spi:2.20.115                     | software.amazon.awssdk:annotations:2.20.115                          | OK
-                                                    |                                                                 | software.amazon.awssdk:utils:2.20.115                                | OK
-json-utils-2.20.115.jar                             | software.amazon.awssdk:json-utils:2.20.115                      | software.amazon.awssdk:utils:2.20.115                                | OK
-                                                    |                                                                 | software.amazon.awssdk:annotations:2.20.115                          | OK
-                                                    |                                                                 | software.amazon.awssdk:third-party-jackson-core:2.20.115             | OK
-crt-core-2.20.115.jar                               | software.amazon.awssdk:crt-core:2.20.115                        | software.amazon.awssdk:annotations:2.20.115                          | OK
-                                                    |                                                                 | software.amazon.awssdk:utils:2.20.115                                | OK
-                                                    |                                                                 | software.amazon.awssdk.crt:aws-crt:0.22.2 (optional)                 | Unsatisfied
-arns-2.20.115.jar                                   | software.amazon.awssdk:arns:2.20.115                            | software.amazon.awssdk:annotations:2.20.115                          | OK
-                                                    |                                                                 | software.amazon.awssdk:utils:2.20.115                                | OK
-profiles-2.20.115.jar                               | software.amazon.awssdk:profiles:2.20.115                        | software.amazon.awssdk:utils:2.20.115                                | OK
-                                                    |                                                                 | software.amazon.awssdk:annotations:2.20.115                          | OK
-utils-2.20.115.jar                                  | software.amazon.awssdk:utils:2.20.115                           | org.reactivestreams:reactive-streams:1.0.3                           | OK
-                                                    |                                                                 | software.amazon.awssdk:annotations:2.20.115                          | OK
-                                                    |                                                                 | org.slf4j:slf4j-api:1.7.30                                           | OK (version 2.0.7)
-slf4j-api-2.0.7.jar                                 | org.slf4j:slf4j-api:2.0.7                                       | [none]                                                               |
+                                                    |                                                                 | org.reactivestreams:reactive-streams:1.0.4                           | OK
+                                                    |                                                                 | org.slf4j:slf4j-api:1.7.30                                           | OK (version 2.0.9)
+http-client-spi-2.20.145.jar                        | software.amazon.awssdk:http-client-spi:2.20.145                 | software.amazon.awssdk:annotations:2.20.145                          | OK
+                                                    |                                                                 | software.amazon.awssdk:utils:2.20.145                                | OK
+                                                    |                                                                 | software.amazon.awssdk:metrics-spi:2.20.145                          | OK
+                                                    |                                                                 | org.reactivestreams:reactive-streams:1.0.4                           | OK
+metrics-spi-2.20.145.jar                            | software.amazon.awssdk:metrics-spi:2.20.145                     | software.amazon.awssdk:annotations:2.20.145                          | OK
+                                                    |                                                                 | software.amazon.awssdk:utils:2.20.145                                | OK
+json-utils-2.20.145.jar                             | software.amazon.awssdk:json-utils:2.20.145                      | software.amazon.awssdk:utils:2.20.145                                | OK
+                                                    |                                                                 | software.amazon.awssdk:annotations:2.20.145                          | OK
+                                                    |                                                                 | software.amazon.awssdk:third-party-jackson-core:2.20.145             | OK
+crt-core-2.20.145.jar                               | software.amazon.awssdk:crt-core:2.20.145                        | software.amazon.awssdk:annotations:2.20.145                          | OK
+                                                    |                                                                 | software.amazon.awssdk:utils:2.20.145                                | OK
+                                                    |                                                                 | software.amazon.awssdk.crt:aws-crt:0.24.0 (optional)                 | Unsatisfied
+arns-2.20.145.jar                                   | software.amazon.awssdk:arns:2.20.145                            | software.amazon.awssdk:annotations:2.20.145                          | OK
+                                                    |                                                                 | software.amazon.awssdk:utils:2.20.145                                | OK
+profiles-2.20.145.jar                               | software.amazon.awssdk:profiles:2.20.145                        | software.amazon.awssdk:utils:2.20.145                                | OK
+                                                    |                                                                 | software.amazon.awssdk:annotations:2.20.145                          | OK
+utils-2.20.145.jar                                  | software.amazon.awssdk:utils:2.20.145                           | org.reactivestreams:reactive-streams:1.0.4                           | OK
+                                                    |                                                                 | software.amazon.awssdk:annotations:2.20.145                          | OK
+                                                    |                                                                 | org.slf4j:slf4j-api:1.7.30                                           | OK (version 2.0.9)
+slf4j-api-2.0.9.jar                                 | org.slf4j:slf4j-api:2.0.9                                       | [none]                                                               |
 httpmime-4.5.14.jar                                 | org.apache.httpcomponents:httpmime:4.5.14                       | org.apache.httpcomponents:httpclient:4.5.14                          | OK
 json-20230618.jar                                   | org.json:json:20230618                                          | [none]                                                               |
-endpoints-spi-2.20.115.jar                          | software.amazon.awssdk:endpoints-spi:2.20.115                   | software.amazon.awssdk:annotations:2.20.115                          | OK
-annotations-2.20.115.jar                            | software.amazon.awssdk:annotations:2.20.115                     | [none]                                                               |
-third-party-jackson-core-2.20.115.jar               | software.amazon.awssdk:third-party-jackson-core:2.20.115        | [none]                                                               |
-jmespath-java-1.12.518.jar                          | com.amazonaws:jmespath-java:1.12.518                            | com.fasterxml.jackson.core:jackson-databind:2.12.7.1                 | OK
-aws-java-sdk-core-1.12.518.jar                      | com.amazonaws:aws-java-sdk-core:1.12.518                        | commons-logging:commons-logging:1.1.3                                | OK (version 1.2)
+endpoints-spi-2.20.145.jar                          | software.amazon.awssdk:endpoints-spi:2.20.145                   | software.amazon.awssdk:annotations:2.20.145                          | OK
+annotations-2.20.145.jar                            | software.amazon.awssdk:annotations:2.20.145                     | [none]                                                               |
+third-party-jackson-core-2.20.145.jar               | software.amazon.awssdk:third-party-jackson-core:2.20.145        | [none]                                                               |
+jmespath-java-1.12.548.jar                          | com.amazonaws:jmespath-java:1.12.548                            | com.fasterxml.jackson.core:jackson-databind:2.12.7.1                 | OK
+aws-java-sdk-core-1.12.548.jar                      | com.amazonaws:aws-java-sdk-core:1.12.548                        | commons-logging:commons-logging:1.1.3                                | OK (version 1.2)
                                                     |                                                                 | commons-codec:commons-codec:1.15                                     | OK
                                                     |                                                                 | org.apache.httpcomponents:httpclient:4.5.13                          | OK (version 4.5.14)
                                                     |                                                                 | software.amazon.ion:ion-java:1.0.2                                   | OK
@@ -906,7 +906,7 @@ commons-logging-1.2.jar                             | commons-logging:commons-lo
                                                     |                                                                 | javax.servlet:servlet-api:2.3 (provided, optional)                   | Unsatisfied
 commons-codec-1.15.jar                              | commons-codec:commons-codec:1.15                                | [none]                                                               |
 opentest4j-1.3.0.jar                                | org.opentest4j:opentest4j:1.3.0                                 | [none]                                                               |
-reactive-streams-1.0.3.jar                          | org.reactivestreams:reactive-streams:1.0.3                      | [none]                                                               |
+reactive-streams-1.0.4.jar                          | org.reactivestreams:reactive-streams:1.0.4                      | [none]                                                               |
 eventstream-1.0.1.jar                               | software.amazon.eventstream:eventstream:1.0.1                   | [none]                                                               |
 netty-codec-http2-4.1.94.Final.jar                  | io.netty:netty-codec-http2:4.1.94.Final                         | io.netty:netty-common:4.1.94.Final                                   | OK
                                                     |                                                                 | io.netty:netty-buffer:4.1.94.Final                                   | OK
@@ -970,7 +970,7 @@ netty-buffer-4.1.94.Final.jar                       | io.netty:netty-buffer:4.1.
 netty-resolver-4.1.94.Final.jar                     | io.netty:netty-resolver:4.1.94.Final                            | io.netty:netty-common:4.1.94.Final                                   | OK
 netty-common-4.1.94.Final.jar                       | io.netty:netty-common:4.1.94.Final                              | org.graalvm.nativeimage:svm:19.3.6 (provided)                        | Unsatisfied
                                                     |                                                                 | org.jetbrains:annotations-java5:23.0.0 (provided)                    | Unsatisfied
-                                                    |                                                                 | org.slf4j:slf4j-api:1.7.30 (optional)                                | OK (version 2.0.7)
+                                                    |                                                                 | org.slf4j:slf4j-api:1.7.30 (optional)                                | OK (version 2.0.9)
                                                     |                                                                 | commons-logging:commons-logging:1.2 (optional)                       | OK
                                                     |                                                                 | org.apache.logging.log4j:log4j-1.2-api:2.17.2 (optional)             | Unsatisfied
                                                     |                                                                 | org.apache.logging.log4j:log4j-api:2.17.2 (optional)                 | Unsatisfied
@@ -992,14 +992,14 @@ List of packages per JAR file.
 JAR file                                            | Count | Packages                                                         | Issues
 ----------------------------------------------------+-------+------------------------------------------------------------------+-------------------------------------
 android-json-0.0.20131108.vaadin1.jar               | 1     | org.json                                                         | Split Package: org.json
-annotations-2.20.115.jar                            | 1     | software.amazon.awssdk.annotations                               |
-apache-client-2.20.115.jar                          | 6     | software.amazon.awssdk.http.apache (+5 subpackages)              |
-arns-2.20.115.jar                                   | 1     | software.amazon.awssdk.arns                                      |
+annotations-2.20.145.jar                            | 1     | software.amazon.awssdk.annotations                               |
+apache-client-2.20.145.jar                          | 6     | software.amazon.awssdk.http.apache (+5 subpackages)              |
+arns-2.20.145.jar                                   | 1     | software.amazon.awssdk.arns                                      |
 assertj-core-3.24.2.jar                             | 27    | org.assertj.core.* (27 subpackages)                              |
-auth-2.20.115.jar                                   | 12    | software.amazon.awssdk.auth.* (12 subpackages)                   |
-aws-core-2.20.115.jar                               | 21    | software.amazon.awssdk.awscore (+20 subpackages)                 |
-aws-java-sdk-cognitoidp-1.12.518.jar                | 3     | com.amazonaws.services.cognitoidp (+2 subpackages)               |
-aws-java-sdk-core-1.12.518.jar                      | 66    | com.amazonaws                                                    |
+auth-2.20.145.jar                                   | 12    | software.amazon.awssdk.auth.* (12 subpackages)                   |
+aws-core-2.20.145.jar                               | 21    | software.amazon.awssdk.awscore (+20 subpackages)                 |
+aws-java-sdk-cognitoidp-1.12.548.jar                | 3     | com.amazonaws.services.cognitoidp (+2 subpackages)               |
+aws-java-sdk-core-1.12.548.jar                      | 66    | com.amazonaws                                                    |
                                                     |       | com.amazonaws.adapters.types                                     |
                                                     |       | com.amazonaws.annotation                                         |
                                                     |       | com.amazonaws.arn                                                |
@@ -1023,16 +1023,16 @@ aws-java-sdk-core-1.12.518.jar                      | 66    | com.amazonaws     
                                                     |       | com.amazonaws.transform                                          |
                                                     |       | com.amazonaws.util (+2 subpackages)                              |
                                                     |       | com.amazonaws.waiters                                            |
-aws-json-protocol-2.20.115.jar                      | 5     | software.amazon.awssdk.protocols.json (+4 subpackages)           |
-aws-query-protocol-2.20.115.jar                     | 5     | software.amazon.awssdk.protocols.query (+4 subpackages)          |
-aws-xml-protocol-2.20.115.jar                       | 3     | software.amazon.awssdk.protocols.xml (+2 subpackages)            |
+aws-json-protocol-2.20.145.jar                      | 5     | software.amazon.awssdk.protocols.json (+4 subpackages)           |
+aws-query-protocol-2.20.145.jar                     | 5     | software.amazon.awssdk.protocols.query (+4 subpackages)          |
+aws-xml-protocol-2.20.145.jar                       | 3     | software.amazon.awssdk.protocols.xml (+2 subpackages)            |
 byte-buddy-1.12.21.jar                              | 38    | net.bytebuddy (+37 subpackages)                                  |
 commons-codec-1.15.jar                              | 7     | org.apache.commons.codec (+6 subpackages)                        |
 commons-logging-1.2.jar                             | 2     | org.apache.commons.logging (+1 subpackage)                       |
-crt-core-2.20.115.jar                               | 1     | software.amazon.awssdk.crtcore                                   |
-endpoints-spi-2.20.115.jar                          | 1     | software.amazon.awssdk.endpoints                                 |
+crt-core-2.20.145.jar                               | 1     | software.amazon.awssdk.crtcore                                   |
+endpoints-spi-2.20.145.jar                          | 1     | software.amazon.awssdk.endpoints                                 |
 eventstream-1.0.1.jar                               | 1     | software.amazon.eventstream                                      |
-http-client-spi-2.20.115.jar                        | 3     | software.amazon.awssdk.http                                      |
+http-client-spi-2.20.145.jar                        | 3     | software.amazon.awssdk.http                                      |
                                                     |       | software.amazon.awssdk.http.async                                |
                                                     |       | software.amazon.awssdk.internal.http                             |
 httpclient-4.5.14.jar                               | 24    | org.apache.http.auth (+1 subpackage)                             |
@@ -1067,10 +1067,10 @@ jackson-annotations-2.12.7.jar                      | 1     | com.fasterxml.jack
 jackson-core-2.12.7.jar                             | 12    | com.fasterxml.jackson.core (+11 subpackages)                     |
 jackson-databind-2.12.7.1.jar                       | 22    | com.fasterxml.jackson.databind (+21 subpackages)                 |
 jackson-dataformat-cbor-2.12.7.jar                  | 2     | com.fasterxml.jackson.dataformat.cbor (+1 subpackage)            |
-jmespath-java-1.12.518.jar                          | 1     | com.amazonaws.jmespath                                           |
+jmespath-java-1.12.548.jar                          | 1     | com.amazonaws.jmespath                                           |
 joda-time-2.8.1.jar                                 | 7     | org.joda.time (+6 subpackages)                                   |
 json-20230618.jar                                   | 1     | org.json                                                         | Split Package: org.json
-json-utils-2.20.115.jar                             | 2     | software.amazon.awssdk.protocols.jsoncore (+1 subpackage)        |
+json-utils-2.20.145.jar                             | 2     | software.amazon.awssdk.protocols.jsoncore (+1 subpackage)        |
 jsonassert-1.5.1.jar                                | 3     | org.json                                                         | Split Package: org.json
                                                     |       | org.skyscreamer.jsonassert (+1 subpackage)                       | Fat JAR: org.json, org.skyscreamer.*
 junit-jupiter-api-5.10.0.jar                        | 7     | org.junit.jupiter.api (+6 subpackages)                           |
@@ -1078,8 +1078,8 @@ junit-jupiter-engine-5.10.0.jar                     | 8     | org.junit.jupiter.
 junit-jupiter-params-5.10.0.jar                     | 21    | org.junit.jupiter.params (+20 subpackages)                       |
 junit-platform-commons-1.10.0.jar                   | 6     | org.junit.platform.commons (+5 subpackages)                      |
 junit-platform-engine-1.10.0.jar                    | 9     | org.junit.platform.engine (+8 subpackages)                       |
-lambda-2.20.115.jar                                 | 10    | software.amazon.awssdk.services.lambda (+9 subpackages)          |
-metrics-spi-2.20.115.jar                            | 2     | software.amazon.awssdk.metrics (+1 subpackage)                   |
+lambda-2.20.145.jar                                 | 10    | software.amazon.awssdk.services.lambda (+9 subpackages)          |
+metrics-spi-2.20.145.jar                            | 2     | software.amazon.awssdk.metrics (+1 subpackage)                   |
 netty-buffer-4.1.94.Final.jar                       | 2     | io.netty.buffer (+1 subpackage)                                  |
 netty-codec-4.1.94.Final.jar                        | 10    | io.netty.handler.codec                                           |
                                                     |       | io.netty.handler.codec.base64                                    |
@@ -1106,7 +1106,7 @@ netty-handler-4.1.94.Final.jar                      | 12    | io.netty.handler.a
                                                     |       | io.netty.handler.stream                                          |
                                                     |       | io.netty.handler.timeout                                         |
                                                     |       | io.netty.handler.traffic                                         |
-netty-nio-client-2.20.115.jar                       | 5     | software.amazon.awssdk.http.nio.netty (+4 subpackages)           |
+netty-nio-client-2.20.145.jar                       | 5     | software.amazon.awssdk.http.nio.netty (+4 subpackages)           |
 netty-resolver-4.1.94.Final.jar                     | 1     | io.netty.resolver                                                |
 netty-transport-4.1.94.Final.jar                    | 12    | io.netty.bootstrap                                               |
                                                     |       | io.netty.channel                                                 |
@@ -1121,20 +1121,20 @@ netty-transport-4.1.94.Final.jar                    | 12    | io.netty.bootstrap
 netty-transport-classes-epoll-4.1.94.Final.jar      | 1     | io.netty.channel.epoll                                           |
 netty-transport-native-unix-common-4.1.94.Final.jar | 1     | io.netty.channel.unix                                            |
 opentest4j-1.3.0.jar                                | 1     | org.opentest4j                                                   |
-profiles-2.20.115.jar                               | 2     | software.amazon.awssdk.profiles (+1 subpackage)                  |
-protocol-core-2.20.115.jar                          | 1     | software.amazon.awssdk.protocols.core                            |
-reactive-streams-1.0.3.jar                          | 1     | org.reactivestreams                                              |
-regions-2.20.115.jar                                | 8     | software.amazon.awssdk.regions (+7 subpackages)                  |
-s3-2.20.115.jar                                     | 24    | software.amazon.awssdk.services.s3 (+23 subpackages)             |
-sdk-core-2.20.115.jar                               | 54    | software.amazon.awssdk.core (+53 subpackages)                    |
-slf4j-api-2.0.7.jar                                 | 4     | org.slf4j                                                        |
+profiles-2.20.145.jar                               | 2     | software.amazon.awssdk.profiles (+1 subpackage)                  |
+protocol-core-2.20.145.jar                          | 1     | software.amazon.awssdk.protocols.core                            |
+reactive-streams-1.0.4.jar                          | 1     | org.reactivestreams                                              |
+regions-2.20.145.jar                                | 8     | software.amazon.awssdk.regions (+7 subpackages)                  |
+s3-2.20.145.jar                                     | 26    | software.amazon.awssdk.services.s3 (+25 subpackages)             |
+sdk-core-2.20.145.jar                               | 56    | software.amazon.awssdk.core (+55 subpackages)                    |
+slf4j-api-2.0.9.jar                                 | 4     | org.slf4j                                                        |
                                                     |       | org.slf4j.event                                                  |
                                                     |       | org.slf4j.helpers                                                |
                                                     |       | org.slf4j.spi                                                    |
-slf4j-simple-2.0.7.jar                              | 1     | org.slf4j.simple                                                 |
+slf4j-simple-2.0.9.jar                              | 1     | org.slf4j.simple                                                 |
 test-prod-1.0.0-SNAPSHOT.jar                        | 3     | org.jarhc.online.tests (+2 subpackages)                          |
-third-party-jackson-core-2.20.115.jar               | 12    | software.amazon.awssdk.thirdparty.jackson.core (+11 subpackages) |
-utils-2.20.115.jar                                  | 8     | software.amazon.awssdk.utils (+7 subpackages)                    |
+third-party-jackson-core-2.20.145.jar               | 14    | software.amazon.awssdk.thirdparty.jackson.core (+13 subpackages) |
+utils-2.20.145.jar                                  | 8     | software.amazon.awssdk.utils (+7 subpackages)                    |
 
 Duplicate Classes
 -----------------
@@ -2457,7 +2457,7 @@ assertj-core-3.24.2.jar               | org.assertj.core.api.HamcrestCondition
                                       | • Superclass not found: org.hamcrest.BaseMatcher
                                       | • Class not found: org.hamcrest.BaseMatcher (package not found)
                                       | • Class not found: org.hamcrest.Description (package not found)
-s3-2.20.115.jar                       | software.amazon.awssdk.services.s3.internal.crt.CrtChecksumUtils
+s3-2.20.145.jar                       | software.amazon.awssdk.services.s3.internal.crt.CrtChecksumUtils
                                       | • Class not found: software.amazon.awssdk.crt.s3.ChecksumAlgorithm (package not found)
                                       | • Class not found: software.amazon.awssdk.crt.s3.ChecksumConfig (package not found)
                                       | • Class not found: software.amazon.awssdk.crt.s3.ChecksumConfig$ChecksumLocation (package not found)
@@ -2523,12 +2523,12 @@ s3-2.20.115.jar                       | software.amazon.awssdk.services.s3.inter
                                       |
                                       | software.amazon.awssdk.services.s3.internal.crt.S3NativeClientConfiguration$Builder
                                       | • Class not found: software.amazon.awssdk.crt.io.StandardRetryOptions (package not found)
-crt-core-2.20.115.jar                 | software.amazon.awssdk.crtcore.CrtConfigurationUtils
+crt-core-2.20.145.jar                 | software.amazon.awssdk.crtcore.CrtConfigurationUtils
                                       | • Class not found: software.amazon.awssdk.crt.http.HttpMonitoringOptions (package not found)
                                       | • Class not found: software.amazon.awssdk.crt.http.HttpProxyOptions (package not found)
                                       | • Class not found: software.amazon.awssdk.crt.http.HttpProxyOptions$HttpProxyAuthorizationType (package not found)
                                       | • Class not found: software.amazon.awssdk.crt.io.TlsContext (package not found)
-aws-java-sdk-core-1.12.518.jar        | com.amazonaws.util.Base64
+aws-java-sdk-core-1.12.548.jar        | com.amazonaws.util.Base64
                                       | • Class not found: javax.xml.bind.DatatypeConverter (package not found)
                                       | • Class not found: javax.xml.bind.JAXBContext (package not found)
 byte-buddy-1.12.21.jar                | net.bytebuddy.ClassFileVersion
@@ -3910,24 +3910,24 @@ Use of dangerous, unsafe, unstable, or deprecated classes and methods.
 
 JAR file                                            | Issues
 ----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-s3-2.20.115.jar                                     | software.amazon.awssdk.services.s3.DefaultS3AsyncClient
+s3-2.20.145.jar                                     | software.amazon.awssdk.services.s3.DefaultS3AsyncClient
                                                     | • @Deprecated: public software.amazon.awssdk.awscore.eventstream.EventStreamAsyncResponseTransformer$Builder software.amazon.awssdk.awscore.eventstream.EventStreamAsyncResponseTransformer$Builder.executor(java.util.concurrent.Executor)
                                                     |
                                                     | software.amazon.awssdk.services.s3.internal.handlers.SyncChecksumValidationInterceptor
                                                     | • @Deprecated: public long software.amazon.awssdk.core.sync.RequestBody.contentLength()
-lambda-2.20.115.jar                                 | software.amazon.awssdk.services.lambda.DefaultLambdaAsyncClient
+lambda-2.20.145.jar                                 | software.amazon.awssdk.services.lambda.DefaultLambdaAsyncClient
                                                     | • @Deprecated: public software.amazon.awssdk.awscore.eventstream.EventStreamAsyncResponseTransformer$Builder software.amazon.awssdk.awscore.eventstream.EventStreamAsyncResponseTransformer$Builder.executor(java.util.concurrent.Executor)
-aws-java-sdk-cognitoidp-1.12.518.jar                | com.amazonaws.services.cognitoidp.AWSCognitoIdentityProviderClient
+aws-java-sdk-cognitoidp-1.12.548.jar                | com.amazonaws.services.cognitoidp.AWSCognitoIdentityProviderClient
                                                     | • @Deprecated: public class com.amazonaws.internal.StaticCredentialsProvider
                                                     | • @Deprecated: public com.amazonaws.Response com.amazonaws.http.AmazonHttpClient.execute(com.amazonaws.Request,com.amazonaws.http.HttpResponseHandler,com.amazonaws.http.HttpResponseHandler,com.amazonaws.http.ExecutionContext)
-aws-core-2.20.115.jar                               | software.amazon.awssdk.awscore.internal.AwsExecutionContextBuilder
+aws-core-2.20.145.jar                               | software.amazon.awssdk.awscore.internal.AwsExecutionContextBuilder
                                                     | • @Deprecated: public static final software.amazon.awssdk.core.interceptor.ExecutionAttribute software.amazon.awssdk.core.interceptor.SdkExecutionAttribute.PROFILE_FILE
-apache-client-2.20.115.jar                          | software.amazon.awssdk.http.apache.internal.impl.ApacheSdkHttpClient
+apache-client-2.20.145.jar                          | software.amazon.awssdk.http.apache.internal.impl.ApacheSdkHttpClient
                                                     | • @Deprecated: public abstract org.apache.http.conn.ClientConnectionManager org.apache.http.client.HttpClient.getConnectionManager()
                                                     | • @Deprecated: public abstract org.apache.http.params.HttpParams org.apache.http.client.HttpClient.getParams()
                                                     | • @Deprecated: public interface org.apache.http.conn.ClientConnectionManager
                                                     | • @Deprecated: public interface org.apache.http.params.HttpParams
-netty-nio-client-2.20.115.jar                       | software.amazon.awssdk.http.nio.netty.internal.DelegatingEventLoopGroup
+netty-nio-client-2.20.145.jar                       | software.amazon.awssdk.http.nio.netty.internal.DelegatingEventLoopGroup
                                                     | • @Deprecated: public abstract io.netty.channel.ChannelFuture io.netty.channel.EventLoopGroup.register(io.netty.channel.Channel,io.netty.channel.ChannelPromise)
                                                     | • @Deprecated: public abstract java.util.List io.netty.util.concurrent.EventExecutorGroup.shutdownNow()
                                                     | • @Deprecated: public abstract void io.netty.util.concurrent.EventExecutorGroup.shutdown()
@@ -3935,11 +3935,11 @@ netty-nio-client-2.20.115.jar                       | software.amazon.awssdk.htt
                                                     | software.amazon.awssdk.http.nio.netty.internal.utils.DelegatingChannelHandlerContext
                                                     | • @Deprecated: public abstract boolean io.netty.channel.ChannelHandlerContext.hasAttr(io.netty.util.AttributeKey)
                                                     | • @Deprecated: public abstract io.netty.util.Attribute io.netty.channel.ChannelHandlerContext.attr(io.netty.util.AttributeKey)
-http-client-spi-2.20.115.jar                        | software.amazon.awssdk.http.SdkHttpHeaders
+http-client-spi-2.20.145.jar                        | software.amazon.awssdk.http.SdkHttpHeaders
                                                     | • @Deprecated: public static java.util.Optional software.amazon.awssdk.utils.http.SdkHttpUtils.firstMatchingHeader(java.util.Map,java.lang.String)
                                                     | • @Deprecated: public static java.util.Optional software.amazon.awssdk.utils.http.SdkHttpUtils.firstMatchingHeaderFromCollection(java.util.Map,java.util.Collection)
                                                     | • @Deprecated: public static java.util.stream.Stream software.amazon.awssdk.utils.http.SdkHttpUtils.allMatchingHeaders(java.util.Map,java.lang.String)
-aws-java-sdk-core-1.12.518.jar                      | com.amazonaws.http.apache.client.impl.ApacheConnectionManagerFactory
+aws-java-sdk-core-1.12.548.jar                      | com.amazonaws.http.apache.client.impl.ApacheConnectionManagerFactory
                                                     | • @Deprecated: public interface org.apache.http.conn.ssl.X509HostnameVerifier
                                                     | • @Deprecated: public static final org.apache.http.conn.ssl.X509HostnameVerifier org.apache.http.conn.ssl.SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER
                                                     | • @Deprecated: public static final org.apache.http.conn.ssl.X509HostnameVerifier org.apache.http.conn.ssl.SSLConnectionSocketFactory.STRICT_HOSTNAME_VERIFIER
