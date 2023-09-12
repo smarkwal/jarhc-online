@@ -28,7 +28,7 @@ tasks {
     register("copyDependencies", Copy::class) {
         group = "build"
         from(configurations.runtimeClasspath)
-        into("$buildDir/dependencies")
+        into("${layout.buildDirectory.get()}/dependencies")
     }
 
     build {
