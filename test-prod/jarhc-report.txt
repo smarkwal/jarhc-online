@@ -7,8 +7,9 @@ List of JAR files found in classpath.
 
 JAR file                                            | Size    | Classes | Resources | Checksum (SHA-1)                         | Artifact coordinates
 ----------------------------------------------------+---------+---------+-----------+------------------------------------------+----------------------------------------------------------------
-test-prod-1.0.0-SNAPSHOT.jar                        | 31.7 KB | 17      | 0         | f2420947e2cb77921b1b0f834c7e3fd42ea4f81b | [unknown]
+test-prod-1.0.0-SNAPSHOT.jar                        | 31.7 KB | 17      | 0         | 8fa61af3c801cf7d6b9e5f240a8d64c689846f7a | [unknown]
 junit-jupiter-5.10.0.jar                            | 6.21 KB | 0       | 0         | 8fea1d9c58b2156f1b998f2f18da04bc9e087f74 | org.junit.jupiter:junit-jupiter:5.10.0
+junit-platform-launcher-1.10.0.jar                  | 179 KB  | 115     | 0         | 89a1922534ed102be1fb2a8c0b2c6151297a12bf | org.junit.platform:junit-platform-launcher:1.10.0
 junit-jupiter-params-5.10.0.jar                     | 572 KB  | 346     | 0         | 9041c7365495a897a64782ea5a6fdb99dab1814e | org.junit.jupiter:junit-jupiter-params:5.10.0
 junit-jupiter-engine-5.10.0.jar                     | 238 KB  | 129     | 0         | 90587932d718fc51a48112d33045a18476c542ad | org.junit.jupiter:junit-jupiter-engine:5.10.0
 junit-jupiter-api-5.10.0.jar                        | 206 KB  | 181     | 0         | 2fe4ba3d31d5067878e468c96aa039005a9134d3 | org.junit.jupiter:junit-jupiter-api:5.10.0
@@ -70,7 +71,7 @@ jackson-dataformat-cbor-2.12.7.jar                  | 60.1 KB | 14      | 0     
 jackson-core-2.12.7.jar                             | 357 KB  | 124     | 0         | 04669a54b799c105572aa8de2a1ae0fe64a17745 | com.fasterxml.jackson.core:jackson-core:2.12.7
 jackson-databind-2.12.7.1.jar                       | 1.44 MB | 700     | 0         | 48d6674adb5a077f2c04b42795e2e7624997b8b9 | com.fasterxml.jackson.core:jackson-databind:2.12.7.1
 joda-time-2.8.1.jar                                 | 607 KB  | 246     | 469       | f5bfc718c95a7b1d3c371bb02a188a4df18361a9 | joda-time:joda-time:2.8.1
-Classpath                                           | 26.0 MB | 16396   | 612       | -                                        | -
+Classpath                                           | 26.2 MB | 16511   | 612       | -                                        | -
 
 Modules
 -------
@@ -82,6 +83,11 @@ test-prod-1.0.0-SNAPSHOT.jar                        | test.prod                 
 junit-jupiter-5.10.0.jar                            | org.junit.jupiter                              | Module-Info    | No        | org.junit.jupiter.api            |
                                                     |                                                |                |           | org.junit.jupiter.engine         |
                                                     |                                                |                |           | org.junit.jupiter.params         |
+                                                    |                                                |                |           | java.base                        |
+junit-platform-launcher-1.10.0.jar                  | org.junit.platform.launcher                    | Module-Info    | No        | org.apiguardian.api              | org.junit.platform.launcher
+                                                    |                                                |                |           | org.junit.platform.commons       | org.junit.platform.launcher.core
+                                                    |                                                |                |           | org.junit.platform.engine        | org.junit.platform.launcher.listeners
+                                                    |                                                |                |           | java.logging                     | org.junit.platform.launcher.listeners.discovery
                                                     |                                                |                |           | java.base                        |
 junit-jupiter-params-5.10.0.jar                     | org.junit.jupiter.params                       | Module-Info    | No        | org.apiguardian.api              | org.junit.jupiter.params
                                                     |                                                |                |           | org.junit.jupiter.api            | org.junit.jupiter.params.aggregator
@@ -275,6 +281,7 @@ JAR file                                            | Multi-release | Class file
 ----------------------------------------------------+---------------+--------------------------------------------------------
 test-prod-1.0.0-SNAPSHOT.jar                        | No            | Java 11 (17)
 junit-jupiter-5.10.0.jar                            | No            | [no class files]
+junit-platform-launcher-1.10.0.jar                  | No            | Java 8 (115)
 junit-jupiter-params-5.10.0.jar                     | No            | Java 8 (73), Java 6 (273)
 junit-jupiter-engine-5.10.0.jar                     | No            | Java 8 (129)
 junit-jupiter-api-5.10.0.jar                        | No            | Java 8 (181)
@@ -336,7 +343,7 @@ jackson-dataformat-cbor-2.12.7.jar                  | No            | Java 7 (14
 jackson-core-2.12.7.jar                             | No            | Java 6 (124)
 jackson-databind-2.12.7.1.jar                       | No            | Java 7 (700)
 joda-time-2.8.1.jar                                 | No            | Java 5 (246)
-Classpath                                           | -             | Java 11 (17), Java 9 (2), Java 8 (6790), Java 7 (2677),
+Classpath                                           | -             | Java 11 (17), Java 9 (2), Java 8 (6905), Java 7 (2677),
                                                     |               | Java 6 (3649), Java 5 (3233), Java 1.2 (28)
 
 JAR Dependencies
@@ -358,6 +365,8 @@ test-prod-1.0.0-SNAPSHOT.jar                        | android-json-0.0.20131108.
                                                     | lambda-2.20.145.jar                                 |
                                                     | sdk-core-2.20.145.jar                               |
 junit-jupiter-5.10.0.jar                            | [none]                                              | [none]
+junit-platform-launcher-1.10.0.jar                  | junit-platform-commons-1.10.0.jar                   | [none]
+                                                    | junit-platform-engine-1.10.0.jar                    |
 junit-jupiter-params-5.10.0.jar                     | junit-jupiter-api-5.10.0.jar                        | [none]
                                                     | junit-platform-commons-1.10.0.jar                   |
 junit-jupiter-engine-5.10.0.jar                     | junit-jupiter-api-5.10.0.jar                        | [none]
@@ -369,12 +378,13 @@ junit-jupiter-api-5.10.0.jar                        | junit-platform-commons-1.1
                                                     |                                                     | junit-jupiter-params-5.10.0.jar
                                                     |                                                     | test-prod-1.0.0-SNAPSHOT.jar
 junit-platform-engine-1.10.0.jar                    | junit-platform-commons-1.10.0.jar                   | junit-jupiter-engine-5.10.0.jar
-                                                    | opentest4j-1.3.0.jar                                |
+                                                    | opentest4j-1.3.0.jar                                | junit-platform-launcher-1.10.0.jar
 junit-platform-commons-1.10.0.jar                   | [none]                                              | assertj-core-3.24.2.jar
                                                     |                                                     | junit-jupiter-api-5.10.0.jar
                                                     |                                                     | junit-jupiter-engine-5.10.0.jar
                                                     |                                                     | junit-jupiter-params-5.10.0.jar
                                                     |                                                     | junit-platform-engine-1.10.0.jar
+                                                    |                                                     | junit-platform-launcher-1.10.0.jar
 assertj-core-3.24.2.jar                             | byte-buddy-1.12.21.jar                              | test-prod-1.0.0-SNAPSHOT.jar
                                                     | junit-jupiter-api-5.10.0.jar                        |
                                                     | junit-platform-commons-1.10.0.jar                   |
@@ -725,6 +735,8 @@ test-prod-1.0.0-SNAPSHOT.jar                        | [unknown]                 
 junit-jupiter-5.10.0.jar                            | org.junit.jupiter:junit-jupiter:5.10.0                          | org.junit.jupiter:junit-jupiter-api:5.10.0                           | OK
                                                     |                                                                 | org.junit.jupiter:junit-jupiter-params:5.10.0                        | OK
                                                     |                                                                 | org.junit.jupiter:junit-jupiter-engine:5.10.0 (runtime)              | OK
+junit-platform-launcher-1.10.0.jar                  | org.junit.platform:junit-platform-launcher:1.10.0               | org.junit.platform:junit-platform-engine:1.10.0                      | OK
+                                                    |                                                                 | org.apiguardian:apiguardian-api:1.1.2                                | Unsatisfied
 junit-jupiter-params-5.10.0.jar                     | org.junit.jupiter:junit-jupiter-params:5.10.0                   | org.junit.jupiter:junit-jupiter-api:5.10.0                           | OK
                                                     |                                                                 | org.apiguardian:apiguardian-api:1.1.2                                | Unsatisfied
 junit-jupiter-engine-5.10.0.jar                     | org.junit.jupiter:junit-jupiter-engine:5.10.0                   | org.junit.platform:junit-platform-engine:1.10.0                      | OK
@@ -1078,6 +1090,7 @@ junit-jupiter-engine-5.10.0.jar                     | 8     | org.junit.jupiter.
 junit-jupiter-params-5.10.0.jar                     | 21    | org.junit.jupiter.params (+20 subpackages)                       |
 junit-platform-commons-1.10.0.jar                   | 6     | org.junit.platform.commons (+5 subpackages)                      |
 junit-platform-engine-1.10.0.jar                    | 9     | org.junit.platform.engine (+8 subpackages)                       |
+junit-platform-launcher-1.10.0.jar                  | 6     | org.junit.platform.launcher (+5 subpackages)                     |
 lambda-2.20.145.jar                                 | 10    | software.amazon.awssdk.services.lambda (+9 subpackages)          |
 metrics-spi-2.20.145.jar                            | 2     | software.amazon.awssdk.metrics (+1 subpackage)                   |
 netty-buffer-4.1.94.Final.jar                       | 2     | io.netty.buffer (+1 subpackage)                                  |
@@ -1163,6 +1176,137 @@ Compatibility issues between JAR files.
 
 JAR file                              | Issues
 --------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+junit-platform-launcher-1.10.0.jar    | org.junit.platform.launcher.EngineDiscoveryResult
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.EngineFilter
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.Launcher
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.LauncherConstants
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.LauncherDiscoveryListener
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.LauncherDiscoveryRequest
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.LauncherInterceptor
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.LauncherSession
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.LauncherSessionListener
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.PostDiscoveryFilter
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.TagFilter
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.TestExecutionListener
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.TestIdentifier
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.TestPlan
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.TestPlan$Visitor
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.core.EngineDiscoveryOrchestrator
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.core.EngineExecutionOrchestrator
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.core.LauncherConfig
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.core.LauncherConfig$Builder
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.core.LauncherDiscoveryResult
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.core.LauncherFactory
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.core.ServiceLoaderTestEngineRegistry
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.listeners.LegacyReportingUtils
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.listeners.LoggingListener
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.listeners.OutputDir
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.listeners.SummaryGeneratingListener
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.listeners.TestExecutionSummary
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.listeners.UniqueIdTrackingListener
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.listeners.discovery.LauncherDiscoveryListeners
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.listeners.session.LauncherSessionListeners
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.tagexpression.ParseResult
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
+                                      |
+                                      | org.junit.platform.launcher.tagexpression.TagExpression
+                                      | • Class not found: org.apiguardian.api.API$Status (package not found)
+                                      | • Annotation not found: org.apiguardian.api.API (package not found)
 junit-jupiter-params-5.10.0.jar       | org.junit.jupiter.params.ParameterizedTest
                                       | • Class not found: org.apiguardian.api.API$Status (package not found)
                                       | • Annotation not found: org.apiguardian.api.API (package not found)
@@ -3910,6 +4054,8 @@ Use of dangerous, unsafe, unstable, or deprecated classes and methods.
 
 JAR file                                            | Issues
 ----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+junit-platform-launcher-1.10.0.jar                  | org.junit.platform.launcher.core.LauncherConfigurationParameters$ParameterProvider$4
+                                                    | • @Deprecated: public abstract int org.junit.platform.engine.ConfigurationParameters.size()
 s3-2.20.145.jar                                     | software.amazon.awssdk.services.s3.DefaultS3AsyncClient
                                                     | • @Deprecated: public software.amazon.awssdk.awscore.eventstream.EventStreamAsyncResponseTransformer$Builder software.amazon.awssdk.awscore.eventstream.EventStreamAsyncResponseTransformer$Builder.executor(java.util.concurrent.Executor)
                                                     |
