@@ -5,11 +5,11 @@ plugins {
 
     // Gradle Versions Plugin
     // https://github.com/ben-manes/gradle-versions-plugin
-    id("com.github.ben-manes.versions") version "0.48.0"
+    id("com.github.ben-manes.versions") version "0.49.0"
 
     // Gradle Test Logger Plugin
     // https://github.com/radarsh/gradle-test-logger-plugin
-    id("com.adarshr.test-logger") version "3.2.0"
+    id("com.adarshr.test-logger") version "4.0.0"
 
     // JarHC Gradle plugin
     id("org.jarhc") version "1.0.1"
@@ -48,9 +48,9 @@ dependencies {
     // note: this is a tests-only project and all classes are in main source set
 
     // BOMs for version constraints
-    implementation(platform("org.junit:junit-bom:5.10.0"))
-    implementation(platform("software.amazon.awssdk:bom:2.20.158"))
-    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.561"))
+    implementation(platform("org.junit:junit-bom:5.10.1"))
+    implementation(platform("software.amazon.awssdk:bom:2.21.15"))
+    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.581"))
 
     // test libraries
     implementation("org.junit.jupiter:junit-jupiter")
@@ -69,7 +69,7 @@ dependencies {
 
     // helpers
     implementation("org.apache.httpcomponents:httpmime:4.5.14")
-    implementation("org.json:json:20230618")
+    implementation("org.json:json:20231013")
 
 }
 
