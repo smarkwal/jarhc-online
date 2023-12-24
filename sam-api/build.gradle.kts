@@ -3,7 +3,7 @@ plugins {
 
     // Gradle Versions Plugin
     // https://github.com/ben-manes/gradle-versions-plugin
-    id("com.github.ben-manes.versions") version "0.49.0"
+    id("com.github.ben-manes.versions") version "0.50.0"
 
     // Gradle Test Logger Plugin
     // https://github.com/radarsh/gradle-test-logger-plugin
