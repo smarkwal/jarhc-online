@@ -9,7 +9,7 @@ dependencies {
     api(platform("software.amazon.awssdk:bom:2.22.5"))
 
     // logging
-    api("org.slf4j:slf4j-api:2.0.9")
+    api("org.slf4j:slf4j-api:2.0.11")
 
     // AWS Lambda Java API
     api("com.amazonaws:aws-lambda-java-core:1.2.3")
