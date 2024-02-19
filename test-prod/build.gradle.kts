@@ -5,7 +5,7 @@ plugins {
 
     // Gradle Versions Plugin
     // https://github.com/ben-manes/gradle-versions-plugin
-    id("com.github.ben-manes.versions") version "0.50.0"
+    id("com.github.ben-manes.versions") version "0.51.0"
 
     // Gradle Test Logger Plugin
     // https://github.com/radarsh/gradle-test-logger-plugin
@@ -48,14 +48,14 @@ dependencies {
     // note: this is a tests-only project and all classes are in main source set
 
     // BOMs for version constraints
-    implementation(platform("org.junit:junit-bom:5.10.1"))
-    implementation(platform("software.amazon.awssdk:bom:2.22.5"))
-    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.625"))
+    implementation(platform("org.junit:junit-bom:5.10.2"))
+    implementation(platform("software.amazon.awssdk:bom:2.24.5"))
+    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.661"))
 
     // test libraries
     implementation("org.junit.jupiter:junit-jupiter")
     runtimeOnly("org.junit.platform:junit-platform-launcher")
-    implementation("org.assertj:assertj-core:3.24.2")
+    implementation("org.assertj:assertj-core:3.25.3")
     implementation("org.skyscreamer:jsonassert:1.5.1")
 
     // AWS SDK for S3, Lambda, and Cognito
@@ -64,12 +64,12 @@ dependencies {
     implementation("com.amazonaws:aws-java-sdk-cognitoidp")
 
     // logging
-    implementation("org.slf4j:slf4j-api:2.0.9")
-    implementation("org.slf4j:slf4j-simple:2.0.9")
+    implementation("org.slf4j:slf4j-api:2.0.12")
+    implementation("org.slf4j:slf4j-simple:2.0.12")
 
     // helpers
     implementation("org.apache.httpcomponents:httpmime:4.5.14")
-    implementation("org.json:json:20231013")
+    implementation("org.json:json:20240205")
 
 }
 
@@ -129,4 +129,16 @@ tasks {
         dependsOn(jarhcReport)
     }
 
+    dependencyUpdates {
+        rejectVersionIf {
+            isUnstableVersion(candidate)
+        }
+    }
+
+}
+
+fun isUnstableVersion(candidate: ModuleComponentIdentifier): Boolean {
+    return candidate.version.contains("-M") // ignore milestone version
+            || candidate.version.contains("-rc") // ignore release candidate versions
+            || candidate.version.contains("-alpha") // ignore alpha versions
 }

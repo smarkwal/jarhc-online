@@ -3,7 +3,7 @@ plugins {
 
     // Gradle Versions Plugin
     // https://github.com/ben-manes/gradle-versions-plugin
-    id("com.github.ben-manes.versions") version "0.50.0"
+    id("com.github.ben-manes.versions") version "0.51.0"
 
     // Gradle Test Logger Plugin
     // https://github.com/radarsh/gradle-test-logger-plugin
@@ -75,6 +75,18 @@ subprojects {
             dependsOn(jarhcReport)
         }
 
+        dependencyUpdates {
+            rejectVersionIf {
+                isUnstableVersion(candidate)
+            }
+        }
+
     }
 
+}
+
+fun isUnstableVersion(candidate: ModuleComponentIdentifier): Boolean {
+    return candidate.version.contains("-M") // ignore milestone version
+            || candidate.version.contains("-rc") // ignore release candidate versions
+            || candidate.version.contains("-alpha") // ignore alpha versions
 }
