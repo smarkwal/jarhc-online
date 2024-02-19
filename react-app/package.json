@@ -13,7 +13,10 @@
     "react-scripts": "5.0.1",
     "tough-cookie": "4.1.3",
     "webpack": "5.90.3",
-    "word-wrap": "1.2.5"
+    "word-wrap": "1.2.5",
+    "postcss": "8.4.35",
+    "follow-redirects": "1.15.5",
+    "@babel/traverse": "7.23.9"
   },
   "scripts": {
     "start": "react-scripts start",
