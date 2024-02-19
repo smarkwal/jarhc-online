@@ -27,7 +27,7 @@ jobs:
         fetch-depth: 0
 
     - name: Set up Node 18
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: 18
 
@@ -40,7 +40,7 @@ jobs:
       working-directory: react-app
 
     - name: Upload build
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: build
         path: react-app/build
