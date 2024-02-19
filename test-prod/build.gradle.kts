@@ -2,6 +2,7 @@ import java.util.*
 
 plugins {
     java
+    idea
 
     // Gradle Versions Plugin
     // https://github.com/ben-manes/gradle-versions-plugin
@@ -28,9 +29,18 @@ if (userPropertiesFile.exists()) {
 
 // Java version check ----------------------------------------------------------
 
-if (!JavaVersion.current().isJava11Compatible) {
-    val error = "Build requires Java 11 and does not run on Java ${JavaVersion.current().majorVersion}."
+if (!JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)) {
+    val error = "Build requires Java 17 and does not run on Java ${JavaVersion.current().majorVersion}."
     throw GradleException(error)
+}
+
+// special settings for IntelliJ IDEA
+idea {
+    project {
+        jdkName = "17"
+        languageLevel = org.gradle.plugins.ide.idea.model.IdeaLanguageLevel(JavaVersion.VERSION_11)
+        vcs = "Git"
+    }
 }
 
 java {
