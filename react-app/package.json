@@ -16,7 +16,7 @@
     "word-wrap": "1.2.5",
     "postcss": "8.4.35",
     "follow-redirects": "1.15.5",
-    "@babel/traverse": "7.23.9"
+    "@babel/traverse": "7.24.0"
   },
   "scripts": {
     "start": "react-scripts start",
