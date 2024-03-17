@@ -15,7 +15,7 @@
     "webpack": "5.90.3",
     "word-wrap": "1.2.5",
     "postcss": "8.4.35",
-    "follow-redirects": "1.15.5",
+    "follow-redirects": "1.15.6",
     "@babel/traverse": "7.23.9"
   },
   "scripts": {
