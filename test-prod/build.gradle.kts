@@ -79,7 +79,7 @@ dependencies {
 
     // helpers
     implementation("org.apache.httpcomponents:httpmime:4.5.14")
-    implementation("org.json:json:20240205")
+    implementation("org.json:json:20240303")
 
 }
 
