@@ -25,7 +25,7 @@ dependencies {
         exclude("software.amazon.awssdk", "netty-nio-client")
     }
     api("software.amazon.awssdk:url-connection-client")
-    api("com.amazonaws:aws-xray-recorder-sdk-core:2.15.1")
+    api("com.amazonaws:aws-xray-recorder-sdk-core:2.15.2")
 
     // test dependencies -------------------------------------
 
