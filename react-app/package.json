@@ -18,7 +18,7 @@
     "follow-redirects": "1.15.6",
     "@babel/traverse": "7.24.1",
     "express": "4.19.2",
-    "webpack-dev-middleware": "5.3.4"
+    "webpack-dev-middleware": "7.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
