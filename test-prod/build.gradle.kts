@@ -59,8 +59,8 @@ dependencies {
 
     // BOMs for version constraints
     implementation(platform("org.junit:junit-bom:5.10.2"))
-    implementation(platform("software.amazon.awssdk:bom:2.24.5"))
-    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.661"))
+    implementation(platform("software.amazon.awssdk:bom:2.25.23"))
+    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.693"))
 
     // test libraries
     implementation("org.junit.jupiter:junit-jupiter")
@@ -79,7 +79,7 @@ dependencies {
 
     // helpers
     implementation("org.apache.httpcomponents:httpmime:4.5.14")
-    implementation("org.json:json:20240205")
+    implementation("org.json:json:20240303")
 
 }
 
