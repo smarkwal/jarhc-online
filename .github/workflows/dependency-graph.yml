@@ -37,3 +37,4 @@ jobs:
       uses: gradle/actions/dependency-submission@v3
       with:
         dependency-graph: ${{ github.event.inputs.dependencyGraphAction }}
+        build-root-directory: sam-api
