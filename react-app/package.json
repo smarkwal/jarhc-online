@@ -16,7 +16,7 @@
     "word-wrap": "1.2.5",
     "postcss": "8.4.38",
     "follow-redirects": "1.15.6",
-    "@babel/traverse": "7.24.1",
+    "@babel/traverse": "7.24.5",
     "express": "4.19.2",
     "webpack-dev-middleware": "5.3.4"
   },
