@@ -33,5 +33,5 @@ dependencies {
     testFixturesRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testFixturesApi("org.mockito:mockito-core:5.11.0")
     testFixturesApi("org.mockito:mockito-junit-jupiter:5.11.0")
-    testFixturesApi("org.assertj:assertj-core:3.25.3")
+    testFixturesApi("org.assertj:assertj-core:3.26.0")
 }
