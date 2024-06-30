@@ -9,16 +9,8 @@
     "react-router-dom": "6.24.0"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "7.21.11",
     "react-scripts": "5.0.1",
-    "tough-cookie": "4.1.4",
-    "webpack": "5.92.1",
-    "word-wrap": "1.2.5",
-    "postcss": "8.4.39",
-    "follow-redirects": "1.15.6",
-    "@babel/traverse": "7.24.7",
-    "express": "4.19.2",
-    "webpack-dev-middleware": "7.2.1"
+    "@babel/plugin-proposal-private-property-in-object": "7.21.11"
   },
   "scripts": {
     "start": "react-scripts start",
