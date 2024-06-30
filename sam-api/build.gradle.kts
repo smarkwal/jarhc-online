@@ -11,7 +11,7 @@ plugins {
     id("com.adarshr.test-logger") version "4.0.0"
 
     // JarHC Gradle plugin
-    id("org.jarhc") version "1.0.1"
+    id("org.jarhc") version "1.1.0"
 }
 
 // Java version check ----------------------------------------------------------
@@ -31,9 +31,18 @@ idea {
 }
 
 tasks {
+
     clean {
         delete(".aws-sam")
     }
+
+    dependencyUpdates {
+        gradleReleaseChannel = "current"
+        rejectVersionIf {
+            isUnstableVersion(candidate)
+        }
+    }
+
 }
 
 subprojects {
@@ -93,6 +102,7 @@ subprojects {
         }
 
         dependencyUpdates {
+            gradleReleaseChannel = "current"
             rejectVersionIf {
                 isUnstableVersion(candidate)
             }

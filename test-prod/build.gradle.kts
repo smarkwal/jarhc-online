@@ -13,7 +13,7 @@ plugins {
     id("com.adarshr.test-logger") version "4.0.0"
 
     // JarHC Gradle plugin
-    id("org.jarhc") version "1.0.1"
+    id("org.jarhc") version "1.1.0"
 }
 
 // load user-specific properties -----------------------------------------------
@@ -58,15 +58,15 @@ dependencies {
     // note: this is a tests-only project and all classes are in main source set
 
     // BOMs for version constraints
-    implementation(platform("org.junit:junit-bom:5.10.2"))
-    implementation(platform("software.amazon.awssdk:bom:2.25.23"))
-    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.693"))
+    implementation(platform("org.junit:junit-bom:5.10.3"))
+    implementation(platform("software.amazon.awssdk:bom:2.26.12"))
+    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.753"))
 
     // test libraries
     implementation("org.junit.jupiter:junit-jupiter")
     runtimeOnly("org.junit.platform:junit-platform-launcher")
-    implementation("org.assertj:assertj-core:3.25.3")
-    implementation("org.skyscreamer:jsonassert:1.5.1")
+    implementation("org.assertj:assertj-core:3.26.0")
+    implementation("org.skyscreamer:jsonassert:1.5.3")
 
     // AWS SDK for S3, Lambda, and Cognito
     implementation("software.amazon.awssdk:s3")
@@ -74,8 +74,8 @@ dependencies {
     implementation("com.amazonaws:aws-java-sdk-cognitoidp")
 
     // logging
-    implementation("org.slf4j:slf4j-api:2.0.12")
-    implementation("org.slf4j:slf4j-simple:2.0.12")
+    implementation("org.slf4j:slf4j-api:2.0.13")
+    implementation("org.slf4j:slf4j-simple:2.0.13")
 
     // helpers
     implementation("org.apache.httpcomponents:httpmime:4.5.14")
@@ -140,6 +140,7 @@ tasks {
     }
 
     dependencyUpdates {
+        gradleReleaseChannel = "current"
         rejectVersionIf {
             isUnstableVersion(candidate)
         }
