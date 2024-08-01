@@ -74,7 +74,7 @@ dependencies {
     // test libraries
     implementation("org.junit.jupiter:junit-jupiter")
     runtimeOnly("org.junit.platform:junit-platform-launcher")
-    implementation("org.assertj:assertj-core:3.26.0")
+    implementation("org.assertj:assertj-core:3.26.3")
     implementation("org.skyscreamer:jsonassert:1.5.3")
 
     // AWS SDK for S3, Lambda, and Cognito
