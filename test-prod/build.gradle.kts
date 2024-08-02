@@ -71,6 +71,10 @@ dependencies {
     implementation(platform("software.amazon.awssdk:bom:2.26.28"))
     implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.767"))
 
+    // FasterXML Jackson (transitive dependency of AWS SDK)
+    // Fix CVE-2022-42003 and CVE-2022-42004 in Jackson Databind < 2.13.4.1
+    implementation(platform("com.fasterxml.jackson:jackson-bom:2.17.2"))
+
     // test libraries
     implementation("org.junit.jupiter:junit-jupiter")
     runtimeOnly("org.junit.platform:junit-platform-launcher")

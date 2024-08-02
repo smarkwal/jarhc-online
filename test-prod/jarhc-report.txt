@@ -7,7 +7,7 @@ List of JAR files found in classpath.
 
 JAR file                                             | Size    | Classes | Resources | Checksum (SHA-1)                         | Artifact coordinates
 -----------------------------------------------------+---------+---------+-----------+------------------------------------------+----------------------------------------------------------------
-test-prod-1.0.0-SNAPSHOT.jar                         | 31.7 KB | 17      | 0         | 274b48f7bdb2bc6ca0567554f4faca7ff430e9cc | [unknown]
+test-prod-1.0.0-SNAPSHOT.jar                         | 31.7 KB | 17      | 0         | 79e3e3db59356ce005ee311a1c023f3e17bbc96f | [unknown]
 junit-jupiter-5.10.3.jar                             | 6.21 KB | 0       | 0         | 6686d8fbf251f9bf8ecba413cab57b9e00f9134d | org.junit.jupiter:junit-jupiter:5.10.3
 junit-platform-launcher-1.10.3.jar                   | 180 KB  | 115     | 0         | 2e07e6389624f3e93fb2e87aec2fdc30cc84b069 | org.junit.platform:junit-platform-launcher:1.10.3
 junit-jupiter-params-5.10.3.jar                      | 572 KB  | 346     | 0         | 4852f4e4af9074d9214213b199751f99efeab8b9 | org.junit.jupiter:junit-jupiter-params:5.10.3
@@ -15,11 +15,17 @@ junit-jupiter-engine-5.10.3.jar                      | 239 KB  | 129     | 0    
 junit-jupiter-api-5.10.3.jar                         | 206 KB  | 182     | 0         | a22aa91d1d6c69b2020a9aeb6d095ea81132bfa5 | org.junit.jupiter:junit-jupiter-api:5.10.3
 junit-platform-engine-1.10.3.jar                     | 200 KB  | 135     | 0         | 365a320c3cfd47f3346625e541e424e35dc75c42 | org.junit.platform:junit-platform-engine:1.10.3
 junit-platform-commons-1.10.3.jar                    | 104 KB  | 43      | 0         | a353d42a2f13343a7cb80c5228ae66ff64495481 | org.junit.platform:junit-platform-commons:1.10.3
+aws-java-sdk-cognitoidp-1.12.767.jar                 | 1.50 MB | 956     | 0         | 81218dbfa9bc8e762b168873951feb69e4165926 | com.amazonaws:aws-java-sdk-cognitoidp:1.12.767
+aws-java-sdk-core-1.12.767.jar                       | 1.00 MB | 862     | 3         | 0c4fc14c8dadc52c7a313b87c31bd1994af516df | com.amazonaws:aws-java-sdk-core:1.12.767
+jmespath-java-1.12.767.jar                           | 26.9 KB | 29      | 0         | 738e1d9b693b6c842cb1c8c50258ecd1675c8a12 | com.amazonaws:jmespath-java:1.12.767
+jackson-dataformat-cbor-2.17.2.jar                   | 68.7 KB | 17      | 0         | 57fa7c1b5104bbc4599278d13933a937ee058e68 | com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.17.2
+jackson-databind-2.17.2.jar                          | 1.57 MB | 764     | 0         | e6deb029e5901e027c129341fac39e515066b68c | com.fasterxml.jackson.core:jackson-databind:2.17.2
+jackson-annotations-2.17.2.jar                       | 76.7 KB | 72      | 0         | 147b7b9412ffff24339f8aba080b292448e08698 | com.fasterxml.jackson.core:jackson-annotations:2.17.2
+jackson-core-2.17.2.jar                              | 568 KB  | 199     | 0         | 969a35cb35c86512acbadcdbbbfb044c877db814 | com.fasterxml.jackson.core:jackson-core:2.17.2
 assertj-core-3.26.3.jar                              | 1.33 MB | 839     | 1         | 0d26263eb7524252d98e602fc6942996a3195e29 | org.assertj:assertj-core:3.26.3
 jsonassert-1.5.3.jar                                 | 30.3 KB | 20      | 0         | aaa43e0823d2a0e106e8754d6a9c4ab24e05e9bc | org.skyscreamer:jsonassert:1.5.3
 s3-2.26.28.jar                                       | 3.42 MB | 2077    | 1         | cd1c04d661338a92aca21b966eadca1a646f53bc | software.amazon.awssdk:s3:2.26.28
 lambda-2.26.28.jar                                   | 2.17 MB | 1282    | 0         | f38676aecd1d1abe6588e3e4aefca225ace68a1e | software.amazon.awssdk:lambda:2.26.28
-aws-java-sdk-cognitoidp-1.12.767.jar                 | 1.50 MB | 956     | 0         | 81218dbfa9bc8e762b168873951feb69e4165926 | com.amazonaws:aws-java-sdk-cognitoidp:1.12.767
 slf4j-simple-2.0.13.jar                              | 15.3 KB | 6       | 0         | be11a3f05f7cf546524b07ad252719d840f4daed | org.slf4j:slf4j-simple:2.0.13
 aws-json-protocol-2.26.28.jar                        | 112 KB  | 86      | 0         | d61b428b5c525dfd974fc90db88e358beb333494 | software.amazon.awssdk:aws-json-protocol:2.26.28
 aws-xml-protocol-2.26.28.jar                         | 99.1 KB | 63      | 0         | 25735faa53d5498b63724d6b2606dc68711d54f1 | software.amazon.awssdk:aws-xml-protocol:2.26.28
@@ -53,8 +59,6 @@ checksums-spi-2.26.28.jar                            | 7.86 KB | 1       | 0    
 http-auth-aws-eventstream-2.26.28.jar                | 8.50 KB | 1       | 0         | dc5ac5cb8e01404ac679b892c6d60b99e6829243 | software.amazon.awssdk:http-auth-aws-eventstream:2.26.28
 annotations-2.26.28.jar                              | 13.4 KB | 13      | 0         | 7ba8ce8795c429a241ad75e7d69b0a14e0367c9c | software.amazon.awssdk:annotations:2.26.28
 third-party-jackson-core-2.26.28.jar                 | 522 KB  | 174     | 0         | 58e10b26032b3562c21c8ec0eda002f8914595ff | software.amazon.awssdk:third-party-jackson-core:2.26.28
-jmespath-java-1.12.767.jar                           | 26.9 KB | 29      | 0         | 738e1d9b693b6c842cb1c8c50258ecd1675c8a12 | com.amazonaws:jmespath-java:1.12.767
-aws-java-sdk-core-1.12.767.jar                       | 1.00 MB | 862     | 3         | 0c4fc14c8dadc52c7a313b87c31bd1994af516df | com.amazonaws:aws-java-sdk-core:1.12.767
 byte-buddy-1.14.18.jar                               | 4.02 MB | 2845    | 0         | 0081e9b9a20944626e6757b5950676af901c2485 | net.bytebuddy:byte-buddy:1.14.18
 android-json-0.0.20131108.vaadin1.jar                | 17.9 KB | 8       | 0         | fa26d351fe62a6a17f5cda1287c1c6110dec413f | com.vaadin.external.google:android-json:0.0.20131108.vaadin1
 httpclient-4.5.14.jar                                | 767 KB  | 470     | 2         | 1194890e6f56ec29177673f2f12d0b8e627dec98 | org.apache.httpcomponents:httpclient:4.5.14
@@ -74,12 +78,8 @@ netty-transport-4.1.111.Final.jar                    | 506 KB  | 384     | 0    
 netty-buffer-4.1.111.Final.jar                       | 329 KB  | 155     | 0         | b54863f578939e135d3b3aea610284ae57c188cf | io.netty:netty-buffer:4.1.111.Final
 netty-resolver-4.1.111.Final.jar                     | 37.0 KB | 29      | 0         | 3493179999f211dc49714319f81da2be86523a3b | io.netty:netty-resolver:4.1.111.Final
 netty-common-4.1.111.Final.jar                       | 678 KB  | 509     | 0         | 58210befcb31adbcadd5724966a061444db91863 | io.netty:netty-common:4.1.111.Final
-jackson-annotations-2.12.7.jar                       | 73.9 KB | 71      | 0         | 2042461b754cd65ab2dd74a9f19f442b54625f19 | com.fasterxml.jackson.core:jackson-annotations:2.12.7
-jackson-dataformat-cbor-2.12.7.jar                   | 60.1 KB | 14      | 0         | 15177b3e1c91529ba02c056035d71463f9e66a03 | com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.12.7
-jackson-core-2.12.7.jar                              | 357 KB  | 124     | 0         | 04669a54b799c105572aa8de2a1ae0fe64a17745 | com.fasterxml.jackson.core:jackson-core:2.12.7
-jackson-databind-2.12.7.2.jar                        | 1.45 MB | 700     | 0         | 93f380701400ae503ad0ac3e174e22ec7f1d789a | com.fasterxml.jackson.core:jackson-databind:2.12.7.2
 joda-time-2.12.7.jar                                 | 623 KB  | 247     | 492       | d015b997eccd511e5567218a51651ff0625f6f25 | joda-time:joda-time:2.12.7
-Classpath                                            | 27.1 MB | 16982   | 635       | -                                        | -
+Classpath                                            | 27.4 MB | 17125   | 635       | -                                        | -
 
 Modules
 -------
@@ -129,6 +129,46 @@ junit-platform-commons-1.10.3.jar                    | org.junit.platform.common
                                                      |                                                  |                |           | java.base                        | org.junit.platform.commons.logging
                                                      |                                                  |                |           |                                  | org.junit.platform.commons.support
                                                      |                                                  |                |           |                                  | org.junit.platform.commons.util
+aws-java-sdk-cognitoidp-1.12.767.jar                 | aws.java.sdk.cognitoidp                          | Auto-generated | Yes       | -                                | [all packages]
+aws-java-sdk-core-1.12.767.jar                       | aws.java.sdk.core                                | Auto-generated | Yes       | -                                | [all packages]
+jmespath-java-1.12.767.jar                           | jmespath.java                                    | Auto-generated | Yes       | -                                | [all packages]
+jackson-dataformat-cbor-2.17.2.jar                   | com.fasterxml.jackson.dataformat.cbor            | Module-Info    | No        | com.fasterxml.jackson.core       | com.fasterxml.jackson.dataformat.cbor
+                                                     |                                                  |                |           | com.fasterxml.jackson.databind   | com.fasterxml.jackson.dataformat.cbor.databind
+                                                     |                                                  |                |           | java.base                        |
+jackson-databind-2.17.2.jar                          | com.fasterxml.jackson.databind                   | Module-Info    | No        | com.fasterxml.jackson.annotation | com.fasterxml.jackson.databind
+                                                     |                                                  |                |           | com.fasterxml.jackson.core       | com.fasterxml.jackson.databind.annotation
+                                                     |                                                  |                |           | java.desktop                     | com.fasterxml.jackson.databind.cfg
+                                                     |                                                  |                |           | java.logging                     | com.fasterxml.jackson.databind.deser
+                                                     |                                                  |                |           | java.sql                         | com.fasterxml.jackson.databind.deser.impl
+                                                     |                                                  |                |           | java.xml                         | com.fasterxml.jackson.databind.deser.std
+                                                     |                                                  |                |           | java.base                        | com.fasterxml.jackson.databind.exc
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.ext
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.introspect
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.json
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.jsonFormatVisitors
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.jsonschema
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.jsontype
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.jsontype.impl
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.module
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.node
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.ser
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.ser.impl
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.ser.std
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.type
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.util
+jackson-annotations-2.17.2.jar                       | com.fasterxml.jackson.annotation                 | Module-Info    | No        | java.base                        | com.fasterxml.jackson.annotation
+jackson-core-2.17.2.jar                              | com.fasterxml.jackson.core                       | Module-Info    | No        | java.base                        | com.fasterxml.jackson.core
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.async
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.base
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.exc
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.filter
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.format
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.io
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.json
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.json.async
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.sym
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.type
+                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.util
 assertj-core-3.26.3.jar                              | org.assertj.core                                 | Module-Info    | No        | junit                            | org.assertj.core.annotations
                                                      |                                                  |                |           | net.bytebuddy                    | org.assertj.core.api
                                                      |                                                  |                |           | org.hamcrest                     | org.assertj.core.api.exception
@@ -155,7 +195,6 @@ assertj-core-3.26.3.jar                              | org.assertj.core         
 jsonassert-1.5.3.jar                                 | jsonassert                                       | Auto-generated | Yes       | -                                | [all packages]
 s3-2.26.28.jar                                       | software.amazon.awssdk.services.s3               | Manifest       | Yes       | -                                | [all packages]
 lambda-2.26.28.jar                                   | software.amazon.awssdk.services.lambda           | Manifest       | Yes       | -                                | [all packages]
-aws-java-sdk-cognitoidp-1.12.767.jar                 | aws.java.sdk.cognitoidp                          | Auto-generated | Yes       | -                                | [all packages]
 slf4j-simple-2.0.13.jar                              | org.slf4j.simple                                 | Module-Info    | No        | org.slf4j                        | org.slf4j.simple
                                                      |                                                  |                |           | java.base                        |
 aws-json-protocol-2.26.28.jar                        | software.amazon.awssdk.protocols.json            | Manifest       | Yes       | -                                | [all packages]
@@ -193,8 +232,6 @@ checksums-spi-2.26.28.jar                            | software.amazon.awssdk.ch
 http-auth-aws-eventstream-2.26.28.jar                | software.amazon.awssdk.http.auth.aws.eventstream | Manifest       | Yes       | -                                | [all packages]
 annotations-2.26.28.jar                              | software.amazon.awssdk.annotations               | Manifest       | Yes       | -                                | [all packages]
 third-party-jackson-core-2.26.28.jar                 | software.amazon.awssdk.thirdparty.jackson.core   | Manifest       | Yes       | -                                | [all packages]
-jmespath-java-1.12.767.jar                           | jmespath.java                                    | Auto-generated | Yes       | -                                | [all packages]
-aws-java-sdk-core-1.12.767.jar                       | aws.java.sdk.core                                | Auto-generated | Yes       | -                                | [all packages]
 byte-buddy-1.14.18.jar                               | net.bytebuddy                                    | Module-Info    | No        | com.sun.jna                      | net.bytebuddy
                                                      |                                                  |                |           | com.sun.jna.platform             | net.bytebuddy.agent.builder
                                                      |                                                  |                |           | net.bytebuddy.agent              | net.bytebuddy.asm
@@ -256,125 +293,88 @@ netty-transport-4.1.111.Final.jar                    | io.netty.transport       
 netty-buffer-4.1.111.Final.jar                       | io.netty.buffer                                  | Manifest       | Yes       | -                                | [all packages]
 netty-resolver-4.1.111.Final.jar                     | io.netty.resolver                                | Manifest       | Yes       | -                                | [all packages]
 netty-common-4.1.111.Final.jar                       | io.netty.common                                  | Manifest       | Yes       | -                                | [all packages]
-jackson-annotations-2.12.7.jar                       | com.fasterxml.jackson.annotation                 | Module-Info    | No        | java.base                        | com.fasterxml.jackson.annotation
-jackson-dataformat-cbor-2.12.7.jar                   | com.fasterxml.jackson.dataformat.cbor            | Module-Info    | No        | com.fasterxml.jackson.core       | com.fasterxml.jackson.dataformat.cbor
-                                                     |                                                  |                |           | com.fasterxml.jackson.databind   | com.fasterxml.jackson.dataformat.cbor.databind
-                                                     |                                                  |                |           | java.base                        |
-jackson-core-2.12.7.jar                              | com.fasterxml.jackson.core                       | Module-Info    | No        | java.base                        | com.fasterxml.jackson.core
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.async
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.base
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.exc
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.filter
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.format
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.io
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.json
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.json.async
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.sym
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.type
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.core.util
-jackson-databind-2.12.7.2.jar                        | com.fasterxml.jackson.databind                   | Module-Info    | No        | com.fasterxml.jackson.annotation | com.fasterxml.jackson.databind
-                                                     |                                                  |                |           | com.fasterxml.jackson.core       | com.fasterxml.jackson.databind.annotation
-                                                     |                                                  |                |           | java.desktop                     | com.fasterxml.jackson.databind.cfg
-                                                     |                                                  |                |           | java.sql                         | com.fasterxml.jackson.databind.deser
-                                                     |                                                  |                |           | java.xml                         | com.fasterxml.jackson.databind.deser.impl
-                                                     |                                                  |                |           | java.base                        | com.fasterxml.jackson.databind.deser.std
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.exc
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.ext
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.introspect
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.json
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.jsonFormatVisitors
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.jsonschema
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.jsontype
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.jsontype.impl
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.module
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.node
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.ser
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.ser.impl
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.ser.std
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.type
-                                                     |                                                  |                |           |                                  | com.fasterxml.jackson.databind.util
 joda-time-2.12.7.jar                                 | org.joda.time                                    | Manifest       | Yes       | -                                | [all packages]
 
 Class Versions
 --------------
 Java class file format information.
 
-JAR file                                             | Multi-release | Class files by Java version
------------------------------------------------------+---------------+--------------------------------------------------------
-test-prod-1.0.0-SNAPSHOT.jar                         | No            | Java 11 (17)
-junit-jupiter-5.10.3.jar                             | No            | [no class files]
-junit-platform-launcher-1.10.3.jar                   | No            | Java 8 (115)
-junit-jupiter-params-5.10.3.jar                      | No            | Java 8 (73), Java 6 (273)
-junit-jupiter-engine-5.10.3.jar                      | No            | Java 8 (129)
-junit-jupiter-api-5.10.3.jar                         | No            | Java 8 (182)
-junit-platform-engine-1.10.3.jar                     | No            | Java 8 (135)
-junit-platform-commons-1.10.3.jar                    | Yes (Java 9)  | Java 9 (2), Java 8 (41)
-assertj-core-3.26.3.jar                              | Yes (Java 9)  | Java 8 (839)
-jsonassert-1.5.3.jar                                 | No            | Java 8 (20)
-s3-2.26.28.jar                                       | No            | Java 8 (2077)
-lambda-2.26.28.jar                                   | No            | Java 8 (1282)
-aws-java-sdk-cognitoidp-1.12.767.jar                 | No            | Java 7 (956)
-slf4j-simple-2.0.13.jar                              | Yes (Java 9)  | Java 8 (6)
-aws-json-protocol-2.26.28.jar                        | No            | Java 8 (86)
-aws-xml-protocol-2.26.28.jar                         | No            | Java 8 (63)
-aws-query-protocol-2.26.28.jar                       | No            | Java 8 (45)
-protocol-core-2.26.28.jar                            | No            | Java 8 (27)
-aws-core-2.26.28.jar                                 | No            | Java 8 (117)
-auth-2.26.28.jar                                     | No            | Java 8 (150)
-regions-2.26.28.jar                                  | No            | Java 8 (422)
-sdk-core-2.26.28.jar                                 | No            | Java 8 (643)
-http-auth-aws-2.26.28.jar                            | No            | Java 8 (104)
-http-auth-2.26.28.jar                                | No            | Java 8 (10)
-http-auth-spi-2.26.28.jar                            | No            | Java 8 (40)
-identity-spi-2.26.28.jar                             | No            | Java 8 (25)
-apache-client-2.26.28.jar                            | No            | Java 8 (43)
-netty-nio-client-2.26.28.jar                         | No            | Java 8 (164)
-http-client-spi-2.26.28.jar                          | No            | Java 8 (72)
-metrics-spi-2.26.28.jar                              | No            | Java 8 (16)
-json-utils-2.26.28.jar                               | No            | Java 8 (17)
-retries-2.26.28.jar                                  | No            | Java 8 (47)
-retries-spi-2.26.28.jar                              | No            | Java 8 (27)
-crt-core-2.26.28.jar                                 | No            | Java 8 (7)
-arns-2.26.28.jar                                     | No            | Java 8 (8)
-profiles-2.26.28.jar                                 | No            | Java 8 (27)
-utils-2.26.28.jar                                    | No            | Java 8 (146)
-slf4j-api-2.0.13.jar                                 | Yes (Java 9)  | Java 8 (54)
-httpmime-4.5.14.jar                                  | No            | Java 6 (23)
-json-20240303.jar                                    | Yes (Java 9)  | Java 8 (30)
-endpoints-spi-2.26.28.jar                            | No            | Java 8 (6)
-checksums-2.26.28.jar                                | No            | Java 8 (2)
-checksums-spi-2.26.28.jar                            | No            | Java 8 (1)
-http-auth-aws-eventstream-2.26.28.jar                | No            | Java 8 (1)
-annotations-2.26.28.jar                              | No            | Java 8 (13)
-third-party-jackson-core-2.26.28.jar                 | No            | Java 8 (174)
-jmespath-java-1.12.767.jar                           | No            | Java 7 (29)
-aws-java-sdk-core-1.12.767.jar                       | No            | Java 7 (862)
-byte-buddy-1.14.18.jar                               | Yes (Java 9)  | Java 6 (9), Java 5 (2836)
-android-json-0.0.20131108.vaadin1.jar                | No            | Java 5 (8)
-httpclient-4.5.14.jar                                | No            | Java 6 (470)
-httpcore-4.4.16.jar                                  | No            | Java 6 (253)
-commons-logging-1.2.jar                              | No            | Java 1.2 (28)
-commons-codec-1.17.1.jar                             | Yes (Java 9)  | Java 8 (107)
-opentest4j-1.3.0.jar                                 | No            | Java 6 (8)
-reactive-streams-1.0.4.jar                           | No            | Java 6 (13)
-eventstream-1.0.1.jar                                | No            | Java 8 (19)
-netty-codec-http2-4.1.111.Final.jar                  | No            | Java 6 (281)
-netty-codec-http-4.1.111.Final.jar                   | No            | Java 6 (391)
-netty-handler-4.1.111.Final.jar                      | No            | Java 6 (360)
-netty-codec-4.1.111.Final.jar                        | No            | Java 6 (219)
-netty-transport-classes-epoll-4.1.111.Final.jar      | No            | Java 6 (67)
-netty-transport-native-unix-common-4.1.111.Final.jar | No            | Java 6 (32)
-netty-transport-4.1.111.Final.jar                    | No            | Java 6 (384)
-netty-buffer-4.1.111.Final.jar                       | No            | Java 6 (155)
-netty-resolver-4.1.111.Final.jar                     | No            | Java 6 (29)
-netty-common-4.1.111.Final.jar                       | No            | Java 6 (509)
-jackson-annotations-2.12.7.jar                       | No            | Java 6 (71)
-jackson-dataformat-cbor-2.12.7.jar                   | No            | Java 7 (14)
-jackson-core-2.12.7.jar                              | No            | Java 6 (124)
-jackson-databind-2.12.7.2.jar                        | No            | Java 7 (700)
-joda-time-2.12.7.jar                                 | No            | Java 5 (247)
-Classpath                                            | -             | Java 11 (17), Java 9 (2), Java 8 (7612), Java 7 (2561),
-                                                     |               | Java 6 (3671), Java 5 (3091), Java 1.2 (28)
+JAR file                                             | Multi-release                           | Class files by Java version
+-----------------------------------------------------+-----------------------------------------+-----------------------------------------------------------
+test-prod-1.0.0-SNAPSHOT.jar                         | No                                      | Java 11 (17)
+junit-jupiter-5.10.3.jar                             | No                                      | [no class files]
+junit-platform-launcher-1.10.3.jar                   | No                                      | Java 8 (115)
+junit-jupiter-params-5.10.3.jar                      | No                                      | Java 8 (73), Java 6 (273)
+junit-jupiter-engine-5.10.3.jar                      | No                                      | Java 8 (129)
+junit-jupiter-api-5.10.3.jar                         | No                                      | Java 8 (182)
+junit-platform-engine-1.10.3.jar                     | No                                      | Java 8 (135)
+junit-platform-commons-1.10.3.jar                    | Yes (Java 9)                            | Java 9 (2), Java 8 (41)
+aws-java-sdk-cognitoidp-1.12.767.jar                 | No                                      | Java 7 (956)
+aws-java-sdk-core-1.12.767.jar                       | No                                      | Java 7 (862)
+jmespath-java-1.12.767.jar                           | No                                      | Java 7 (29)
+jackson-dataformat-cbor-2.17.2.jar                   | Yes (Java 9)                            | Java 8 (17)
+jackson-databind-2.17.2.jar                          | Yes (Java 9)                            | Java 8 (764)
+jackson-annotations-2.17.2.jar                       | No                                      | Java 6 (72)
+jackson-core-2.17.2.jar                              | Yes (Java 9, Java 11, Java 17, Java 21) | Java 17 (2), Java 11 (1), Java 8 (196)
+assertj-core-3.26.3.jar                              | Yes (Java 9)                            | Java 8 (839)
+jsonassert-1.5.3.jar                                 | No                                      | Java 8 (20)
+s3-2.26.28.jar                                       | No                                      | Java 8 (2077)
+lambda-2.26.28.jar                                   | No                                      | Java 8 (1282)
+slf4j-simple-2.0.13.jar                              | Yes (Java 9)                            | Java 8 (6)
+aws-json-protocol-2.26.28.jar                        | No                                      | Java 8 (86)
+aws-xml-protocol-2.26.28.jar                         | No                                      | Java 8 (63)
+aws-query-protocol-2.26.28.jar                       | No                                      | Java 8 (45)
+protocol-core-2.26.28.jar                            | No                                      | Java 8 (27)
+aws-core-2.26.28.jar                                 | No                                      | Java 8 (117)
+auth-2.26.28.jar                                     | No                                      | Java 8 (150)
+regions-2.26.28.jar                                  | No                                      | Java 8 (422)
+sdk-core-2.26.28.jar                                 | No                                      | Java 8 (643)
+http-auth-aws-2.26.28.jar                            | No                                      | Java 8 (104)
+http-auth-2.26.28.jar                                | No                                      | Java 8 (10)
+http-auth-spi-2.26.28.jar                            | No                                      | Java 8 (40)
+identity-spi-2.26.28.jar                             | No                                      | Java 8 (25)
+apache-client-2.26.28.jar                            | No                                      | Java 8 (43)
+netty-nio-client-2.26.28.jar                         | No                                      | Java 8 (164)
+http-client-spi-2.26.28.jar                          | No                                      | Java 8 (72)
+metrics-spi-2.26.28.jar                              | No                                      | Java 8 (16)
+json-utils-2.26.28.jar                               | No                                      | Java 8 (17)
+retries-2.26.28.jar                                  | No                                      | Java 8 (47)
+retries-spi-2.26.28.jar                              | No                                      | Java 8 (27)
+crt-core-2.26.28.jar                                 | No                                      | Java 8 (7)
+arns-2.26.28.jar                                     | No                                      | Java 8 (8)
+profiles-2.26.28.jar                                 | No                                      | Java 8 (27)
+utils-2.26.28.jar                                    | No                                      | Java 8 (146)
+slf4j-api-2.0.13.jar                                 | Yes (Java 9)                            | Java 8 (54)
+httpmime-4.5.14.jar                                  | No                                      | Java 6 (23)
+json-20240303.jar                                    | Yes (Java 9)                            | Java 8 (30)
+endpoints-spi-2.26.28.jar                            | No                                      | Java 8 (6)
+checksums-2.26.28.jar                                | No                                      | Java 8 (2)
+checksums-spi-2.26.28.jar                            | No                                      | Java 8 (1)
+http-auth-aws-eventstream-2.26.28.jar                | No                                      | Java 8 (1)
+annotations-2.26.28.jar                              | No                                      | Java 8 (13)
+third-party-jackson-core-2.26.28.jar                 | No                                      | Java 8 (174)
+byte-buddy-1.14.18.jar                               | Yes (Java 9)                            | Java 6 (9), Java 5 (2836)
+android-json-0.0.20131108.vaadin1.jar                | No                                      | Java 5 (8)
+httpclient-4.5.14.jar                                | No                                      | Java 6 (470)
+httpcore-4.4.16.jar                                  | No                                      | Java 6 (253)
+commons-logging-1.2.jar                              | No                                      | Java 1.2 (28)
+commons-codec-1.17.1.jar                             | Yes (Java 9)                            | Java 8 (107)
+opentest4j-1.3.0.jar                                 | No                                      | Java 6 (8)
+reactive-streams-1.0.4.jar                           | No                                      | Java 6 (13)
+eventstream-1.0.1.jar                                | No                                      | Java 8 (19)
+netty-codec-http2-4.1.111.Final.jar                  | No                                      | Java 6 (281)
+netty-codec-http-4.1.111.Final.jar                   | No                                      | Java 6 (391)
+netty-handler-4.1.111.Final.jar                      | No                                      | Java 6 (360)
+netty-codec-4.1.111.Final.jar                        | No                                      | Java 6 (219)
+netty-transport-classes-epoll-4.1.111.Final.jar      | No                                      | Java 6 (67)
+netty-transport-native-unix-common-4.1.111.Final.jar | No                                      | Java 6 (32)
+netty-transport-4.1.111.Final.jar                    | No                                      | Java 6 (384)
+netty-buffer-4.1.111.Final.jar                       | No                                      | Java 6 (155)
+netty-resolver-4.1.111.Final.jar                     | No                                      | Java 6 (29)
+netty-common-4.1.111.Final.jar                       | No                                      | Java 6 (509)
+joda-time-2.12.7.jar                                 | No                                      | Java 5 (247)
+Classpath                                            | -                                       | Java 17 (2), Java 11 (18), Java 9 (2), Java 8 (8589),
+                                                     |                                         | Java 7 (1847), Java 6 (3548), Java 5 (3091), Java 1.2 (28)
 
 JAR Dependencies
 ----------------
@@ -415,6 +415,29 @@ junit-platform-commons-1.10.3.jar                    | [none]                   
                                                      |                                                      | junit-jupiter-params-5.10.3.jar
                                                      |                                                      | junit-platform-engine-1.10.3.jar
                                                      |                                                      | junit-platform-launcher-1.10.3.jar
+aws-java-sdk-cognitoidp-1.12.767.jar                 | aws-java-sdk-core-1.12.767.jar                       | test-prod-1.0.0-SNAPSHOT.jar
+                                                     | commons-logging-1.2.jar                              |
+                                                     | jackson-core-2.17.2.jar                              |
+aws-java-sdk-core-1.12.767.jar                       | commons-logging-1.2.jar                              | aws-java-sdk-cognitoidp-1.12.767.jar
+                                                     | httpclient-4.5.14.jar                                |
+                                                     | httpcore-4.4.16.jar                                  |
+                                                     | jackson-annotations-2.17.2.jar                       |
+                                                     | jackson-core-2.17.2.jar                              |
+                                                     | jackson-databind-2.17.2.jar                          |
+                                                     | jackson-dataformat-cbor-2.17.2.jar                   |
+                                                     | joda-time-2.12.7.jar                                 |
+jmespath-java-1.12.767.jar                           | jackson-databind-2.17.2.jar                          | [none]
+jackson-dataformat-cbor-2.17.2.jar                   | jackson-core-2.17.2.jar                              | aws-java-sdk-core-1.12.767.jar
+                                                     | jackson-databind-2.17.2.jar                          |
+jackson-databind-2.17.2.jar                          | jackson-annotations-2.17.2.jar                       | aws-java-sdk-core-1.12.767.jar
+                                                     | jackson-core-2.17.2.jar                              | jackson-dataformat-cbor-2.17.2.jar
+                                                     |                                                      | jmespath-java-1.12.767.jar
+jackson-annotations-2.17.2.jar                       | [none]                                               | aws-java-sdk-core-1.12.767.jar
+                                                     |                                                      | jackson-databind-2.17.2.jar
+jackson-core-2.17.2.jar                              | [none]                                               | aws-java-sdk-cognitoidp-1.12.767.jar
+                                                     |                                                      | aws-java-sdk-core-1.12.767.jar
+                                                     |                                                      | jackson-databind-2.17.2.jar
+                                                     |                                                      | jackson-dataformat-cbor-2.17.2.jar
 assertj-core-3.26.3.jar                              | byte-buddy-1.14.18.jar                               | test-prod-1.0.0-SNAPSHOT.jar
                                                      | junit-jupiter-api-5.10.3.jar                         |
                                                      | junit-platform-commons-1.10.3.jar                    |
@@ -463,9 +486,6 @@ lambda-2.26.28.jar                                   | annotations-2.26.28.jar  
                                                      | sdk-core-2.26.28.jar                                 |
                                                      | slf4j-api-2.0.13.jar                                 |
                                                      | utils-2.26.28.jar                                    |
-aws-java-sdk-cognitoidp-1.12.767.jar                 | aws-java-sdk-core-1.12.767.jar                       | test-prod-1.0.0-SNAPSHOT.jar
-                                                     | commons-logging-1.2.jar                              |
-                                                     | jackson-core-2.12.7.jar                              |
 slf4j-simple-2.0.13.jar                              | slf4j-api-2.0.13.jar                                 | [none]
 aws-json-protocol-2.26.28.jar                        | annotations-2.26.28.jar                              | lambda-2.26.28.jar
                                                      | aws-core-2.26.28.jar                                 |
@@ -731,15 +751,6 @@ annotations-2.26.28.jar                              | [none]                   
                                                      |                                                      | utils-2.26.28.jar
 third-party-jackson-core-2.26.28.jar                 | [none]                                               | aws-json-protocol-2.26.28.jar
                                                      |                                                      | json-utils-2.26.28.jar
-jmespath-java-1.12.767.jar                           | jackson-databind-2.12.7.2.jar                        | [none]
-aws-java-sdk-core-1.12.767.jar                       | commons-logging-1.2.jar                              | aws-java-sdk-cognitoidp-1.12.767.jar
-                                                     | httpclient-4.5.14.jar                                |
-                                                     | httpcore-4.4.16.jar                                  |
-                                                     | jackson-annotations-2.12.7.jar                       |
-                                                     | jackson-core-2.12.7.jar                              |
-                                                     | jackson-databind-2.12.7.2.jar                        |
-                                                     | jackson-dataformat-cbor-2.12.7.jar                   |
-                                                     | joda-time-2.12.7.jar                                 |
 byte-buddy-1.14.18.jar                               | [none]                                               | assertj-core-3.26.3.jar
 android-json-0.0.20131108.vaadin1.jar                | json-20240303.jar                                    | json-20240303.jar
                                                      |                                                      | jsonassert-1.5.3.jar
@@ -832,17 +843,6 @@ netty-common-4.1.111.Final.jar                       | commons-logging-1.2.jar  
                                                      |                                                      | netty-transport-4.1.111.Final.jar
                                                      |                                                      | netty-transport-classes-epoll-4.1.111.Final.jar
                                                      |                                                      | netty-transport-native-unix-common-4.1.111.Final.jar
-jackson-annotations-2.12.7.jar                       | [none]                                               | aws-java-sdk-core-1.12.767.jar
-                                                     |                                                      | jackson-databind-2.12.7.2.jar
-jackson-dataformat-cbor-2.12.7.jar                   | jackson-core-2.12.7.jar                              | aws-java-sdk-core-1.12.767.jar
-                                                     | jackson-databind-2.12.7.2.jar                        |
-jackson-core-2.12.7.jar                              | [none]                                               | aws-java-sdk-cognitoidp-1.12.767.jar
-                                                     |                                                      | aws-java-sdk-core-1.12.767.jar
-                                                     |                                                      | jackson-databind-2.12.7.2.jar
-                                                     |                                                      | jackson-dataformat-cbor-2.12.7.jar
-jackson-databind-2.12.7.2.jar                        | jackson-annotations-2.12.7.jar                       | aws-java-sdk-core-1.12.767.jar
-                                                     | jackson-core-2.12.7.jar                              | jackson-dataformat-cbor-2.12.7.jar
-                                                     |                                                      | jmespath-java-1.12.767.jar
 joda-time-2.12.7.jar                                 | [none]                                               | aws-java-sdk-core-1.12.767.jar
 
 Dependencies
@@ -850,7 +850,7 @@ Dependencies
 Dependencies as declared in POM file.
 
 JAR file                                             | Maven coordinates                                               | Direct dependencies                                                  | Status
------------------------------------------------------+-----------------------------------------------------------------+----------------------------------------------------------------------+----------------------
+-----------------------------------------------------+-----------------------------------------------------------------+----------------------------------------------------------------------+--------------------
 test-prod-1.0.0-SNAPSHOT.jar                         | [unknown]                                                       | [unknown]                                                            |
 junit-jupiter-5.10.3.jar                             | org.junit.jupiter:junit-jupiter:5.10.3                          | org.junit.jupiter:junit-jupiter-api:5.10.3                           | OK
                                                      |                                                                 | org.junit.jupiter:junit-jupiter-params:5.10.3                        | OK
@@ -869,6 +869,22 @@ junit-platform-engine-1.10.3.jar                     | org.junit.platform:junit-
                                                      |                                                                 | org.junit.platform:junit-platform-commons:1.10.3                     | OK
                                                      |                                                                 | org.apiguardian:apiguardian-api:1.1.2                                | Unsatisfied
 junit-platform-commons-1.10.3.jar                    | org.junit.platform:junit-platform-commons:1.10.3                | org.apiguardian:apiguardian-api:1.1.2                                | Unsatisfied
+aws-java-sdk-cognitoidp-1.12.767.jar                 | com.amazonaws:aws-java-sdk-cognitoidp:1.12.767                  | com.amazonaws:aws-java-sdk-core:1.12.767                             | OK
+                                                     |                                                                 | com.amazonaws:jmespath-java:1.12.767                                 | OK
+aws-java-sdk-core-1.12.767.jar                       | com.amazonaws:aws-java-sdk-core:1.12.767                        | commons-logging:commons-logging:1.1.3                                | OK (version 1.2)
+                                                     |                                                                 | commons-codec:commons-codec:1.15                                     | OK (version 1.17.1)
+                                                     |                                                                 | org.apache.httpcomponents:httpclient:4.5.13                          | OK (version 4.5.14)
+                                                     |                                                                 | com.fasterxml.jackson.core:jackson-databind:2.12.7.2                 | OK (version 2.17.2)
+                                                     |                                                                 | com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.12.6      | OK (version 2.17.2)
+                                                     |                                                                 | joda-time:joda-time:2.12.7                                           | OK
+jmespath-java-1.12.767.jar                           | com.amazonaws:jmespath-java:1.12.767                            | com.fasterxml.jackson.core:jackson-databind:2.12.7.2                 | OK (version 2.17.2)
+jackson-dataformat-cbor-2.17.2.jar                   | com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.17.2 | com.fasterxml.jackson.core:jackson-databind:2.17.2                   | OK
+                                                     |                                                                 | com.fasterxml.jackson.core:jackson-annotations:2.17.2 (provided)     | OK
+                                                     |                                                                 | com.fasterxml.jackson.core:jackson-core:2.17.2                       | OK
+jackson-databind-2.17.2.jar                          | com.fasterxml.jackson.core:jackson-databind:2.17.2              | com.fasterxml.jackson.core:jackson-annotations:2.17.2                | OK
+                                                     |                                                                 | com.fasterxml.jackson.core:jackson-core:2.17.2                       | OK
+jackson-annotations-2.17.2.jar                       | com.fasterxml.jackson.core:jackson-annotations:2.17.2           | [none]                                                               |
+jackson-core-2.17.2.jar                              | com.fasterxml.jackson.core:jackson-core:2.17.2                  | [none]                                                               |
 assertj-core-3.26.3.jar                              | org.assertj:assertj-core:3.26.3                                 | net.bytebuddy:byte-buddy:1.14.18                                     | OK
                                                      |                                                                 | junit:junit:4.13.2 (provided, optional)                              | Unsatisfied
                                                      |                                                                 | org.hamcrest:hamcrest:2.2 (provided, optional)                       | Unsatisfied
@@ -919,8 +935,6 @@ lambda-2.26.28.jar                                   | software.amazon.awssdk:la
                                                      |                                                                 | software.amazon.awssdk:retries-spi:2.26.28                           | OK
                                                      |                                                                 | software.amazon.awssdk:apache-client:2.26.28 (runtime)               | OK
                                                      |                                                                 | software.amazon.awssdk:netty-nio-client:2.26.28 (runtime)            | OK
-aws-java-sdk-cognitoidp-1.12.767.jar                 | com.amazonaws:aws-java-sdk-cognitoidp:1.12.767                  | com.amazonaws:aws-java-sdk-core:1.12.767                             | OK
-                                                     |                                                                 | com.amazonaws:jmespath-java:1.12.767                                 | OK
 slf4j-simple-2.0.13.jar                              | org.slf4j:slf4j-simple:2.0.13                                   | org.slf4j:slf4j-api:2.0.13                                           | OK
 aws-json-protocol-2.26.28.jar                        | software.amazon.awssdk:aws-json-protocol:2.26.28                | software.amazon.awssdk:aws-core:2.26.28                              | OK
                                                      |                                                                 | software.amazon.awssdk:protocol-core:2.26.28                         | OK
@@ -1077,13 +1091,6 @@ http-auth-aws-eventstream-2.26.28.jar                | software.amazon.awssdk:ht
                                                      |                                                                 | software.amazon.eventstream:eventstream:1.0.1                        | OK
 annotations-2.26.28.jar                              | software.amazon.awssdk:annotations:2.26.28                      | [none]                                                               |
 third-party-jackson-core-2.26.28.jar                 | software.amazon.awssdk:third-party-jackson-core:2.26.28         | [none]                                                               |
-jmespath-java-1.12.767.jar                           | com.amazonaws:jmespath-java:1.12.767                            | com.fasterxml.jackson.core:jackson-databind:2.12.7.2                 | OK
-aws-java-sdk-core-1.12.767.jar                       | com.amazonaws:aws-java-sdk-core:1.12.767                        | commons-logging:commons-logging:1.1.3                                | OK (version 1.2)
-                                                     |                                                                 | commons-codec:commons-codec:1.15                                     | OK (version 1.17.1)
-                                                     |                                                                 | org.apache.httpcomponents:httpclient:4.5.13                          | OK (version 4.5.14)
-                                                     |                                                                 | com.fasterxml.jackson.core:jackson-databind:2.12.7.2                 | OK
-                                                     |                                                                 | com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.12.6      | OK (version 2.12.7)
-                                                     |                                                                 | joda-time:joda-time:2.12.7                                           | OK
 byte-buddy-1.14.18.jar                               | net.bytebuddy:byte-buddy:1.14.18                                | net.java.dev.jna:jna:5.12.1 (provided)                               | Unsatisfied
                                                      |                                                                 | net.java.dev.jna:jna-platform:5.12.1 (provided)                      | Unsatisfied
                                                      |                                                                 | com.google.code.findbugs:findbugs-annotations:3.0.1 (provided)       | Unsatisfied
@@ -1169,13 +1176,6 @@ netty-common-4.1.111.Final.jar                       | io.netty:netty-common:4.1
                                                      |                                                                 | org.apache.logging.log4j:log4j-1.2-api:2.17.2 (optional)             | Unsatisfied
                                                      |                                                                 | org.apache.logging.log4j:log4j-api:2.17.2 (optional)                 | Unsatisfied
                                                      |                                                                 | io.projectreactor.tools:blockhound:1.0.6.RELEASE (optional)          | Unsatisfied
-jackson-annotations-2.12.7.jar                       | com.fasterxml.jackson.core:jackson-annotations:2.12.7           | [none]                                                               |
-jackson-dataformat-cbor-2.12.7.jar                   | com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.12.7 | com.fasterxml.jackson.core:jackson-databind:2.12.7                   | OK (version 2.12.7.2)
-                                                     |                                                                 | com.fasterxml.jackson.core:jackson-annotations:2.12.7 (provided)     | OK
-                                                     |                                                                 | com.fasterxml.jackson.core:jackson-core:2.12.7                       | OK
-jackson-core-2.12.7.jar                              | com.fasterxml.jackson.core:jackson-core:2.12.7                  | [none]                                                               |
-jackson-databind-2.12.7.2.jar                        | com.fasterxml.jackson.core:jackson-databind:2.12.7.2            | com.fasterxml.jackson.core:jackson-annotations:2.12.7                | OK
-                                                     |                                                                 | com.fasterxml.jackson.core:jackson-core:2.12.7                       | OK
 joda-time-2.12.7.jar                                 | joda-time:joda-time:2.12.7                                      | org.joda:joda-convert:1.9.2 (optional)                               | Unsatisfied
 
 Packages
@@ -1268,10 +1268,10 @@ httpcore-4.4.16.jar                                  | 17    | org.apache.http  
                                                      |       | org.apache.http.util                                                        |
 httpmime-4.5.14.jar                                  | 2     | org.apache.http.entity.mime (+1 subpackage)                                 |
 identity-spi-2.26.28.jar                             | 2     | software.amazon.awssdk.identity.spi (+1 subpackage)                         |
-jackson-annotations-2.12.7.jar                       | 1     | com.fasterxml.jackson.annotation                                            |
-jackson-core-2.12.7.jar                              | 12    | com.fasterxml.jackson.core (+11 subpackages)                                |
-jackson-databind-2.12.7.2.jar                        | 22    | com.fasterxml.jackson.databind (+21 subpackages)                            |
-jackson-dataformat-cbor-2.12.7.jar                   | 2     | com.fasterxml.jackson.dataformat.cbor (+1 subpackage)                       |
+jackson-annotations-2.17.2.jar                       | 1     | com.fasterxml.jackson.annotation                                            |
+jackson-core-2.17.2.jar                              | 14    | com.fasterxml.jackson.core (+13 subpackages)                                |
+jackson-databind-2.17.2.jar                          | 23    | com.fasterxml.jackson.databind (+22 subpackages)                            |
+jackson-dataformat-cbor-2.17.2.jar                   | 2     | com.fasterxml.jackson.dataformat.cbor (+1 subpackage)                       |
 jmespath-java-1.12.767.jar                           | 1     | com.amazonaws.jmespath                                                      |
 joda-time-2.12.7.jar                                 | 7     | org.joda.time (+6 subpackages)                                              |
 json-20240303.jar                                    | 1     | org.json                                                                    | Split Package: org.json
@@ -2770,6 +2770,9 @@ junit-platform-commons-1.10.3.jar     | org.junit.platform.commons.JUnitExceptio
                                       | org.junit.platform.commons.util.UnrecoverableExceptions
                                       | • Class not found: org.apiguardian.api.API$Status (package not found)
                                       | • Annotation not found: org.apiguardian.api.API (package not found)
+aws-java-sdk-core-1.12.767.jar        | com.amazonaws.util.Base64
+                                      | • Class not found: javax.xml.bind.DatatypeConverter (package not found)
+                                      | • Class not found: javax.xml.bind.JAXBContext (package not found)
 assertj-core-3.26.3.jar               | org.assertj.core.api.HamcrestCondition
                                       | • Class not found: org.hamcrest.Description (package not found)
                                       | • Class not found: org.hamcrest.Matcher (package not found)
@@ -2918,9 +2921,6 @@ crt-core-2.26.28.jar                  | software.amazon.awssdk.crtcore.CrtConfig
                                       | • Class not found: software.amazon.awssdk.crt.http.HttpProxyOptions (package not found)
                                       | • Class not found: software.amazon.awssdk.crt.http.HttpProxyOptions$HttpProxyAuthorizationType (package not found)
                                       | • Class not found: software.amazon.awssdk.crt.io.TlsContext (package not found)
-aws-java-sdk-core-1.12.767.jar        | com.amazonaws.util.Base64
-                                      | • Class not found: javax.xml.bind.DatatypeConverter (package not found)
-                                      | • Class not found: javax.xml.bind.JAXBContext (package not found)
 byte-buddy-1.14.18.jar                | net.bytebuddy.ClassFileVersion
                                       | • Annotation not found: edu.umd.cs.findbugs.annotations.SuppressFBWarnings (package not found)
                                       |
@@ -4364,6 +4364,55 @@ JAR file                                             | Issues
 -----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 junit-platform-launcher-1.10.3.jar                   | org.junit.platform.launcher.core.LauncherConfigurationParameters$ParameterProvider$4
                                                      | • @Deprecated: public abstract int org.junit.platform.engine.ConfigurationParameters.size()
+aws-java-sdk-cognitoidp-1.12.767.jar                 | com.amazonaws.services.cognitoidp.AWSCognitoIdentityProviderClient
+                                                     | • @Deprecated: public class com.amazonaws.internal.StaticCredentialsProvider
+                                                     | • @Deprecated: public com.amazonaws.Response com.amazonaws.http.AmazonHttpClient.execute(com.amazonaws.Request,com.amazonaws.http.HttpResponseHandler,com.amazonaws.http.HttpResponseHandler,com.amazonaws.http.ExecutionContext)
+aws-java-sdk-core-1.12.767.jar                       | com.amazonaws.http.apache.client.impl.ApacheConnectionManagerFactory
+                                                     | • @Deprecated: public interface org.apache.http.conn.ssl.X509HostnameVerifier
+                                                     | • @Deprecated: public static final org.apache.http.conn.ssl.X509HostnameVerifier org.apache.http.conn.ssl.SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER
+                                                     | • @Deprecated: public static final org.apache.http.conn.ssl.X509HostnameVerifier org.apache.http.conn.ssl.SSLConnectionSocketFactory.STRICT_HOSTNAME_VERIFIER
+                                                     |
+                                                     | com.amazonaws.http.apache.client.impl.SdkHttpClient
+                                                     | • @Deprecated: public abstract org.apache.http.conn.ClientConnectionManager org.apache.http.client.HttpClient.getConnectionManager()
+                                                     | • @Deprecated: public abstract org.apache.http.params.HttpParams org.apache.http.client.HttpClient.getParams()
+                                                     | • @Deprecated: public interface org.apache.http.conn.ClientConnectionManager
+                                                     | • @Deprecated: public interface org.apache.http.params.HttpParams
+                                                     |
+                                                     | com.amazonaws.http.conn.ssl.privileged.PrivilegedMasterSecretValidator
+                                                     | • @Deprecated: public final class java.security.AccessController
+                                                     |
+                                                     | com.amazonaws.internal.config.InternalConfig
+                                                     | • @Deprecated: public com.fasterxml.jackson.databind.ObjectMapper com.fasterxml.jackson.databind.ObjectMapper.disable(com.fasterxml.jackson.databind.MapperFeature[])
+                                                     |
+                                                     | com.amazonaws.partitions.PartitionsLoader
+                                                     | • @Deprecated: public com.fasterxml.jackson.databind.ObjectMapper com.fasterxml.jackson.databind.ObjectMapper.disable(com.fasterxml.jackson.databind.MapperFeature[])
+                                                     |
+                                                     | com.amazonaws.util.HttpClientWrappingInputStream
+                                                     | • @Deprecated: public abstract org.apache.http.conn.ClientConnectionManager org.apache.http.client.HttpClient.getConnectionManager()
+                                                     | • @Deprecated: public interface org.apache.http.conn.ClientConnectionManager
+                                                     |
+                                                     | com.amazonaws.util.NamedDefaultThreadFactory
+                                                     | • @Deprecated: public class java.lang.SecurityManager
+                                                     |
+                                                     | com.amazonaws.util.RuntimeHttpUtils
+                                                     | • @Deprecated: public class org.apache.http.impl.client.DefaultHttpClient
+                                                     | • @Deprecated: public class org.apache.http.params.BasicHttpParams
+                                                     | • @Deprecated: public final class org.apache.http.params.HttpConnectionParams
+                                                     | • @Deprecated: public final class org.apache.http.params.HttpProtocolParams
+                                                     | • @Deprecated: public interface org.apache.http.params.HttpParams
+                                                     |
+                                                     | com.amazonaws.util.XmlUtils
+                                                     | • @Deprecated: public final class org.xml.sax.helpers.XMLReaderFactory
+jackson-databind-2.17.2.jar                          | com.fasterxml.jackson.databind.ObjectMapper
+                                                     | • @Deprecated: public class java.lang.SecurityManager
+                                                     | • @Deprecated: public final class java.security.AccessController
+                                                     |
+                                                     | com.fasterxml.jackson.databind.cfg.MapperBuilder
+                                                     | • @Deprecated: public class java.lang.SecurityManager
+                                                     | • @Deprecated: public final class java.security.AccessController
+                                                     |
+                                                     | com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector
+                                                     | • @Deprecated: public abstract class com.fasterxml.jackson.annotation.JsonTypeInfo$None
 s3-2.26.28.jar                                       | software.amazon.awssdk.services.s3.DefaultS3AsyncClient
                                                      | • @Deprecated: public software.amazon.awssdk.awscore.eventstream.EventStreamAsyncResponseTransformer$Builder software.amazon.awssdk.awscore.eventstream.EventStreamAsyncResponseTransformer$Builder.executor(java.util.concurrent.Executor)
                                                      |
@@ -4407,9 +4456,6 @@ s3-2.26.28.jar                                       | software.amazon.awssdk.se
                                                      | • @Deprecated: public static final software.amazon.awssdk.core.interceptor.ExecutionAttribute software.amazon.awssdk.auth.signer.AwsSignerExecutionAttribute.SIGNING_REGION
 lambda-2.26.28.jar                                   | software.amazon.awssdk.services.lambda.DefaultLambdaAsyncClient
                                                      | • @Deprecated: public software.amazon.awssdk.awscore.eventstream.EventStreamAsyncResponseTransformer$Builder software.amazon.awssdk.awscore.eventstream.EventStreamAsyncResponseTransformer$Builder.executor(java.util.concurrent.Executor)
-aws-java-sdk-cognitoidp-1.12.767.jar                 | com.amazonaws.services.cognitoidp.AWSCognitoIdentityProviderClient
-                                                     | • @Deprecated: public class com.amazonaws.internal.StaticCredentialsProvider
-                                                     | • @Deprecated: public com.amazonaws.Response com.amazonaws.http.AmazonHttpClient.execute(com.amazonaws.Request,com.amazonaws.http.HttpResponseHandler,com.amazonaws.http.HttpResponseHandler,com.amazonaws.http.ExecutionContext)
 slf4j-simple-2.0.13.jar                              | org.slf4j.simple.SimpleLoggerConfiguration
                                                      | • @Deprecated: public final class java.security.AccessController
 aws-core-2.26.28.jar                                 | software.amazon.awssdk.awscore.client.builder.AwsDefaultClientBuilder
@@ -4514,36 +4560,6 @@ slf4j-api-2.0.13.jar                                 | org.slf4j.LoggerFactory
                                                      |
                                                      | org.slf4j.helpers.Util$ClassContextSecurityManager
                                                      | • @Deprecated: public class java.lang.SecurityManager
-aws-java-sdk-core-1.12.767.jar                       | com.amazonaws.http.apache.client.impl.ApacheConnectionManagerFactory
-                                                     | • @Deprecated: public interface org.apache.http.conn.ssl.X509HostnameVerifier
-                                                     | • @Deprecated: public static final org.apache.http.conn.ssl.X509HostnameVerifier org.apache.http.conn.ssl.SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER
-                                                     | • @Deprecated: public static final org.apache.http.conn.ssl.X509HostnameVerifier org.apache.http.conn.ssl.SSLConnectionSocketFactory.STRICT_HOSTNAME_VERIFIER
-                                                     |
-                                                     | com.amazonaws.http.apache.client.impl.SdkHttpClient
-                                                     | • @Deprecated: public abstract org.apache.http.conn.ClientConnectionManager org.apache.http.client.HttpClient.getConnectionManager()
-                                                     | • @Deprecated: public abstract org.apache.http.params.HttpParams org.apache.http.client.HttpClient.getParams()
-                                                     | • @Deprecated: public interface org.apache.http.conn.ClientConnectionManager
-                                                     | • @Deprecated: public interface org.apache.http.params.HttpParams
-                                                     |
-                                                     | com.amazonaws.http.conn.ssl.privileged.PrivilegedMasterSecretValidator
-                                                     | • @Deprecated: public final class java.security.AccessController
-                                                     |
-                                                     | com.amazonaws.util.HttpClientWrappingInputStream
-                                                     | • @Deprecated: public abstract org.apache.http.conn.ClientConnectionManager org.apache.http.client.HttpClient.getConnectionManager()
-                                                     | • @Deprecated: public interface org.apache.http.conn.ClientConnectionManager
-                                                     |
-                                                     | com.amazonaws.util.NamedDefaultThreadFactory
-                                                     | • @Deprecated: public class java.lang.SecurityManager
-                                                     |
-                                                     | com.amazonaws.util.RuntimeHttpUtils
-                                                     | • @Deprecated: public class org.apache.http.impl.client.DefaultHttpClient
-                                                     | • @Deprecated: public class org.apache.http.params.BasicHttpParams
-                                                     | • @Deprecated: public final class org.apache.http.params.HttpConnectionParams
-                                                     | • @Deprecated: public final class org.apache.http.params.HttpProtocolParams
-                                                     | • @Deprecated: public interface org.apache.http.params.HttpParams
-                                                     |
-                                                     | com.amazonaws.util.XmlUtils
-                                                     | • @Deprecated: public final class org.xml.sax.helpers.XMLReaderFactory
 byte-buddy-1.14.18.jar                               | net.bytebuddy.ByteBuddy
                                                      | • @Deprecated: public final class java.security.AccessController
                                                      |
@@ -5294,16 +5310,6 @@ netty-common-4.1.111.Final.jar                       | io.netty.util.NetUtil
                                                      | • java.lang.Object sun.misc.Unsafe.getObjectVolatile(java.lang.Object,long)
                                                      | • void sun.misc.Unsafe.putObject(java.lang.Object,long,java.lang.Object)
                                                      | • void sun.misc.Unsafe.putOrderedObject(java.lang.Object,long,java.lang.Object)
-jackson-databind-2.12.7.2.jar                        | com.fasterxml.jackson.databind.ObjectMapper
-                                                     | • @Deprecated: public class java.lang.SecurityManager
-                                                     | • @Deprecated: public final class java.security.AccessController
-                                                     |
-                                                     | com.fasterxml.jackson.databind.cfg.MapperBuilder
-                                                     | • @Deprecated: public class java.lang.SecurityManager
-                                                     | • @Deprecated: public final class java.security.AccessController
-                                                     |
-                                                     | com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector
-                                                     | • @Deprecated: public abstract class com.fasterxml.jackson.annotation.JsonTypeInfo$None
 joda-time-2.12.7.jar                                 | org.joda.time.DateTimeUtils
                                                      | • @Deprecated: public class java.lang.SecurityManager
                                                      |
