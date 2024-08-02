@@ -70,7 +70,7 @@ class WebsiteTest extends AbstractWebTest {
 		assertThat(response)
 				.isOK()
 				.hasHeader("Server", "AmazonS3")
-				.hasContentType("image/x-icon")
+				.hasContentType("image/vnd.microsoft.icon")
 				.hasContentLength(32988)
 				.hasBody();
 
