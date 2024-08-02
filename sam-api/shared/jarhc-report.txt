@@ -7,11 +7,11 @@ List of JAR files found in classpath.
 
 JAR file                              | Size    | Classes | Resources | Checksum (SHA-1)                         | Artifact coordinates
 --------------------------------------+---------+---------+-----------+------------------------------------------+----------------------------------------------------------------
-shared-1.0.0-SNAPSHOT.jar             | 13.9 KB | 9       | 1         | 33e4cf684835d46b30a65801b224e062b4fbfc5b | [unknown]
+shared-1.0.0-SNAPSHOT.jar             | 13.9 KB | 9       | 1         | 281230c8fc31bd84a386318161df8b383706c8fb | [unknown]
 aws-xray-recorder-sdk-core-2.17.0.jar | 235 KB  | 134     | 2         | 8d2c66a6d0ec8700c8061a7a272b7e7d7c5c5eed | com.amazonaws:aws-xray-recorder-sdk-core:2.17.0
-aws-java-sdk-xray-1.12.228.jar        | 596 KB  | 349     | 0         | 6b13ed6f4822d3dec50302f70b53e1678c5fdf79 | com.amazonaws:aws-java-sdk-xray:1.12.228
-aws-java-sdk-core-1.12.228.jar        | 1020 KB | 875     | 3         | 98a4789e22ce85e943deecf70a9b6fbf189f8a9d | com.amazonaws:aws-java-sdk-core:1.12.228
-jmespath-java-1.12.228.jar            | 26.9 KB | 29      | 0         | fdb8b04b9615a4389da87a25021742ebcee527fe | com.amazonaws:jmespath-java:1.12.228
+aws-java-sdk-xray-1.12.767.jar        | 639 KB  | 380     | 0         | 2d6a55856101e1d52842408a6ae014501d1b9681 | com.amazonaws:aws-java-sdk-xray:1.12.767
+aws-java-sdk-core-1.12.767.jar        | 1.00 MB | 862     | 3         | 0c4fc14c8dadc52c7a313b87c31bd1994af516df | com.amazonaws:aws-java-sdk-core:1.12.767
+jmespath-java-1.12.767.jar            | 26.9 KB | 29      | 0         | 738e1d9b693b6c842cb1c8c50258ecd1675c8a12 | com.amazonaws:jmespath-java:1.12.767
 jackson-dataformat-cbor-2.17.2.jar    | 68.7 KB | 17      | 0         | 57fa7c1b5104bbc4599278d13933a937ee058e68 | com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.17.2
 jackson-databind-2.17.2.jar           | 1.57 MB | 764     | 0         | e6deb029e5901e027c129341fac39e515066b68c | com.fasterxml.jackson.core:jackson-databind:2.17.2
 jackson-annotations-2.17.2.jar        | 76.7 KB | 72      | 0         | 147b7b9412ffff24339f8aba080b292448e08698 | com.fasterxml.jackson.core:jackson-annotations:2.17.2
@@ -49,15 +49,14 @@ checksums-spi-2.26.28.jar             | 7.86 KB | 1       | 0         | cdeb3e8b
 http-auth-aws-eventstream-2.26.28.jar | 8.50 KB | 1       | 0         | dc5ac5cb8e01404ac679b892c6d60b99e6829243 | software.amazon.awssdk:http-auth-aws-eventstream:2.26.28
 annotations-2.26.28.jar               | 13.4 KB | 13      | 0         | 7ba8ce8795c429a241ad75e7d69b0a14e0367c9c | software.amazon.awssdk:annotations:2.26.28
 third-party-jackson-core-2.26.28.jar  | 522 KB  | 174     | 0         | 58e10b26032b3562c21c8ec0eda002f8914595ff | software.amazon.awssdk:third-party-jackson-core:2.26.28
-joda-time-2.10.8.jar                  | 629 KB  | 247     | 485       | b0442d652c209a7ba7af0410ce219d997a447701 | joda-time:joda-time:2.10.8
+joda-time-2.12.7.jar                  | 623 KB  | 247     | 492       | d015b997eccd511e5567218a51651ff0625f6f25 | joda-time:joda-time:2.12.7
 reactive-streams-1.0.4.jar            | 11.4 KB | 13      | 0         | 3864a1320d97d7b045f729a326e1e077661f31b7 | org.reactivestreams:reactive-streams:1.0.4
 eventstream-1.0.1.jar                 | 29.5 KB | 19      | 0         | 6ff8649dffc5190366ada897ba8525a836297784 | software.amazon.eventstream:eventstream:1.0.1
 httpclient-4.5.13.jar                 | 762 KB  | 470     | 2         | e5f6cae5ca7ecaac1ec2827a9e2d65ae2869cada | org.apache.httpcomponents:httpclient:4.5.13
 commons-logging-1.2.jar               | 60.4 KB | 28      | 0         | 4bfc12adfe4842bf07b657f0369c4cb522955686 | commons-logging:commons-logging:1.2
 commons-codec-1.15.jar                | 346 KB  | 106     | 128       | 49d94806b6e3dc933dacbd8acb0fdbab8ebd1e5d | commons-codec:commons-codec:1.15
-ion-java-1.0.2.jar                    | 552 KB  | 336     | 0         | ee9dacea7726e495f8352b81c12c23834ffbc564 | software.amazon.ion:ion-java:1.0.2
 httpcore-4.4.13.jar                   | 321 KB  | 253     | 1         | 853b96d3afbb7bf8cc303fe27ee96836a10c1834 | org.apache.httpcomponents:httpcore:4.4.13
-Classpath                             | 16.7 MB | 9982    | 629       | -                                        | -
+Classpath                             | 16.2 MB | 9664    | 636       | -                                        | -
 
 Modules
 -------
@@ -67,9 +66,9 @@ JAR file                              | Module name                             
 --------------------------------------+--------------------------------------------------+----------------+-----------+----------------------------------+--------------------------------------------------
 shared-1.0.0-SNAPSHOT.jar             | shared                                           | Auto-generated | Yes       | -                                | [all packages]
 aws-xray-recorder-sdk-core-2.17.0.jar | com.amazonaws.xray.sdk_core                      | Manifest       | Yes       | -                                | [all packages]
-aws-java-sdk-xray-1.12.228.jar        | aws.java.sdk.xray                                | Auto-generated | Yes       | -                                | [all packages]
-aws-java-sdk-core-1.12.228.jar        | aws.java.sdk.core                                | Auto-generated | Yes       | -                                | [all packages]
-jmespath-java-1.12.228.jar            | jmespath.java                                    | Auto-generated | Yes       | -                                | [all packages]
+aws-java-sdk-xray-1.12.767.jar        | aws.java.sdk.xray                                | Auto-generated | Yes       | -                                | [all packages]
+aws-java-sdk-core-1.12.767.jar        | aws.java.sdk.core                                | Auto-generated | Yes       | -                                | [all packages]
+jmespath-java-1.12.767.jar            | jmespath.java                                    | Auto-generated | Yes       | -                                | [all packages]
 jackson-dataformat-cbor-2.17.2.jar    | com.fasterxml.jackson.dataformat.cbor            | Module-Info    | No        | com.fasterxml.jackson.core       | com.fasterxml.jackson.dataformat.cbor
                                       |                                                  |                |           | com.fasterxml.jackson.databind   | com.fasterxml.jackson.dataformat.cbor.databind
                                       |                                                  |                |           | java.base                        |
@@ -143,13 +142,12 @@ checksums-spi-2.26.28.jar             | software.amazon.awssdk.checksums.spi    
 http-auth-aws-eventstream-2.26.28.jar | software.amazon.awssdk.http.auth.aws.eventstream | Manifest       | Yes       | -                                | [all packages]
 annotations-2.26.28.jar               | software.amazon.awssdk.annotations               | Manifest       | Yes       | -                                | [all packages]
 third-party-jackson-core-2.26.28.jar  | software.amazon.awssdk.thirdparty.jackson.core   | Manifest       | Yes       | -                                | [all packages]
-joda-time-2.10.8.jar                  | org.joda.time                                    | Manifest       | Yes       | -                                | [all packages]
+joda-time-2.12.7.jar                  | org.joda.time                                    | Manifest       | Yes       | -                                | [all packages]
 reactive-streams-1.0.4.jar            | org.reactivestreams                              | Manifest       | Yes       | -                                | [all packages]
 eventstream-1.0.1.jar                 | software.amazon.eventstream                      | Manifest       | Yes       | -                                | [all packages]
 httpclient-4.5.13.jar                 | org.apache.httpcomponents.httpclient             | Manifest       | Yes       | -                                | [all packages]
 commons-logging-1.2.jar               | commons.logging                                  | Auto-generated | Yes       | -                                | [all packages]
 commons-codec-1.15.jar                | org.apache.commons.codec                         | Manifest       | Yes       | -                                | [all packages]
-ion-java-1.0.2.jar                    | ion.java                                         | Auto-generated | Yes       | -                                | [all packages]
 httpcore-4.4.13.jar                   | org.apache.httpcomponents.httpcore               | Manifest       | Yes       | -                                | [all packages]
 
 Class Versions
@@ -160,9 +158,9 @@ JAR file                              | Multi-release                           
 --------------------------------------+-----------------------------------------+---------------------------------------------------------
 shared-1.0.0-SNAPSHOT.jar             | No                                      | Java 11 (9)
 aws-xray-recorder-sdk-core-2.17.0.jar | No                                      | Java 8 (134)
-aws-java-sdk-xray-1.12.228.jar        | No                                      | Java 7 (349)
-aws-java-sdk-core-1.12.228.jar        | No                                      | Java 7 (875)
-jmespath-java-1.12.228.jar            | No                                      | Java 7 (29)
+aws-java-sdk-xray-1.12.767.jar        | No                                      | Java 7 (380)
+aws-java-sdk-core-1.12.767.jar        | No                                      | Java 7 (862)
+jmespath-java-1.12.767.jar            | No                                      | Java 7 (29)
 jackson-dataformat-cbor-2.17.2.jar    | Yes (Java 9)                            | Java 8 (17)
 jackson-databind-2.17.2.jar           | Yes (Java 9)                            | Java 8 (764)
 jackson-annotations-2.17.2.jar        | No                                      | Java 6 (72)
@@ -200,16 +198,15 @@ checksums-spi-2.26.28.jar             | No                                      
 http-auth-aws-eventstream-2.26.28.jar | No                                      | Java 8 (1)
 annotations-2.26.28.jar               | No                                      | Java 8 (13)
 third-party-jackson-core-2.26.28.jar  | No                                      | Java 8 (174)
-joda-time-2.10.8.jar                  | No                                      | Java 5 (247)
+joda-time-2.12.7.jar                  | No                                      | Java 5 (247)
 reactive-streams-1.0.4.jar            | No                                      | Java 6 (13)
 eventstream-1.0.1.jar                 | No                                      | Java 8 (19)
 httpclient-4.5.13.jar                 | No                                      | Java 6 (470)
 commons-logging-1.2.jar               | No                                      | Java 1.2 (28)
 commons-codec-1.15.jar                | No                                      | Java 7 (106)
-ion-java-1.0.2.jar                    | No                                      | Java 5 (336)
 httpcore-4.4.13.jar                   | No                                      | Java 6 (253)
-Classpath                             | -                                       | Java 17 (2), Java 11 (10), Java 8 (7192), Java 7 (1359),
-                                      |                                         | Java 6 (808), Java 5 (583), Java 1.2 (28)
+Classpath                             | -                                       | Java 17 (2), Java 11 (10), Java 8 (7192), Java 7 (1377),
+                                      |                                         | Java 6 (808), Java 5 (247), Java 1.2 (28)
 
 JAR Dependencies
 ----------------
@@ -225,41 +222,40 @@ shared-1.0.0-SNAPSHOT.jar             | aws-xray-recorder-sdk-core-2.17.0.jar | 
                                       | sdk-core-2.26.28.jar                  |
                                       | slf4j-api-2.0.13.jar                  |
                                       | url-connection-client-2.26.28.jar     |
-aws-xray-recorder-sdk-core-2.17.0.jar | aws-java-sdk-core-1.12.228.jar        | shared-1.0.0-SNAPSHOT.jar
-                                      | aws-java-sdk-xray-1.12.228.jar        |
+aws-xray-recorder-sdk-core-2.17.0.jar | aws-java-sdk-core-1.12.767.jar        | shared-1.0.0-SNAPSHOT.jar
+                                      | aws-java-sdk-xray-1.12.767.jar        |
                                       | commons-logging-1.2.jar               |
                                       | httpclient-4.5.13.jar                 |
                                       | httpcore-4.4.13.jar                   |
                                       | jackson-annotations-2.17.2.jar        |
                                       | jackson-core-2.17.2.jar               |
                                       | jackson-databind-2.17.2.jar           |
-aws-java-sdk-xray-1.12.228.jar        | aws-java-sdk-core-1.12.228.jar        | aws-xray-recorder-sdk-core-2.17.0.jar
+aws-java-sdk-xray-1.12.767.jar        | aws-java-sdk-core-1.12.767.jar        | aws-xray-recorder-sdk-core-2.17.0.jar
                                       | commons-logging-1.2.jar               |
                                       | jackson-annotations-2.17.2.jar        |
                                       | jackson-core-2.17.2.jar               |
-aws-java-sdk-core-1.12.228.jar        | commons-logging-1.2.jar               | aws-java-sdk-xray-1.12.228.jar
+aws-java-sdk-core-1.12.767.jar        | commons-logging-1.2.jar               | aws-java-sdk-xray-1.12.767.jar
                                       | httpclient-4.5.13.jar                 | aws-xray-recorder-sdk-core-2.17.0.jar
                                       | httpcore-4.4.13.jar                   |
-                                      | ion-java-1.0.2.jar                    |
                                       | jackson-annotations-2.17.2.jar        |
                                       | jackson-core-2.17.2.jar               |
                                       | jackson-databind-2.17.2.jar           |
                                       | jackson-dataformat-cbor-2.17.2.jar    |
-                                      | joda-time-2.10.8.jar                  |
-jmespath-java-1.12.228.jar            | jackson-databind-2.17.2.jar           | [none]
-jackson-dataformat-cbor-2.17.2.jar    | jackson-core-2.17.2.jar               | aws-java-sdk-core-1.12.228.jar
+                                      | joda-time-2.12.7.jar                  |
+jmespath-java-1.12.767.jar            | jackson-databind-2.17.2.jar           | [none]
+jackson-dataformat-cbor-2.17.2.jar    | jackson-core-2.17.2.jar               | aws-java-sdk-core-1.12.767.jar
                                       | jackson-databind-2.17.2.jar           |
-jackson-databind-2.17.2.jar           | jackson-annotations-2.17.2.jar        | aws-java-sdk-core-1.12.228.jar
+jackson-databind-2.17.2.jar           | jackson-annotations-2.17.2.jar        | aws-java-sdk-core-1.12.767.jar
                                       | jackson-core-2.17.2.jar               | aws-xray-recorder-sdk-core-2.17.0.jar
                                       |                                       | jackson-dataformat-cbor-2.17.2.jar
-                                      |                                       | jmespath-java-1.12.228.jar
+                                      |                                       | jmespath-java-1.12.767.jar
                                       |                                       | shared-1.0.0-SNAPSHOT.jar
-jackson-annotations-2.17.2.jar        | [none]                                | aws-java-sdk-core-1.12.228.jar
-                                      |                                       | aws-java-sdk-xray-1.12.228.jar
+jackson-annotations-2.17.2.jar        | [none]                                | aws-java-sdk-core-1.12.767.jar
+                                      |                                       | aws-java-sdk-xray-1.12.767.jar
                                       |                                       | aws-xray-recorder-sdk-core-2.17.0.jar
                                       |                                       | jackson-databind-2.17.2.jar
-jackson-core-2.17.2.jar               | [none]                                | aws-java-sdk-core-1.12.228.jar
-                                      |                                       | aws-java-sdk-xray-1.12.228.jar
+jackson-core-2.17.2.jar               | [none]                                | aws-java-sdk-core-1.12.767.jar
+                                      |                                       | aws-java-sdk-xray-1.12.767.jar
                                       |                                       | aws-xray-recorder-sdk-core-2.17.0.jar
                                       |                                       | jackson-databind-2.17.2.jar
                                       |                                       | jackson-dataformat-cbor-2.17.2.jar
@@ -498,7 +494,7 @@ slf4j-api-2.0.13.jar                  | [none]                                | 
                                       |                                       | shared-1.0.0-SNAPSHOT.jar
                                       |                                       | utils-2.26.28.jar
 aws-lambda-java-core-1.2.3.jar        | [none]                                | [none]
-aws-lambda-java-events-3.13.0.jar     | joda-time-2.10.8.jar                  | [none]
+aws-lambda-java-events-3.13.0.jar     | joda-time-2.12.7.jar                  | [none]
 endpoints-spi-2.26.28.jar             | annotations-2.26.28.jar               | aws-core-2.26.28.jar
                                       |                                       | lambda-2.26.28.jar
                                       |                                       | s3-2.26.28.jar
@@ -541,7 +537,7 @@ annotations-2.26.28.jar               | [none]                                | 
                                       |                                       | utils-2.26.28.jar
 third-party-jackson-core-2.26.28.jar  | [none]                                | aws-json-protocol-2.26.28.jar
                                       |                                       | json-utils-2.26.28.jar
-joda-time-2.10.8.jar                  | [none]                                | aws-java-sdk-core-1.12.228.jar
+joda-time-2.12.7.jar                  | [none]                                | aws-java-sdk-core-1.12.767.jar
                                       |                                       | aws-lambda-java-events-3.13.0.jar
 reactive-streams-1.0.4.jar            | [none]                                | auth-2.26.28.jar
                                       |                                       | aws-core-2.26.28.jar
@@ -556,16 +552,15 @@ reactive-streams-1.0.4.jar            | [none]                                | 
 eventstream-1.0.1.jar                 | [none]                                | auth-2.26.28.jar
                                       |                                       | aws-core-2.26.28.jar
                                       |                                       | http-auth-aws-2.26.28.jar
-httpclient-4.5.13.jar                 | commons-codec-1.15.jar                | aws-java-sdk-core-1.12.228.jar
+httpclient-4.5.13.jar                 | commons-codec-1.15.jar                | aws-java-sdk-core-1.12.767.jar
                                       | commons-logging-1.2.jar               | aws-xray-recorder-sdk-core-2.17.0.jar
                                       | httpcore-4.4.13.jar                   |
-commons-logging-1.2.jar               | [none]                                | aws-java-sdk-core-1.12.228.jar
-                                      |                                       | aws-java-sdk-xray-1.12.228.jar
+commons-logging-1.2.jar               | [none]                                | aws-java-sdk-core-1.12.767.jar
+                                      |                                       | aws-java-sdk-xray-1.12.767.jar
                                       |                                       | aws-xray-recorder-sdk-core-2.17.0.jar
                                       |                                       | httpclient-4.5.13.jar
 commons-codec-1.15.jar                | [none]                                | httpclient-4.5.13.jar
-ion-java-1.0.2.jar                    | [none]                                | aws-java-sdk-core-1.12.228.jar
-httpcore-4.4.13.jar                   | [none]                                | aws-java-sdk-core-1.12.228.jar
+httpcore-4.4.13.jar                   | [none]                                | aws-java-sdk-core-1.12.767.jar
                                       |                                       | aws-xray-recorder-sdk-core-2.17.0.jar
                                       |                                       | httpclient-4.5.13.jar
 
@@ -574,19 +569,18 @@ Dependencies
 Dependencies as declared in POM file.
 
 JAR file                              | Maven coordinates                                               | Direct dependencies                                                 | Status
---------------------------------------+-----------------------------------------------------------------+---------------------------------------------------------------------+--------------------
+--------------------------------------+-----------------------------------------------------------------+---------------------------------------------------------------------+----------------------
 shared-1.0.0-SNAPSHOT.jar             | [unknown]                                                       | [unknown]                                                           |
-aws-xray-recorder-sdk-core-2.17.0.jar | com.amazonaws:aws-xray-recorder-sdk-core:2.17.0                 | com.amazonaws:aws-java-sdk-xray:1.12.228                            | OK
-aws-java-sdk-xray-1.12.228.jar        | com.amazonaws:aws-java-sdk-xray:1.12.228                        | com.amazonaws:aws-java-sdk-core:1.12.228                            | OK
-                                      |                                                                 | com.amazonaws:jmespath-java:1.12.228                                | OK
-aws-java-sdk-core-1.12.228.jar        | com.amazonaws:aws-java-sdk-core:1.12.228                        | commons-logging:commons-logging:1.1.3                               | OK (version 1.2)
+aws-xray-recorder-sdk-core-2.17.0.jar | com.amazonaws:aws-xray-recorder-sdk-core:2.17.0                 | com.amazonaws:aws-java-sdk-xray:1.12.228                            | OK (version 1.12.767)
+aws-java-sdk-xray-1.12.767.jar        | com.amazonaws:aws-java-sdk-xray:1.12.767                        | com.amazonaws:aws-java-sdk-core:1.12.767                            | OK
+                                      |                                                                 | com.amazonaws:jmespath-java:1.12.767                                | OK
+aws-java-sdk-core-1.12.767.jar        | com.amazonaws:aws-java-sdk-core:1.12.767                        | commons-logging:commons-logging:1.1.3                               | OK (version 1.2)
                                       |                                                                 | commons-codec:commons-codec:1.15                                    | OK
                                       |                                                                 | org.apache.httpcomponents:httpclient:4.5.13                         | OK
-                                      |                                                                 | software.amazon.ion:ion-java:1.0.2                                  | OK
-                                      |                                                                 | com.fasterxml.jackson.core:jackson-databind:2.12.6.1                | OK (version 2.17.2)
+                                      |                                                                 | com.fasterxml.jackson.core:jackson-databind:2.12.7.2                | OK (version 2.17.2)
                                       |                                                                 | com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.12.6     | OK (version 2.17.2)
-                                      |                                                                 | joda-time:joda-time:2.8.1                                           | OK (version 2.10.8)
-jmespath-java-1.12.228.jar            | com.amazonaws:jmespath-java:1.12.228                            | com.fasterxml.jackson.core:jackson-databind:2.12.6.1                | OK (version 2.17.2)
+                                      |                                                                 | joda-time:joda-time:2.12.7                                          | OK
+jmespath-java-1.12.767.jar            | com.amazonaws:jmespath-java:1.12.767                            | com.fasterxml.jackson.core:jackson-databind:2.12.7.2                | OK (version 2.17.2)
 jackson-dataformat-cbor-2.17.2.jar    | com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.17.2 | com.fasterxml.jackson.core:jackson-databind:2.17.2                  | OK
                                       |                                                                 | com.fasterxml.jackson.core:jackson-annotations:2.17.2 (provided)    | OK
                                       |                                                                 | com.fasterxml.jackson.core:jackson-core:2.17.2                      | OK
@@ -764,7 +758,7 @@ utils-2.26.28.jar                     | software.amazon.awssdk:utils:2.26.28    
                                       |                                                                 | org.slf4j:slf4j-api:1.7.36                                          | OK (version 2.0.13)
 slf4j-api-2.0.13.jar                  | org.slf4j:slf4j-api:2.0.13                                      | [none]                                                              |
 aws-lambda-java-core-1.2.3.jar        | com.amazonaws:aws-lambda-java-core:1.2.3                        | [none]                                                              |
-aws-lambda-java-events-3.13.0.jar     | com.amazonaws:aws-lambda-java-events:3.13.0                     | joda-time:joda-time:2.10.8                                          | OK
+aws-lambda-java-events-3.13.0.jar     | com.amazonaws:aws-lambda-java-events:3.13.0                     | joda-time:joda-time:2.10.8                                          | OK (version 2.12.7)
                                       |                                                                 | org.projectlombok:lombok:1.18.22 (provided)                         | Unsatisfied
 endpoints-spi-2.26.28.jar             | software.amazon.awssdk:endpoints-spi:2.26.28                    | software.amazon.awssdk:annotations:2.26.28                          | OK
 checksums-2.26.28.jar                 | software.amazon.awssdk:checksums:2.26.28                        | software.amazon.awssdk:annotations:2.26.28                          | OK
@@ -774,7 +768,7 @@ http-auth-aws-eventstream-2.26.28.jar | software.amazon.awssdk:http-auth-aws-eve
                                       |                                                                 | software.amazon.eventstream:eventstream:1.0.1                       | OK
 annotations-2.26.28.jar               | software.amazon.awssdk:annotations:2.26.28                      | [none]                                                              |
 third-party-jackson-core-2.26.28.jar  | software.amazon.awssdk:third-party-jackson-core:2.26.28         | [none]                                                              |
-joda-time-2.10.8.jar                  | joda-time:joda-time:2.10.8                                      | org.joda:joda-convert:1.9.2 (optional)                              | Unsatisfied
+joda-time-2.12.7.jar                  | joda-time:joda-time:2.12.7                                      | org.joda:joda-convert:1.9.2 (optional)                              | Unsatisfied
 reactive-streams-1.0.4.jar            | org.reactivestreams:reactive-streams:1.0.4                      | [none]                                                              |
 eventstream-1.0.1.jar                 | software.amazon.eventstream:eventstream:1.0.1                   | [none]                                                              |
 httpclient-4.5.13.jar                 | org.apache.httpcomponents:httpclient:4.5.13                     | org.apache.httpcomponents:httpcore:4.4.13                           | OK
@@ -785,7 +779,6 @@ commons-logging-1.2.jar               | commons-logging:commons-logging:1.2     
                                       |                                                                 | avalon-framework:avalon-framework:4.1.5 (optional)                  | Unsatisfied
                                       |                                                                 | javax.servlet:servlet-api:2.3 (provided, optional)                  | Unsatisfied
 commons-codec-1.15.jar                | commons-codec:commons-codec:1.15                                | [none]                                                              |
-ion-java-1.0.2.jar                    | software.amazon.ion:ion-java:1.0.2                              | [none]                                                              |
 httpcore-4.4.13.jar                   | org.apache.httpcomponents:httpcore:4.4.13                       | [none]                                                              |
 
 Packages
@@ -798,7 +791,7 @@ annotations-2.26.28.jar               | 1     | software.amazon.awssdk.annotatio
 arns-2.26.28.jar                      | 1     | software.amazon.awssdk.arns                                                 |
 auth-2.26.28.jar                      | 12    | software.amazon.awssdk.auth.* (12 subpackages)                              |
 aws-core-2.26.28.jar                  | 21    | software.amazon.awssdk.awscore (+20 subpackages)                            |
-aws-java-sdk-core-1.12.228.jar        | 66    | com.amazonaws                                                               |
+aws-java-sdk-core-1.12.767.jar        | 66    | com.amazonaws                                                               |
                                       |       | com.amazonaws.adapters.types                                                |
                                       |       | com.amazonaws.annotation                                                    |
                                       |       | com.amazonaws.arn                                                           |
@@ -822,7 +815,7 @@ aws-java-sdk-core-1.12.228.jar        | 66    | com.amazonaws                   
                                       |       | com.amazonaws.transform                                                     |
                                       |       | com.amazonaws.util (+2 subpackages)                                         |
                                       |       | com.amazonaws.waiters                                                       |
-aws-java-sdk-xray-1.12.228.jar        | 3     | com.amazonaws.services.xray (+2 subpackages)                                |
+aws-java-sdk-xray-1.12.767.jar        | 3     | com.amazonaws.services.xray (+2 subpackages)                                |
 aws-json-protocol-2.26.28.jar         | 5     | software.amazon.awssdk.protocols.json (+4 subpackages)                      |
 aws-lambda-java-core-1.2.3.jar        | 2     | com.amazonaws.services.lambda.runtime                                       |
                                       |       | com.amazonaws.services.lambda.runtime.logging                               |
@@ -877,13 +870,12 @@ httpcore-4.4.13.jar                   | 17    | org.apache.http                 
                                       |       | org.apache.http.ssl                                                         |
                                       |       | org.apache.http.util                                                        |
 identity-spi-2.26.28.jar              | 2     | software.amazon.awssdk.identity.spi (+1 subpackage)                         |
-ion-java-1.0.2.jar                    | 8     | software.amazon.ion (+7 subpackages)                                        |
 jackson-annotations-2.17.2.jar        | 1     | com.fasterxml.jackson.annotation                                            |
 jackson-core-2.17.2.jar               | 14    | com.fasterxml.jackson.core (+13 subpackages)                                |
 jackson-databind-2.17.2.jar           | 23    | com.fasterxml.jackson.databind (+22 subpackages)                            |
 jackson-dataformat-cbor-2.17.2.jar    | 2     | com.fasterxml.jackson.dataformat.cbor (+1 subpackage)                       |
-jmespath-java-1.12.228.jar            | 1     | com.amazonaws.jmespath                                                      |
-joda-time-2.10.8.jar                  | 7     | org.joda.time (+6 subpackages)                                              |
+jmespath-java-1.12.767.jar            | 1     | com.amazonaws.jmespath                                                      |
+joda-time-2.12.7.jar                  | 7     | org.joda.time (+6 subpackages)                                              |
 json-utils-2.26.28.jar                | 2     | software.amazon.awssdk.protocols.jsoncore (+1 subpackage)                   |
 lambda-2.26.28.jar                    | 13    | software.amazon.awssdk.services.lambda (+12 subpackages)                    |
 metrics-spi-2.26.28.jar               | 2     | software.amazon.awssdk.metrics (+1 subpackage)                              |
@@ -914,7 +906,7 @@ Binary Compatibility
 Compatibility issues between JAR files.
 
 JAR file                              | Issues
---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------
 aws-xray-recorder-sdk-core-2.17.0.jar | com.amazonaws.xray.AWSXRay
                                       | • Annotation not found: org.checkerframework.checker.initialization.qual.Initialized (package not found)
                                       | • Annotation not found: org.checkerframework.checker.nullness.qual.NonNull (package not found)
@@ -1690,27 +1682,9 @@ aws-xray-recorder-sdk-core-2.17.0.jar | com.amazonaws.xray.AWSXRay
                                       | • Annotation not found: org.checkerframework.checker.initialization.qual.Initialized (package not found)
                                       | • Annotation not found: org.checkerframework.checker.nullness.qual.NonNull (package not found)
                                       | • Annotation not found: org.checkerframework.checker.nullness.qual.UnknownKeyFor (package not found)
-aws-java-sdk-core-1.12.228.jar        | com.amazonaws.monitoring.internal.AsynchronousAgentDispatcher
-                                      | • Field not found: static com.fasterxml.jackson.databind.PropertyNamingStrategy com.fasterxml.jackson.databind.PropertyNamingStrategy.PASCAL_CASE_TO_CAMEL_CASE
-                                      | > com.fasterxml.jackson.databind.PropertyNamingStrategy (field not found)
-                                      | > java.io.Serializable (field not found)
-                                      | > java.lang.Object (field not found)
-                                      |
-                                      | com.amazonaws.transform.JsonErrorUnmarshaller
-                                      | • Field not found: static com.fasterxml.jackson.databind.PropertyNamingStrategy com.fasterxml.jackson.databind.PropertyNamingStrategy.PASCAL_CASE_TO_CAMEL_CASE
-                                      | > com.fasterxml.jackson.databind.PropertyNamingStrategy (field not found)
-                                      | > java.io.Serializable (field not found)
-                                      | > java.lang.Object (field not found)
-                                      |
-                                      | com.amazonaws.util.Base64
+aws-java-sdk-core-1.12.767.jar        | com.amazonaws.util.Base64
                                       | • Class not found: javax.xml.bind.DatatypeConverter (package not found)
                                       | • Class not found: javax.xml.bind.JAXBContext (package not found)
-                                      |
-                                      | com.amazonaws.util.EC2MetadataUtils
-                                      | • Field not found: static com.fasterxml.jackson.databind.PropertyNamingStrategy com.fasterxml.jackson.databind.PropertyNamingStrategy.PASCAL_CASE_TO_CAMEL_CASE
-                                      | > com.fasterxml.jackson.databind.PropertyNamingStrategy (field not found)
-                                      | > java.io.Serializable (field not found)
-                                      | > java.lang.Object (field not found)
 s3-2.26.28.jar                        | software.amazon.awssdk.services.s3.internal.crt.CrtChecksumUtils
                                       | • Class not found: software.amazon.awssdk.crt.s3.ChecksumAlgorithm (package not found)
                                       | • Class not found: software.amazon.awssdk.crt.s3.ChecksumConfig (package not found)
@@ -1832,7 +1806,7 @@ crt-core-2.26.28.jar                  | software.amazon.awssdk.crtcore.CrtConfig
                                       | • Class not found: software.amazon.awssdk.crt.http.HttpProxyOptions (package not found)
                                       | • Class not found: software.amazon.awssdk.crt.http.HttpProxyOptions$HttpProxyAuthorizationType (package not found)
                                       | • Class not found: software.amazon.awssdk.crt.io.TlsContext (package not found)
-joda-time-2.10.8.jar                  | org.joda.time.DateMidnight
+joda-time-2.12.7.jar                  | org.joda.time.DateMidnight
                                       | • Annotation not found: org.joda.convert.FromString (package not found)
                                       |
                                       | org.joda.time.DateTime
@@ -1944,10 +1918,10 @@ aws-xray-recorder-sdk-core-2.17.0.jar | com.amazonaws.xray.plugins.EC2MetadataFe
                                       |
                                       | com.amazonaws.xray.plugins.ECSMetadataFetcher
                                       | • @Deprecated: public abstract java.lang.String com.fasterxml.jackson.core.JsonParser.getCurrentName()
-aws-java-sdk-xray-1.12.228.jar        | com.amazonaws.services.xray.AWSXRayClient
+aws-java-sdk-xray-1.12.767.jar        | com.amazonaws.services.xray.AWSXRayClient
                                       | • @Deprecated: public class com.amazonaws.internal.StaticCredentialsProvider
                                       | • @Deprecated: public com.amazonaws.Response com.amazonaws.http.AmazonHttpClient.execute(com.amazonaws.Request,com.amazonaws.http.HttpResponseHandler,com.amazonaws.http.HttpResponseHandler,com.amazonaws.http.ExecutionContext)
-aws-java-sdk-core-1.12.228.jar        | com.amazonaws.http.apache.client.impl.ApacheConnectionManagerFactory
+aws-java-sdk-core-1.12.767.jar        | com.amazonaws.http.apache.client.impl.ApacheConnectionManagerFactory
                                       | • @Deprecated: public interface org.apache.http.conn.ssl.X509HostnameVerifier
                                       | • @Deprecated: public static final org.apache.http.conn.ssl.X509HostnameVerifier org.apache.http.conn.ssl.SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER
                                       | • @Deprecated: public static final org.apache.http.conn.ssl.X509HostnameVerifier org.apache.http.conn.ssl.SSLConnectionSocketFactory.STRICT_HOSTNAME_VERIFIER
@@ -2116,7 +2090,7 @@ slf4j-api-2.0.13.jar                  | org.slf4j.LoggerFactory
                                       |
                                       | org.slf4j.helpers.Util$ClassContextSecurityManager
                                       | • @Deprecated: public class java.lang.SecurityManager
-joda-time-2.10.8.jar                  | org.joda.time.DateTimeUtils
+joda-time-2.12.7.jar                  | org.joda.time.DateTimeUtils
                                       | • @Deprecated: public class java.lang.SecurityManager
                                       |
                                       | org.joda.time.DateTimeZone

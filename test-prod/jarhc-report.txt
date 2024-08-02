@@ -7,7 +7,7 @@ List of JAR files found in classpath.
 
 JAR file                                             | Size    | Classes | Resources | Checksum (SHA-1)                         | Artifact coordinates
 -----------------------------------------------------+---------+---------+-----------+------------------------------------------+----------------------------------------------------------------
-test-prod-1.0.0-SNAPSHOT.jar                         | 31.7 KB | 17      | 0         | 79e3e3db59356ce005ee311a1c023f3e17bbc96f | [unknown]
+test-prod-1.0.0-SNAPSHOT.jar                         | 31.7 KB | 17      | 0         | 08308b0128c5bc8d41f4f61adb634924d0af0a9d | [unknown]
 junit-jupiter-5.10.3.jar                             | 6.21 KB | 0       | 0         | 6686d8fbf251f9bf8ecba413cab57b9e00f9134d | org.junit.jupiter:junit-jupiter:5.10.3
 junit-platform-launcher-1.10.3.jar                   | 180 KB  | 115     | 0         | 2e07e6389624f3e93fb2e87aec2fdc30cc84b069 | org.junit.platform:junit-platform-launcher:1.10.3
 junit-jupiter-params-5.10.3.jar                      | 572 KB  | 346     | 0         | 4852f4e4af9074d9214213b199751f99efeab8b9 | org.junit.jupiter:junit-jupiter-params:5.10.3
