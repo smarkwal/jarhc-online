@@ -14,7 +14,7 @@ dependencies {
     api(platform("com.fasterxml.jackson:jackson-bom:2.17.2"))
 
     // logging
-    api("org.slf4j:slf4j-api:2.0.13")
+    api("org.slf4j:slf4j-api:2.0.16")
 
     // AWS Lambda Java API
     api("com.amazonaws:aws-lambda-java-core:1.2.3")
