@@ -8,10 +8,10 @@ dependencies {
     // Interface between Lambda service and function code.
     // Entrypoint in Docker image, see Dockerfile.
     // https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-runtime-interface-client
-    implementation("com.amazonaws:aws-lambda-java-runtime-interface-client:2.5.1")
+    implementation("com.amazonaws:aws-lambda-java-runtime-interface-client:2.6.0")
 
     // logging implementation
-    runtimeOnly("org.slf4j:slf4j-simple:2.0.13")
+    runtimeOnly("org.slf4j:slf4j-simple:2.0.16")
 
     // test dependencies -------------------------------------
 

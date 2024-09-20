@@ -47,8 +47,8 @@ buildscript {
     dependencies {
         // fix CVE-2023-3635 in Okio < 3.4.0
         // (indirect dependency of Gradle Versions Plugin 0.51.0)
-        classpath("com.squareup.okio:okio:3.9.0")
-        classpath("com.squareup.okio:okio-jvm:3.9.0")
+        classpath("com.squareup.okio:okio:3.9.1")
+        classpath("com.squareup.okio:okio-jvm:3.9.1")
     }
 }
 
@@ -67,9 +67,9 @@ dependencies {
     // note: this is a tests-only project and all classes are in main source set
 
     // BOMs for version constraints
-    implementation(platform("org.junit:junit-bom:5.10.3"))
-    implementation(platform("software.amazon.awssdk:bom:2.26.28"))
-    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.767"))
+    implementation(platform("org.junit:junit-bom:5.11.0"))
+    implementation(platform("software.amazon.awssdk:bom:2.28.5"))
+    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.772"))
 
     // FasterXML Jackson (transitive dependency of AWS SDK)
     // Fix CVE-2022-42003 and CVE-2022-42004 in Jackson Databind < 2.13.4.1
@@ -87,8 +87,8 @@ dependencies {
     implementation("com.amazonaws:aws-java-sdk-cognitoidp")
 
     // logging
-    implementation("org.slf4j:slf4j-api:2.0.13")
-    implementation("org.slf4j:slf4j-simple:2.0.13")
+    implementation("org.slf4j:slf4j-api:2.0.16")
+    implementation("org.slf4j:slf4j-simple:2.0.16")
 
     // helpers
     implementation("org.apache.httpcomponents:httpmime:4.5.14")
