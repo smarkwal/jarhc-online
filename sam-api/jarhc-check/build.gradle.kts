@@ -9,7 +9,7 @@ dependencies {
 
     // JarHC - JAR Health Check
     // https://github.com/smarkwal/jarhc
-    implementation("org.jarhc:jarhc:2.2.0")
+    implementation("org.jarhc:jarhc:2.2.2")
 
     // add slf4j-simple
     runtimeOnly("org.slf4j:slf4j-simple:2.0.13")
