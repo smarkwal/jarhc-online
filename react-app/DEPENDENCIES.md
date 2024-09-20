@@ -11,7 +11,7 @@
 react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 ├── react-debounce-input@3.3.0
 ├── react-dom@18.3.1
-├── react-router-dom@6.24.0
+├── react-router-dom@6.26.2
 └── react@18.3.1
 ```
 
@@ -34,11 +34,11 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ ├── react@18.3.1 deduped
 │ └─┬ scheduler@0.23.2
 │   └── loose-envify@1.4.0 deduped
-├─┬ react-router-dom@6.24.0
-│ ├── @remix-run/router@1.17.0
+├─┬ react-router-dom@6.26.2
+│ ├── @remix-run/router@1.19.2
 │ ├── react-dom@18.3.1 deduped
-│ ├─┬ react-router@6.24.0
-│ │ ├── @remix-run/router@1.17.0 deduped
+│ ├─┬ react-router@6.26.2
+│ │ ├── @remix-run/router@1.19.2 deduped
 │ │ └── react@18.3.1 deduped
 │ └── react@18.3.1 deduped
 └─┬ react@18.3.1
@@ -56,7 +56,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 ├── @babel/plugin-proposal-private-property-in-object@7.21.11
 ├── react-debounce-input@3.3.0
 ├── react-dom@18.3.1
-├── react-router-dom@6.24.0
+├── react-router-dom@6.26.2
 ├── react-scripts@5.0.1
 └── react@18.3.1
 ```
@@ -184,11 +184,11 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ ├── react@18.3.1 deduped
 │ └─┬ scheduler@0.23.2
 │   └── loose-envify@1.4.0 deduped
-├─┬ react-router-dom@6.24.0
-│ ├── @remix-run/router@1.17.0
+├─┬ react-router-dom@6.26.2
+│ ├── @remix-run/router@1.19.2
 │ ├── react-dom@18.3.1 deduped
-│ ├─┬ react-router@6.24.0
-│ │ ├── @remix-run/router@1.17.0 deduped
+│ ├─┬ react-router@6.26.2
+│ │ ├── @remix-run/router@1.19.2 deduped
 │ │ └── react@18.3.1 deduped
 │ └── react@18.3.1 deduped
 ├─┬ react-scripts@5.0.1
