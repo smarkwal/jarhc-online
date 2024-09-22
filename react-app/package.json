@@ -2,6 +2,10 @@
   "name": "react-app",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "18.20.0",
+    "npm": "10.5.0"
+  },
   "dependencies": {
     "react": "18.3.1",
     "react-debounce-input": "3.3.0",
@@ -11,6 +15,11 @@
   "devDependencies": {
     "react-scripts": "5.0.1",
     "@babel/plugin-proposal-private-property-in-object": "7.21.11"
+  },
+  "overrides": {
+    "express": "4.21.0",
+    "webpack": "5.94.0",
+    "micromatch": "4.0.8"
   },
   "scripts": {
     "start": "react-scripts start",

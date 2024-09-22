@@ -227,7 +227,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ ├── webpack-dev-server@4.15.2 deduped
 │ │ ├── UNMET OPTIONAL DEPENDENCY webpack-hot-middleware@2.x
 │ │ ├── UNMET OPTIONAL DEPENDENCY webpack-plugin-serve@0.x || 1.x
-│ │ └── webpack@5.92.1 deduped
+│ │ └── webpack@5.94.0 deduped
 │ ├─┬ @svgr/webpack@5.5.0
 │ │ ├── @babel/core@7.24.7 deduped
 │ │ ├─┬ @babel/plugin-transform-react-constant-elements@7.24.7
@@ -668,7 +668,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │ ├── jest-haste-map@27.5.1 deduped
 │ │ │ ├── jest-regex-util@27.5.1
 │ │ │ ├── jest-util@27.5.1 deduped
-│ │ │ ├── micromatch@4.0.7 deduped
+│ │ │ ├── micromatch@4.0.8 deduped
 │ │ │ ├── pirates@4.0.6
 │ │ │ ├── slash@3.0.0 deduped
 │ │ │ ├── source-map@0.6.1
@@ -772,7 +772,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │ ├─┬ ajv-keywords@3.5.2
 │ │ │ │ └── ajv@6.12.6 deduped
 │ │ │ └── ajv@6.12.6 deduped
-│ │ └── webpack@5.92.1 deduped
+│ │ └── webpack@5.94.0 deduped
 │ ├─┬ babel-plugin-named-asset-import@0.3.8
 │ │ └── @babel/core@7.24.7 deduped
 │ ├─┬ babel-preset-react-app@10.0.1
@@ -901,7 +901,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ ├── postcss-value-parser@4.2.0
 │ │ ├── postcss@8.4.39 deduped
 │ │ ├── semver@7.6.2 deduped
-│ │ └── webpack@5.92.1 deduped
+│ │ └── webpack@5.94.0 deduped
 │ ├─┬ css-minimizer-webpack-plugin@3.4.1
 │ │ ├─┬ cssnano@5.1.15
 │ │ │ ├─┬ cssnano-preset-default@5.2.14
@@ -1034,7 +1034,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │ └─┬ randombytes@2.1.0
 │ │ │   └── safe-buffer@5.2.1 deduped
 │ │ ├── source-map@0.6.1
-│ │ └── webpack@5.92.1 deduped
+│ │ └── webpack@5.94.0 deduped
 │ ├── dotenv-expand@5.1.0
 │ ├── dotenv@10.0.0
 │ ├─┬ eslint-config-react-app@7.0.1
@@ -1548,7 +1548,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │ ├── merge-stream@2.0.0 deduped
 │ │ │ └─┬ supports-color@8.1.1
 │ │ │   └── has-flag@4.0.0
-│ │ ├─┬ micromatch@4.0.7
+│ │ ├─┬ micromatch@4.0.8 overridden
 │ │ │ ├─┬ braces@3.0.3
 │ │ │ │ └─┬ fill-range@7.1.1
 │ │ │ │   └─┬ to-regex-range@5.0.1
@@ -1556,7 +1556,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │ └── picomatch@2.3.1
 │ │ ├── normalize-path@3.0.0
 │ │ ├── schema-utils@4.2.0 deduped
-│ │ └── webpack@5.92.1 deduped
+│ │ └── webpack@5.94.0 deduped
 │ ├─┬ eslint@8.57.0
 │ │ ├─┬ @eslint-community/eslint-utils@4.4.0
 │ │ │ ├── eslint-visitor-keys@3.4.3 deduped
@@ -1678,7 +1678,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │ ├── @types/json-schema@7.0.15 deduped
 │ │ │ ├── ajv-keywords@3.5.2 deduped
 │ │ │ └── ajv@6.12.6 deduped
-│ │ └── webpack@5.92.1 deduped
+│ │ └── webpack@5.94.0 deduped
 │ ├─┬ fs-extra@10.1.0
 │ │ ├── graceful-fs@4.2.11 deduped
 │ │ ├─┬ jsonfile@6.1.0
@@ -1737,7 +1737,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │   ├── lodash@4.17.21 deduped
 │ │ │   └── strip-ansi@6.0.1 deduped
 │ │ ├── tapable@2.2.1
-│ │ └── webpack@5.92.1 deduped
+│ │ └── webpack@5.94.0 deduped
 │ ├─┬ identity-obj-proxy@3.0.0
 │ │ └── harmony-reflect@1.6.2
 │ ├─┬ jest-resolve@27.5.1
@@ -1768,7 +1768,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │ │ └── graceful-fs@4.2.11 deduped
 │ │ │ ├── jest-util@27.5.1 deduped
 │ │ │ ├── jest-worker@27.5.1 deduped
-│ │ │ ├── micromatch@4.0.7 deduped
+│ │ │ ├── micromatch@4.0.8 deduped
 │ │ │ └─┬ walker@1.0.8
 │ │ │   └─┬ makeerror@1.0.12
 │ │ │     └── tmpl@1.0.5
@@ -1826,7 +1826,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │ │ │ │ ├── @types/stack-utils@2.0.3 deduped
 │ │ │ │ │ │ ├── chalk@4.1.2 deduped
 │ │ │ │ │ │ ├── graceful-fs@4.2.11 deduped
-│ │ │ │ │ │ ├── micromatch@4.0.7 deduped
+│ │ │ │ │ │ ├── micromatch@4.0.8 deduped
 │ │ │ │ │ │ ├─┬ pretty-format@28.1.3
 │ │ │ │ │ │ │ ├── @jest/schemas@28.1.3 deduped
 │ │ │ │ │ │ │ ├── ansi-regex@5.0.1 deduped
@@ -2123,7 +2123,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │ │ ├── jest-runner@27.5.1 deduped
 │ │ │ │ ├── jest-util@27.5.1 deduped
 │ │ │ │ ├── jest-validate@27.5.1 deduped
-│ │ │ │ ├── micromatch@4.0.7 deduped
+│ │ │ │ ├── micromatch@4.0.8 deduped
 │ │ │ │ ├── parse-json@5.2.0 deduped
 │ │ │ │ ├── pretty-format@27.5.1 deduped
 │ │ │ │ ├── slash@3.0.0 deduped
@@ -2141,7 +2141,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │ │ │ └─┬ supports-color@7.2.0
 │ │ │ │ │   └── has-flag@4.0.0
 │ │ │ │ ├── graceful-fs@4.2.11 deduped
-│ │ │ │ ├── micromatch@4.0.7 deduped
+│ │ │ │ ├── micromatch@4.0.8 deduped
 │ │ │ │ ├── pretty-format@27.5.1 deduped
 │ │ │ │ ├── slash@3.0.0 deduped
 │ │ │ │ └─┬ stack-utils@2.0.6
@@ -2295,7 +2295,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │ │ │   └── has-flag@4.0.0
 │ │ │ │ ├── jest-util@27.5.1 deduped
 │ │ │ │ └── string-length@4.0.2 deduped
-│ │ │ ├── micromatch@4.0.7 deduped
+│ │ │ ├── micromatch@4.0.8 deduped
 │ │ │ ├── UNMET OPTIONAL DEPENDENCY node-notifier@^8.0.1 || ^9.0.0 || ^10.0.0
 │ │ │ ├── rimraf@3.0.2 deduped
 │ │ │ ├── slash@3.0.0 deduped
@@ -2345,7 +2345,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ ├─┬ mini-css-extract-plugin@2.9.0
 │ │ ├── schema-utils@4.2.0 deduped
 │ │ ├── tapable@2.2.1 deduped
-│ │ └── webpack@5.92.1 deduped
+│ │ └── webpack@5.94.0 deduped
 │ ├─┬ postcss-flexbugs-fixes@5.0.2
 │ │ └── postcss@8.4.39 deduped
 │ ├─┬ postcss-loader@6.2.1
@@ -2363,7 +2363,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ ├── klona@2.0.6
 │ │ ├── postcss@8.4.39 deduped
 │ │ ├── semver@7.6.2 deduped
-│ │ └── webpack@5.92.1 deduped
+│ │ └── webpack@5.94.0 deduped
 │ ├─┬ postcss-normalize@10.0.1
 │ │ ├── @csstools/normalize.css@12.1.1
 │ │ ├── browserslist@4.23.1 deduped
@@ -2602,7 +2602,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │ ├── tapable@1.1.3
 │ │ │ ├── typescript@4.9.5 deduped
 │ │ │ ├── UNMET OPTIONAL DEPENDENCY vue-template-compiler@*
-│ │ │ └── webpack@5.92.1 deduped
+│ │ │ └── webpack@5.94.0 deduped
 │ │ ├─┬ global-modules@2.0.0
 │ │ │ └─┬ global-prefix@3.0.0
 │ │ │   ├── ini@1.3.8
@@ -2667,16 +2667,16 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ ├── UNMET OPTIONAL DEPENDENCY node-sass@^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
 │ │ ├── UNMET OPTIONAL DEPENDENCY sass-embedded@*
 │ │ ├── UNMET OPTIONAL DEPENDENCY sass@^1.3.0
-│ │ └── webpack@5.92.1 deduped
+│ │ └── webpack@5.94.0 deduped
 │ ├── semver@7.6.2
 │ ├─┬ source-map-loader@3.0.2
 │ │ ├── abab@2.0.6
 │ │ ├─┬ iconv-lite@0.6.3
 │ │ │ └── safer-buffer@2.1.2
 │ │ ├── source-map-js@1.2.0 deduped
-│ │ └── webpack@5.92.1 deduped
+│ │ └── webpack@5.94.0 deduped
 │ ├─┬ style-loader@3.3.4
-│ │ └── webpack@5.92.1 deduped
+│ │ └── webpack@5.94.0 deduped
 │ ├─┬ tailwindcss@3.4.4
 │ │ ├── @alloc/quick-lru@5.2.0
 │ │ ├── arg@5.0.2
@@ -2700,12 +2700,12 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │ ├─┬ glob-parent@5.1.2
 │ │ │ │ └── is-glob@4.0.3 deduped
 │ │ │ ├── merge2@1.4.1 deduped
-│ │ │ └── micromatch@4.0.7 deduped
+│ │ │ └── micromatch@4.0.8 deduped
 │ │ ├── glob-parent@6.0.2 deduped
 │ │ ├── is-glob@4.0.3 deduped
 │ │ ├── jiti@1.21.6
 │ │ ├── lilconfig@2.1.0
-│ │ ├── micromatch@4.0.7 deduped
+│ │ ├── micromatch@4.0.8 deduped
 │ │ ├── normalize-path@3.0.0 deduped
 │ │ ├── object-hash@3.0.0
 │ │ ├── picocolors@1.0.1 deduped
@@ -2799,7 +2799,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │ └─┬ source-map-support@0.5.21
 │ │ │   ├── buffer-from@1.1.2
 │ │ │   └── source-map@0.6.1
-│ │ └── webpack@5.92.1 deduped
+│ │ └── webpack@5.94.0 deduped
 │ ├── typescript@4.9.5
 │ ├─┬ webpack-dev-server@4.15.2
 │ │ ├─┬ @types/bonjour@3.5.13
@@ -2866,10 +2866,10 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │   │ └── mimic-fn@2.1.0
 │ │ │   ├── signal-exit@3.0.7 deduped
 │ │ │   └── strip-final-newline@2.0.0
-│ │ ├─┬ express@4.19.2
+│ │ ├─┬ express@4.21.0 overridden
 │ │ │ ├── accepts@1.3.8 deduped
 │ │ │ ├── array-flatten@1.1.1
-│ │ │ ├─┬ body-parser@1.20.2
+│ │ │ ├─┬ body-parser@1.20.3
 │ │ │ │ ├── bytes@3.1.2
 │ │ │ │ ├── content-type@1.0.5 deduped
 │ │ │ │ ├─┬ debug@2.6.9
@@ -2880,7 +2880,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │ │ ├─┬ iconv-lite@0.4.24
 │ │ │ │ │ └── safer-buffer@2.1.2 deduped
 │ │ │ │ ├── on-finished@2.4.1 deduped
-│ │ │ │ ├── qs@6.11.0 deduped
+│ │ │ │ ├── qs@6.13.0 deduped
 │ │ │ │ ├─┬ raw-body@2.5.2
 │ │ │ │ │ ├── bytes@3.1.2
 │ │ │ │ │ ├── http-errors@2.0.0 deduped
@@ -2897,13 +2897,13 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │ ├─┬ debug@2.6.9
 │ │ │ │ └── ms@2.0.0
 │ │ │ ├── depd@2.0.0
-│ │ │ ├── encodeurl@1.0.2
+│ │ │ ├── encodeurl@2.0.0
 │ │ │ ├── escape-html@1.0.3
 │ │ │ ├── etag@1.8.1
-│ │ │ ├─┬ finalhandler@1.2.0
+│ │ │ ├─┬ finalhandler@1.3.1
 │ │ │ │ ├─┬ debug@2.6.9
 │ │ │ │ │ └── ms@2.0.0
-│ │ │ │ ├── encodeurl@1.0.2 deduped
+│ │ │ │ ├── encodeurl@2.0.0 deduped
 │ │ │ │ ├── escape-html@1.0.3 deduped
 │ │ │ │ ├── on-finished@2.4.1 deduped
 │ │ │ │ ├── parseurl@1.3.3 deduped
@@ -2916,25 +2916,25 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │ │ ├── setprototypeof@1.2.0 deduped
 │ │ │ │ ├── statuses@2.0.1 deduped
 │ │ │ │ └── toidentifier@1.0.1
-│ │ │ ├── merge-descriptors@1.0.1
+│ │ │ ├── merge-descriptors@1.0.3
 │ │ │ ├── methods@1.1.2
 │ │ │ ├─┬ on-finished@2.4.1
 │ │ │ │ └── ee-first@1.1.1
 │ │ │ ├── parseurl@1.3.3
-│ │ │ ├── path-to-regexp@0.1.7
+│ │ │ ├── path-to-regexp@0.1.10
 │ │ │ ├─┬ proxy-addr@2.0.7
 │ │ │ │ ├── forwarded@0.2.0
 │ │ │ │ └── ipaddr.js@1.9.1
-│ │ │ ├─┬ qs@6.11.0
+│ │ │ ├─┬ qs@6.13.0
 │ │ │ │ └── side-channel@1.0.6 deduped
 │ │ │ ├── range-parser@1.2.1
 │ │ │ ├── safe-buffer@5.2.1
-│ │ │ ├─┬ send@0.18.0
+│ │ │ ├─┬ send@0.19.0
 │ │ │ │ ├─┬ debug@2.6.9
 │ │ │ │ │ └── ms@2.0.0
 │ │ │ │ ├── depd@2.0.0 deduped
 │ │ │ │ ├── destroy@1.2.0 deduped
-│ │ │ │ ├── encodeurl@1.0.2 deduped
+│ │ │ │ ├── encodeurl@1.0.2
 │ │ │ │ ├── escape-html@1.0.3 deduped
 │ │ │ │ ├── etag@1.8.1 deduped
 │ │ │ │ ├── fresh@0.5.2 deduped
@@ -2944,11 +2944,11 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │ │ ├── on-finished@2.4.1 deduped
 │ │ │ │ ├── range-parser@1.2.1 deduped
 │ │ │ │ └── statuses@2.0.1 deduped
-│ │ │ ├─┬ serve-static@1.15.0
-│ │ │ │ ├── encodeurl@1.0.2 deduped
+│ │ │ ├─┬ serve-static@1.16.2
+│ │ │ │ ├── encodeurl@2.0.0 deduped
 │ │ │ │ ├── escape-html@1.0.3 deduped
 │ │ │ │ ├── parseurl@1.3.3 deduped
-│ │ │ │ └── send@0.18.0 deduped
+│ │ │ │ └── send@0.19.0 deduped
 │ │ │ ├── setprototypeof@1.2.0
 │ │ │ ├── statuses@2.0.1
 │ │ │ ├─┬ type-is@1.6.18
@@ -2968,7 +2968,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │ │ └── requires-port@1.0.0
 │ │ │ ├── is-glob@4.0.3 deduped
 │ │ │ ├── is-plain-obj@3.0.0
-│ │ │ └── micromatch@4.0.7 deduped
+│ │ │ └── micromatch@4.0.8 deduped
 │ │ ├── ipaddr.js@2.2.0
 │ │ ├─┬ launch-editor@2.8.0
 │ │ │ ├── picocolors@1.0.1 deduped
@@ -3040,8 +3040,8 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ │ ├── mime-types@2.1.35 deduped
 │ │ │ ├── range-parser@1.2.1 deduped
 │ │ │ ├── schema-utils@4.2.0 deduped
-│ │ │ └── webpack@5.92.1 deduped
-│ │ ├── webpack@5.92.1 deduped
+│ │ │ └── webpack@5.94.0 deduped
+│ │ ├── webpack@5.94.0 deduped
 │ │ └─┬ ws@8.17.1
 │ │   ├── UNMET OPTIONAL DEPENDENCY bufferutil@^4.0.1
 │ │   └── UNMET OPTIONAL DEPENDENCY utf-8-validate@>=5.0.2
@@ -3050,11 +3050,8 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ ├─┬ webpack-sources@2.3.1
 │ │ │ ├── source-list-map@2.0.1
 │ │ │ └── source-map@0.6.1
-│ │ └── webpack@5.92.1 deduped
-│ ├─┬ webpack@5.92.1
-│ │ ├─┬ @types/eslint-scope@3.7.7
-│ │ │ ├── @types/eslint@8.56.10 deduped
-│ │ │ └── @types/estree@1.0.5 deduped
+│ │ └── webpack@5.94.0 deduped
+│ ├─┬ webpack@5.94.0 overridden
 │ │ ├── @types/estree@1.0.5
 │ │ ├─┬ @webassemblyjs/ast@1.12.1
 │ │ │ ├─┬ @webassemblyjs/helper-numbers@1.11.6
@@ -3100,7 +3097,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │ │ ├── acorn@8.12.0
 │ │ ├── browserslist@4.23.1 deduped
 │ │ ├── chrome-trace-event@1.0.4
-│ │ ├─┬ enhanced-resolve@5.17.0
+│ │ ├─┬ enhanced-resolve@5.17.1
 │ │ │ ├── graceful-fs@4.2.11 deduped
 │ │ │ └── tapable@2.2.1 deduped
 │ │ ├── es-module-lexer@1.5.4
@@ -3132,7 +3129,7 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │   ├─┬ webpack-sources@1.4.3
 │   │ ├── source-list-map@2.0.1 deduped
 │   │ └── source-map@0.6.1
-│   ├── webpack@5.92.1 deduped
+│   ├── webpack@5.94.0 deduped
 │   └─┬ workbox-build@6.6.0
 │     ├─┬ @apideck/better-ajv-errors@0.3.6
 │     │ ├── ajv@8.16.0 deduped
