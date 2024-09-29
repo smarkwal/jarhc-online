@@ -3146,9 +3146,9 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │     │ │ ├── @types/estree@0.0.39
 │     │ │ ├── estree-walker@1.0.1
 │     │ │ ├── picomatch@2.3.1 deduped
-│     │ │ └── rollup@2.79.1 deduped
+│     │ │ └── rollup@2.79.2 deduped
 │     │ ├── @types/babel__core@7.20.5 deduped
-│     │ └── rollup@2.79.1 deduped
+│     │ └── rollup@2.79.2 deduped
 │     ├─┬ @rollup/plugin-node-resolve@11.2.1
 │     │ ├── @rollup/pluginutils@3.1.0 deduped
 │     │ ├─┬ @types/resolve@1.17.1
@@ -3157,12 +3157,12 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │     │ ├── deepmerge@4.3.1 deduped
 │     │ ├── is-module@1.0.0
 │     │ ├── resolve@1.22.8 deduped
-│     │ └── rollup@2.79.1 deduped
+│     │ └── rollup@2.79.2 deduped
 │     ├─┬ @rollup/plugin-replace@2.4.2
 │     │ ├── @rollup/pluginutils@3.1.0 deduped
 │     │ ├─┬ magic-string@0.25.9
 │     │ │ └── sourcemap-codec@1.4.8
-│     │ └── rollup@2.79.1 deduped
+│     │ └── rollup@2.79.2 deduped
 │     ├─┬ @surma/rollup-plugin-off-main-thread@2.2.3
 │     │ ├─┬ ejs@3.1.10
 │     │ │ └─┬ jake@10.9.1
@@ -3203,11 +3203,11 @@ react-app@0.1.0 /home/markwalder/Dev/IntelliJ/jarhc-online/react-app
 │     │ │ ├── merge-stream@2.0.0 deduped
 │     │ │ └─┬ supports-color@7.2.0
 │     │ │   └── has-flag@4.0.0
-│     │ ├── rollup@2.79.1 deduped
+│     │ ├── rollup@2.79.2 deduped
 │     │ ├─┬ serialize-javascript@4.0.0
 │     │ │ └── randombytes@2.1.0 deduped
 │     │ └── terser@5.31.1 deduped
-│     ├─┬ rollup@2.79.1
+│     ├─┬ rollup@2.79.2 overridden
 │     │ └── UNMET OPTIONAL DEPENDENCY fsevents@~2.3.2
 │     ├─┬ source-map@0.8.0-beta.0
 │     │ └─┬ whatwg-url@7.1.0

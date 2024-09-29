@@ -19,3 +19,7 @@ If a direct dependency is updated so that the fix is no longer needed, it should
 ### micromatch < 4.0.8
 
 `CVE-2024-4067`
+
+### rollup < 2.72.2
+
+`CVE-2024-47068`
