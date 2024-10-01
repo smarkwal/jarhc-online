@@ -34,7 +34,7 @@ dependencies {
 
     // test dependencies -------------------------------------
 
-    testFixturesApi("org.junit.jupiter:junit-jupiter:5.11.0")
+    testFixturesApi("org.junit.jupiter:junit-jupiter:5.11.1")
     testFixturesRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testFixturesApi("org.mockito:mockito-core:5.13.0")
     testFixturesApi("org.mockito:mockito-junit-jupiter:5.13.0")
