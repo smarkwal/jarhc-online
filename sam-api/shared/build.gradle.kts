@@ -11,7 +11,7 @@ dependencies {
 
     // FasterXML Jackson (transitive dependency of AWS SDK)
     // Fix CVE-2022-42003 and CVE-2022-42004 in Jackson Databind < 2.13.4.1
-    api(platform("com.fasterxml.jackson:jackson-bom:2.17.2"))
+    api(platform("com.fasterxml.jackson:jackson-bom:2.18.0"))
 
     // logging
     api("org.slf4j:slf4j-api:2.0.16")
