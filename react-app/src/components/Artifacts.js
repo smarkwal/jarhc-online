@@ -39,7 +39,7 @@ const Artifacts = {
 				coordinates: version
 			})
 		}
-		const url = process.env.REACT_APP_API_URL + "/maven/search"
+		const url = import.meta.env.VITE_API_URL + "/maven/search"
 		return fetch(url, requestOptions)
 			.then(Artifacts.handleResponse)
 			.catch(Artifacts.handleError)

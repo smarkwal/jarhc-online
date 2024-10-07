@@ -1,6 +1,7 @@
 {
   "name": "react-app",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "type": "module",
   "private": true,
   "engines": {
     "node": "18.20.0",
@@ -13,18 +14,15 @@
     "react-router-dom": "6.26.2"
   },
   "devDependencies": {
-    "react-scripts": "5.0.1",
-    "@babel/plugin-proposal-private-property-in-object": "7.21.11"
+    "vite": "5.4.8",
+    "@vitejs/plugin-react": "4.3.2"
   },
   "overrides": {
-    "express": "4.21.0",
-    "webpack": "5.94.0",
-    "micromatch": "4.0.8",
-    "rollup": "2.79.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build"
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
   },
   "eslintConfig": {
     "extends": [
