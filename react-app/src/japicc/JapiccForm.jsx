@@ -1,24 +1,15 @@
-import Navigation from "./components/Navigation";
 import React, {useReducer, useState} from "react";
-import Auth from "./components/Auth";
-import Artifacts from "./components/Artifacts";
-import ArtifactInput from "./components/ArtifactInput";
-import Report from "./components/Report";
+import Auth from "../components/Auth"
+import Artifacts from "../components/Artifacts";
+import ArtifactInput from "../components/ArtifactInput";
+import Report from "../components/Report";
+import JapiccAbout from "./JapiccAbout";
 
-function JarHC() {
-	return (<>
-		<Navigation/>
-		<div className="container">
-			<h2>JarHC - JAR Health Check</h2>
-			<JarHCForm/>
-		</div>
-	</>);
-}
-
-const JarHCForm = () => {
+const JapiccForm = () => {
 
 	const [state, setState] = useState({
-		version: "",
+		oldVersion: "",
+		newVersion: "",
 		loading: false,
 		reportURL: "",
 		errorMessage: ""
@@ -55,12 +46,13 @@ const JarHCForm = () => {
 				"Authorization": "Bearer " + token
 			},
 			body: JSON.stringify({
-				classpath: [state.version]
+				oldVersion: state.oldVersion,
+				newVersion: state.newVersion
 			})
 		};
 
 		// run JAPICC check
-		const requestURL = process.env.REACT_APP_API_URL + "/jarhc/submit";
+		const requestURL = import.meta.env.VITE_API_URL + "/japicc/submit";
 		fetch(requestURL, requestOptions)
 			.then(response => response.json())
 			.then(data => {
@@ -92,27 +84,38 @@ const JarHCForm = () => {
 	}
 
 	const isSubmitButtonEnabled = function() {
-		return Auth.isSignedIn() && Artifacts.isValid(state.version) && !state.loading;
+		return Auth.isSignedIn() && Artifacts.isValid(state.oldVersion) && Artifacts.isValid(state.newVersion) && !state.loading;
 	}
 
 	const getSubmitButtonClass = function() {
 		return isSubmitButtonEnabled() ? "btn-primary" : "btn-secondary";
 	}
 
-	const doSubmitExample = function(version) {
-		if (!Artifacts.isCached(version)) {
-			Artifacts.searchAsync(version).then(forceUpdate)
+	const doSubmitExample = function(oldVersion, newVersion) {
+		if (!Artifacts.isCached(oldVersion)) {
+			Artifacts.searchAsync(oldVersion).then(forceUpdate)
+		}
+		if (!Artifacts.isCached(newVersion)) {
+			Artifacts.searchAsync(newVersion).then(forceUpdate)
 		}
 		setState({
 			...state,
-			version: version,
+			oldVersion: oldVersion,
+			newVersion: newVersion,
 		})
 	}
 
-	const setVersion = function(version) {
+	const setOldVersion = function(version) {
 		setState({
 			...state,
-			version: version
+			oldVersion: version
+		})
+	}
+
+	const setNewVersion = function(version) {
+		setState({
+			...state,
+			newVersion: version
 		})
 	}
 
@@ -125,25 +128,29 @@ const JarHCForm = () => {
 
 	return (<div className="mb-4">
 		<div>
-			Analyze a set of Java libraries for compatibility at binary level. Find missing dependencies, duplicate classes, dangerous code, and much more.
+			Check API source and binary compatibility of two versions of a Java library.
 		</div>
 		<div className="mt-2">
-			Enter the Maven artifact coordinates of a Java library in the form <code>Group:Artifact:Version</code>.
+			Enter the Maven artifact coordinates of two versions of <strong>the same Java library</strong> in the form <code>Group:Artifact:Version</code>.
 		</div>
 		<div>
 			Examples:
 			<ul>
-				<Example version="org.springframework:spring-core:5.3.16" onClick={doSubmitExample}/>
-				<Example version="commons-io:commons-io:2.11.0" onClick={doSubmitExample}/>
-				<Example version="org.owasp.esapi:esapi:2.2.3.1" onClick={doSubmitExample}/>
-				<Example version="jakarta.xml.bind:jakarta.xml.bind-api:2.3.2" onClick={doSubmitExample}/>
+				<Example oldVersion="org.springframework:spring-core:5.3.0" newVersion="org.springframework:spring-core:5.3.16" onClick={doSubmitExample}/>
+				<Example oldVersion="commons-io:commons-io:2.10.0" newVersion="commons-io:commons-io:2.11.0" onClick={doSubmitExample}/>
+				<Example oldVersion="org.owasp.esapi:esapi:2.2.2.0" newVersion="org.owasp.esapi:esapi:2.2.3.1" onClick={doSubmitExample}/>
+				<Example oldVersion="javax.xml.bind:jaxb-api:2.3.0" newVersion="jakarta.xml.bind:jakarta.xml.bind-api:2.3.2" onClick={doSubmitExample}/>
 			</ul>
 		</div>
 		<form onSubmit={onSubmit} className="mb-0">
 			<div className="row align-items-md-top mb-3">
 				<div className="col-12 col-md-5 mt-3">
-					<label className="form-label">Library</label>
-					<ArtifactInput version={state.version} onUpdate={setVersion} onRefresh={forceUpdate}/>
+					<label className="form-label">Old version</label>
+					<ArtifactInput version={state.oldVersion} onUpdate={setOldVersion} onRefresh={forceUpdate}/>
+				</div>
+				<div className="col-12 col-md-5 mt-3">
+					<label className="form-label">New version</label>
+					<ArtifactInput version={state.newVersion} onUpdate={setNewVersion} onRefresh={forceUpdate}/>
 				</div>
 				<div className="col-12 col-md-2 mt-3">
 					<label className="form-label d-none d-md-block">&nbsp;</label>
@@ -158,20 +165,21 @@ const JarHCForm = () => {
 		{state.errorMessage && state.errorMessage.length > 0 && <div className="alert alert-danger">
 			{state.errorMessage}
 		</div>}
-		{state.reportURL && state.reportURL.length > 0 && <Report title="JAR Health Check Report" reportURL={state.reportURL} onClose={closeReport}/>}
+		{state.reportURL && state.reportURL.length > 0 ? <Report title="Java API Compliance Checker Report" reportURL={state.reportURL} onClose={closeReport}/> : <JapiccAbout/>}
 	</div>)
 }
 
 function Example({
-					 version,
+					 oldVersion,
+					 newVersion,
 					 onClick
 				 }) {
 	return <li>
-		<span role="button" onClick={() => onClick(version)}>
-			<code>{version}</code>
+		<span role="button" onClick={() => onClick(oldVersion, newVersion)}>
+			<code>{oldVersion}</code> and <code>{newVersion}</code>
 			<i className="bi bi-box-arrow-in-down-right text-primary ms-1"/>
 		</span>
 	</li>;
 }
 
-export default JarHC;
+export default JapiccForm;

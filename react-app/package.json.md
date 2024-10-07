@@ -6,20 +6,8 @@ If a direct dependency is updated so that the fix is no longer needed, it should
 
 ## Production dependencies
 
+*None*
+
 ## Development dependencies
 
-### express < 4.20.0
-
-`CVE-2024-43796`
-
-### webpack < 5.94.0
-
-`CVE-2024-43788`
-
-### micromatch < 4.0.8
-
-`CVE-2024-4067`
-
-### rollup < 2.72.2
-
-`CVE-2024-47068`
+*None*
