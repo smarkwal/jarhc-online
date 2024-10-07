@@ -48,7 +48,7 @@ serve -s build
 
 ### Deploy
 
-Use `aws s3 sycn` to copy the content of the `build/` folder into the S3 bucket `online.jarhc.org`.
+Use `aws s3 sycn` to copy the content of the `dist/` folder into the S3 bucket `online.jarhc.org`.
 
 Use `--delete` to delete files in S3 which do not exist locally.
 
@@ -57,7 +57,7 @@ Use `--exclude reports/*` to avoid deleting generated JAPICC reports.
 Use `--dryrun` to display the operations that would be performed without actually running them.
 
 ```shell
-aws s3 sync build/. s3://online.jarhc.org --delete --exclude reports/* # --dryrun
+aws s3 sync dist/. s3://online.jarhc.org --delete --exclude reports/* # --dryrun
 ```
 
 ## Project information
