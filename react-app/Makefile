@@ -19,4 +19,4 @@ delete:
 	aws s3 rm s3://online.jarhc.org --recursive
 
 run:
-	npm start
+	npm run preview

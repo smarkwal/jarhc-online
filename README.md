@@ -36,14 +36,13 @@ npm run build
 To run during development:
 
 ```shell
-npm start
+npm run dev
 ```
 
 To run the production build:
 
 ```shell
-npm install -g serve
-serve -s build
+npm run preview
 ```
 
 ### Deploy
