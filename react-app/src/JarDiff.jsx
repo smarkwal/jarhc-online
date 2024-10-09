@@ -1,5 +1,5 @@
-import Navigation from "./components/Navigation";
-import UnderConstruction from "./components/UnderConstruction";
+import Navigation from './components/Navigation.jsx';
+import UnderConstruction from './components/UnderConstruction.jsx';
 
 function JarDiff() {
 	return (<>

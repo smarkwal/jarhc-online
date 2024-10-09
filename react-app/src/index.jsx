@@ -1,12 +1,14 @@
 import React from 'react';
 import {createRoot} from 'react-dom/client';
 import {HashRouter, Route, Routes} from 'react-router-dom';
-import './index.css';
-import App from './App';
-import JAPICC from "./JAPICC";
-import JarHC from "./JarHC";
-import JarDiff from "./JarDiff";
-import SrcDiff from "./SrcDiff";
+
+import App from './App.jsx';
+import JAPICC from './JAPICC.jsx';
+import JarHC from './JarHC.jsx';
+import JarDiff from './JarDiff.jsx';
+import SrcDiff from './SrcDiff.jsx';
+
+import './App.css';
 
 let rootElement = document.getElementById('root');
 const root = createRoot(rootElement);

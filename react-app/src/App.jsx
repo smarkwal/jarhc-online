@@ -1,8 +1,9 @@
-import React from "react";
-import Card from "./components/Card";
-import Navigation from "./components/Navigation";
-import PayPalButton from "./components/PayPalButton";
-import ExternalLink from "./components/ExternalLink";
+import React from 'react';
+
+import Card from './components/Card.jsx';
+import Navigation from './components/Navigation.jsx';
+import PayPalButton from './components/PayPalButton.jsx';
+import ExternalLink from './components/ExternalLink.jsx';
 
 function App() {
 	return (<>

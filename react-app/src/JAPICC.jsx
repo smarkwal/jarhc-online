@@ -1,6 +1,7 @@
-import JapiccForm from "./japicc/JapiccForm";
-import Navigation from "./components/Navigation";
-import React from "react";
+import React from 'react';
+
+import JapiccForm from './japicc/JapiccForm.jsx';
+import Navigation from './components/Navigation.jsx';
 
 function JAPICC() {
 	return (<>

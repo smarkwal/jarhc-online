@@ -1,49 +1,51 @@
-import React, {useReducer, useState} from "react";
-import Auth from "../components/Auth"
-import Artifacts from "../components/Artifacts";
-import ArtifactInput from "../components/ArtifactInput";
-import Report from "../components/Report";
-import JapiccAbout from "./JapiccAbout";
+import React, {useReducer, useState} from 'react';
+
+import ArtifactInput from '../components/ArtifactInput.jsx';
+import Report from '../components/Report.jsx';
+import JapiccAbout from './JapiccAbout.jsx';
+
+import Auth from '../components/Auth.js';
+import Artifacts from '../components/Artifacts.js';
 
 const JapiccForm = () => {
 
 	const [state, setState] = useState({
-		oldVersion: "",
-		newVersion: "",
+		oldVersion: '',
+		newVersion: '',
 		loading: false,
-		reportURL: "",
-		errorMessage: ""
+		reportURL: '',
+		errorMessage: ''
 	});
 
 	// create a helper hook to force a rerender
 	const [, forceUpdate] = useReducer(x => x + 1, 0, (x) => x);
 
 	const onSubmit = function(event) {
-		event.preventDefault()
+		event.preventDefault();
 
 		// get ID token
-		const token = Auth.getIdToken()
+		const token = Auth.getIdToken();
 		if (!token) {
 			// TODO: error handling
-			console.error("ID token not found. Please sign in first.")
-			return
+			console.error('ID token not found. Please sign in first.');
+			return;
 		}
 
 		// show loading wheel
 		setState({
 			...state,
 			loading: true,
-			reportURL: "",
-			errorMessage: ""
-		})
+			reportURL: '',
+			errorMessage: ''
+		});
 
 		// prepare API request
 		const requestOptions = {
-			method: "POST",
-			credentials: "include",
+			method: 'POST',
+			credentials: 'include',
 			headers: {
-				"Content-Type": "application/json",
-				"Authorization": "Bearer " + token
+				'Content-Type': 'application/json',
+				'Authorization': 'Bearer ' + token
 			},
 			body: JSON.stringify({
 				oldVersion: state.oldVersion,
@@ -52,7 +54,7 @@ const JapiccForm = () => {
 		};
 
 		// run JAPICC check
-		const requestURL = import.meta.env.VITE_API_URL + "/japicc/submit";
+		const requestURL = import.meta.env.VITE_API_URL + '/japicc/submit';
 		fetch(requestURL, requestOptions)
 			.then(response => response.json())
 			.then(data => {
@@ -60,7 +62,7 @@ const JapiccForm = () => {
 				let reportURL = data.reportURL;
 				if (reportURL) {
 					// add timestamp to prevent loading report from cache
-					reportURL += "?timestamp=" + Date.now();
+					reportURL += '?timestamp=' + Date.now();
 				}
 
 				// show report or error message
@@ -69,62 +71,62 @@ const JapiccForm = () => {
 					loading: false,
 					reportURL: reportURL,
 					errorMessage: data.errorMessage
-				})
+				});
 			})
 			.catch(error => {
-				console.error("API error:", error)
+				console.error('API error:', error);
 
 				// show error message
 				setState({
 					...state,
 					loading: false,
-					errorMessage: "" + error
-				})
+					errorMessage: '' + error
+				});
 			});
-	}
+	};
 
 	const isSubmitButtonEnabled = function() {
 		return Auth.isSignedIn() && Artifacts.isValid(state.oldVersion) && Artifacts.isValid(state.newVersion) && !state.loading;
-	}
+	};
 
 	const getSubmitButtonClass = function() {
-		return isSubmitButtonEnabled() ? "btn-primary" : "btn-secondary";
-	}
+		return isSubmitButtonEnabled() ? 'btn-primary' : 'btn-secondary';
+	};
 
 	const doSubmitExample = function(oldVersion, newVersion) {
 		if (!Artifacts.isCached(oldVersion)) {
-			Artifacts.searchAsync(oldVersion).then(forceUpdate)
+			Artifacts.searchAsync(oldVersion).then(forceUpdate);
 		}
 		if (!Artifacts.isCached(newVersion)) {
-			Artifacts.searchAsync(newVersion).then(forceUpdate)
+			Artifacts.searchAsync(newVersion).then(forceUpdate);
 		}
 		setState({
 			...state,
 			oldVersion: oldVersion,
 			newVersion: newVersion,
-		})
-	}
+		});
+	};
 
 	const setOldVersion = function(version) {
 		setState({
 			...state,
 			oldVersion: version
-		})
-	}
+		});
+	};
 
 	const setNewVersion = function(version) {
 		setState({
 			...state,
 			newVersion: version
-		})
-	}
+		});
+	};
 
 	const closeReport = function() {
 		setState({
 			...state,
-			reportURL: ""
-		})
-	}
+			reportURL: ''
+		});
+	};
 
 	return (<div className="mb-4">
 		<div>
@@ -166,8 +168,8 @@ const JapiccForm = () => {
 			{state.errorMessage}
 		</div>}
 		{state.reportURL && state.reportURL.length > 0 ? <Report title="Java API Compliance Checker Report" reportURL={state.reportURL} onClose={closeReport}/> : <JapiccAbout/>}
-	</div>)
-}
+	</div>);
+};
 
 function Example({
 					 oldVersion,

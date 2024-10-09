@@ -1,9 +1,11 @@
-import Navigation from "./components/Navigation";
-import React, {useReducer, useState} from "react";
-import Auth from "./components/Auth";
-import Artifacts from "./components/Artifacts";
-import ArtifactInput from "./components/ArtifactInput";
-import Report from "./components/Report";
+import React, {useReducer, useState} from 'react';
+
+import Navigation from './components/Navigation.jsx';
+import ArtifactInput from './components/ArtifactInput.jsx';
+import Report from './components/Report.jsx';
+
+import Auth from './components/Auth.js';
+import Artifacts from './components/Artifacts.js';
 
 function JarHC() {
 	return (<>
@@ -18,41 +20,41 @@ function JarHC() {
 const JarHCForm = () => {
 
 	const [state, setState] = useState({
-		version: "",
+		version: '',
 		loading: false,
-		reportURL: "",
-		errorMessage: ""
+		reportURL: '',
+		errorMessage: ''
 	});
 
 	// create a helper hook to force a rerender
 	const [, forceUpdate] = useReducer(x => x + 1, 0, (x) => x);
 
 	const onSubmit = function(event) {
-		event.preventDefault()
+		event.preventDefault();
 
 		// get ID token
-		const token = Auth.getIdToken()
+		const token = Auth.getIdToken();
 		if (!token) {
 			// TODO: error handling
-			console.error("ID token not found. Please sign in first.")
-			return
+			console.error('ID token not found. Please sign in first.');
+			return;
 		}
 
 		// show loading wheel
 		setState({
 			...state,
 			loading: true,
-			reportURL: "",
-			errorMessage: ""
-		})
+			reportURL: '',
+			errorMessage: ''
+		});
 
 		// prepare API request
 		const requestOptions = {
-			method: "POST",
-			credentials: "include",
+			method: 'POST',
+			credentials: 'include',
 			headers: {
-				"Content-Type": "application/json",
-				"Authorization": "Bearer " + token
+				'Content-Type': 'application/json',
+				'Authorization': 'Bearer ' + token
 			},
 			body: JSON.stringify({
 				classpath: [state.version]
@@ -60,7 +62,7 @@ const JarHCForm = () => {
 		};
 
 		// run JAPICC check
-		const requestURL = import.meta.env.VITE_API_URL + "/jarhc/submit";
+		const requestURL = import.meta.env.VITE_API_URL + '/jarhc/submit';
 		fetch(requestURL, requestOptions)
 			.then(response => response.json())
 			.then(data => {
@@ -68,7 +70,7 @@ const JarHCForm = () => {
 				let reportURL = data.reportURL;
 				if (reportURL) {
 					// add timestamp to prevent loading report from cache
-					reportURL += "?timestamp=" + Date.now();
+					reportURL += '?timestamp=' + Date.now();
 				}
 
 				// show report or error message
@@ -77,51 +79,51 @@ const JarHCForm = () => {
 					loading: false,
 					reportURL: reportURL,
 					errorMessage: data.errorMessage
-				})
+				});
 			})
 			.catch(error => {
-				console.error("API error:", error)
+				console.error('API error:', error);
 
 				// show error message
 				setState({
 					...state,
 					loading: false,
-					errorMessage: "" + error
-				})
+					errorMessage: '' + error
+				});
 			});
-	}
+	};
 
 	const isSubmitButtonEnabled = function() {
 		return Auth.isSignedIn() && Artifacts.isValid(state.version) && !state.loading;
-	}
+	};
 
 	const getSubmitButtonClass = function() {
-		return isSubmitButtonEnabled() ? "btn-primary" : "btn-secondary";
-	}
+		return isSubmitButtonEnabled() ? 'btn-primary' : 'btn-secondary';
+	};
 
 	const doSubmitExample = function(version) {
 		if (!Artifacts.isCached(version)) {
-			Artifacts.searchAsync(version).then(forceUpdate)
+			Artifacts.searchAsync(version).then(forceUpdate);
 		}
 		setState({
 			...state,
 			version: version,
-		})
-	}
+		});
+	};
 
 	const setVersion = function(version) {
 		setState({
 			...state,
 			version: version
-		})
-	}
+		});
+	};
 
 	const closeReport = function() {
 		setState({
 			...state,
-			reportURL: ""
-		})
-	}
+			reportURL: ''
+		});
+	};
 
 	return (<div className="mb-4">
 		<div>
@@ -159,8 +161,8 @@ const JarHCForm = () => {
 			{state.errorMessage}
 		</div>}
 		{state.reportURL && state.reportURL.length > 0 && <Report title="JAR Health Check Report" reportURL={state.reportURL} onClose={closeReport}/>}
-	</div>)
-}
+	</div>);
+};
 
 function Example({
 					 version,

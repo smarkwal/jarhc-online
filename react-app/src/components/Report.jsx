@@ -11,29 +11,29 @@ const Report = ({
 		timeout: false
 	});
 
-	let pollReportTimeout
-	let pollReportDelay = 0
-	const pollReportDelayMax = 10
+	let pollReportTimeout;
+	let pollReportDelay = 0;
+	const pollReportDelayMax = 10;
 
 	useEffect(() => {
 		if (pollReportTimeout) {
-			window.clearTimeout(pollReportTimeout)
+			window.clearTimeout(pollReportTimeout);
 		}
 		if (state.polling && !state.timeout) {
-			pollReportStart()
+			pollReportStart();
 		}
 	});
 
 	function pollReportStart() {
-		pollReportDelay += 1 // increase delay by 1 second for every iteration
-		pollReportTimeout = window.setTimeout(pollReport, pollReportDelay * 1000)
+		pollReportDelay += 1; // increase delay by 1 second for every iteration
+		pollReportTimeout = window.setTimeout(pollReport, pollReportDelay * 1000);
 	}
 
 	function pollReport() {
 
 		const fetchOptions = {
-			method: "HEAD"
-		}
+			method: 'HEAD'
+		};
 
 		fetch(reportURL, fetchOptions)
 			.then(res => {
@@ -42,37 +42,37 @@ const Report = ({
 					setState({
 						...state,
 						polling: false
-					})
+					});
 				} else {
 					// TODO: check if status code is 404
 					// report does not exist
 					if (pollReportDelay < pollReportDelayMax) {
 						// schedule another polling request
-						pollReportStart()
+						pollReportStart();
 					} else {
 						// show timeout message and retry button
 						setState({
 							...state,
 							timeout: true
-						})
+						});
 					}
 				}
 			})
 			.catch(err => {
-				console.error(err)
-			})
+				console.error(err);
+			});
 
 	}
 
 	function pollRequestRetry() {
 		// restart polling with 5 seconds delay
-		pollReportDelay = 5
+		pollReportDelay = 5;
 		// clear timeout state
 		// -> this trigger useEffect and will restart polling
 		setState({
 			...state,
 			timeout: false
-		})
+		});
 	}
 
 	return (<div className="border border-success border-1 mt-5">
@@ -105,7 +105,7 @@ function WaitMessage(props) {
 }
 
 function ReportFrame(props) {
-	return <iframe src={props.src} className="w-100 mt-0" style={{height: "500px"}} title="JAPICC Report"/>;
+	return <iframe src={props.src} className="w-100 mt-0" style={{height: '500px'}} title="JAPICC Report"/>;
 }
 
 export default Report;

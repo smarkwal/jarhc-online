@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
 import {DebounceInput} from 'react-debounce-input';
-import Artifacts from './Artifacts'
+
+import Artifacts from './Artifacts.js';
 
 function ArtifactInput({
 						   version,
@@ -8,19 +9,19 @@ function ArtifactInput({
 						   onRefresh
 					   }) {
 
-	const VERSION_REGEX = "^[^:]+:[^:]+:[^:]*[^.]$"
+	const VERSION_REGEX = '^[^:]+:[^:]+:[^:]*[^.]$';
 
 	// on every change in the input field ...
 	function onChange(event) {
 
-		const version = event.target.value.trim()
+		const version = event.target.value.trim();
 
-		onUpdate(version)
+		onUpdate(version);
 
 		// check if artifact is cached
 		if (version.match(VERSION_REGEX)) {
 			if (!Artifacts.isCached(version)) {
-				Artifacts.searchAsync(version).then(onRefresh)
+				Artifacts.searchAsync(version).then(onRefresh);
 			}
 		}
 
@@ -30,22 +31,22 @@ function ArtifactInput({
 
 		if (version === undefined || version.length === 0) {
 			// input field is empty
-			return ""
+			return '';
 		}
 
 		if (!version.match(VERSION_REGEX)) {
 			// input field contains an invalid value
-			return "is-invalid"
+			return 'is-invalid';
 		}
 
 		if (Artifacts.isCached(version)) {
 			if (Artifacts.isValid(version)) {
-				return "is-valid"
+				return 'is-valid';
 			} else {
-				return "is-invalid"
+				return 'is-invalid';
 			}
 		} else {
-			return ""
+			return '';
 		}
 
 	}
