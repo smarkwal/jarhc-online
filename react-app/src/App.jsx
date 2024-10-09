@@ -113,7 +113,7 @@ function Donations() {
 					<code>3L1V8yGPwSjixTScCpE78fUr16tEWdpD1n</code>
 				</ExternalLink>
 			</p>
-			<p className="mb-1">If you like it comfortable, use Paypal:</p>
+			<p className="mb-1">If you like it comfortable, use PayPal:</p>
 			<PayPalButton/>
 		</div>
 	</>;
