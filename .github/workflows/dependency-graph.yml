@@ -2,6 +2,10 @@ name: Dependency Graph
 
 on:
   push:
+    paths:
+      - 'sam-api/**'
+      - 'test-prod/**'
+      - '.github/workflows/dependency-graph.yml'
   workflow_dispatch:
     inputs:
       dependencyGraphAction:
