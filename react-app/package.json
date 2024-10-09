@@ -4,8 +4,8 @@
   "type": "module",
   "private": true,
   "engines": {
-    "node": "18.20.0",
-    "npm": "10.5.0"
+    "node": "20.18.0",
+    "npm": "10.8.2"
   },
   "dependencies": {
     "react": "18.3.1",
