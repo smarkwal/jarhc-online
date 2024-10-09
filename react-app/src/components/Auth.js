@@ -1,8 +1,7 @@
 const Auth = {
 
-	// TODO: set via process.env variables
-	issuerURL: 'https://login.jarhc.org',
-	clientId: '7qa0i0lnqnii4rr6pbjh0etu1a',
+	issuerURL: import.meta.env.VITE_COGNITO_ISSUER_URL,
+	clientId: import.meta.env.VITE_COGNITO_CLIENT_ID,
 	callbackBaseURL: window.location.origin,
 
 	isSignedIn: function() {
