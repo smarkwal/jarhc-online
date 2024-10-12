@@ -1,0 +1,1008 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "API gateway",
+  "Parameters": {
+    "DnsZoneID": {
+      "Description": "ID of hosted DNS zone",
+      "Type": "String",
+      "Default": "Z39VOOPW73P7H0"
+    },
+    "WebsiteBucketName": {
+      "Description": "Name of S3 bucket hosting public website",
+      "Type": "String",
+      "Default": "online.jarhc.org"
+    },
+    "WebsiteURL": {
+      "Description": "URL for public website (CloudFront distribution)",
+      "Type": "String",
+      "Default": "https://online.jarhc.org"
+    },
+    "CognitoUserPoolARN": {
+      "Description": "Cognito User Pool ARN",
+      "Type": "String",
+      "Default": "arn:aws:cognito-idp:eu-central-1:837783538267:userpool/eu-central-1_duUV8DgO7"
+    },
+    "WebsiteBucketURL": {
+      "Description": "URL of S3 bucket hosting JARHC reports",
+      "Type": "String",
+      "Default": "https://online.jarhc.org"
+    },
+    "ApiDomain": {
+      "Description": "Domain name for API gateway",
+      "Type": "String",
+      "Default": "api.jarhc.org"
+    }
+  },
+  "Outputs": {
+    "ApiGatewayUrl": {
+      "Description": "Base URL of API Gateway.",
+      "Value": {
+        "Fn::Sub": "https://${RestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+      }
+    }
+  },
+  "Resources": {
+    "RestApiFunctionMavenSearchPermissionProd": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Ref": "RestApiFunctionAliasLive"
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Sub": [
+            "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${__ApiId__}/${__Stage__}/POST/maven/search",
+            {
+              "__ApiId__": {
+                "Ref": "RestApi"
+              },
+              "__Stage__": "*"
+            }
+          ]
+        }
+      }
+    },
+    "RestApiDeploymentda0c697d37": {
+      "Type": "AWS::ApiGateway::Deployment",
+      "Properties": {
+        "Description": "RestApi deployment id: da0c697d373d21ac37e4fed735198b7705ad0e81",
+        "RestApiId": {
+          "Ref": "RestApi"
+        },
+        "StageName": "Stage"
+      }
+    },
+    "ErrorQueue": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "QueueName": "jarhc-online-error-queue",
+        "MessageRetentionPeriod": 1209600
+      },
+      "Metadata": {
+        "SamResourceId": "ErrorQueue"
+      }
+    },
+    "RestApiFunctionVersionfd84d95e06": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "RestApiFunction"
+        }
+      }
+    },
+    "RestApiFunctionJapiccSubmitPermissionProd": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Ref": "RestApiFunctionAliasLive"
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Sub": [
+            "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${__ApiId__}/${__Stage__}/POST/japicc/submit",
+            {
+              "__ApiId__": {
+                "Ref": "RestApi"
+              },
+              "__Stage__": "*"
+            }
+          ]
+        }
+      }
+    },
+    "JarhcCheckFunctionAliasLive": {
+      "Type": "AWS::Lambda::Alias",
+      "Properties": {
+        "Name": "Live",
+        "FunctionName": {
+          "Ref": "JarhcCheckFunction"
+        },
+        "FunctionVersion": {
+          "Fn::GetAtt": [
+            "JarhcCheckFunctionVersionc64849b36b",
+            "Version"
+          ]
+        }
+      }
+    },
+    "ApiGatewayDomainNamed39b733ace": {
+      "Type": "AWS::ApiGateway::DomainName",
+      "Properties": {
+        "RegionalCertificateArn": {
+          "Ref": "ApiCertificate"
+        },
+        "DomainName": "api.jarhc.org",
+        "EndpointConfiguration": {
+          "Types": [
+            "REGIONAL"
+          ]
+        }
+      }
+    },
+    "RestApiFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Metadata": {
+        "SamResourceId": "RestApiFunction"
+      },
+      "Properties": {
+        "Code": {
+          "S3Bucket": "aws-sam-cli-managed-default-samclisourcebucket-lcbyi0cw90q3",
+          "S3Key": "jarhc-online-api/2d1a8b550a8d0086639fe92705c1363d"
+        },
+        "FunctionName": "rest-api",
+        "Handler": "org.jarhc.online.rest.Handler",
+        "MemorySize": 512,
+        "Role": {
+          "Fn::GetAtt": [
+            "RestApiFunctionRole",
+            "Arn"
+          ]
+        },
+        "Runtime": "java11",
+        "Timeout": 10,
+        "Environment": {
+          "Variables": {
+            "BUCKET_NAME": {
+              "Ref": "WebsiteBucketName"
+            },
+            "BUCKET_URL": {
+              "Ref": "WebsiteBucketURL"
+            },
+            "JAVA_TOOL_OPTIONS": "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
+          }
+        },
+        "Tags": [
+          {
+            "Key": "lambda:createdBy",
+            "Value": "SAM"
+          }
+        ],
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Architectures": [
+          "x86_64"
+        ]
+      }
+    },
+    "JarhcCheckFunctionEventInvokeConfig": {
+      "Type": "AWS::Lambda::EventInvokeConfig",
+      "DependsOn": [
+        "JarhcCheckFunctionAliasLive"
+      ],
+      "Metadata": {
+        "SamResourceId": "JarhcCheckFunction"
+      },
+      "Properties": {
+        "DestinationConfig": {},
+        "FunctionName": {
+          "Ref": "JarhcCheckFunction"
+        },
+        "MaximumEventAgeInSeconds": 120,
+        "MaximumRetryAttempts": 0,
+        "Qualifier": "Live"
+      }
+    },
+    "RecordSetGroup877b93814a": {
+      "Type": "AWS::Route53::RecordSetGroup",
+      "Properties": {
+        "HostedZoneId": "Z39VOOPW73P7H0",
+        "RecordSets": [
+          {
+            "Name": "api.jarhc.org",
+            "Type": "A",
+            "AliasTarget": {
+              "EvaluateTargetHealth": false,
+              "HostedZoneId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayDomainNamed39b733ace",
+                  "RegionalHostedZoneId"
+                ]
+              },
+              "DNSName": {
+                "Fn::GetAtt": [
+                  "ApiGatewayDomainNamed39b733ace",
+                  "RegionalDomainName"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "RestApiFunctionRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "RoleName": "rest-api-role",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "lambda.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ]
+            }
+          ]
+        },
+        "ManagedPolicyArns": [
+          "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
+          "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+          "arn:aws:iam::aws:policy/service-role/AWSLambdaRole",
+          "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
+        ]
+      },
+      "Metadata": {
+        "SamResourceId": "RestApiFunctionRole"
+      }
+    },
+    "RestApiFunctionAliasLive": {
+      "Type": "AWS::Lambda::Alias",
+      "Properties": {
+        "Name": "Live",
+        "FunctionName": {
+          "Ref": "RestApiFunction"
+        },
+        "FunctionVersion": {
+          "Fn::GetAtt": [
+            "RestApiFunctionVersionfd84d95e06",
+            "Version"
+          ]
+        }
+      }
+    },
+    "RestApiProdStage": {
+      "Type": "AWS::ApiGateway::Stage",
+      "Properties": {
+        "DeploymentId": {
+          "Ref": "RestApiDeploymentda0c697d37"
+        },
+        "RestApiId": {
+          "Ref": "RestApi"
+        },
+        "StageName": "Prod",
+        "MethodSettings": [
+          {
+            "HttpMethod": "*",
+            "ResourcePath": "/*",
+            "ThrottlingBurstLimit": 20,
+            "ThrottlingRateLimit": 10
+          }
+        ]
+      }
+    },
+    "JarhcCheckFunctionVersionc64849b36b": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "JarhcCheckFunction"
+        }
+      }
+    },
+    "AsyncFunctionRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "RoleName": "async-function-role",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "lambda.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ]
+            }
+          ]
+        },
+        "ManagedPolicyArns": [
+          "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
+          "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+          "arn:aws:iam::aws:policy/AmazonSQSFullAccess",
+          "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+        ]
+      },
+      "Metadata": {
+        "SamResourceId": "AsyncFunctionRole"
+      }
+    },
+    "JarhcCheckFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Metadata": {
+        "SamResourceId": "JarhcCheckFunction"
+      },
+      "Properties": {
+        "Code": {
+          "S3Bucket": "aws-sam-cli-managed-default-samclisourcebucket-lcbyi0cw90q3",
+          "S3Key": "jarhc-online-api/0e7882a16924b5dce32769213f64627d"
+        },
+        "DeadLetterConfig": {
+          "TargetArn": {
+            "Fn::GetAtt": [
+              "ErrorQueue",
+              "Arn"
+            ]
+          }
+        },
+        "FunctionName": "jarhc-check",
+        "Handler": "org.jarhc.online.jarhc.Handler",
+        "MemorySize": 1024,
+        "Role": {
+          "Fn::GetAtt": [
+            "AsyncFunctionRole",
+            "Arn"
+          ]
+        },
+        "Runtime": "java11",
+        "Timeout": 60,
+        "Environment": {
+          "Variables": {
+            "BUCKET_NAME": {
+              "Ref": "WebsiteBucketName"
+            },
+            "BUCKET_URL": {
+              "Ref": "WebsiteBucketURL"
+            }
+          }
+        },
+        "Tags": [
+          {
+            "Key": "lambda:createdBy",
+            "Value": "SAM"
+          }
+        ],
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Architectures": [
+          "x86_64"
+        ]
+      }
+    },
+    "ApiCertificate": {
+      "Type": "AWS::CertificateManager::Certificate",
+      "Properties": {
+        "DomainName": {
+          "Ref": "ApiDomain"
+        },
+        "ValidationMethod": "DNS",
+        "DomainValidationOptions": [
+          {
+            "DomainName": {
+              "Ref": "ApiDomain"
+            },
+            "HostedZoneId": {
+              "Ref": "DnsZoneID"
+            }
+          }
+        ]
+      },
+      "Metadata": {
+        "SamResourceId": "ApiCertificate"
+      }
+    },
+    "JapiccCheckFunctionVersion1d0277932a": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "JapiccCheckFunction"
+        }
+      }
+    },
+    "RestApiBasePathMapping": {
+      "Type": "AWS::ApiGateway::BasePathMapping",
+      "Properties": {
+        "DomainName": {
+          "Ref": "ApiGatewayDomainNamed39b733ace"
+        },
+        "RestApiId": {
+          "Ref": "RestApi"
+        },
+        "Stage": {
+          "Ref": "RestApiProdStage"
+        }
+      }
+    },
+    "JapiccCheckFunctionAliasLive": {
+      "Type": "AWS::Lambda::Alias",
+      "Properties": {
+        "Name": "Live",
+        "FunctionName": {
+          "Ref": "JapiccCheckFunction"
+        },
+        "FunctionVersion": {
+          "Fn::GetAtt": [
+            "JapiccCheckFunctionVersion1d0277932a",
+            "Version"
+          ]
+        }
+      }
+    },
+    "RestApi": {
+      "Type": "AWS::ApiGateway::RestApi",
+      "Metadata": {
+        "SamResourceId": "RestApi"
+      },
+      "Properties": {
+        "Body": {
+          "info": {
+            "version": "1.0",
+            "title": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          "paths": {
+            "/japicc/submit": {
+              "post": {
+                "x-amazon-apigateway-integration": {
+                  "httpMethod": "POST",
+                  "type": "aws_proxy",
+                  "uri": {
+                    "Fn::Sub": "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${RestApiFunctionAliasLive}/invocations"
+                  }
+                },
+                "x-amazon-apigateway-request-validator": "body-only",
+                "security": [
+                  {
+                    "CognitoAuthorizer": []
+                  }
+                ],
+                "parameters": [
+                  {
+                    "required": true,
+                    "in": "body",
+                    "name": "japiccsubmitmodel",
+                    "schema": {
+                      "$ref": "#/definitions/japiccsubmitmodel"
+                    }
+                  }
+                ],
+                "responses": {}
+              },
+              "options": {
+                "x-amazon-apigateway-integration": {
+                  "type": "mock",
+                  "requestTemplates": {
+                    "application/json": "{\n  \"statusCode\" : 200\n}\n"
+                  },
+                  "responses": {
+                    "default": {
+                      "statusCode": "200",
+                      "responseTemplates": {
+                        "application/json": "{}\n"
+                      },
+                      "responseParameters": {
+                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization'",
+                        "method.response.header.Access-Control-Allow-Origin": {
+                          "Fn::Sub": "'${WebsiteURL}'"
+                        },
+                        "method.response.header.Access-Control-Max-Age": "'600'",
+                        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'",
+                        "method.response.header.Access-Control-Allow-Credentials": "'true'"
+                      }
+                    }
+                  }
+                },
+                "consumes": [
+                  "application/json"
+                ],
+                "summary": "CORS support",
+                "responses": {
+                  "200": {
+                    "headers": {
+                      "Access-Control-Allow-Origin": {
+                        "type": "string"
+                      },
+                      "Access-Control-Allow-Headers": {
+                        "type": "string"
+                      },
+                      "Access-Control-Max-Age": {
+                        "type": "integer"
+                      },
+                      "Access-Control-Allow-Methods": {
+                        "type": "string"
+                      },
+                      "Access-Control-Allow-Credentials": {
+                        "type": "string"
+                      }
+                    },
+                    "description": "Default response for CORS method"
+                  }
+                },
+                "produces": [
+                  "application/json"
+                ]
+              }
+            },
+            "/auth/validate": {
+              "options": {
+                "x-amazon-apigateway-integration": {
+                  "type": "mock",
+                  "requestTemplates": {
+                    "application/json": "{\n  \"statusCode\" : 200\n}\n"
+                  },
+                  "responses": {
+                    "default": {
+                      "statusCode": "200",
+                      "responseTemplates": {
+                        "application/json": "{}\n"
+                      },
+                      "responseParameters": {
+                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization'",
+                        "method.response.header.Access-Control-Allow-Origin": {
+                          "Fn::Sub": "'${WebsiteURL}'"
+                        },
+                        "method.response.header.Access-Control-Max-Age": "'600'",
+                        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'",
+                        "method.response.header.Access-Control-Allow-Credentials": "'true'"
+                      }
+                    }
+                  }
+                },
+                "consumes": [
+                  "application/json"
+                ],
+                "summary": "CORS support",
+                "responses": {
+                  "200": {
+                    "headers": {
+                      "Access-Control-Allow-Origin": {
+                        "type": "string"
+                      },
+                      "Access-Control-Allow-Headers": {
+                        "type": "string"
+                      },
+                      "Access-Control-Max-Age": {
+                        "type": "integer"
+                      },
+                      "Access-Control-Allow-Methods": {
+                        "type": "string"
+                      },
+                      "Access-Control-Allow-Credentials": {
+                        "type": "string"
+                      }
+                    },
+                    "description": "Default response for CORS method"
+                  }
+                },
+                "produces": [
+                  "application/json"
+                ]
+              },
+              "get": {
+                "x-amazon-apigateway-integration": {
+                  "httpMethod": "POST",
+                  "type": "aws_proxy",
+                  "uri": {
+                    "Fn::Sub": "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${RestApiFunctionAliasLive}/invocations"
+                  }
+                },
+                "security": [
+                  {
+                    "CognitoAuthorizer": []
+                  }
+                ],
+                "responses": {}
+              }
+            },
+            "/jarhc/submit": {
+              "post": {
+                "x-amazon-apigateway-integration": {
+                  "httpMethod": "POST",
+                  "type": "aws_proxy",
+                  "uri": {
+                    "Fn::Sub": "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${RestApiFunctionAliasLive}/invocations"
+                  }
+                },
+                "x-amazon-apigateway-request-validator": "body-only",
+                "security": [
+                  {
+                    "CognitoAuthorizer": []
+                  }
+                ],
+                "parameters": [
+                  {
+                    "required": true,
+                    "in": "body",
+                    "name": "jarhcsubmitmodel",
+                    "schema": {
+                      "$ref": "#/definitions/jarhcsubmitmodel"
+                    }
+                  }
+                ],
+                "responses": {}
+              },
+              "options": {
+                "x-amazon-apigateway-integration": {
+                  "type": "mock",
+                  "requestTemplates": {
+                    "application/json": "{\n  \"statusCode\" : 200\n}\n"
+                  },
+                  "responses": {
+                    "default": {
+                      "statusCode": "200",
+                      "responseTemplates": {
+                        "application/json": "{}\n"
+                      },
+                      "responseParameters": {
+                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization'",
+                        "method.response.header.Access-Control-Allow-Origin": {
+                          "Fn::Sub": "'${WebsiteURL}'"
+                        },
+                        "method.response.header.Access-Control-Max-Age": "'600'",
+                        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'",
+                        "method.response.header.Access-Control-Allow-Credentials": "'true'"
+                      }
+                    }
+                  }
+                },
+                "consumes": [
+                  "application/json"
+                ],
+                "summary": "CORS support",
+                "responses": {
+                  "200": {
+                    "headers": {
+                      "Access-Control-Allow-Origin": {
+                        "type": "string"
+                      },
+                      "Access-Control-Allow-Headers": {
+                        "type": "string"
+                      },
+                      "Access-Control-Max-Age": {
+                        "type": "integer"
+                      },
+                      "Access-Control-Allow-Methods": {
+                        "type": "string"
+                      },
+                      "Access-Control-Allow-Credentials": {
+                        "type": "string"
+                      }
+                    },
+                    "description": "Default response for CORS method"
+                  }
+                },
+                "produces": [
+                  "application/json"
+                ]
+              }
+            },
+            "/maven/search": {
+              "post": {
+                "x-amazon-apigateway-integration": {
+                  "httpMethod": "POST",
+                  "type": "aws_proxy",
+                  "uri": {
+                    "Fn::Sub": "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${RestApiFunctionAliasLive}/invocations"
+                  }
+                },
+                "x-amazon-apigateway-request-validator": "body-only",
+                "security": [
+                  {
+                    "NONE": []
+                  }
+                ],
+                "parameters": [
+                  {
+                    "required": true,
+                    "in": "body",
+                    "name": "mavensearchmodel",
+                    "schema": {
+                      "$ref": "#/definitions/mavensearchmodel"
+                    }
+                  }
+                ],
+                "responses": {}
+              },
+              "options": {
+                "x-amazon-apigateway-integration": {
+                  "type": "mock",
+                  "requestTemplates": {
+                    "application/json": "{\n  \"statusCode\" : 200\n}\n"
+                  },
+                  "responses": {
+                    "default": {
+                      "statusCode": "200",
+                      "responseTemplates": {
+                        "application/json": "{}\n"
+                      },
+                      "responseParameters": {
+                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization'",
+                        "method.response.header.Access-Control-Allow-Origin": {
+                          "Fn::Sub": "'${WebsiteURL}'"
+                        },
+                        "method.response.header.Access-Control-Max-Age": "'600'",
+                        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'",
+                        "method.response.header.Access-Control-Allow-Credentials": "'true'"
+                      }
+                    }
+                  }
+                },
+                "consumes": [
+                  "application/json"
+                ],
+                "summary": "CORS support",
+                "responses": {
+                  "200": {
+                    "headers": {
+                      "Access-Control-Allow-Origin": {
+                        "type": "string"
+                      },
+                      "Access-Control-Allow-Headers": {
+                        "type": "string"
+                      },
+                      "Access-Control-Max-Age": {
+                        "type": "integer"
+                      },
+                      "Access-Control-Allow-Methods": {
+                        "type": "string"
+                      },
+                      "Access-Control-Allow-Credentials": {
+                        "type": "string"
+                      }
+                    },
+                    "description": "Default response for CORS method"
+                  }
+                },
+                "produces": [
+                  "application/json"
+                ]
+              }
+            }
+          },
+          "x-amazon-apigateway-gateway-responses": {
+            "DEFAULT_5XX": {
+              "responseParameters": {
+                "gatewayresponse.header.Access-Control-Allow-Origin": {
+                  "Fn::Sub": "'${WebsiteURL}'"
+                },
+                "gatewayresponse.header.Access-Control-Allow-Credentials": "'true'"
+              },
+              "responseTemplates": {}
+            },
+            "DEFAULT_4XX": {
+              "responseParameters": {
+                "gatewayresponse.header.Access-Control-Allow-Origin": {
+                  "Fn::Sub": "'${WebsiteURL}'"
+                },
+                "gatewayresponse.header.Access-Control-Allow-Credentials": "'true'"
+              },
+              "responseTemplates": {}
+            }
+          },
+          "securityDefinitions": {
+            "CognitoAuthorizer": {
+              "in": "header",
+              "type": "apiKey",
+              "name": "Authorization",
+              "x-amazon-apigateway-authorizer": {
+                "providerARNs": [
+                  "arn:aws:cognito-idp:eu-central-1:837783538267:userpool/eu-central-1_duUV8DgO7"
+                ],
+                "type": "cognito_user_pools"
+              },
+              "x-amazon-apigateway-authtype": "cognito_user_pools"
+            }
+          },
+          "definitions": {
+            "jarhcsubmitmodel": {
+              "additionalProperties": false,
+              "required": [
+                "classpath"
+              ],
+              "type": "object",
+              "properties": {
+                "provided": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "classpath": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "mavensearchmodel": {
+              "additionalProperties": false,
+              "required": [
+                "coordinates"
+              ],
+              "type": "object",
+              "properties": {
+                "coordinates": {
+                  "type": "string"
+                }
+              }
+            },
+            "japiccsubmitmodel": {
+              "additionalProperties": false,
+              "required": [
+                "oldVersion",
+                "newVersion"
+              ],
+              "type": "object",
+              "properties": {
+                "newVersion": {
+                  "type": "string"
+                },
+                "oldVersion": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "swagger": "2.0",
+          "x-amazon-apigateway-request-validators": {
+            "body-only": {
+              "validateRequestParameters": false,
+              "validateRequestBody": true
+            }
+          }
+        },
+        "Parameters": {
+          "endpointConfigurationTypes": "REGIONAL"
+        },
+        "EndpointConfiguration": {
+          "Types": [
+            "REGIONAL"
+          ]
+        }
+      }
+    },
+    "JapiccCheckFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Metadata": {
+        "DockerContext": "/Users/markwalder/Documents/Private/IntelliJ/jarhc-online/sam-api/japicc-check",
+        "DockerTag": "v1",
+        "Dockerfile": "Dockerfile",
+        "SamResourceId": "JapiccCheckFunction"
+      },
+      "Properties": {
+        "Code": {
+          "ImageUri": "837783538267.dkr.ecr.eu-central-1.amazonaws.com/jarhc-online-api:japicccheckfunction-adb1ce521f2b-v1"
+        },
+        "PackageType": "Image",
+        "DeadLetterConfig": {
+          "TargetArn": {
+            "Fn::GetAtt": [
+              "ErrorQueue",
+              "Arn"
+            ]
+          }
+        },
+        "FunctionName": "japicc-check",
+        "MemorySize": 1024,
+        "Role": {
+          "Fn::GetAtt": [
+            "AsyncFunctionRole",
+            "Arn"
+          ]
+        },
+        "Timeout": 60,
+        "Environment": {
+          "Variables": {
+            "BUCKET_NAME": {
+              "Ref": "WebsiteBucketName"
+            },
+            "BUCKET_URL": {
+              "Ref": "WebsiteBucketURL"
+            }
+          }
+        },
+        "Tags": [
+          {
+            "Key": "lambda:createdBy",
+            "Value": "SAM"
+          }
+        ],
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Architectures": [
+          "x86_64"
+        ]
+      }
+    },
+    "RestApiFunctionJarhcSubmitPermissionProd": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Ref": "RestApiFunctionAliasLive"
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Sub": [
+            "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${__ApiId__}/${__Stage__}/POST/jarhc/submit",
+            {
+              "__ApiId__": {
+                "Ref": "RestApi"
+              },
+              "__Stage__": "*"
+            }
+          ]
+        }
+      }
+    },
+    "JapiccCheckFunctionEventInvokeConfig": {
+      "Type": "AWS::Lambda::EventInvokeConfig",
+      "DependsOn": [
+        "JapiccCheckFunctionAliasLive"
+      ],
+      "Metadata": {
+        "DockerContext": "/Users/markwalder/Documents/Private/IntelliJ/jarhc-online/sam-api/japicc-check",
+        "DockerTag": "v1",
+        "Dockerfile": "Dockerfile",
+        "SamResourceId": "JapiccCheckFunction"
+      },
+      "Properties": {
+        "DestinationConfig": {},
+        "FunctionName": {
+          "Ref": "JapiccCheckFunction"
+        },
+        "MaximumEventAgeInSeconds": 120,
+        "MaximumRetryAttempts": 0,
+        "Qualifier": "Live"
+      }
+    },
+    "RestApiFunctionAuthValidatePermissionProd": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Ref": "RestApiFunctionAliasLive"
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Sub": [
+            "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${__ApiId__}/${__Stage__}/GET/auth/validate",
+            {
+              "__ApiId__": {
+                "Ref": "RestApi"
+              },
+              "__Stage__": "*"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

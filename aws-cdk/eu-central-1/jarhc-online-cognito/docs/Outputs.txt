@@ -1,0 +1,11 @@
+CognitoAppClientID
+7qa0i0lnqnii4rr6pbjh0etu1a
+Cognito App Client ID
+
+CognitoUserPoolID
+eu-central-1_duUV8DgO7
+Cognito User Pool ID
+
+CognitoUserPoolProviderURL
+https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_duUV8DgO7
+Cognito User Pool Provider URL

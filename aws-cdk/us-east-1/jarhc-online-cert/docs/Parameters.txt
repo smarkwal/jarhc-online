@@ -1,0 +1,8 @@
+CognitoDomain
+login.jarhc.org
+
+DnsZoneID
+Z39VOOPW73P7H0
+
+WebsiteDomain
+online.jarhc.org

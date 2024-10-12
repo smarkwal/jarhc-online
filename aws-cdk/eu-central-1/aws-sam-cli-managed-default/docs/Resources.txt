@@ -1,0 +1,7 @@
+SamCliSourceBucket
+aws-sam-cli-managed-default-samclisourcebucket-lcbyi0cw90q3
+AWS::S3::Bucket
+
+SamCliSourceBucketBucketPolicy
+aws-sam-cli-managed-defa-SamCliSourceBucketBucke-18HXW3GL2DAE6
+AWS::S3::BucketPolicy
