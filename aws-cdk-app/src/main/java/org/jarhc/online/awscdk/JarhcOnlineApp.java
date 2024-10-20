@@ -1,37 +1,104 @@
 package org.jarhc.online.awscdk;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.Properties;
+import org.jarhc.online.awscdk.stacks.ApiStack;
+import org.jarhc.online.awscdk.stacks.CertStack;
+import org.jarhc.online.awscdk.stacks.CognitoStack;
+import org.jarhc.online.awscdk.stacks.WebsiteStack;
 import software.amazon.awscdk.App;
 import software.amazon.awscdk.Environment;
 import software.amazon.awscdk.StackProps;
 
 public class JarhcOnlineApp {
 
-	private static final String APP_NAME = "jarhc-online";
+	private static final Properties properties = new Properties();
 
-	private static final String AWS_ACCOUNT_ID = "837783538267";
-	private static final String AWS_REGION_EU_CENTRAL_1 = "eu-central-1";
-	private static final String AWS_REGION_US_EAST_1 = "us-east-1";
+	public static void main(final String[] args) throws IOException {
 
-	public static void main(final String[] args) {
+		// load configuration properties
+		loadPropertiesFromFile("env.properties");
+
+		String awsAccountId = getProperty("AWS_ACCOUNT_ID");
+		String usEast1AwsRegion = getProperty("AWS_REGION_US_EAST_1");
+		String defaultAwsRegion = getProperty("AWS_REGION_DEFAULT");
+		String appName = getProperty("AppName");
+		String dnsZoneId = getProperty("DnsZoneID");
+		String websiteCertificateArn = getProperty("WebsiteCertificateARN");
+		String cognitoCertificateArn = getProperty("CognitoCertificateARN");
+		String websiteDomain = getProperty("WebsiteDomain");
+		String websiteUrl = getProperty("WebsiteURL");
+		String websiteBucketName = getProperty("WebsiteBucketName");
+		String websiteBucketUrl = getProperty("WebsiteBucketURL");
+		String websiteLogsBucket = getProperty("WebsiteLogsBucket");
+		String apiDomain = getProperty("ApiDomain");
+		String cognitoDomain = getProperty("CognitoDomain");
+		String cognitoUserPoolArn = getProperty("CognitoUserPoolARN");
+		String emailAddress = getProperty("EmailAddress");
+		String emailArn = getProperty("EmailARN");
+
+		StackProps usEast1StackProps = buildStackProps(awsAccountId, usEast1AwsRegion);
+		StackProps defaultStackProps = buildStackProps(awsAccountId, defaultAwsRegion);
 
 		App app = new App();
 
-		StackProps props1 = buildStackProps(AWS_REGION_EU_CENTRAL_1);
-		new ApiStack(app, APP_NAME + "-api", props1);
-		new CognitoStack(app, APP_NAME + "-cognito", props1);
-		new WebsiteStack(app, APP_NAME + "-website", props1);
+		new CertStack(app, appName + "-cert", usEast1StackProps,
+				websiteDomain,
+				cognitoDomain,
+				dnsZoneId
+		);
+		// TODO: pass CognitoCertificateARN to Cognito stack below
+		// TODO: pass WebsiteCertificateARN to Website stack below
 
-		StackProps props2 = buildStackProps(AWS_REGION_US_EAST_1);
-		new CertStack(app, APP_NAME + "-cert", props2);
+		new CognitoStack(app, appName + "-cognito", defaultStackProps,
+				cognitoCertificateArn,
+				cognitoDomain,
+				websiteDomain,
+				emailArn,
+				emailAddress,
+				dnsZoneId
+		);
+		// TODO: pass CognitoUserPoolARN to API stack below
+
+		new WebsiteStack(app, appName + "-website", defaultStackProps,
+				websiteCertificateArn,
+				websiteDomain,
+				websiteLogsBucket,
+				dnsZoneId
+		);
+
+		new ApiStack(app, appName + "-api", defaultStackProps,
+				apiDomain,
+				cognitoUserPoolArn,
+				websiteUrl,
+				websiteBucketName,
+				websiteBucketUrl,
+				dnsZoneId
+		);
 
 		app.synth();
 
 	}
 
-	private static StackProps buildStackProps(String region) {
+	private static void loadPropertiesFromFile(final String fileName) throws IOException {
+		try (Reader reader = new FileReader(fileName)) {
+			properties.load(reader);
+		}
+	}
+
+	private static String getProperty(String propertyName) {
+		if (!properties.containsKey(propertyName)) {
+			throw new IllegalArgumentException("Property not found: " + propertyName);
+		}
+		return properties.getProperty(propertyName);
+	}
+
+	private static StackProps buildStackProps(String accountId, String region) {
 
 		Environment environment = Environment.builder()
-				.account(AWS_ACCOUNT_ID)
+				.account(accountId)
 				.region(region)
 				.build();
 

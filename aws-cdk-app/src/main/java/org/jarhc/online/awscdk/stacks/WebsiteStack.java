@@ -1,10 +1,5 @@
-package org.jarhc.online.awscdk;
+package org.jarhc.online.awscdk.stacks;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import software.amazon.awscdk.CfnOutput;
-import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
 import software.amazon.awscdk.services.cloudfront.CfnDistribution;
 import software.amazon.awscdk.services.cloudfront.CfnOriginAccessControl;
@@ -13,34 +8,24 @@ import software.amazon.awscdk.services.s3.CfnBucket;
 import software.amazon.awscdk.services.s3.CfnBucketPolicy;
 import software.constructs.Construct;
 
-class WebsiteStack extends Stack {
+public class WebsiteStack extends AbstractStack {
 
-	private Object websiteCloudFrontDistributionUrl;
+	private static final String MANAGED_CACHING_DISABLED = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad"; // Managed: CachingDisabled
+	private static final String MANAGED_SECURITY_HEADER_POLICY = "67f7725c-6f97-4210-82d7-5512b31e9d03"; // Managed: SecurityHeadersPolicy
 
-	public Object getWebsiteCloudFrontDistributionUrl() {
-		return this.websiteCloudFrontDistributionUrl;
-	}
-
-	public WebsiteStack(final Construct scope, final String id) {
-		super(scope, id, null);
-	}
-
-	public WebsiteStack(final Construct scope, final String id, final StackProps props) {
-		this(scope, id, props, null, null, null, null);
-	}
-
-	public WebsiteStack(final Construct scope, final String id, final StackProps props,
-	                    String websiteDomain,
-	                    String websiteCertificateArn,
-	                    String websiteLogsBucket,
-	                    String dnsZoneId) {
+	public WebsiteStack(
+			final Construct scope,
+			final String id,
+			final StackProps props,
+			// configuration:
+			final String websiteCertificateArn,
+			final String websiteDomain,
+			final String websiteLogsBucket,
+			final String dnsZoneId
+	) {
 		super(scope, id, props);
 
-		websiteDomain = Optional.ofNullable(websiteDomain).isPresent() ? websiteDomain : "online.jarhc.org";
-		websiteCertificateArn = Optional.ofNullable(websiteCertificateArn).isPresent() ? websiteCertificateArn : "arn:aws:acm:us-east-1:837783538267:certificate/3fa0002b-0667-4e67-b8c5-d228a4341811";
-		websiteLogsBucket = Optional.ofNullable(websiteLogsBucket).isPresent() ? websiteLogsBucket : "aws-cloud-reports.s3.amazonaws.com";
-		dnsZoneId = Optional.ofNullable(dnsZoneId).isPresent() ? dnsZoneId : "Z39VOOPW73P7H0";
-
+		// S3 Bucket for public website
 		CfnBucket websiteBucket = CfnBucket.Builder.create(this, "WebsiteBucket")
 				.bucketName(websiteDomain)
 				.publicAccessBlockConfiguration(
@@ -54,7 +39,7 @@ class WebsiteStack extends Stack {
 				.lifecycleConfiguration(
 						CfnBucket.LifecycleConfigurationProperty.builder()
 								.rules(
-										List.of(
+										list(
 												CfnBucket.RuleProperty.builder()
 														.id("AutoCleanup")
 														.status("Enabled")
@@ -67,13 +52,11 @@ class WebsiteStack extends Stack {
 				)
 				.loggingConfiguration(
 						CfnBucket.LoggingConfigurationProperty.builder()
-								.destinationBucketName("aws-cloud-reports")
+								.destinationBucketName("aws-cloud-reports") // TODO: replace with parameter
 								.logFilePrefix("s3-access-logs/")
 								.build()
 				)
 				.build();
-
-		websiteBucket.addMetadata("SamResourceId", "WebsiteBucket");
 
 		CfnOriginAccessControl websiteOriginAccessControl = CfnOriginAccessControl.Builder.create(this, "WebsiteOriginAccessControl")
 				.originAccessControlConfig(
@@ -86,16 +69,15 @@ class WebsiteStack extends Stack {
 				)
 				.build();
 
-		websiteOriginAccessControl.addMetadata("SamResourceId", "WebsiteOriginAccessControl");
-
+		// CloudFront Distribution for public website
 		CfnDistribution websiteCloudFrontDistribution = CfnDistribution.Builder.create(this, "WebsiteCloudFrontDistribution")
 				.distributionConfig(
 						CfnDistribution.DistributionConfigProperty.builder()
 								.enabled(true)
-								.aliases(List.of(websiteDomain))
+								.aliases(list(websiteDomain))
 								.httpVersion("http2")
 								.origins(
-										List.of(
+										list(
 												CfnDistribution.OriginProperty.builder()
 														.id("DefaultOrigin")
 														.domainName(websiteBucket.getAttrRegionalDomainName())
@@ -119,10 +101,10 @@ class WebsiteStack extends Stack {
 								)
 								.defaultCacheBehavior(
 										CfnDistribution.DefaultCacheBehaviorProperty.builder()
-												.allowedMethods(List.of("GET", "HEAD", "OPTIONS"))
-												.cachedMethods(List.of("GET", "HEAD"))
-												.cachePolicyId("4135ea2d-6df8-44a3-9df3-4b5a84be39ad")
-												.responseHeadersPolicyId("67f7725c-6f97-4210-82d7-5512b31e9d03")
+												.allowedMethods(list("GET", "HEAD", "OPTIONS"))
+												.cachedMethods(list("GET", "HEAD"))
+												.cachePolicyId(MANAGED_CACHING_DISABLED)
+												.responseHeadersPolicyId(MANAGED_SECURITY_HEADER_POLICY)
 												.compress(true)
 												.targetOriginId("DefaultOrigin")
 												.viewerProtocolPolicy("redirect-to-https")
@@ -139,29 +121,28 @@ class WebsiteStack extends Stack {
 				)
 				.build();
 
-		websiteCloudFrontDistribution.addMetadata("SamResourceId", "WebsiteCloudFrontDistribution");
-
-		CfnBucketPolicy websiteBucketPolicy = CfnBucketPolicy.Builder.create(this, "WebsiteBucketPolicy")
+		// S3 Bucket Policy for public website
+		CfnBucketPolicy.Builder.create(this, "WebsiteBucketPolicy")
 				.bucket(websiteBucket.getRef())
-				.policyDocument(Map.of(
+				.policyDocument(map(
 								"Version", "2012-10-17",
-								"Statement", List.of(
-										Map.of(
+								"Statement", list(
+										map(
 												"Sid", "AllowCloudFrontServicePrincipal",
 												"Effect", "Allow",
-												"Principal", Map.of(
+												"Principal", map(
 														"Service", "cloudfront.amazonaws.com"
 												),
-												"Action", List.of(
+												"Action", list(
 														"s3:ListBucket",
 														"s3:GetObject"
 												),
-												"Resource", List.of(
+												"Resource", list(
 														"arn:aws:s3:::" + websiteBucket.getRef(),
 														"arn:aws:s3:::" + websiteBucket.getRef() + "/*"
 												),
-												"Condition", Map.of(
-														"StringEquals", Map.of(
+												"Condition", map(
+														"StringEquals", map(
 																"AWS:SourceArn", "arn:aws:cloudfront::" + this.getAccount() + ":distribution/" + websiteCloudFrontDistribution.getAttrId()
 														)
 												)
@@ -171,19 +152,18 @@ class WebsiteStack extends Stack {
 				)
 				.build();
 
-		websiteBucketPolicy.addMetadata("SamResourceId", "WebsiteBucketPolicy");
-
-		CfnRecordSetGroup websiteDnsRecord = CfnRecordSetGroup.Builder.create(this, "WebsiteDnsRecord")
+		// Route 53 DNS record for public website (CloudFront distribution)
+		CfnRecordSetGroup.Builder.create(this, "WebsiteDnsRecord")
 				.hostedZoneId(dnsZoneId)
 				.recordSets(
-						List.of(
+						list(
 								CfnRecordSetGroup.RecordSetProperty.builder()
 										.name(websiteDomain)
 										.type("A")
 										.aliasTarget(
 												CfnRecordSetGroup.AliasTargetProperty.builder()
 														.dnsName(websiteCloudFrontDistribution.getAttrDomainName())
-														.hostedZoneId("Z2FDTNDATAQYW2")
+														.hostedZoneId(CLOUDFRONT_HOSTED_ZONE_ID)
 														.evaluateTargetHealth(false)
 														.build()
 										)
@@ -192,14 +172,11 @@ class WebsiteStack extends Stack {
 				)
 				.build();
 
-		websiteDnsRecord.addMetadata("SamResourceId", "WebsiteDnsRecord");
-
-		this.websiteCloudFrontDistributionUrl = "https://" + websiteCloudFrontDistribution.getAttrDomainName() + "/";
-		CfnOutput.Builder.create(this, "CfnOutputWebsiteCloudFrontDistributionUrl")
-				.key("WebsiteCloudFrontDistributionUrl")
-				.value(this.websiteCloudFrontDistributionUrl.toString())
-				.description("Public URL of CloudFront Distribution.")
-				.build();
+		createOutput(
+				"WebsiteCloudFrontDistributionUrl",
+				"https://" + websiteCloudFrontDistribution.getAttrDomainName() + "/",
+				"Public URL of CloudFront Distribution."
+		);
 
 	}
 }
