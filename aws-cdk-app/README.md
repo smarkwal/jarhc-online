@@ -116,14 +116,14 @@ Resources:
 Copy the output values from the stack to the [env.properties](env.properties) file:
 
 ```properties
-CognitoClientID=ti5uih5nb0thqf7tbqubl0k2l
+CognitoClientID=jvfkebosr3qtfqq2is2ihkugn
 CognitoUserPoolARN=arn:aws:cognito-idp:eu-central-1:837783538267:userpool/eu-central-1_FIVRD3IzS
 ```
 
 Update the React application settings in [.env](../react-app/.env):
 
 ```properties
-VITE_COGNITO_CLIENT_ID=ti5uih5nb0thqf7tbqubl0k2l
+VITE_COGNITO_CLIENT_ID=jvfkebosr3qtfqq2is2ihkugn
 ```
 
 Regenerate the CloudFormation templates:

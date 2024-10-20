@@ -64,7 +64,7 @@ public class CognitoStack extends AbstractStack {
 		CfnUserPoolClient cognitoAppClient = CfnUserPoolClient.Builder.create(this, "CognitoAppClient")
 				.userPoolId(cognitoUserPool.getRef())
 				.clientName(websiteDomain)
-				.generateSecret(true)
+				.generateSecret(false)
 				.allowedOAuthFlowsUserPoolClient(true)
 				.allowedOAuthFlows(list("code", "implicit"))
 				.allowedOAuthScopes(list("openid", "profile", "email", "phone"))
