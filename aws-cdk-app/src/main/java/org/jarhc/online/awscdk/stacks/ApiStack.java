@@ -1,6 +1,8 @@
 package org.jarhc.online.awscdk.stacks;
 
+import java.util.Map;
 import software.amazon.awscdk.RemovalPolicy;
+import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
 import software.amazon.awscdk.services.apigateway.CfnBasePathMapping;
 import software.amazon.awscdk.services.apigateway.CfnDeployment;
@@ -37,7 +39,7 @@ public class ApiStack extends AbstractStack {
 		// ================================================================================================================
 		// Lambda functions
 
-		// Lambda function role
+		// IAM role for asynchronous Lambda functions
 		CfnRole asyncFunctionRole = CfnRole.Builder.create(this, "AsyncFunctionRole")
 				.roleName("async-function-role")
 				.assumeRolePolicyDocument(
@@ -64,7 +66,7 @@ public class ApiStack extends AbstractStack {
 				)
 				.build();
 
-		// Lambda function role
+		// IAM role for REST API Lambda function
 		CfnRole restApiFunctionRole = CfnRole.Builder.create(this, "RestApiFunctionRole")
 				.roleName("rest-api-role")
 				.assumeRolePolicyDocument(
@@ -96,6 +98,23 @@ public class ApiStack extends AbstractStack {
 				.messageRetentionPeriod(1209600) // 14 days
 				.build();
 
+		CfnFunction.DeadLetterConfigProperty deadLetterConfig = CfnFunction.DeadLetterConfigProperty.builder()
+				.targetArn(errorQueue.getAttrArn())
+				.build();
+
+		CfnFunction.TracingConfigProperty tracingConfig = CfnFunction.TracingConfigProperty.builder()
+				.mode("Active")
+				.build();
+
+		CfnFunction.EnvironmentProperty environment = CfnFunction.EnvironmentProperty.builder()
+				.variables(map(
+						"BUCKET_NAME", websiteBucketName,
+						"BUCKET_URL", websiteBucketUrl,
+						// TODO: disable JAVA_TOOL_OPTIONS for JAPICC and JarHC functions?
+						"JAVA_TOOL_OPTIONS", "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
+				))
+				.build();
+
 		// Lambda function for JAPICC Check (invoked asynchronously)
 		CfnFunction japiccCheckFunction = CfnFunction.Builder.create(this, "JapiccCheckFunction")
 				.functionName("japicc-check")
@@ -106,33 +125,18 @@ public class ApiStack extends AbstractStack {
 								.imageUri("837783538267.dkr.ecr.eu-central-1.amazonaws.com/jarhc-online-api:japicccheckfunction-adb1ce521f2b-v1")
 								.build()
 				)
-				.tracingConfig(
-						CfnFunction.TracingConfigProperty.builder()
-								.mode("Active")
-								.build()
-				)
+				.tracingConfig(tracingConfig)
 				.role(asyncFunctionRole.getAttrArn())
 				// max price per execution:
 				// memorySize * timeout / 1024 * $0.0000166667 = $0.001000002
 				.memorySize(1024) // increase memory size to 1 GB for JAPICC
 				.timeout(60) // increase timeout to 60 seconds for JAPICC
-				.deadLetterConfig(
-						CfnFunction.DeadLetterConfigProperty.builder()
-								.targetArn(errorQueue.getAttrArn())
-								.build()
-				)
-				.environment(
-						CfnFunction.EnvironmentProperty.builder()
-								.variables(
-										map(
-												"BUCKET_NAME", websiteBucketName,
-												"BUCKET_URL", websiteBucketUrl
-												// TODO: JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-										)
-								)
-								.build()
-				)
+				.deadLetterConfig(deadLetterConfig)
+				.environment(environment)
 				.build();
+
+		CfnAlias japiccCheckFunctionAlias = createFunctionVersion(this, japiccCheckFunction);
+		createEvenInvokeConfig(this, japiccCheckFunction, japiccCheckFunctionAlias);
 
 		// Lambda function for JarHC Check (invoked asynchronously)
 		CfnFunction jarhcCheckFunction = CfnFunction.Builder.create(this, "JarhcCheckFunction")
@@ -146,33 +150,18 @@ public class ApiStack extends AbstractStack {
 				.handler("org.jarhc.online.jarhc.Handler")
 				.runtime("java11") // TODO: migrate to Java 17
 				.architectures(list("x86_64")) // TODO: migrate to ARM64?
-				.tracingConfig(
-						CfnFunction.TracingConfigProperty.builder()
-								.mode("Active")
-								.build()
-				)
+				.tracingConfig(tracingConfig)
 				.role(asyncFunctionRole.getAttrArn())
 				// max price per execution:
 				// memorySize * timeout / 1024 * $0.0000166667 = $0.001000002
 				.memorySize(1024) // increase memory size to 1 GB for JarHC
 				.timeout(60) // increase timeout to 60 seconds for JarHC
-				.deadLetterConfig(
-						CfnFunction.DeadLetterConfigProperty.builder()
-								.targetArn(errorQueue.getAttrArn())
-								.build()
-				)
-				.environment(
-						CfnFunction.EnvironmentProperty.builder()
-								.variables(
-										map(
-												"BUCKET_NAME", websiteBucketName,
-												"BUCKET_URL", websiteBucketUrl
-												// TODO: JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-										)
-								)
-								.build()
-				)
+				.deadLetterConfig(deadLetterConfig)
+				.environment(environment)
 				.build();
+
+		CfnAlias jarhcCheckFunctionAlias = createFunctionVersion(this, jarhcCheckFunction);
+		createEvenInvokeConfig(this, jarhcCheckFunction, jarhcCheckFunctionAlias);
 
 		// Lambda function for REST API (invoked synchronously by API Gateway)
 		CfnFunction restApiFunction = CfnFunction.Builder.create(this, "RestApiFunction")
@@ -188,79 +177,16 @@ public class ApiStack extends AbstractStack {
 				.architectures(list("x86_64")) // TODO: migrate to ARM64?
 				// TODO: SnapStart:
 				//   ApplyOn: PublishedVersions
-				.tracingConfig(
-						CfnFunction.TracingConfigProperty.builder()
-								.mode("Active")
-								.build()
-				)
+				.tracingConfig(tracingConfig)
 				.role(restApiFunctionRole.getAttrArn())
 				// max price per execution:
 				// memorySize * timeout / 1024 * $0.0000166667 = $0.0000833335
 				.memorySize(512) // increase memory size to 512 MB for REST API
 				.timeout(10) // increase timeout to 10 seconds for REST API
-				.environment(
-						CfnFunction.EnvironmentProperty.builder()
-								.variables(
-										map(
-												"BUCKET_NAME", websiteBucketName,
-												"BUCKET_URL", websiteBucketUrl,
-												"JAVA_TOOL_OPTIONS", "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
-										)
-								)
-								.build()
-				)
+				.environment(environment)
 				.build();
 
-		CfnVersion japiccCheckFunctionVersion = CfnVersion.Builder.create(this, "JapiccCheckFunctionVersion")
-				.functionName(japiccCheckFunction.getRef())
-				.build();
-		japiccCheckFunctionVersion.applyRemovalPolicy(RemovalPolicy.RETAIN);
-
-		CfnVersion jarhcCheckFunctionVersion = CfnVersion.Builder.create(this, "JarhcCheckFunctionVersion")
-				.functionName(jarhcCheckFunction.getRef())
-				.build();
-		jarhcCheckFunctionVersion.applyRemovalPolicy(RemovalPolicy.RETAIN);
-
-		CfnVersion restApiFunctionVersion = CfnVersion.Builder.create(this, "RestApiFunctionVersion")
-				.functionName(restApiFunction.getRef())
-				.build();
-		restApiFunctionVersion.applyRemovalPolicy(RemovalPolicy.RETAIN);
-
-		CfnAlias japiccCheckFunctionAliasLive = CfnAlias.Builder.create(this, "JapiccCheckFunctionAliasLive")
-				.name("Live")
-				.functionName(japiccCheckFunction.getRef())
-				.functionVersion(japiccCheckFunctionVersion.getAttrVersion())
-				.build();
-
-		CfnAlias jarhcCheckFunctionAliasLive = CfnAlias.Builder.create(this, "JarhcCheckFunctionAliasLive")
-				.name("Live")
-				.functionName(jarhcCheckFunction.getRef())
-				.functionVersion(jarhcCheckFunctionVersion.getAttrVersion())
-				.build();
-
-		CfnAlias restApiFunctionAliasLive = CfnAlias.Builder.create(this, "RestApiFunctionAliasLive")
-				.name("Live")
-				.functionName(restApiFunction.getRef())
-				.functionVersion(restApiFunctionVersion.getAttrVersion())
-				.build();
-
-		CfnEventInvokeConfig japiccCheckFunctionEventInvokeConfig = CfnEventInvokeConfig.Builder.create(this, "JapiccCheckFunctionEventInvokeConfig")
-				.destinationConfig(CfnEventInvokeConfig.DestinationConfigProperty.builder().build())
-				.functionName(japiccCheckFunction.getRef())
-				.maximumEventAgeInSeconds(120)
-				.maximumRetryAttempts(0)
-				.qualifier("Live")
-				.build();
-		japiccCheckFunctionEventInvokeConfig.addDependency(japiccCheckFunctionAliasLive);
-
-		CfnEventInvokeConfig jarhcCheckFunctionEventInvokeConfig = CfnEventInvokeConfig.Builder.create(this, "JarhcCheckFunctionEventInvokeConfig")
-				.destinationConfig(CfnEventInvokeConfig.DestinationConfigProperty.builder().build())
-				.functionName(jarhcCheckFunction.getRef())
-				.maximumEventAgeInSeconds(120)
-				.maximumRetryAttempts(0)
-				.qualifier("Live")
-				.build();
-		jarhcCheckFunctionEventInvokeConfig.addDependency(jarhcCheckFunctionAliasLive);
+		CfnAlias restApiFunctionAlias = createFunctionVersion(this, restApiFunction);
 
 		// ================================================================================================================
 		// API Gateway
@@ -310,6 +236,14 @@ public class ApiStack extends AbstractStack {
 				)
 				.build();
 
+		var gatewayErrorResponse = map(
+				"responseParameters", map(
+						"gatewayresponse.header.Access-Control-Allow-Origin", "'" + websiteUrl + "'",
+						"gatewayresponse.header.Access-Control-Allow-Credentials", "'true'"
+				),
+				"responseTemplates", map()
+		);
+
 		// REST API Gateway
 		CfnRestApi restApi = CfnRestApi.Builder.create(this, "RestApi")
 				.body(
@@ -318,261 +252,10 @@ public class ApiStack extends AbstractStack {
 										"version", "1.0",
 										"title", this.getStackName()
 								),
-								"paths", map(
-										"/japicc/submit", map(
-												"post", map(
-														"x-amazon-apigateway-integration", map(
-																"httpMethod", "POST",
-																"type", "aws_proxy",
-																"uri", "arn:aws:apigateway:" + this.getRegion() + ":lambda:path/2015-03-31/functions/" + restApiFunctionAliasLive.getRef() + "/invocations"
-														),
-														"x-amazon-apigateway-request-validator", "body-only",
-														"security", list(
-																map(
-																		"CognitoAuthorizer", list()
-																)
-														),
-														"parameters", list(
-																map(
-																		"required", true,
-																		"in", "body",
-																		"name", "japiccsubmitmodel",
-																		"schema", map("$ref", "#/definitions/japiccsubmitmodel")
-																)
-														),
-														"responses", map()
-												),
-												"options", map(
-														"x-amazon-apigateway-integration", map(
-																"type", "mock",
-																"requestTemplates", map(
-																		"application/json", "{\"statusCode\" : 200}"
-																),
-																"responses", map(
-																		"default", map(
-																				"statusCode", "200",
-																				"responseTemplates", map(
-																						"application/json", "{}"
-																				),
-																				"responseParameters", map(
-																						"method.response.header.Access-Control-Allow-Headers", "'Content-Type,Authorization'",
-																						"method.response.header.Access-Control-Allow-Origin", "'" + websiteUrl + "'",
-																						"method.response.header.Access-Control-Max-Age", "'600'", // cache results of a preflight request for 10 minutes
-																						"method.response.header.Access-Control-Allow-Methods", "'GET,POST,OPTIONS'",
-																						"method.response.header.Access-Control-Allow-Credentials", "'true'"
-																				)
-																		)
-																)
-														),
-														"consumes", list("application/json"),
-														"summary", "CORS support",
-														"responses", map(
-																"200", map(
-																		"headers", map(
-																				"Access-Control-Allow-Origin", map("type", "string"),
-																				"Access-Control-Allow-Headers", map("type", "string"),
-																				"Access-Control-Max-Age", map("type", "integer"),
-																				"Access-Control-Allow-Methods", map("type", "string"),
-																				"Access-Control-Allow-Credentials", map("type", "string")),
-																		"description", "Default response for CORS method"
-																)
-														),
-														"produces", list("application/json")
-												)
-										),
-										"/auth/validate", map(
-												"options", map(
-														"x-amazon-apigateway-integration", map(
-																"type", "mock",
-																"requestTemplates", map(
-																		"application/json", "{\"statusCode\" : 200}"
-																),
-																"responses", map(
-																		"default", map(
-																				"statusCode", "200",
-																				"responseTemplates", map(
-																						"application/json", "{}"
-																				),
-																				"responseParameters", map(
-																						"method.response.header.Access-Control-Allow-Headers", "'Content-Type,Authorization'",
-																						"method.response.header.Access-Control-Allow-Origin", "'" + websiteUrl + "'",
-																						"method.response.header.Access-Control-Max-Age", "'600'", // cache results of a preflight request for 10 minutes
-																						"method.response.header.Access-Control-Allow-Methods", "'GET,POST,OPTIONS'",
-																						"method.response.header.Access-Control-Allow-Credentials", "'true'"
-																				)
-																		)
-																)
-														),
-														"consumes", list("application/json"),
-														"summary", "CORS support",
-														"responses", map(
-																"200", map(
-																		"headers", map(
-																				"Access-Control-Allow-Origin", map("type", "string"),
-																				"Access-Control-Allow-Headers", map("type", "string"),
-																				"Access-Control-Max-Age", map("type", "integer"),
-																				"Access-Control-Allow-Methods", map("type", "string"),
-																				"Access-Control-Allow-Credentials", map("type", "string")
-																		),
-																		"description", "Default response for CORS method"
-																)
-														),
-														"produces", list("application/json")
-												),
-												"get", map(
-														"x-amazon-apigateway-integration", map(
-																"httpMethod", "POST",
-																"type", "aws_proxy",
-																"uri", "arn:aws:apigateway:" + this.getRegion() + ":lambda:path/2015-03-31/functions/" + restApiFunctionAliasLive.getRef() + "/invocations"
-														),
-														"security", list(
-																map(
-																		"CognitoAuthorizer", list()
-																)
-														),
-														"responses", map()
-												)
-										),
-										"/jarhc/submit", map(
-												"post", map(
-														"x-amazon-apigateway-integration", map(
-																"httpMethod", "POST",
-																"type", "aws_proxy",
-																"uri", "arn:aws:apigateway:" + this.getRegion() + ":lambda:path/2015-03-31/functions/" + restApiFunctionAliasLive.getRef() + "/invocations"
-														),
-														"x-amazon-apigateway-request-validator", "body-only",
-														"security", list(
-																map(
-																		"CognitoAuthorizer", list()
-																)
-														),
-														"parameters", list(
-																map(
-																		"required", true,
-																		"in", "body",
-																		"name", "jarhcsubmitmodel",
-																		"schema", map("$ref", "#/definitions/jarhcsubmitmodel")
-																)
-														),
-														"responses", map()
-												),
-												"options", map(
-														"x-amazon-apigateway-integration", map(
-																"type", "mock",
-																"requestTemplates", map(
-																		"application/json", "{\"statusCode\" : 200}"
-																),
-																"responses", map(
-																		"default", map(
-																				"statusCode", "200",
-																				"responseTemplates", map(
-																						"application/json", "{}"
-																				),
-																				"responseParameters", map(
-																						"method.response.header.Access-Control-Allow-Headers", "'Content-Type,Authorization'",
-																						"method.response.header.Access-Control-Allow-Origin", "'" + websiteUrl + "'",
-																						"method.response.header.Access-Control-Max-Age", "'600'", // cache results of a preflight request for 10 minutes
-																						"method.response.header.Access-Control-Allow-Methods", "'GET,POST,OPTIONS'",
-																						"method.response.header.Access-Control-Allow-Credentials", "'true'"
-																				)
-																		)
-																)
-														),
-														"consumes", list("application/json"),
-														"summary", "CORS support",
-														"responses", map(
-																"200", map(
-																		"headers", map(
-																				"Access-Control-Allow-Origin", map("type", "string"),
-																				"Access-Control-Allow-Headers", map("type", "string"),
-																				"Access-Control-Max-Age", map("type", "integer"),
-																				"Access-Control-Allow-Methods", map("type", "string"),
-																				"Access-Control-Allow-Credentials", map("type", "string")),
-																		"description", "Default response for CORS method"
-																)
-														),
-														"produces", list("application/json")
-												)
-										),
-										"/maven/search", map(
-												"post", map(
-														"x-amazon-apigateway-integration", map(
-																"httpMethod", "POST",
-																"type", "aws_proxy",
-																"uri", "arn:aws:apigateway:" + this.getRegion() + ":lambda:path/2015-03-31/functions/" + restApiFunctionAliasLive.getRef() + "/invocations"
-														),
-														"x-amazon-apigateway-request-validator", "body-only",
-														"security", list(
-																map(
-																		"NONE", list()
-																)
-														),
-														"parameters", list(
-																map(
-																		"required", true,
-																		"in", "body",
-																		"name", "mavensearchmodel",
-																		"schema", map(
-																				"$ref", "#/definitions/mavensearchmodel"
-																		)
-																)
-														),
-														"responses", map()
-												),
-												"options", map(
-														"x-amazon-apigateway-integration", map(
-																"type", "mock",
-																"requestTemplates", map(
-																		"application/json", "{\"statusCode\" : 200}\n"
-																),
-																"responses", map(
-																		"default", map(
-																				"statusCode", "200",
-																				"responseTemplates", map(
-																						"application/json", "{}"
-																				),
-																				"responseParameters", map(
-																						"method.response.header.Access-Control-Allow-Headers", "'Content-Type,Authorization'",
-																						"method.response.header.Access-Control-Allow-Origin", "'" + websiteUrl + "'",
-																						"method.response.header.Access-Control-Max-Age", "'600'", // cache results of a preflight request for 10 minutes
-																						"method.response.header.Access-Control-Allow-Methods", "'GET,POST,OPTIONS'",
-																						"method.response.header.Access-Control-Allow-Credentials", "'true'"
-																				)
-																		)
-																)
-														),
-														"consumes", list("application/json"),
-														"summary", "CORS support",
-														"responses", map(
-																"200", map(
-																		"headers", map(
-																				"Access-Control-Allow-Origin", map("type", "string"),
-																				"Access-Control-Allow-Headers", map("type", "string"),
-																				"Access-Control-Max-Age", map("type", "integer"),
-																				"Access-Control-Allow-Methods", map("type", "string"),
-																				"Access-Control-Allow-Credentials", map("type", "string")),
-																		"description", "Default response for CORS method"
-																)
-														),
-														"produces", list("application/json")
-												)
-										)
-								),
+								"paths", createRestApiPaths(websiteUrl, restApiFunctionAlias),
 								"x-amazon-apigateway-gateway-responses", map(
-										"DEFAULT_5XX", map(
-												"responseParameters", map(
-														"gatewayresponse.header.Access-Control-Allow-Origin", "'" + websiteUrl + "'",
-														"gatewayresponse.header.Access-Control-Allow-Credentials", "'true'"
-												),
-												"responseTemplates", map()
-										),
-										"DEFAULT_4XX", map(
-												"responseParameters", map(
-														"gatewayresponse.header.Access-Control-Allow-Origin", "'" + websiteUrl + "'",
-														"gatewayresponse.header.Access-Control-Allow-Credentials", "'true'"
-												),
-												"responseTemplates", map()
-										)
+										"DEFAULT_5XX", gatewayErrorResponse,
+										"DEFAULT_4XX", gatewayErrorResponse
 								),
 								"securityDefinitions", map(
 										"CognitoAuthorizer", map(
@@ -586,46 +269,7 @@ public class ApiStack extends AbstractStack {
 												"x-amazon-apigateway-authtype", "cognito_user_pools"
 										)
 								),
-								"definitions", map(
-										"jarhcsubmitmodel", map(
-												"additionalProperties", false,
-												"required", list("classpath"),
-												"type", "object",
-												"properties", map(
-														"provided", map(
-																"items", map(
-																		"type", "string" // pattern: "^[^:]+:[^:]+:[^:]+$"
-																),
-																"type", "array"
-														),
-														"classpath", map(
-																"items", map(
-																		"type", "string" // pattern: "^[^:]+:[^:]+:[^:]+$"
-																),
-																"type", "array"
-														)
-												)
-										),
-										"mavensearchmodel", map(
-												"additionalProperties", false,
-												"required", list("coordinates"),
-												"type", "object",
-												"properties", map(
-														"coordinates", map(
-																"type", "string" // pattern: "^[^:]+:[^:]+:[^:]+$"
-														)
-												)
-										),
-										"japiccsubmitmodel", map(
-												"additionalProperties", false,
-												"required", list("oldVersion", "newVersion"),
-												"type", "object",
-												"properties", map(
-														"newVersion", map("type", "string"), // pattern: "^[^:]+:[^:]+:[^:]+$"
-														"oldVersion", map("type", "string") // pattern: "^[^:]+:[^:]+:[^:]+$"
-												)
-										)
-								),
+								"definitions", createRestApiModels(),
 								"swagger", "2.0",
 								"x-amazon-apigateway-request-validators", map(
 										"body-only", map(
@@ -635,14 +279,14 @@ public class ApiStack extends AbstractStack {
 								)
 						)
 				)
-				.parameters(
-						map(
-								"endpointConfigurationTypes", "REGIONAL" // default
-						)
+				.parameters(map(
+						"endpointConfigurationTypes", "REGIONAL" // default
+				))
+				.endpointConfiguration(
+						CfnRestApi.EndpointConfigurationProperty.builder()
+								.types(list("REGIONAL"))
+								.build()
 				)
-				.endpointConfiguration(CfnRestApi.EndpointConfigurationProperty.builder()
-						.types(list("REGIONAL"))
-						.build())
 				.build();
 
 		CfnDeployment restApiDeployment = CfnDeployment.Builder.create(this, "RestApiDeployment")
@@ -650,33 +294,10 @@ public class ApiStack extends AbstractStack {
 				.stageName("Stage")
 				.build();
 
-		CfnPermission.Builder.create(this, "RestApiFunctionAuthValidatePermissionProd")
-				.action("lambda:InvokeFunction")
-				.functionName(restApiFunctionAliasLive.getRef())
-				.principal("apigateway.amazonaws.com")
-				.sourceArn("arn:aws:execute-api:" + this.getRegion() + ":" + this.getAccount() + ":" + restApi.getRef() + "/*/GET/auth/validate")
-				.build();
-
-		CfnPermission.Builder.create(this, "RestApiFunctionJapiccSubmitPermissionProd")
-				.action("lambda:InvokeFunction")
-				.functionName(restApiFunctionAliasLive.getRef())
-				.principal("apigateway.amazonaws.com")
-				.sourceArn("arn:aws:execute-api:" + this.getRegion() + ":" + this.getAccount() + ":" + restApi.getRef() + "/*/POST/japicc/submit")
-				.build();
-
-		CfnPermission.Builder.create(this, "RestApiFunctionJarhcSubmitPermissionProd")
-				.action("lambda:InvokeFunction")
-				.functionName(restApiFunctionAliasLive.getRef())
-				.principal("apigateway.amazonaws.com")
-				.sourceArn("arn:aws:execute-api:" + this.getRegion() + ":" + this.getAccount() + ":" + restApi.getRef() + "/*/POST/jarhc/submit")
-				.build();
-
-		CfnPermission.Builder.create(this, "RestApiFunctionMavenSearchPermissionProd")
-				.action("lambda:InvokeFunction")
-				.functionName(restApiFunctionAliasLive.getRef())
-				.principal("apigateway.amazonaws.com")
-				.sourceArn("arn:aws:execute-api:" + this.getRegion() + ":" + this.getAccount() + ":" + restApi.getRef() + "/*/POST/maven/search")
-				.build();
+		createPermission(this, "AuthValidate", restApiFunctionAlias, restApi, "/*/GET/auth/validate");
+		createPermission(this, "JapiccSubmit", restApiFunctionAlias, restApi, "/*/POST/japicc/submit");
+		createPermission(this, "JarhcSubmit", restApiFunctionAlias, restApi, "/*/POST/jarhc/submit");
+		createPermission(this, "MavenSearch", restApiFunctionAlias, restApi, "/*/POST/maven/search");
 
 		CfnStage restApiProdStage = CfnStage.Builder.create(this, "RestApiProdStage")
 				.deploymentId(restApiDeployment.getRef())
@@ -707,4 +328,209 @@ public class ApiStack extends AbstractStack {
 		);
 
 	}
+
+	private Map<String, Object> createRestApiPaths(String websiteUrl, CfnAlias restApiFunctionAlias) {
+
+		var optionsMethod = map(
+				"x-amazon-apigateway-integration", map(
+						"type", "mock",
+						"requestTemplates", map(
+								"application/json", "{\"statusCode\" : 200}"
+						),
+						"responses", map(
+								"default", map(
+										"statusCode", "200",
+										"responseTemplates", map(
+												"application/json", "{}"
+										),
+										"responseParameters", map(
+												"method.response.header.Access-Control-Allow-Headers", "'Content-Type,Authorization'",
+												"method.response.header.Access-Control-Allow-Origin", "'" + websiteUrl + "'",
+												"method.response.header.Access-Control-Max-Age", "'600'", // cache results of a preflight request for 10 minutes
+												"method.response.header.Access-Control-Allow-Methods", "'GET,POST,OPTIONS'",
+												"method.response.header.Access-Control-Allow-Credentials", "'true'"
+										)
+								)
+						)
+				),
+				"consumes", list("application/json"),
+				"summary", "CORS support",
+				"responses", map(
+						"200", map(
+								"headers", map(
+										"Access-Control-Allow-Origin", map("type", "string"),
+										"Access-Control-Allow-Headers", map("type", "string"),
+										"Access-Control-Max-Age", map("type", "integer"),
+										"Access-Control-Allow-Methods", map("type", "string"),
+										"Access-Control-Allow-Credentials", map("type", "string")
+								),
+								"description", "Default response for CORS method"
+						)
+				),
+				"produces", list("application/json")
+		);
+
+		var apiGatewayIntegration = map(
+				"httpMethod", "POST",
+				"type", "aws_proxy",
+				"uri", "arn:aws:apigateway:" + this.getRegion() + ":lambda:path/2015-03-31/functions/" + restApiFunctionAlias.getRef() + "/invocations"
+		);
+
+		var authValidatePath = map(
+				"options", optionsMethod,
+				"get", map(
+						"x-amazon-apigateway-integration", apiGatewayIntegration,
+						"security", list(map("CognitoAuthorizer", list())),
+						"responses", map()
+				)
+		);
+
+		var japiccSubmitPath = map(
+				"options", optionsMethod,
+				"post", map(
+						"x-amazon-apigateway-integration", apiGatewayIntegration,
+						"x-amazon-apigateway-request-validator", "body-only",
+						"security", list(map("CognitoAuthorizer", list())),
+						"parameters", list(
+								map(
+										"name", "japiccsubmitmodel",
+										"required", true,
+										"in", "body",
+										"schema", map("$ref", "#/definitions/japiccsubmitmodel")
+								)
+						),
+						"responses", map()
+				)
+		);
+
+		var jarhcSubmitPath = map(
+				"options", optionsMethod,
+				"post", map(
+						"x-amazon-apigateway-integration", apiGatewayIntegration,
+						"x-amazon-apigateway-request-validator", "body-only",
+						"security", list(map("CognitoAuthorizer", list())),
+						"parameters", list(
+								map(
+										"name", "jarhcsubmitmodel",
+										"required", true,
+										"in", "body",
+										"schema", map("$ref", "#/definitions/jarhcsubmitmodel")
+								)
+						),
+						"responses", map()
+				)
+		);
+
+		var mavenSearchPath = map(
+				"options", optionsMethod,
+				"post", map(
+						"x-amazon-apigateway-integration", apiGatewayIntegration,
+						"x-amazon-apigateway-request-validator", "body-only",
+						"security", list(map("NONE", list())),
+						"parameters", list(
+								map(
+										"name", "mavensearchmodel",
+										"required", true,
+										"in", "body",
+										"schema", map("$ref", "#/definitions/mavensearchmodel")
+								)
+						),
+						"responses", map()
+				)
+		);
+
+		return map(
+				"/auth/validate", authValidatePath,
+				"/japicc/submit", japiccSubmitPath,
+				"/jarhc/submit", jarhcSubmitPath,
+				"/maven/search", mavenSearchPath
+		);
+	}
+
+	private static Map<String, Object> createRestApiModels() {
+
+		var japiccSubmitModel = map(
+				"additionalProperties", false,
+				"required", list("oldVersion", "newVersion"),
+				"type", "object",
+				"properties", map(
+						"newVersion", map("type", "string"), // pattern: "^[^:]+:[^:]+:[^:]+$"
+						"oldVersion", map("type", "string") // pattern: "^[^:]+:[^:]+:[^:]+$"
+				)
+		);
+
+		var jarhcSubmitModel = map(
+				"additionalProperties", false,
+				"required", list("classpath"),
+				"type", "object",
+				"properties", map(
+						"provided", map(
+								"items", map(
+										"type", "string" // pattern: "^[^:]+:[^:]+:[^:]+$"
+								),
+								"type", "array"
+						),
+						"classpath", map(
+								"items", map(
+										"type", "string" // pattern: "^[^:]+:[^:]+:[^:]+$"
+								),
+								"type", "array"
+						)
+				)
+		);
+
+		var mavenSearchModel = map(
+				"additionalProperties", false,
+				"required", list("coordinates"),
+				"type", "object",
+				"properties", map(
+						"coordinates", map(
+								"type", "string" // pattern: "^[^:]+:[^:]+:[^:]+$"
+						)
+				)
+		);
+
+		return map(
+				"japiccsubmitmodel", japiccSubmitModel,
+				"jarhcsubmitmodel", jarhcSubmitModel,
+				"mavensearchmodel", mavenSearchModel
+		);
+	}
+
+	private CfnAlias createFunctionVersion(Stack scope, CfnFunction function) {
+
+		CfnVersion functionVersion = CfnVersion.Builder.create(scope, function.getNode().getId() + "Version")
+				.functionName(function.getRef())
+				.build();
+		functionVersion.applyRemovalPolicy(RemovalPolicy.RETAIN);
+
+		return CfnAlias.Builder.create(scope, function.getNode().getId() + "AliasLive")
+				.name("Live")
+				.functionName(function.getRef())
+				.functionVersion(functionVersion.getAttrVersion())
+				.build();
+	}
+
+	private void createEvenInvokeConfig(Stack scope, CfnFunction function, CfnAlias alias) {
+
+		CfnEventInvokeConfig eventInvokeConfig = CfnEventInvokeConfig.Builder.create(scope, function.getNode().getId() + "EventInvokeConfig")
+				.destinationConfig(CfnEventInvokeConfig.DestinationConfigProperty.builder().build())
+				.functionName(function.getRef())
+				.maximumEventAgeInSeconds(120)
+				.maximumRetryAttempts(0)
+				.qualifier("Live")
+				.build();
+
+		eventInvokeConfig.addDependency(alias);
+	}
+
+	private void createPermission(Stack scope, String id, CfnAlias functionAlias, CfnRestApi restApi, String path) {
+		CfnPermission.Builder.create(scope, "RestApiFunction" + id + "PermissionProd")
+				.action("lambda:InvokeFunction")
+				.functionName(functionAlias.getRef())
+				.principal("apigateway.amazonaws.com")
+				.sourceArn("arn:aws:execute-api:" + scope.getRegion() + ":" + scope.getAccount() + ":" + restApi.getRef() + path)
+				.build();
+	}
+
 }
