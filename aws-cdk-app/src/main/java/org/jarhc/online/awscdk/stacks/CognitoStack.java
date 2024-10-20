@@ -111,6 +111,16 @@ public class CognitoStack extends AbstractStack {
 				"Cognito App Client ID"
 		);
 		createOutput(
+				"CognitoDiscoveryEndpointURL",
+				cognitoUserPool.getAttrProviderUrl() + "/.well-known/openid-configuration",
+				"Cognito Discovery Endpoint URL"
+		);
+		createOutput(
+				"CognitoIssuerURL",
+				cognitoUserPool.getAttrProviderUrl(),
+				"Cognito Issuer URL"
+		);
+		createOutput(
 				"CognitoUserPoolARN",
 				cognitoUserPool.getAttrArn(),
 				"Cognito User Pool ARN"
