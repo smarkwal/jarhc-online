@@ -3,6 +3,8 @@ package org.jarhc.online.awscdk;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Properties;
 import org.jarhc.online.awscdk.stacks.ApiStack;
 import org.jarhc.online.awscdk.stacks.CertStack;
@@ -19,7 +21,7 @@ public class JarhcOnlineApp {
 	public static void main(final String[] args) throws IOException {
 
 		// load configuration properties
-		loadPropertiesFromFile("env.properties");
+		loadProperties("env.properties", "env.user.properties");
 
 		String awsAccountId = getProperty("AWS_ACCOUNT_ID");
 		String usEast1AwsRegion = getProperty("AWS_REGION_US_EAST_1");
@@ -82,9 +84,13 @@ public class JarhcOnlineApp {
 
 	}
 
-	private static void loadPropertiesFromFile(final String fileName) throws IOException {
-		try (Reader reader = new FileReader(fileName)) {
-			properties.load(reader);
+	private static void loadProperties(final String... filePaths) throws IOException {
+		for (String filePath : filePaths) {
+			if (Files.exists(Paths.get(filePath))) {
+				try (Reader reader = new FileReader(filePath)) {
+					properties.load(reader);
+				}
+			}
 		}
 	}
 

@@ -4,7 +4,6 @@ import software.amazon.awscdk.StackProps;
 import software.amazon.awscdk.services.cognito.CfnUserPool;
 import software.amazon.awscdk.services.cognito.CfnUserPoolClient;
 import software.amazon.awscdk.services.cognito.CfnUserPoolDomain;
-import software.amazon.awscdk.services.cognito.CfnUserPoolGroup;
 import software.amazon.awscdk.services.route53.CfnRecordSet;
 import software.constructs.Construct;
 
@@ -24,23 +23,9 @@ public class CognitoStack extends AbstractStack {
 	) {
 		super(scope, id, props);
 
-		// DNS record for Cognito custom domain
-		CfnRecordSet.Builder.create(this, "CognitoDnsRecord")
-				.hostedZoneId(dnsZoneId)
-				.name(cognitoDomain)
-				.type("A")
-				.aliasTarget(
-						CfnRecordSet.AliasTargetProperty.builder()
-								.dnsName("d1h9aibn2whqxe.cloudfront.net") // TODO: how to get the DNS name for CloudFront distribution created for Cognito?
-								.hostedZoneId(CLOUDFRONT_HOSTED_ZONE_ID)
-								.evaluateTargetHealth(false)
-								.build()
-				)
-				.build();
-
 		// Cognito user pool
 		CfnUserPool cognitoUserPool = CfnUserPool.Builder.create(this, "CognitoUserPool")
-				.userPoolName(websiteDomain)
+				.userPoolName(cognitoDomain)
 				.usernameAttributes(list("email"))
 				.autoVerifiedAttributes(list("email"))
 				.usernameConfiguration(CfnUserPool.UsernameConfigurationProperty.builder()
@@ -66,14 +51,16 @@ public class CognitoStack extends AbstractStack {
 						.build())
 				.build();
 
+		/*
 		// Cognito user group "Administrators"
 		CfnUserPoolGroup.Builder.create(this, "CognitoAdminGroup")
 				.userPoolId(cognitoUserPool.getRef())
 				.groupName("Administrators")
 				.precedence(0)
 				.build();
+		*/
 
-		// ognito app client used by public website and API gateway
+		// Cognito app client used by public website and API gateway
 		CfnUserPoolClient cognitoAppClient = CfnUserPoolClient.Builder.create(this, "CognitoAppClient")
 				.userPoolId(cognitoUserPool.getRef())
 				.clientName(websiteDomain)
@@ -84,9 +71,9 @@ public class CognitoStack extends AbstractStack {
 				.defaultRedirectUri("https://" + websiteDomain + "/login.html")
 				.callbackUrLs(list("https://" + websiteDomain + "/login.html", "http://localhost:3000/login.html"))
 				.logoutUrLs(list("https://" + websiteDomain + "/logout.html", "http://localhost:3000/logout.html"))
-				.idTokenValidity(3)
-				.accessTokenValidity(3)
-				.refreshTokenValidity(7)
+				.idTokenValidity(3) // hours
+				.accessTokenValidity(3) // hours
+				.refreshTokenValidity(7) // days
 				.enableTokenRevocation(true)
 				.preventUserExistenceErrors("ENABLED")
 				.supportedIdentityProviders(list("COGNITO"))
@@ -94,12 +81,26 @@ public class CognitoStack extends AbstractStack {
 				.build();
 
 		// Cognito custom domain
-		CfnUserPoolDomain.Builder.create(this, "CognitoCustomDomain")
+		CfnUserPoolDomain cognitoCustomDomain = CfnUserPoolDomain.Builder.create(this, "CognitoCustomDomain")
 				.userPoolId(cognitoUserPool.getRef())
 				.domain(cognitoDomain)
 				.customDomainConfig(
 						CfnUserPoolDomain.CustomDomainConfigTypeProperty.builder()
 								.certificateArn(cognitoCertificateArn)
+								.build()
+				)
+				.build();
+
+		// DNS record for Cognito custom domain
+		CfnRecordSet.Builder.create(this, "CognitoDnsRecord")
+				.hostedZoneId(dnsZoneId)
+				.name(cognitoDomain)
+				.type("A")
+				.aliasTarget(
+						CfnRecordSet.AliasTargetProperty.builder()
+								.dnsName(cognitoCustomDomain.getAttrCloudFrontDistribution())
+								.hostedZoneId(CLOUDFRONT_HOSTED_ZONE_ID)
+								.evaluateTargetHealth(false)
 								.build()
 				)
 				.build();

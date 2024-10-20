@@ -35,6 +35,15 @@ CDK version used to create this project: `2.162.1 (build 10aa526)`
 
 CDK will use the credentials configured for AWS CLI (see `~/.aws/config` and `~/.aws/credentials`).
 
+## Stacks
+
+| Stack                | Description                                               | Build dependencies                         |
+|----------------------|-----------------------------------------------------------|--------------------------------------------|
+| jarhc-online-cert    | SSL certificates for website and Cognito (custom domains) |                                            |
+| jarhc-online-cognito | Cognito user pool and app client                          | jarhc-online-cert                          |
+| jarhc-online-website | S3 bucket and CloudFront distribution for website         | jarhc-online-cert, jarhc-online-cognito    |
+| jarhc-online-api     | API gateway and Lambda functions                          | jarhc-online-cognito, jarhc-online-website |
+
 ## Build and deploy
 
 Prepare AWS environment for usage with AWS CDK (only once):
@@ -59,7 +68,7 @@ cdk deploy jarhc-online-cert
 
 Links:
 
-* [CloudFormation (us-east-1)](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1) 
+* [CloudFormation (us-east-1)](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1)
 * [Certificate Manager (us-east-1)](https://us-east-1.console.aws.amazon.com/acm/home?region=us-east-1)
 
 Resources:
@@ -101,20 +110,20 @@ Resources:
 |---------------------|-----------------|------------------------------|
 | CognitoUserPool     | (dynamic)       | AWS::Cognito::UserPool       |
 | CognitoAppClient    | (dynamic)       | AWS::Cognito::UserPoolClient |
-| CognitoAdminGroup   | Administrators  | AWS::Cognito::UserPoolGroup  |
 | CognitoCustomDomain | login.jarhc.org | AWS::Cognito::UserPoolDomain |
 | CognitoDnsRecord    | login.jarhc.org | AWS::Route53::RecordSet      |
 
 Copy the output values from the stack to the [env.properties](env.properties) file:
 
 ```properties
-CognitoUserPoolARN=arn:aws:cognito-idp:eu-central-1:837783538267:userpool/eu-central-1_hGmfARjML
-CognitoClientID=1lnm05s072ksriccnmohm9udmc
+CognitoClientID=ti5uih5nb0thqf7tbqubl0k2l
+CognitoUserPoolARN=arn:aws:cognito-idp:eu-central-1:837783538267:userpool/eu-central-1_FIVRD3IzS
 ```
 
 Update the React application settings in [.env](../react-app/.env):
+
 ```properties
-VITE_COGNITO_CLIENT_ID=1lnm05s072ksriccnmohm9udmc
+VITE_COGNITO_CLIENT_ID=ti5uih5nb0thqf7tbqubl0k2l
 ```
 
 Regenerate the CloudFormation templates:
@@ -133,8 +142,8 @@ cdk deploy jarhc-online-website
 
 Links:
 
-* [CloudFormation](https://eu-central-1.console.aws.amazon.com/cloudformation/home?region=eu-central-1) 
-* [S3](https://eu-central-1.console.aws.amazon.com/s3/buckets?region=eu-central-1) 
+* [CloudFormation](https://eu-central-1.console.aws.amazon.com/cloudformation/home?region=eu-central-1)
+* [S3](https://eu-central-1.console.aws.amazon.com/s3/buckets?region=eu-central-1)
 * [CloudFront](https://us-east-1.console.aws.amazon.com/cloudfront/v4/home?region=eu-central-1)
 * [Route 53](https://us-east-1.console.aws.amazon.com/route53/v2/hostedzones?region=eu-central-1)
 
