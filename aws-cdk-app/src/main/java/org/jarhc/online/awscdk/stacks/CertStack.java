@@ -1,7 +1,11 @@
 package org.jarhc.online.awscdk.stacks;
 
 import software.amazon.awscdk.StackProps;
-import software.amazon.awscdk.services.certificatemanager.CfnCertificate;
+import software.amazon.awscdk.services.certificatemanager.Certificate;
+import software.amazon.awscdk.services.certificatemanager.CertificateValidation;
+import software.amazon.awscdk.services.route53.HostedZone;
+import software.amazon.awscdk.services.route53.HostedZoneProviderProps;
+import software.amazon.awscdk.services.route53.IHostedZone;
 import software.constructs.Construct;
 
 public class CertStack extends AbstractStack {
@@ -13,44 +17,35 @@ public class CertStack extends AbstractStack {
 			// configuration:
 			final String websiteDomain,
 			final String cognitoDomain,
-			final String dnsZoneId
+			final String rootDomain
 	) {
 		super(scope, id, props);
 
-		CfnCertificate cognitoCertificate = CfnCertificate.Builder.create(this, "CognitoCertificate")
+		// reference to Route 53 hosted zone for root domain
+		IHostedZone hostedZone = HostedZone.fromLookup(this, "HostedZone", HostedZoneProviderProps.builder().domainName(rootDomain).build());
+
+		// SSL certificate for custom domain used by Cognito for user authentication
+		Certificate cognitoCertificate = Certificate.Builder.create(this, "CognitoCertificate")
 				.domainName(cognitoDomain)
-				.validationMethod("DNS")
-				.domainValidationOptions(
-						list(
-								CfnCertificate.DomainValidationOptionProperty.builder()
-										.domainName(cognitoDomain)
-										.hostedZoneId(dnsZoneId)
-										.build()
-						)
-				)
+				.validation(CertificateValidation.fromDns(hostedZone))
 				.build();
 
-		CfnCertificate websiteCertificate = CfnCertificate.Builder.create(this, "WebsiteCertificate")
+		// SSL certificate for custom domain used by S3 for the static website
+		Certificate websiteCertificate = Certificate.Builder.create(this, "WebsiteCertificate")
 				.domainName(websiteDomain)
-				.validationMethod("DNS")
-				.domainValidationOptions(
-						list(
-								CfnCertificate.DomainValidationOptionProperty.builder()
-										.domainName(websiteDomain)
-										.hostedZoneId(dnsZoneId)
-										.build()
-						)
-				)
+				.validation(CertificateValidation.fromDns(hostedZone))
 				.build();
 
+		// output certificate ARNs
+		// (used in the other stacks to configure CloudFront distributions)
 		createOutput(
 				"WebsiteCertificateARN",
-				websiteCertificate.getRef(),
+				websiteCertificate.getCertificateArn(),
 				"Website Certificate ARN"
 		);
 		createOutput(
 				"CognitoCertificateARN",
-				cognitoCertificate.getRef(),
+				cognitoCertificate.getCertificateArn(),
 				"Cognito Certificate ARN"
 		);
 

@@ -1,10 +1,34 @@
 package org.jarhc.online.awscdk.stacks;
 
+import software.amazon.awscdk.Duration;
+import software.amazon.awscdk.RemovalPolicy;
 import software.amazon.awscdk.StackProps;
-import software.amazon.awscdk.services.cognito.CfnUserPool;
-import software.amazon.awscdk.services.cognito.CfnUserPoolClient;
-import software.amazon.awscdk.services.cognito.CfnUserPoolDomain;
-import software.amazon.awscdk.services.route53.CfnRecordSet;
+import software.amazon.awscdk.services.certificatemanager.Certificate;
+import software.amazon.awscdk.services.certificatemanager.ICertificate;
+import software.amazon.awscdk.services.cognito.AccountRecovery;
+import software.amazon.awscdk.services.cognito.AutoVerifiedAttrs;
+import software.amazon.awscdk.services.cognito.CustomDomainOptions;
+import software.amazon.awscdk.services.cognito.Mfa;
+import software.amazon.awscdk.services.cognito.MfaSecondFactor;
+import software.amazon.awscdk.services.cognito.OAuthFlows;
+import software.amazon.awscdk.services.cognito.OAuthScope;
+import software.amazon.awscdk.services.cognito.OAuthSettings;
+import software.amazon.awscdk.services.cognito.PasswordPolicy;
+import software.amazon.awscdk.services.cognito.SignInAliases;
+import software.amazon.awscdk.services.cognito.UserPool;
+import software.amazon.awscdk.services.cognito.UserPoolClient;
+import software.amazon.awscdk.services.cognito.UserPoolClientIdentityProvider;
+import software.amazon.awscdk.services.cognito.UserPoolClientOptions;
+import software.amazon.awscdk.services.cognito.UserPoolDomain;
+import software.amazon.awscdk.services.cognito.UserPoolDomainOptions;
+import software.amazon.awscdk.services.cognito.UserPoolEmail;
+import software.amazon.awscdk.services.cognito.UserPoolSESOptions;
+import software.amazon.awscdk.services.route53.ARecord;
+import software.amazon.awscdk.services.route53.HostedZone;
+import software.amazon.awscdk.services.route53.HostedZoneProviderProps;
+import software.amazon.awscdk.services.route53.IHostedZone;
+import software.amazon.awscdk.services.route53.RecordTarget;
+import software.amazon.awscdk.services.route53.targets.UserPoolDomainTarget;
 import software.constructs.Construct;
 
 public class CognitoStack extends AbstractStack {
@@ -17,112 +41,118 @@ public class CognitoStack extends AbstractStack {
 			final String cognitoCertificateArn,
 			final String cognitoDomain,
 			final String websiteDomain,
-			final String emailArn,
 			final String emailAddress,
-			final String dnsZoneId
+			final String rootDomain
 	) {
 		super(scope, id, props);
 
 		// Cognito user pool
-		CfnUserPool cognitoUserPool = CfnUserPool.Builder.create(this, "CognitoUserPool")
+		UserPool cognitoUserPool = UserPool.Builder.create(this, "CognitoUserPool")
 				.userPoolName(cognitoDomain)
-				.usernameAttributes(list("email"))
-				.autoVerifiedAttributes(list("email"))
-				.usernameConfiguration(CfnUserPool.UsernameConfigurationProperty.builder()
-						.caseSensitive(false)
-						.build())
-				.mfaConfiguration("OPTIONAL")
-				.enabledMfas(list("SOFTWARE_TOKEN_MFA"))
-				.emailConfiguration(CfnUserPool.EmailConfigurationProperty.builder()
-						.emailSendingAccount("DEVELOPER")
-						.sourceArn(emailArn)
-						.from("JarHC <" + emailAddress + ">")
-						.build())
-				.adminCreateUserConfig(CfnUserPool.AdminCreateUserConfigProperty.builder()
-						.allowAdminCreateUserOnly(false)
-						.unusedAccountValidityDays(7)
-						.build())
-				.accountRecoverySetting(CfnUserPool.AccountRecoverySettingProperty.builder()
-						.recoveryMechanisms(list(
-								CfnUserPool.RecoveryOptionProperty.builder()
-										.name("verified_email")
-										.priority(1)
-										.build()))
-						.build())
+				.signInAliases(SignInAliases.builder().email(true).build())
+				.autoVerify(AutoVerifiedAttrs.builder().email(true).build())
+				.signInCaseSensitive(false)
+				.mfa(Mfa.OPTIONAL)
+				.mfaSecondFactor(MfaSecondFactor.builder().otp(true).sms(false).build())
+				.email(
+						UserPoolEmail.withSES(
+								UserPoolSESOptions.builder()
+										.fromEmail(emailAddress)
+										.fromName("JarHC")
+										.build()
+						)
+				)
+				.selfSignUpEnabled(true)
+				.accountRecovery(AccountRecovery.EMAIL_ONLY)
+				.passwordPolicy(
+						PasswordPolicy.builder()
+								.minLength(8)
+								.requireUppercase(true)
+								.requireLowercase(true)
+								.requireDigits(true)
+								.requireSymbols(true)
+								.tempPasswordValidity(Duration.days(7))
+								.build()
+				)
+				// TODO: .deviceTracking(DeviceTracking.builder().build())
+				// TODO: .standardAttributes(StandardAttributes.builder()
+				//		.email(StandardAttribute.builder().required(true).mutable(false).build())
+				//		.build())
+				.removalPolicy(RemovalPolicy.DESTROY) // TODO: this does not seem to have an effect - BUG?
 				.build();
-
-		/*
-		// Cognito user group "Administrators"
-		CfnUserPoolGroup.Builder.create(this, "CognitoAdminGroup")
-				.userPoolId(cognitoUserPool.getRef())
-				.groupName("Administrators")
-				.precedence(0)
-				.build();
-		*/
 
 		// Cognito app client used by public website and API gateway
-		CfnUserPoolClient cognitoAppClient = CfnUserPoolClient.Builder.create(this, "CognitoAppClient")
-				.userPoolId(cognitoUserPool.getRef())
-				.clientName(websiteDomain)
+		UserPoolClientOptions cognitoAppClientOptions = UserPoolClientOptions.builder()
+				.userPoolClientName(websiteDomain)
 				.generateSecret(false)
-				.allowedOAuthFlowsUserPoolClient(true)
-				.allowedOAuthFlows(list("code", "implicit"))
-				.allowedOAuthScopes(list("openid", "profile", "email", "phone"))
-				.defaultRedirectUri("https://" + websiteDomain + "/login.html")
-				.callbackUrLs(list("https://" + websiteDomain + "/login.html", "http://localhost:3000/login.html"))
-				.logoutUrLs(list("https://" + websiteDomain + "/logout.html", "http://localhost:3000/logout.html"))
-				.idTokenValidity(3) // hours
-				.accessTokenValidity(3) // hours
-				.refreshTokenValidity(7) // days
+				.oAuth(
+						OAuthSettings.builder()
+								.flows(
+										OAuthFlows.builder()
+												.authorizationCodeGrant(true)
+												.implicitCodeGrant(true)
+												.clientCredentials(false)
+												.build()
+								)
+								.scopes(list(OAuthScope.OPENID, OAuthScope.PROFILE, OAuthScope.EMAIL, OAuthScope.PHONE))
+								.defaultRedirectUri("https://" + websiteDomain + "/login.html")
+								.callbackUrls(list("https://" + websiteDomain + "/login.html", "http://localhost:3000/login.html"))
+								.logoutUrls(list("https://" + websiteDomain + "/logout.html", "http://localhost:3000/logout.html"))
+								.build()
+				)
+				.idTokenValidity(Duration.hours(3))
+				.accessTokenValidity(Duration.hours(3))
+				.refreshTokenValidity(Duration.days(7))
 				.enableTokenRevocation(true)
-				.preventUserExistenceErrors("ENABLED")
-				.supportedIdentityProviders(list("COGNITO"))
-				.writeAttributes(list("name"))
+				.preventUserExistenceErrors(true)
+				.supportedIdentityProviders(list(UserPoolClientIdentityProvider.COGNITO))
+				// TODO: .readAttributes(list("name"))
+				// TODO: .writeAttributes(list("name"))
 				.build();
+		UserPoolClient cognitoAppClient = cognitoUserPool.addClient(websiteDomain, cognitoAppClientOptions);
+
+		// reference to SSL certificate for Cognito custom domain
+		ICertificate cognitoCertificate = Certificate.fromCertificateArn(this, "CognitoCertificate", cognitoCertificateArn);
 
 		// Cognito custom domain
-		CfnUserPoolDomain cognitoCustomDomain = CfnUserPoolDomain.Builder.create(this, "CognitoCustomDomain")
-				.userPoolId(cognitoUserPool.getRef())
-				.domain(cognitoDomain)
-				.customDomainConfig(
-						CfnUserPoolDomain.CustomDomainConfigTypeProperty.builder()
-								.certificateArn(cognitoCertificateArn)
+		UserPoolDomainOptions cognitoCustomDomainOptions = UserPoolDomainOptions.builder()
+				.customDomain(
+						CustomDomainOptions.builder()
+								.domainName(cognitoDomain)
+								.certificate(cognitoCertificate)
 								.build()
 				)
 				.build();
+		UserPoolDomain cognitoCustomDomain = cognitoUserPool.addDomain("CognitoCustomDomain", cognitoCustomDomainOptions);
+
+		// reference to Route 53 hosted zone for root domain
+		IHostedZone hostedZone = HostedZone.fromLookup(this, "HostedZone", HostedZoneProviderProps.builder().domainName(rootDomain).build());
 
 		// DNS record for Cognito custom domain
-		CfnRecordSet.Builder.create(this, "CognitoDnsRecord")
-				.hostedZoneId(dnsZoneId)
-				.name(cognitoDomain)
-				.type("A")
-				.aliasTarget(
-						CfnRecordSet.AliasTargetProperty.builder()
-								.dnsName(cognitoCustomDomain.getAttrCloudFrontDistribution())
-								.hostedZoneId(CLOUDFRONT_HOSTED_ZONE_ID)
-								.evaluateTargetHealth(false)
-								.build()
-				)
+		ARecord.Builder.create(this, "CognitoDnsRecord")
+				.zone(hostedZone)
+				.recordName(cognitoDomain)
+				.target(RecordTarget.fromAlias(new UserPoolDomainTarget(cognitoCustomDomain)))
 				.build();
 
 		createOutput(
 				"CognitoClientID",
-				cognitoAppClient.getRef(),
+				cognitoAppClient.getUserPoolClientId(),
 				"Cognito App Client ID"
 		);
 		createOutput(
 				"CognitoDiscoveryEndpointURL",
-				cognitoUserPool.getAttrProviderUrl() + "/.well-known/openid-configuration",
+				cognitoUserPool.getUserPoolProviderUrl() + "/.well-known/openid-configuration",
 				"Cognito Discovery Endpoint URL"
 		);
 		createOutput(
 				"CognitoIssuerURL",
-				cognitoUserPool.getAttrProviderUrl(),
+				cognitoUserPool.getUserPoolProviderUrl(),
 				"Cognito Issuer URL"
 		);
 		createOutput(
 				"CognitoUserPoolARN",
-				cognitoUserPool.getAttrArn(),
+				cognitoUserPool.getUserPoolArn(),
 				"Cognito User Pool ARN"
 		);
 

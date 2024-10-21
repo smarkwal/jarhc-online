@@ -115,16 +115,23 @@ public class ApiStack extends AbstractStack {
 				))
 				.build();
 
+		// TODO: create ECR repository for Docker images?
+		// TODO: create S3 bucket for JAR/ZIP files?
+
 		// Lambda function for JAPICC Check (invoked asynchronously)
+		// TODO: fix code reference:
+		//   - build Docker image
+		//   - push image to ECR
+		//   - set image URI
+		CfnFunction.CodeProperty japiccCheckCode = CfnFunction.CodeProperty.builder()
+				.imageUri(this.getAccount() + ".dkr.ecr.eu-central-1.amazonaws.com/jarhc-online-code:japicc-check-function-v1")
+				.build();
+
 		CfnFunction japiccCheckFunction = CfnFunction.Builder.create(this, "JapiccCheckFunction")
 				.functionName("japicc-check")
 				.packageType("Image")
 				.architectures(list("x86_64"))
-				.code( // TODO: fix code reference
-						CfnFunction.CodeProperty.builder()
-								.imageUri("837783538267.dkr.ecr.eu-central-1.amazonaws.com/jarhc-online-api:japicccheckfunction-adb1ce521f2b-v1")
-								.build()
-				)
+				.code(japiccCheckCode)
 				.tracingConfig(tracingConfig)
 				.role(asyncFunctionRole.getAttrArn())
 				// max price per execution:
@@ -139,14 +146,18 @@ public class ApiStack extends AbstractStack {
 		createEvenInvokeConfig(this, japiccCheckFunction, japiccCheckFunctionAlias);
 
 		// Lambda function for JarHC Check (invoked asynchronously)
+		// TODO: fix code reference:
+		//   - build function uber-JAR file with all dependencies
+		//   - upload JAR file to S3
+		//   - set S3 bucket and key
+		CfnFunction.CodeProperty jarhcCheckCode = CfnFunction.CodeProperty.builder()
+				.s3Bucket("jarhc-online-code")
+				.s3Key("jarhc-check-1.0.0.jar")
+				.build();
+
 		CfnFunction jarhcCheckFunction = CfnFunction.Builder.create(this, "JarhcCheckFunction")
 				.functionName("jarhc-check")
-				.code( // TODO: fix code reference
-						CfnFunction.CodeProperty.builder()
-								.s3Bucket("aws-sam-cli-managed-default-samclisourcebucket-lcbyi0cw90q3")
-								.s3Key("jarhc-online-api/0e7882a16924b5dce32769213f64627d")
-								.build()
-				)
+				.code(jarhcCheckCode)
 				.handler("org.jarhc.online.jarhc.Handler")
 				.runtime("java11") // TODO: migrate to Java 17
 				.architectures(list("x86_64")) // TODO: migrate to ARM64?
@@ -164,14 +175,18 @@ public class ApiStack extends AbstractStack {
 		createEvenInvokeConfig(this, jarhcCheckFunction, jarhcCheckFunctionAlias);
 
 		// Lambda function for REST API (invoked synchronously by API Gateway)
+		// TODO: fix code reference:
+		//   - build function uber-JAR file with all dependencies
+		//   - upload JAR file to S3
+		//   - set S3 bucket and key
+		CfnFunction.CodeProperty restApiCode = CfnFunction.CodeProperty.builder()
+				.s3Bucket("jarhc-online-code")
+				.s3Key("rest-api-1.0.0.jar") // TODO: use fat JAR with all dependencies
+				.build();
+
 		CfnFunction restApiFunction = CfnFunction.Builder.create(this, "RestApiFunction")
 				.functionName("rest-api")
-				.code( // TODO: fix code reference
-						CfnFunction.CodeProperty.builder()
-								.s3Bucket("aws-sam-cli-managed-default-samclisourcebucket-lcbyi0cw90q3")
-								.s3Key("jarhc-online-api/2d1a8b550a8d0086639fe92705c1363d")
-								.build()
-				)
+				.code(restApiCode)
 				.handler("org.jarhc.online.rest.Handler")
 				.runtime("java11") // TODO: migrate to Java 17
 				.architectures(list("x86_64")) // TODO: migrate to ARM64?

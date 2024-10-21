@@ -27,7 +27,8 @@ public class JarhcOnlineApp {
 		String usEast1AwsRegion = getProperty("AWS_REGION_US_EAST_1");
 		String defaultAwsRegion = getProperty("AWS_REGION_DEFAULT");
 		String appName = getProperty("AppName");
-		String dnsZoneId = getProperty("DnsZoneID");
+		String rootDomain = getProperty("RootDomain");
+		String dnsZoneId = getProperty("DnsZoneID"); // TODO: remove DnzZoneID and only use RootDomain
 		String websiteCertificateArn = getProperty("WebsiteCertificateARN");
 		String cognitoCertificateArn = getProperty("CognitoCertificateARN");
 		String websiteDomain = getProperty("WebsiteDomain");
@@ -39,7 +40,6 @@ public class JarhcOnlineApp {
 		String cognitoDomain = getProperty("CognitoDomain");
 		String cognitoUserPoolArn = getProperty("CognitoUserPoolARN");
 		String emailAddress = getProperty("EmailAddress");
-		String emailArn = getProperty("EmailARN");
 
 		StackProps usEast1StackProps = buildStackProps(awsAccountId, usEast1AwsRegion);
 		StackProps defaultStackProps = buildStackProps(awsAccountId, defaultAwsRegion);
@@ -49,7 +49,7 @@ public class JarhcOnlineApp {
 		new CertStack(app, appName + "-cert", usEast1StackProps,
 				websiteDomain,
 				cognitoDomain,
-				dnsZoneId
+				rootDomain
 		);
 		// TODO: pass CognitoCertificateARN to Cognito stack below
 		// TODO: pass WebsiteCertificateARN to Website stack below
@@ -58,9 +58,8 @@ public class JarhcOnlineApp {
 				cognitoCertificateArn,
 				cognitoDomain,
 				websiteDomain,
-				emailArn,
 				emailAddress,
-				dnsZoneId
+				rootDomain
 		);
 		// TODO: pass CognitoUserPoolARN to API stack below
 

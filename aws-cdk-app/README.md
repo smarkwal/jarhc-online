@@ -73,16 +73,16 @@ Links:
 
 Resources:
 
-| Logical ID         | Physical ID | Type                                 |
-|--------------------|-------------|--------------------------------------|
-| CognitoCertificate | (dynamic)   | AWS::CertificateManager::Certificate |
-| WebsiteCertificate | (dynamic)   | AWS::CertificateManager::Certificate |
+| Logical ID                 | Physical ID | Type                                 |
+|----------------------------|-------------|--------------------------------------|
+| CognitoCertificate6C6D677B | (dynamic)   | AWS::CertificateManager::Certificate |
+| WebsiteCertificateEEE1FA4C | (dynamic)   | AWS::CertificateManager::Certificate |
 
 Copy the output values from the stack to the [env.properties](env.properties) file:
 
 ```properties
-CognitoCertificateARN=arn:aws:acm:us-east-1:837783538267:certificate/4983cb68-d5f7-4862-8417-4a3a5d2aea8a
-WebsiteCertificateARN=arn:aws:acm:us-east-1:837783538267:certificate/e67606ad-78b1-472a-b30d-64f406faa5e8
+CognitoCertificateARN=arn:aws:acm:us-east-1:837783538267:certificate/1439f453-fe04-46f8-9198-319b99ac9233
+WebsiteCertificateARN=arn:aws:acm:us-east-1:837783538267:certificate/fb1d01cd-d534-4d22-9dab-5fd591176742
 ```
 
 Regenerate the CloudFormation templates:
@@ -106,24 +106,25 @@ Links:
 
 Resources:
 
-| Logical ID          | Physical ID     | Type                         |
-|---------------------|-----------------|------------------------------|
-| CognitoUserPool     | (dynamic)       | AWS::Cognito::UserPool       |
-| CognitoAppClient    | (dynamic)       | AWS::Cognito::UserPoolClient |
-| CognitoCustomDomain | login.jarhc.org | AWS::Cognito::UserPoolDomain |
-| CognitoDnsRecord    | login.jarhc.org | AWS::Route53::RecordSet      |
+| Logical ID                                 | Physical ID     | Type                         |
+|--------------------------------------------|-----------------|------------------------------|
+| CognitoUserPool53E37E69                    | (dynamic)       | AWS::Cognito::UserPool       |
+| CognitoUserPoolonlinejarhcorg41904085      | (dynamic)       | AWS::Cognito::UserPoolClient |
+| CognitoUserPoolCognitoCustomDomainE2E6CF17 | login.jarhc.org | AWS::Cognito::UserPoolDomain |
+| CognitoDnsRecord9CDAC157                   | login.jarhc.org | AWS::Route53::RecordSet      |
+| (some more resource)                       | (dynamic)       | (various)                    |
 
 Copy the output values from the stack to the [env.properties](env.properties) file:
 
 ```properties
-CognitoClientID=jvfkebosr3qtfqq2is2ihkugn
-CognitoUserPoolARN=arn:aws:cognito-idp:eu-central-1:837783538267:userpool/eu-central-1_FIVRD3IzS
+CognitoClientID=1cc2kvdb7ip94935j2pedb9qlo
+CognitoUserPoolARN=arn:aws:cognito-idp:eu-central-1:837783538267:userpool/eu-central-1_iJ5Jxf8ll
 ```
 
 Update the React application settings in [.env](../react-app/.env):
 
 ```properties
-VITE_COGNITO_CLIENT_ID=jvfkebosr3qtfqq2is2ihkugn
+VITE_COGNITO_CLIENT_ID=1cc2kvdb7ip94935j2pedb9qlo
 ```
 
 Regenerate the CloudFormation templates:
@@ -173,4 +174,16 @@ Note: It may take up to an hour until the Cognito custom domain is available.
 Test if the Cognito OpenID service is available: https://login.jarhc.org/.well-known/openid-configuration
 
 ### Stack 4: jarhc-online-api
+
+TODO: ???
+
+## Cleanup
+
+TODO:
+
+- Delete API stack
+- Empty S3 bucket with static website content
+- Delete Website stack
+- Delete Cognito stack
+- Delete Cert stack
 
