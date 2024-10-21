@@ -150,13 +150,13 @@ Links:
 
 Resources:
 
-| Logical ID                    | Physical ID      | Type                                 |
-|-------------------------------|------------------|--------------------------------------|
-| WebsiteBucket                 | online.jarhc.org | AWS::S3::Bucket                      |
-| WebsiteBucketPolicy           | online.jarhc.org | AWS::S3::BucketPolicy                |
-| WebsiteCloudFrontDistribution | (dynamic)        | AWS::CloudFront::Distribution        |
-| WebsiteOriginAccessControl    | (dynamic)        | AWS::CloudFront::OriginAccessControl |
-| WebsiteDnsRecord              | (dynamic)        | AWS::Route53::RecordSetGroup         |
+| Logical ID                            | Physical ID      | Type                                 |
+|---------------------------------------|------------------|--------------------------------------|
+| WebsiteBucket75C24D94                 | online.jarhc.org | AWS::S3::Bucket                      |
+| WebsiteBucketPolicyE10E3262           | online.jarhc.org | AWS::S3::BucketPolicy                |
+| WebsiteCloudFrontDistribution12928E08 | (dynamic)        | AWS::CloudFront::Distribution        |
+| WebsiteOriginAccessControl57832DAD    | (dynamic)        | AWS::CloudFront::OriginAccessControl |
+| WebsiteDnsRecord3059DC61              | online.jarhc.org | AWS::Route53::RecordSetGroup         |
 
 ### Deploy the static website content (React app)
 
@@ -171,7 +171,7 @@ Test the static website: https://online.jarhc.org/
 
 Note: It may take up to an hour until the Cognito custom domain is available.
 
-Test if the Cognito OpenID service is available: https://login.jarhc.org/.well-known/openid-configuration
+Test if the Cognito OpenID service is available: https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_iJ5Jxf8ll/.well-known/openid-configuration
 
 ### Stack 4: jarhc-online-api
 

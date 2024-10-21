@@ -67,7 +67,7 @@ public class JarhcOnlineApp {
 				websiteCertificateArn,
 				websiteDomain,
 				websiteLogsBucket,
-				dnsZoneId
+				rootDomain
 		);
 
 		new ApiStack(app, appName + "-api", defaultStackProps,
