@@ -16,3 +16,20 @@ dependencies {
 configurations.testRuntimeClasspath {
     exclude("org.slf4j", "slf4j-simple")
 }
+
+tasks {
+
+    // create a ZIP file with all dependencies for AWS Lambda
+    register("buildZip", Zip::class) {
+        group = "build"
+        into("lib") {
+            from(jar)
+            from(configurations.runtimeClasspath)
+        }
+    }
+
+    build {
+        dependsOn("buildZip")
+    }
+
+}

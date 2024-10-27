@@ -29,7 +29,7 @@ Verify CDK CLI version:
 cdk --version
 ```
 
-CDK version used to create this project: `2.162.1 (build 10aa526)`
+CDK version used to create this project: `2.164.1 (build bb9275c)`
 
 ### Configuration
 
@@ -112,7 +112,7 @@ Resources:
 | CognitoUserPoolonlinejarhcorg41904085      | (dynamic)       | AWS::Cognito::UserPoolClient |
 | CognitoUserPoolCognitoCustomDomainE2E6CF17 | login.jarhc.org | AWS::Cognito::UserPoolDomain |
 | CognitoDnsRecord9CDAC157                   | login.jarhc.org | AWS::Route53::RecordSet      |
-| (some more resource)                       | (dynamic)       | (various)                    |
+| (more resource)                            | (dynamic)       | (various)                    |
 
 Copy the output values from the stack to the [env.properties](env.properties) file:
 
@@ -175,7 +175,44 @@ Test if the Cognito OpenID service is available: https://cognito-idp.eu-central-
 
 ### Stack 4: jarhc-online-api
 
-TODO: ???
+Build the Lambda functions:
+
+```shell
+cd ../sam-api
+./gradlew clean build -x test -x jarhcReport
+```
+
+Deploy the stack for the API gateway:
+
+```shell
+cdk deploy jarhc-online-api
+```
+
+Links:
+
+* [CloudFormation](https://eu-central-1.console.aws.amazon.com/cloudformation/home?region=eu-central-1)
+* [API Gateway](https://eu-central-1.console.aws.amazon.com/apigateway/main/apis?region=eu-central-1)
+* [Lambda](https://eu-central-1.console.aws.amazon.com/lambda/home?region=eu-central-1)
+* [ECR](https://eu-central-1.console.aws.amazon.com/ecr/private-registry/repositories?region=eu-central-1)
+* [SQS](https://eu-central-1.console.aws.amazon.com/sqs/v3/home?region=eu-central-1)
+* [X-Ray](https://eu-central-1.console.aws.amazon.com/cloudwatch/home?region=eu-central-1#xray:traces)
+* [Route 53](https://us-east-1.console.aws.amazon.com/route53/v2/hostedzones?region=eu-central-1)
+
+Resources:
+
+| Logical ID                                                | Physical ID   | Type                                 |
+|-----------------------------------------------------------|---------------|--------------------------------------|
+| RestApi0C43BF4B                                           | (dynamic)     | AWS::ApiGateway::RestApi             |
+| RestApiDeployment180EC5030543aecfbe4b1557b12f6cbaad612eca | (dynamic)     | AWS::ApiGateway::Deployment          |
+| RestApiDeploymentStageProd718AC1AC                        | (dynamic)     | AWS::ApiGateway::Stage               |
+| RestApiCustomDomain91FA5E60                               | api.jarhc.org | AWS::ApiGateway::DomainName          |
+| ApiDnsRecordD7F299CB                                      | api.jarhc.org | AWS::Route53::RecordSet              |
+| ApiCertificate1D5B2B3B                                    | (dynamic)     | AWS::CertificateManager::Certificate |
+| RestApiFunctionB9A4309E                                   | rest-api      | AWS::Lambda::Function                |
+| JarhcCheckFunction1DCBD1DF                                | jarhc-check   | AWS::Lambda::Function                |
+| JapiccCheckFunction77210A42                               | japicc-check  | AWS::Lambda::Function                |
+| ErrorQueue2580A2D4                                        | (dynamic)     | AWS::SQS::Queue                      |
+| (more resource)                                           | (dynamic)     | (various)                            |
 
 ## Cleanup
 

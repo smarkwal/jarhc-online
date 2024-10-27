@@ -28,7 +28,6 @@ public class JarhcOnlineApp {
 		String defaultAwsRegion = getProperty("AWS_REGION_DEFAULT");
 		String appName = getProperty("AppName");
 		String rootDomain = getProperty("RootDomain");
-		String dnsZoneId = getProperty("DnsZoneID"); // TODO: remove DnzZoneID and only use RootDomain
 		String websiteCertificateArn = getProperty("WebsiteCertificateARN");
 		String cognitoCertificateArn = getProperty("CognitoCertificateARN");
 		String websiteDomain = getProperty("WebsiteDomain");
@@ -76,7 +75,7 @@ public class JarhcOnlineApp {
 				websiteUrl,
 				websiteBucketName,
 				websiteBucketUrl,
-				dnsZoneId
+				rootDomain
 		);
 
 		app.synth();

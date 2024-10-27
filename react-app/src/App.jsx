@@ -97,7 +97,7 @@ function OpenSource() {
 		<div className="p-3 mb-4 bg-sidepanel">
 			<h3>Open Source</h3>
 			<p>Everything in this project is open source.</p>
-			<p>The website itself is a <ExternalLink href="https://reactjs.org/">React</ExternalLink> app with a <ExternalLink href="https://dev.java/">Java</ExternalLink> backend running on serverless <ExternalLink href="https://aws.amazon.com/serverless/sam/">AWS SAM</ExternalLink> infrastructure.</p>
+			<p>The website itself is a <ExternalLink href="https://reactjs.org/">React</ExternalLink> app with a <ExternalLink href="https://dev.java/">Java</ExternalLink> backend running on serverless <ExternalLink href="https://aws.amazon.com/cdk/">AWS CDK</ExternalLink> infrastructure.</p>
 			<p>You can find more information on GitHub at <ExternalLink href="https://github.com/smarkwal/jarhc-online">smarkwal/jarhc-online</ExternalLink>.</p>
 		</div>
 	</>;

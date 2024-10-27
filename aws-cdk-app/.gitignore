@@ -13,3 +13,4 @@ cdk.out
 
 # settings
 env.user.properties
+http-client.env.json
