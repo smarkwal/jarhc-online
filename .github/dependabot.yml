@@ -19,7 +19,7 @@ updates:
     open-pull-requests-limit: 100
 
   - package-ecosystem: "gradle"
-    directory: "/sam-api"
+    directory: "/jarhc-aws-lambda"
     schedule:
       interval: "monthly"
     open-pull-requests-limit: 100

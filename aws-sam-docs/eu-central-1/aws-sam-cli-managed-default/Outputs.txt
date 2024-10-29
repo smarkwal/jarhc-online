@@ -1,2 +1,0 @@
-SourceBucket
-aws-sam-cli-managed-default-samclisourcebucket-lcbyi0cw90q3

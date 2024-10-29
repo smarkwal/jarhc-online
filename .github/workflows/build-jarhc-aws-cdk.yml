@@ -1,0 +1,36 @@
+name: Build jarhc-aws-cdk
+
+on:
+  push:
+    paths:
+      - 'jarhc-aws-cdk/**'
+      - '.github/workflows/build-jarhc-aws-cdk.yml'
+  workflow_dispatch:
+    inputs:
+      additionalMavenOptions:
+        description: 'Additional Maven options'
+        required: false
+        default: ''
+
+jobs:
+  build:
+    name: Build
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Build with Maven
+      run: 'mvn package ${{ github.event.inputs.additionalMavenOptions }}'
+      working-directory: jarhc-aws-cdk

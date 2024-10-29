@@ -3,7 +3,7 @@ name: Dependency Graph
 on:
   push:
     paths:
-      - 'sam-api/**'
+      - 'jarhc-aws-lambda/**'
       - 'test-prod/**'
       - '.github/workflows/dependency-graph.yml'
   workflow_dispatch:
@@ -41,4 +41,4 @@ jobs:
       uses: gradle/actions/dependency-submission@v4
       with:
         dependency-graph: ${{ github.event.inputs.dependencyGraphAction || 'generate-and-submit' }}
-        build-root-directory: sam-api
+        build-root-directory: jarhc-aws-lambda
