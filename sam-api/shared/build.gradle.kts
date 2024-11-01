@@ -6,7 +6,7 @@ plugins {
 dependencies {
 
     // BOMs for version constraints
-    api(platform("software.amazon.awssdk:bom:2.28.6"))
+    api(platform("software.amazon.awssdk:bom:2.29.5"))
     api(platform("com.amazonaws:aws-java-sdk-bom:1.12.772"))
 
     // FasterXML Jackson (transitive dependency of AWS SDK)
