@@ -103,7 +103,7 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation("org.mockito:mockito-core:5.13.0")
     testImplementation("org.mockito:mockito-junit-jupiter:5.13.0")
-    testImplementation("org.assertj:assertj-core:3.26.3")
+    testImplementation("org.assertj:assertj-core:3.27.3")
 }
 
 // exclude slf4j-simple from tests
