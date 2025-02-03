@@ -69,7 +69,7 @@ dependencies {
     // BOMs for version constraints
     implementation(platform("org.junit:junit-bom:5.11.0"))
     implementation(platform("software.amazon.awssdk:bom:2.28.6"))
-    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.772"))
+    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.780"))
 
     // FasterXML Jackson (transitive dependency of AWS SDK)
     // Fix CVE-2022-42003 and CVE-2022-42004 in Jackson Databind < 2.13.4.1
