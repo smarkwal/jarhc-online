@@ -4,7 +4,7 @@ plugins {
 
     // Gradle Versions Plugin
     // https://github.com/ben-manes/gradle-versions-plugin
-    id("com.github.ben-manes.versions") version "0.51.0"
+    id("com.github.ben-manes.versions") version "0.52.0"
 
     // Gradle Test Logger Plugin
     // https://github.com/radarsh/gradle-test-logger-plugin
@@ -34,8 +34,8 @@ buildscript {
     dependencies {
         // fix CVE-2023-3635 in Okio < 3.4.0
         // (indirect dependency of Gradle Versions Plugin 0.51.0)
-        classpath("com.squareup.okio:okio:3.9.1")
-        classpath("com.squareup.okio:okio-jvm:3.9.1")
+        classpath("com.squareup.okio:okio:3.10.2")
+        classpath("com.squareup.okio:okio-jvm:3.10.2")
     }
 }
 
@@ -52,12 +52,12 @@ java {
 dependencies {
 
     // BOMs for version constraints
-    implementation(platform("software.amazon.awssdk:bom:2.28.6"))
-    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.772"))
+    implementation(platform("software.amazon.awssdk:bom:2.30.11"))
+    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.780"))
 
     // FasterXML Jackson (transitive dependency of AWS SDK)
     // Fix CVE-2022-42003 and CVE-2022-42004 in Jackson Databind < 2.13.4.1
-    implementation(platform("com.fasterxml.jackson:jackson-bom:2.17.2"))
+    implementation(platform("com.fasterxml.jackson:jackson-bom:2.18.2"))
 
     // logging
     implementation("org.slf4j:slf4j-api:2.0.16")
@@ -99,11 +99,11 @@ dependencies {
 
     // test dependencies -------------------------------------
 
-    testImplementation("org.junit.jupiter:junit-jupiter:5.11.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    testImplementation("org.mockito:mockito-core:5.13.0")
-    testImplementation("org.mockito:mockito-junit-jupiter:5.13.0")
-    testImplementation("org.assertj:assertj-core:3.26.3")
+    testImplementation("org.mockito:mockito-core:5.15.2")
+    testImplementation("org.mockito:mockito-junit-jupiter:5.15.2")
+    testImplementation("org.assertj:assertj-core:3.27.3")
 }
 
 // exclude slf4j-simple from tests
