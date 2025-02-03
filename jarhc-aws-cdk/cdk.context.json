@@ -1,0 +1,10 @@
+{
+  "hosted-zone:account=837783538267:domainName=jarhc.org:region=us-east-1": {
+    "Id": "/hostedzone/Z39VOOPW73P7H0",
+    "Name": "jarhc.org."
+  },
+  "hosted-zone:account=837783538267:domainName=jarhc.org:region=eu-central-1": {
+    "Id": "/hostedzone/Z39VOOPW73P7H0",
+    "Name": "jarhc.org."
+  }
+}

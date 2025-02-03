@@ -1,0 +1,32 @@
+### POST /maven/search
+POST https://api.jarhc.org/maven/search
+Content-Type: application/json
+
+{
+  "coordinates": "commons-io:commons-io:2.11.0"
+}
+
+### GET /auth/validate
+GET https://api.jarhc.org/auth/validate
+Authorization: Bearer {{id-token}}
+
+### POST /japicc/submit
+POST https://api.jarhc.org/japicc/submit
+Content-Type: application/json
+Authorization: Bearer {{id-token}}
+
+{
+  "oldVersion": "commons-io:commons-io:2.10.0",
+  "newVersion": "commons-io:commons-io:2.11.0"
+}
+
+### POST /jarhc/submit
+POST https://api.jarhc.org/jarhc/submit
+Content-Type: application/json
+Authorization: Bearer {{id-token}}
+
+{
+  "classpath": [
+    "commons-io:commons-io:2.11.0"
+  ]
+}

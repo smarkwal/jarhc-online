@@ -1,0 +1,61 @@
+name: Build jarhc-aws-lambda
+
+on:
+  push:
+    paths:
+      - 'jarhc-aws-lambda/**'
+      - '.github/workflows/build-jarhc-aws-lambda.yml'
+  workflow_dispatch:
+    inputs:
+      additionalGradleOptions:
+        description: 'Additional Gradle options'
+        required: false
+        default: ''
+
+jobs:
+  build:
+    name: Build
+
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: eu-central-1
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      PUSH_GRADLE_OPTIONS: ''
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up JDK 11 and 17
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: |
+          11
+          17
+
+    - name: Restore Sonar Cache
+      uses: actions/cache@v4
+      if: ${{ github.event_name == 'push' && !startsWith(github.ref_name, 'dependabot/') }}
+      with:
+        path: /home/runner/.sonar/cache
+        key: sonar-cache
+
+    # TODO: support SonarQube scan
+    #- name: Set Push Gradle options
+    #  if: ${{ github.event_name == 'push' && !startsWith(github.ref_name, 'dependabot/') }}
+    #  run: echo "PUSH_GRADLE_OPTIONS=sonar" >> $GITHUB_ENV
+
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v4
+      with:
+        cache-read-only: false
+
+    - name: Build with Gradle
+      run: './gradlew --no-daemon build ${{ env.PUSH_GRADLE_OPTIONS }} ${{ github.event.inputs.additionalGradleOptions }}'
+      working-directory: jarhc-aws-lambda
