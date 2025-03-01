@@ -68,7 +68,7 @@ dependencies {
 
     // BOMs for version constraints
     implementation(platform("org.junit:junit-bom:5.11.4"))
-    implementation(platform("software.amazon.awssdk:bom:2.30.11"))
+    implementation(platform("software.amazon.awssdk:bom:2.30.31"))
     implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.780"))
 
     // FasterXML Jackson (transitive dependency of AWS SDK)
