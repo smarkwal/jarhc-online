@@ -67,7 +67,7 @@ dependencies {
     // note: this is a tests-only project and all classes are in main source set
 
     // BOMs for version constraints
-    implementation(platform("org.junit:junit-bom:5.11.4"))
+    implementation(platform("org.junit:junit-bom:5.12.0"))
     implementation(platform("software.amazon.awssdk:bom:2.30.11"))
     implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.780"))
 
