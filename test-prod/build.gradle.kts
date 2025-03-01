@@ -87,7 +87,7 @@ dependencies {
     implementation("com.amazonaws:aws-java-sdk-cognitoidp")
 
     // logging
-    implementation("org.slf4j:slf4j-api:2.0.16")
+    implementation("org.slf4j:slf4j-api:2.0.17")
     implementation("org.slf4j:slf4j-simple:2.0.16")
 
     // helpers
