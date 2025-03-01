@@ -73,7 +73,7 @@ dependencies {
 
     // FasterXML Jackson (transitive dependency of AWS SDK)
     // Fix CVE-2022-42003 and CVE-2022-42004 in Jackson Databind < 2.13.4.1
-    implementation(platform("com.fasterxml.jackson:jackson-bom:2.18.2"))
+    implementation(platform("com.fasterxml.jackson:jackson-bom:2.18.3"))
 
     // test libraries
     implementation("org.junit.jupiter:junit-jupiter")
