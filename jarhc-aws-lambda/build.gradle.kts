@@ -63,7 +63,7 @@ dependencies {
     implementation("org.slf4j:slf4j-api:2.0.16")
 
     // logging implementation
-    runtimeOnly("org.slf4j:slf4j-simple:2.0.16")
+    runtimeOnly("org.slf4j:slf4j-simple:2.0.17")
 
     // AWS Lambda Java Runtime Interface Client
     // Interface between Lambda service and function code.
