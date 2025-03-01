@@ -60,7 +60,7 @@ dependencies {
     implementation(platform("com.fasterxml.jackson:jackson-bom:2.18.2"))
 
     // logging
-    implementation("org.slf4j:slf4j-api:2.0.16")
+    implementation("org.slf4j:slf4j-api:2.0.17")
 
     // logging implementation
     runtimeOnly("org.slf4j:slf4j-simple:2.0.16")
