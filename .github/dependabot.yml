@@ -10,22 +10,22 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
-    open-pull-requests-limit: 100
+    open-pull-requests-limit: 0
 
   - package-ecosystem: "npm"
     directory: "/react-app"
     schedule:
       interval: "monthly"
-    open-pull-requests-limit: 100
+    open-pull-requests-limit: 0
 
   - package-ecosystem: "gradle"
     directory: "/jarhc-aws-lambda"
     schedule:
       interval: "monthly"
-    open-pull-requests-limit: 100
+    open-pull-requests-limit: 0
 
   - package-ecosystem: "gradle"
     directory: "/test-prod"
     schedule:
       interval: "monthly"
-    open-pull-requests-limit: 100
+    open-pull-requests-limit: 0
