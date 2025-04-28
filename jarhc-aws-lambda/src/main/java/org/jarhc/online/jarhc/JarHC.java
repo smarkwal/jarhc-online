@@ -1,7 +1,5 @@
 package org.jarhc.online.jarhc;
 
-import static org.jarhc.artifacts.MavenRepository.MAVEN_CENTRAL_URL;
-
 import com.amazonaws.xray.AWSXRay;
 import com.amazonaws.xray.entities.Subsegment;
 import java.io.File;
@@ -75,7 +73,7 @@ class JarHC {
 
 		int javaVersion = options.getRelease();
 		Logger mavenRepositoryLogger = LoggerFactory.getLogger(MavenRepository.class);
-		return new MavenRepository(javaVersion, MAVEN_CENTRAL_URL, dataPath, artifactFinder, mavenRepositoryLogger);
+		return new MavenRepository(javaVersion, options, dataPath, artifactFinder, mavenRepositoryLogger);
 	}
 
 }
