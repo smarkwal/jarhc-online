@@ -11,7 +11,7 @@ plugins {
     id("com.adarshr.test-logger") version "4.0.0"
 
     // JarHC Gradle plugin
-    id("org.jarhc") version "1.1.1"
+    id("org.jarhc") version "1.2.0"
 }
 
 // Java version check ----------------------------------------------------------
@@ -30,15 +30,6 @@ idea {
     }
 }
 
-buildscript {
-    dependencies {
-        // fix CVE-2023-3635 in Okio < 3.4.0
-        // (indirect dependency of Gradle Versions Plugin 0.51.0)
-        classpath("com.squareup.okio:okio:3.10.2")
-        classpath("com.squareup.okio:okio-jvm:3.10.2")
-    }
-}
-
 repositories {
     mavenCentral()
 }
@@ -52,18 +43,18 @@ java {
 dependencies {
 
     // BOMs for version constraints
-    implementation(platform("software.amazon.awssdk:bom:2.30.11"))
-    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.780"))
+    implementation(platform("software.amazon.awssdk:bom:2.31.30"))
+    implementation(platform("com.amazonaws:aws-java-sdk-bom:1.12.782"))
 
     // FasterXML Jackson (transitive dependency of AWS SDK)
     // Fix CVE-2022-42003 and CVE-2022-42004 in Jackson Databind < 2.13.4.1
-    implementation(platform("com.fasterxml.jackson:jackson-bom:2.18.2"))
+    implementation(platform("com.fasterxml.jackson:jackson-bom:2.19.0"))
 
     // logging
-    implementation("org.slf4j:slf4j-api:2.0.16")
+    implementation("org.slf4j:slf4j-api:2.0.17")
 
     // logging implementation
-    runtimeOnly("org.slf4j:slf4j-simple:2.0.16")
+    runtimeOnly("org.slf4j:slf4j-simple:2.0.17")
 
     // AWS Lambda Java Runtime Interface Client
     // Interface between Lambda service and function code.
@@ -73,7 +64,7 @@ dependencies {
 
     // AWS Lambda Java API
     implementation("com.amazonaws:aws-lambda-java-core:1.2.3")
-    implementation("com.amazonaws:aws-lambda-java-events:3.14.0")
+    implementation("com.amazonaws:aws-lambda-java-events:3.15.0")
 
     // AWS SDK for S3, Lambda, and X-Ray (excluding HttpClient and Netty)
     implementation("software.amazon.awssdk:s3") {
@@ -92,17 +83,17 @@ dependencies {
 
     // JarHC - JAR Health Check
     // https://github.com/smarkwal/jarhc
-    implementation("org.jarhc:jarhc:2.2.2") {
+    implementation("org.jarhc:jarhc:3.0.0") {
         // exclude commons-logging (replaced by jcl-over-slf4j, see below)
         exclude(group = "commons-logging", module = "commons-logging")
     }
 
     // test dependencies -------------------------------------
 
-    testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.12.2")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    testImplementation("org.mockito:mockito-core:5.15.2")
-    testImplementation("org.mockito:mockito-junit-jupiter:5.15.2")
+    testImplementation("org.mockito:mockito-core:5.17.0")
+    testImplementation("org.mockito:mockito-junit-jupiter:5.17.0")
     testImplementation("org.assertj:assertj-core:3.27.3")
 }
 
